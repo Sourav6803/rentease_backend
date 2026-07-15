@@ -1,0 +1,32 @@
+{{#> layout}}
+    {{#*inline "body"}}
+        <h2>Vendor Application Update</h2>
+        
+        <p>Hello {{name}},</p>
+        
+        <p>Thank you for your interest in becoming a RentEase vendor. After reviewing your application, we regret to inform you that we are unable to approve it at this time.</p>
+        
+        <div class="info-box">
+            <h3>Reason for Rejection:</h3>
+            <p>{{reason}}</p>
+        </div>
+        
+        <h3>Next Steps:</h3>
+        <ul>
+            <li>Review the feedback provided above</li>
+            <li>Make necessary improvements to your application</li>
+            <li>You can reapply after 30 days</li>
+            <li>Contact our support team if you need clarification</li>
+        </ul>
+        
+        <p>We encourage you to address the issues mentioned and reapply. We'd love to have you on our platform once all requirements are met.</p>
+        
+        <center>
+            <a href="mailto:{{supportEmail}}" class="button">Contact Support</a>
+        </center>
+        
+        <p>If you have any questions, please don't hesitate to reach out to our support team.</p>
+        
+        <p>Thank you for your understanding,<br>The RentEase Team</p>
+    {{/inline}}
+{{/layout}}

@@ -1,0 +1,3260 @@
+openapi: 3.0.0
+info:
+  title: RentEase API Documentation
+  description: |
+    # 🏠 RentEase - Furniture & Appliance Rental Platform API
+    
+    RentEase is a comprehensive rental platform where users can rent furniture and appliances on a monthly basis.
+    
+    ## 📋 Key Features
+    - User authentication & authorization
+    - Product catalog with categories
+    - Rental management
+    - Payment processing
+    - Delivery tracking
+    - Maintenance requests
+    - Reviews & ratings
+    - Vendor dashboard
+    - Admin panel
+    
+    ## 🔐 Authentication
+    Most endpoints require authentication using JWT tokens.
+    Include the token in the Authorization header: `Bearer <your-token>`
+    
+    ## 📦 Base URL
+    `https://api.rentease.com/api/v1`
+    
+    ## 🧪 Testing
+    For testing, you can use the following credentials:
+    - Admin: admin@rentease.com / Admin@123
+    - Vendor: vendor@rentease.com / Vendor@123
+    - User: user@rentease.com / User@123
+    
+  version: 1.0.0
+  contact:
+    name: RentEase Support
+    email: support@rentease.com
+    url: https://rentease.com
+  license:
+    name: Proprietary
+    url: https://rentease.com/terms
+
+servers:
+  - url: https://api.rentease.com/api/v1
+    description: Production server
+  - url: https://staging-api.rentease.com/api/v1
+    description: Staging server
+  - url: http://localhost:5000/api/v1
+    description: Local development
+
+tags:
+  - name: Authentication
+    description: User authentication endpoints
+  - name: Users
+    description: User profile management
+  - name: Products
+    description: Product catalog and search
+  - name: Categories
+    description: Product categories
+  - name: Rentals
+    description: Rental management
+  - name: Payments
+    description: Payment processing
+  - name: Deliveries
+    description: Delivery tracking
+  - name: Maintenance
+    description: Maintenance requests
+  - name: Reviews
+    description: Product reviews
+  - name: Vendors
+    description: Vendor operations
+  - name: Admin
+    description: Admin operations
+  - name: Notifications
+    description: User notifications
+  - name: Discounts
+    description: Coupons and discounts
+  - name: Webhooks
+    description: Webhook endpoints
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Enter your JWT token in the format: Bearer &lt;token&gt;
+
+  schemas:
+    # ==================== ERROR SCHEMAS ====================
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: "Error message"
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+        stack:
+          type: string
+          description: Stack trace (only in development)
+
+    ValidationError:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: "Validation failed"
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                example: "email"
+              message:
+                type: string
+                example: "Email is required"
+
+    # ==================== USER SCHEMAS ====================
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "507f1f77bcf86cd799439011"
+        email:
+          type: string
+          format: email
+          example: "user@example.com"
+        phone:
+          type: string
+          example: "9876543210"
+        profile:
+          type: object
+          properties:
+            firstName:
+              type: string
+              example: "John"
+            lastName:
+              type: string
+              example: "Doe"
+            avatar:
+              type: string
+              example: "https://res.cloudinary.com/rentease/image/upload/v1234567/avatar.jpg"
+        role:
+          type: string
+          enum: [user, vendor, admin, super-admin]
+          example: "user"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    UserProfile:
+      type: object
+      properties:
+        profile:
+          type: object
+          properties:
+            firstName:
+              type: string
+              example: "John"
+            lastName:
+              type: string
+              example: "Doe"
+            dateOfBirth:
+              type: string
+              format: date
+              example: "1990-01-01"
+            gender:
+              type: string
+              enum: [male, female, other]
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+
+    # ==================== ADDRESS SCHEMAS ====================
+    Address:
+      type: object
+      properties:
+        id:
+          type: string
+        addressType:
+          type: string
+          enum: [home, work, other]
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        pincode:
+          type: string
+        phone:
+          type: string
+        isDefault:
+          type: boolean
+
+    AddressInput:
+      type: object
+      required:
+        - addressLine1
+        - city
+        - state
+        - pincode
+        - phone
+      properties:
+        addressType:
+          type: string
+          enum: [home, work, other]
+          default: home
+        addressLine1:
+          type: string
+          minLength: 3
+          maxLength: 100
+        addressLine2:
+          type: string
+          maxLength: 100
+        city:
+          type: string
+          minLength: 2
+          maxLength: 50
+        state:
+          type: string
+          minLength: 2
+          maxLength: 50
+        pincode:
+          type: string
+          pattern: '^[1-9][0-9]{5}$'
+        phone:
+          type: string
+          pattern: '^[6-9]\d{9}$'
+        isDefault:
+          type: boolean
+          default: false
+
+    # ==================== PRODUCT SCHEMAS ====================
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        vendor:
+          $ref: '#/components/schemas/VendorBasic'
+        category:
+          $ref: '#/components/schemas/Category'
+        basicInfo:
+          type: object
+          properties:
+            name:
+              type: string
+            slug:
+              type: string
+            description:
+              type: string
+            brand:
+              type: string
+        pricing:
+          type: object
+          properties:
+            monthlyRent:
+              type: number
+            securityDeposit:
+              type: number
+            deliveryCharges:
+              type: number
+            rentalOptions:
+              type: array
+              items:
+                type: object
+                properties:
+                  months:
+                    type: integer
+                  discount:
+                    type: number
+                  monthlyPrice:
+                    type: number
+                  totalPrice:
+                    type: number
+        inventory:
+          type: object
+          properties:
+            totalQuantity:
+              type: integer
+            availableQuantity:
+              type: integer
+        specifications:
+          type: object
+        condition:
+          type: string
+          enum: [new, like-new, good, fair]
+        media:
+          type: object
+          properties:
+            images:
+              type: array
+              items:
+                type: object
+                properties:
+                  url:
+                    type: string
+                  thumbnail:
+                    type: string
+                  isPrimary:
+                    type: boolean
+        ratings:
+          type: object
+          properties:
+            average:
+              type: number
+            count:
+              type: integer
+        status:
+          type: object
+          properties:
+            isActive:
+              type: boolean
+            isVerified:
+              type: boolean
+
+    ProductInput:
+      type: object
+      required:
+        - basicInfo
+        - category
+        - pricing
+        - inventory
+        - condition
+      properties:
+        basicInfo:
+          type: object
+          required:
+            - name
+            - description
+          properties:
+            name:
+              type: string
+              minLength: 3
+              maxLength: 100
+            description:
+              type: string
+              minLength: 20
+              maxLength: 2000
+            brand:
+              type: string
+        category:
+          type: string
+        pricing:
+          type: object
+          required:
+            - monthlyRent
+            - securityDeposit
+          properties:
+            monthlyRent:
+              type: number
+              minimum: 0
+            securityDeposit:
+              type: number
+              minimum: 0
+            deliveryCharges:
+              type: number
+              default: 0
+        inventory:
+          type: object
+          required:
+            - totalQuantity
+          properties:
+            totalQuantity:
+              type: integer
+              minimum: 0
+        condition:
+          type: string
+          enum: [new, like-new, good, fair]
+        specifications:
+          type: object
+        rentalTerms:
+          type: object
+          properties:
+            minRentalMonths:
+              type: integer
+              default: 3
+            maxRentalMonths:
+              type: integer
+              default: 12
+
+    # ==================== CATEGORY SCHEMAS ====================
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        parent:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        image:
+          type: object
+          properties:
+            url:
+              type: string
+            thumbnail:
+              type: string
+        productCount:
+          type: integer
+
+    CategoryInput:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 50
+        description:
+          type: string
+          maxLength: 500
+        parent:
+          type: string
+        image:
+          type: string
+
+    # ==================== RENTAL SCHEMAS ====================
+    Rental:
+      type: object
+      properties:
+        id:
+          type: string
+        rentalNumber:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserBasic'
+        vendor:
+          $ref: '#/components/schemas/VendorBasic'
+        product:
+          $ref: '#/components/schemas/ProductBasic'
+        address:
+          $ref: '#/components/schemas/Address'
+        rentalDetails:
+          type: object
+          properties:
+            startDate:
+              type: string
+              format: date
+            endDate:
+              type: string
+              format: date
+            tenureMonths:
+              type: integer
+            monthlyRent:
+              type: number
+            securityDeposit:
+              type: number
+            deliveryCharges:
+              type: number
+            totalAmount:
+              type: number
+        payment:
+          type: object
+          properties:
+            status:
+              type: string
+              enum: [pending, partial, completed, refunded]
+            paidAmount:
+              type: number
+            dueAmount:
+              type: number
+        status:
+          type: string
+          enum: [pending, confirmed, delivered, active, completed, cancelled, overdue]
+        timeline:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+              timestamp:
+                type: string
+                format: date-time
+              note:
+                type: string
+
+    RentalInput:
+      type: object
+      required:
+        - productId
+        - addressId
+        - startDate
+        - tenureMonths
+      properties:
+        productId:
+          type: string
+        addressId:
+          type: string
+        startDate:
+          type: string
+          format: date
+        tenureMonths:
+          type: integer
+          minimum: 3
+          maximum: 12
+        deliverySlot:
+          type: string
+        couponCode:
+          type: string
+
+    RentalExtension:
+      type: object
+      required:
+        - extensionMonths
+      properties:
+        extensionMonths:
+          type: integer
+          minimum: 1
+          maximum: 6
+
+    # ==================== PAYMENT SCHEMAS ====================
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+        paymentNumber:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserBasic'
+        rental:
+          type: object
+          properties:
+            id:
+              type: string
+            rentalNumber:
+              type: string
+        amount:
+          type: number
+        type:
+          type: string
+          enum: [security_deposit, rent, delivery, late_fee, damage_charge, extension, refund]
+        method:
+          type: string
+          enum: [credit_card, debit_card, upi, net_banking, wallet, cash]
+        status:
+          type: string
+          enum: [pending, processing, success, failed, refunded]
+        createdAt:
+          type: string
+          format: date-time
+
+    PaymentInitiate:
+      type: object
+      required:
+        - rentalId
+        - amount
+        - paymentMethod
+      properties:
+        rentalId:
+          type: string
+        amount:
+          type: number
+          minimum: 1
+        paymentMethod:
+          type: string
+          enum: [credit_card, debit_card, upi, net_banking, wallet]
+        paymentDetails:
+          type: object
+
+    PaymentVerify:
+      type: object
+      required:
+        - razorpay_payment_id
+        - razorpay_order_id
+        - razorpay_signature
+      properties:
+        razorpay_payment_id:
+          type: string
+        razorpay_order_id:
+          type: string
+        razorpay_signature:
+          type: string
+
+    # ==================== DELIVERY SCHEMAS ====================
+    Delivery:
+      type: object
+      properties:
+        id:
+          type: string
+        deliveryNumber:
+          type: string
+        rental:
+          $ref: '#/components/schemas/RentalBasic'
+        type:
+          type: string
+          enum: [delivery, pickup, return]
+        status:
+          type: string
+          enum: [scheduled, assigned, out_for_delivery, in_transit, delivered, failed]
+        schedule:
+          type: object
+          properties:
+            scheduledDate:
+              type: string
+              format: date-time
+            scheduledSlot:
+              type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        tracking:
+          type: object
+          properties:
+            currentLocation:
+              type: object
+              properties:
+                coordinates:
+                  type: array
+                  items:
+                    type: number
+                updatedAt:
+                  type: string
+                  format: date-time
+            estimatedArrival:
+              type: string
+              format: date-time
+        proof:
+          type: object
+          properties:
+            signature:
+              type: string
+            photos:
+              type: array
+              items:
+                type: string
+            otp:
+              type: string
+
+    # ==================== MAINTENANCE SCHEMAS ====================
+    Maintenance:
+      type: object
+      properties:
+        id:
+          type: string
+        requestNumber:
+          type: string
+        rental:
+          $ref: '#/components/schemas/RentalBasic'
+        user:
+          $ref: '#/components/schemas/UserBasic'
+        issueType:
+          type: string
+          enum: [not_working, damaged, cleaning, replacement, repair, other]
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+        status:
+          type: string
+          enum: [pending, assigned, in_progress, completed, cancelled]
+        description:
+          type: string
+        schedule:
+          type: object
+          properties:
+            scheduledDate:
+              type: string
+              format: date-time
+            actualStartDate:
+              type: string
+              format: date-time
+            actualEndDate:
+              type: string
+              format: date-time
+        resolution:
+          type: object
+          properties:
+            action:
+              type: string
+            partsUsed:
+              type: array
+            cost:
+              type: object
+              properties:
+                parts:
+                  type: number
+                labour:
+                  type: number
+                total:
+                  type: number
+
+    MaintenanceInput:
+      type: object
+      required:
+        - rentalId
+        - issueType
+        - description
+      properties:
+        rentalId:
+          type: string
+        issueType:
+          type: string
+          enum: [not_working, damaged, cleaning, replacement, repair, other]
+        description:
+          type: string
+          minLength: 10
+          maxLength: 1000
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+        attachments:
+          type: array
+          items:
+            type: string
+
+    # ==================== REVIEW SCHEMAS ====================
+    Review:
+      type: object
+      properties:
+        id:
+          type: string
+        rental:
+          $ref: '#/components/schemas/RentalBasic'
+        user:
+          $ref: '#/components/schemas/UserBasic'
+        product:
+          $ref: '#/components/schemas/ProductBasic'
+        ratings:
+          type: object
+          properties:
+            overall:
+              type: integer
+              minimum: 1
+              maximum: 5
+            product:
+              type: object
+              properties:
+                quality:
+                  type: integer
+                condition:
+                  type: integer
+                valueForMoney:
+                  type: integer
+            vendor:
+              type: object
+              properties:
+                communication:
+                  type: integer
+                deliveryTimeliness:
+                  type: integer
+                professionalism:
+                  type: integer
+        title:
+          type: string
+        content:
+          type: string
+        pros:
+          type: array
+          items:
+            type: string
+        cons:
+          type: array
+          items:
+            type: string
+        attachments:
+          type: array
+          items:
+            type: object
+        helpful:
+          type: object
+          properties:
+            count:
+              type: integer
+        createdAt:
+          type: string
+          format: date-time
+
+    ReviewInput:
+      type: object
+      required:
+        - rentalId
+        - ratings
+        - title
+        - content
+      properties:
+        rentalId:
+          type: string
+        ratings:
+          type: object
+          required:
+            - overall
+          properties:
+            overall:
+              type: integer
+              minimum: 1
+              maximum: 5
+            product:
+              type: object
+              properties:
+                quality:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                condition:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                valueForMoney:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+        title:
+          type: string
+          minLength: 3
+          maxLength: 100
+        content:
+          type: string
+          minLength: 10
+          maxLength: 2000
+        pros:
+          type: array
+          items:
+            type: string
+        cons:
+          type: array
+          items:
+            type: string
+        images:
+          type: array
+          items:
+            type: string
+          maxItems: 5
+
+    # ==================== VENDOR SCHEMAS ====================
+    Vendor:
+      type: object
+      properties:
+        id:
+          type: string
+        vendorId:
+          type: string
+        business:
+          type: object
+          properties:
+            name:
+              type: string
+            gstin:
+              type: string
+            description:
+              type: string
+        contact:
+          type: object
+          properties:
+            phone:
+              type: string
+            email:
+              type: string
+            supportPhone:
+              type: string
+        verification:
+          type: object
+          properties:
+            status:
+              type: string
+              enum: [pending, verified, rejected]
+        performance:
+          type: object
+          properties:
+            rating:
+              type: object
+              properties:
+                average:
+                  type: number
+                count:
+                  type: integer
+        products:
+          type: object
+          properties:
+            total:
+              type: integer
+            active:
+              type: integer
+        createdAt:
+          type: string
+          format: date-time
+
+    VendorBasic:
+      type: object
+      properties:
+        id:
+          type: string
+        businessName:
+          type: string
+        rating:
+          type: number
+        totalProducts:
+          type: integer
+
+    # ==================== BASIC REFERENCE SCHEMAS ====================
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        avatar:
+          type: string
+
+    ProductBasic:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        image:
+          type: string
+        monthlyRent:
+          type: number
+
+    RentalBasic:
+      type: object
+      properties:
+        id:
+          type: string
+        rentalNumber:
+          type: string
+        status:
+          type: string
+
+    # ==================== NOTIFICATION SCHEMAS ====================
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [in_app, email, sms]
+        title:
+          type: string
+        content:
+          type: string
+        data:
+          type: object
+        read:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+
+    # ==================== DISCOUNT SCHEMAS ====================
+    Discount:
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum: [percentage, fixed, free_delivery, no_deposit]
+        value:
+          type: number
+        minOrderValue:
+          type: number
+        maxDiscountAmount:
+          type: number
+        validFrom:
+          type: string
+          format: date
+        validUntil:
+          type: string
+          format: date
+        usageCount:
+          type: integer
+        status:
+          type: string
+          enum: [active, inactive, expired]
+
+    # ==================== AUTH SCHEMAS ====================
+    RegisterInput:
+      type: object
+      required:
+        - email
+        - phone
+        - password
+        - name
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 50
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+          pattern: '^[6-9]\d{9}$'
+        password:
+          type: string
+          format: password
+          minLength: 8
+        role:
+          type: string
+          enum: [user, vendor]
+          default: user
+
+    LoginInput:
+      type: object
+      oneOf:
+        - required: [email, password]
+        - required: [phone, password]
+      properties:
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        password:
+          type: string
+          format: password
+
+    AuthResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        token:
+          type: string
+        refreshToken:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+
+    OTPVerify:
+      type: object
+      required:
+        - phone
+        - otp
+      properties:
+        phone:
+          type: string
+        otp:
+          type: string
+          minLength: 6
+          maxLength: 6
+          pattern: '^[0-9]{6}$'
+
+    ForgotPassword:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+
+    ResetPassword:
+      type: object
+      required:
+        - token
+        - password
+        - confirmPassword
+      properties:
+        token:
+          type: string
+        password:
+          type: string
+          format: password
+          minLength: 8
+        confirmPassword:
+          type: string
+          format: password
+
+    # ==================== PAGINATION ====================
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          example: 1
+        limit:
+          type: integer
+          example: 10
+        total:
+          type: integer
+          example: 100
+        totalPages:
+          type: integer
+          example: 10
+        hasNext:
+          type: boolean
+          example: true
+        hasPrev:
+          type: boolean
+          example: false
+
+    PaginatedResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            type: object
+        meta:
+          type: object
+          properties:
+            pagination:
+              $ref: '#/components/schemas/Pagination'
+            timestamp:
+              type: string
+              format: date-time
+
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            message: "Unauthorized access"
+
+    ForbiddenError:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            message: "You do not have permission to perform this action"
+
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            message: "Resource not found"
+
+    ValidationError:
+      description: Validation failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+
+    TooManyRequestsError:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            message: "Too many requests, please try again later"
+
+security:
+  - bearerAuth: []
+
+paths:
+  # ==================== AUTH ENDPOINTS ====================
+  /auth/register:
+    post:
+      tags:
+        - Authentication
+      summary: Register a new user
+      description: Create a new user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterInput'
+      responses:
+        201:
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        400:
+          description: Bad request
+          $ref: '#/components/schemas/Error'
+        409:
+          description: Email or phone already exists
+          $ref: '#/components/schemas/Error'
+
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: Login user
+      description: Authenticate user and get access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginInput'
+      responses:
+        200:
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        401:
+          description: Invalid credentials
+          $ref: '#/components/schemas/Error'
+
+  /auth/refresh-token:
+    post:
+      tags:
+        - Authentication
+      summary: Refresh access token
+      description: Get new access token using refresh token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refreshToken
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        200:
+          description: Token refreshed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  token:
+                    type: string
+                  refreshToken:
+                    type: string
+        401:
+          description: Invalid refresh token
+          $ref: '#/components/schemas/Error'
+
+  /auth/logout:
+    post:
+      tags:
+        - Authentication
+      summary: Logout user
+      description: Invalidate user tokens
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Logout successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+
+  /auth/verify-email/{token}:
+    get:
+      tags:
+        - Authentication
+      summary: Verify email
+      description: Verify user email address
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Email verified successfully
+        400:
+          description: Invalid or expired token
+
+  /auth/verify-phone:
+    post:
+      tags:
+        - Authentication
+      summary: Verify phone number
+      description: Send OTP for phone verification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - phone
+              properties:
+                phone:
+                  type: string
+      responses:
+        200:
+          description: OTP sent successfully
+        400:
+          description: Invalid phone number
+
+  /auth/verify-otp:
+    post:
+      tags:
+        - Authentication
+      summary: Verify OTP
+      description: Verify OTP for phone verification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OTPVerify'
+      responses:
+        200:
+          description: OTP verified successfully
+        400:
+          description: Invalid or expired OTP
+
+  /auth/forgot-password:
+    post:
+      tags:
+        - Authentication
+      summary: Forgot password
+      description: Send password reset link to email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPassword'
+      responses:
+        200:
+          description: Reset link sent successfully
+        404:
+          description: User not found
+
+  /auth/reset-password:
+    post:
+      tags:
+        - Authentication
+      summary: Reset password
+      description: Reset password using token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPassword'
+      responses:
+        200:
+          description: Password reset successfully
+        400:
+          description: Invalid or expired token
+
+  # ==================== USER ENDPOINTS ====================
+  /users/profile:
+    get:
+      tags:
+        - Users
+      summary: Get user profile
+      description: Get current user profile
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: User profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/User'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+    put:
+      tags:
+        - Users
+      summary: Update user profile
+      description: Update current user profile
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfile'
+      responses:
+        200:
+          description: Profile updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/ValidationError'
+
+  /users/addresses:
+    get:
+      tags:
+        - Users
+      summary: Get user addresses
+      description: Get all addresses of current user
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Addresses retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Address'
+
+    post:
+      tags:
+        - Users
+      summary: Add new address
+      description: Add a new address for current user
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressInput'
+      responses:
+        201:
+          description: Address added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Address'
+        400:
+          $ref: '#/components/responses/ValidationError'
+
+  /users/addresses/{id}:
+    put:
+      tags:
+        - Users
+      summary: Update address
+      description: Update an existing address
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressInput'
+      responses:
+        200:
+          description: Address updated successfully
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+    delete:
+      tags:
+        - Users
+      summary: Delete address
+      description: Delete an address
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Address deleted successfully
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  /users/change-password:
+    post:
+      tags:
+        - Users
+      summary: Change password
+      description: Change user password
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - currentPassword
+                - newPassword
+                - confirmPassword
+              properties:
+                currentPassword:
+                  type: string
+                  format: password
+                newPassword:
+                  type: string
+                  format: password
+                  minLength: 8
+                confirmPassword:
+                  type: string
+                  format: password
+      responses:
+        200:
+          description: Password changed successfully
+        400:
+          description: Invalid current password or passwords don't match
+
+  # ==================== PRODUCT ENDPOINTS ====================
+  /products:
+    get:
+      tags:
+        - Products
+      summary: Get products
+      description: Get paginated list of products with filters
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: minPrice
+          in: query
+          schema:
+            type: number
+        - name: maxPrice
+          in: query
+          schema:
+            type: number
+        - name: condition
+          in: query
+          schema:
+            type: string
+            enum: [new, like-new, good, fair]
+        - name: brand
+          in: query
+          schema:
+            type: string
+        - name: city
+          in: query
+          schema:
+            type: string
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [price_asc, price_desc, newest, rating, popularity]
+            default: newest
+        - name: q
+          in: query
+          schema:
+            type: string
+          description: Search query
+      responses:
+        200:
+          description: Products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  meta:
+                    $ref: '#/components/schemas/Pagination'
+
+    post:
+      tags:
+        - Products
+      summary: Create product
+      description: Create a new product (Vendor only)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        201:
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Product'
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        400:
+          $ref: '#/components/responses/ValidationError'
+
+  /products/{id}:
+    get:
+      tags:
+        - Products
+      summary: Get product by ID
+      description: Get detailed product information
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Product retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Product'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+    put:
+      tags:
+        - Products
+      summary: Update product
+      description: Update product information (Vendor only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        200:
+          description: Product updated successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+    delete:
+      tags:
+        - Products
+      summary: Delete product
+      description: Delete a product (Vendor only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Product deleted successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  /products/{id}/reviews:
+    get:
+      tags:
+        - Products
+        - Reviews
+      summary: Get product reviews
+      description: Get all reviews for a product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        200:
+          description: Reviews retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Review'
+                  meta:
+                    $ref: '#/components/schemas/Pagination'
+
+  /products/{id}/similar:
+    get:
+      tags:
+        - Products
+      summary: Get similar products
+      description: Get products similar to the given product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 5
+      responses:
+        200:
+          description: Similar products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+
+  # ==================== CATEGORY ENDPOINTS ====================
+  /categories:
+    get:
+      tags:
+        - Categories
+      summary: Get categories
+      description: Get all product categories
+      responses:
+        200:
+          description: Categories retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Category'
+
+    post:
+      tags:
+        - Categories
+      summary: Create category
+      description: Create a new category (Admin only)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryInput'
+      responses:
+        201:
+          description: Category created successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+
+  /categories/{id}:
+    get:
+      tags:
+        - Categories
+      summary: Get category by ID
+      description: Get category details with subcategories
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Category retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Category'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+    put:
+      tags:
+        - Categories
+      summary: Update category
+      description: Update category (Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryInput'
+      responses:
+        200:
+          description: Category updated successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+    delete:
+      tags:
+        - Categories
+      summary: Delete category
+      description: Delete a category (Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Category deleted successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  # ==================== RENTAL ENDPOINTS ====================
+  /rentals:
+    get:
+      tags:
+        - Rentals
+      summary: Get user rentals
+      description: Get all rentals of current user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, confirmed, active, completed, cancelled]
+      responses:
+        200:
+          description: Rentals retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+
+    post:
+      tags:
+        - Rentals
+      summary: Create rental
+      description: Create a new rental request
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RentalInput'
+      responses:
+        201:
+          description: Rental created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Rental'
+        400:
+          $ref: '#/components/responses/ValidationError'
+
+  /rentals/{id}:
+    get:
+      tags:
+        - Rentals
+      summary: Get rental by ID
+      description: Get detailed rental information
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Rental retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Rental'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  /rentals/{id}/cancel:
+    post:
+      tags:
+        - Rentals
+      summary: Cancel rental
+      description: Cancel a rental request
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        200:
+          description: Rental cancelled successfully
+        400:
+          description: Rental cannot be cancelled
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  /rentals/{id}/extend:
+    post:
+      tags:
+        - Rentals
+      summary: Extend rental
+      description: Request rental extension
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RentalExtension'
+      responses:
+        200:
+          description: Extension requested successfully
+        400:
+          description: Invalid extension request
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  /rentals/{id}/track:
+    get:
+      tags:
+        - Rentals
+      summary: Track rental
+      description: Get real-time tracking information for rental delivery
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Tracking information retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      currentLocation:
+                        type: object
+                      estimatedArrival:
+                        type: string
+                      timeline:
+                        type: array
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  # ==================== PAYMENT ENDPOINTS ====================
+  /payments/initiate:
+    post:
+      tags:
+        - Payments
+      summary: Initiate payment
+      description: Initiate a payment for rental
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentInitiate'
+      responses:
+        200:
+          description: Payment initiated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      orderId:
+                        type: string
+                      amount:
+                        type: number
+                      currency:
+                        type: string
+                      key:
+                        type: string
+        400:
+          $ref: '#/components/responses/ValidationError'
+
+  /payments/verify:
+    post:
+      tags:
+        - Payments
+      summary: Verify payment
+      description: Verify payment after completion
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentVerify'
+      responses:
+        200:
+          description: Payment verified successfully
+        400:
+          description: Payment verification failed
+
+  /payments/history:
+    get:
+      tags:
+        - Payments
+      summary: Get payment history
+      description: Get user's payment history
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        200:
+          description: Payment history retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+
+  /payments/{id}:
+    get:
+      tags:
+        - Payments
+      summary: Get payment by ID
+      description: Get detailed payment information
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Payment retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Payment'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  # ==================== DELIVERY ENDPOINTS ====================
+  /deliveries/track/{trackingNumber}:
+    get:
+      tags:
+        - Deliveries
+      summary: Track delivery
+      description: Track delivery by tracking number
+      parameters:
+        - name: trackingNumber
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Tracking information retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Delivery'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  /deliveries/{id}/status:
+    put:
+      tags:
+        - Deliveries
+      summary: Update delivery status
+      description: Update delivery status (Vendor/Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [assigned, out_for_delivery, delivered, failed]
+                location:
+                  type: object
+                  properties:
+                    lat:
+                      type: number
+                    lng:
+                      type: number
+                notes:
+                  type: string
+      responses:
+        200:
+          description: Delivery status updated successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  # ==================== MAINTENANCE ENDPOINTS ====================
+  /maintenance:
+    get:
+      tags:
+        - Maintenance
+      summary: Get maintenance requests
+      description: Get user's maintenance requests
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, assigned, in_progress, completed]
+      responses:
+        200:
+          description: Maintenance requests retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+
+    post:
+      tags:
+        - Maintenance
+      summary: Create maintenance request
+      description: Create a new maintenance request
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceInput'
+      responses:
+        201:
+          description: Maintenance request created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Maintenance'
+        400:
+          $ref: '#/components/responses/ValidationError'
+
+  /maintenance/{id}:
+    get:
+      tags:
+        - Maintenance
+      summary: Get maintenance request
+      description: Get detailed maintenance request information
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Maintenance request retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Maintenance'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+    put:
+      tags:
+        - Maintenance
+      summary: Update maintenance request
+      description: Update maintenance request status (Vendor only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [assigned, in_progress, completed]
+                scheduledDate:
+                  type: string
+                  format: date-time
+                resolution:
+                  type: object
+      responses:
+        200:
+          description: Maintenance request updated successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  /maintenance/{id}/cancel:
+    post:
+      tags:
+        - Maintenance
+      summary: Cancel maintenance request
+      description: Cancel a maintenance request
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        200:
+          description: Maintenance request cancelled successfully
+        403:
+          description: Cannot cancel request
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  # ==================== REVIEW ENDPOINTS ====================
+  /reviews:
+    post:
+      tags:
+        - Reviews
+      summary: Create review
+      description: Create a review for a completed rental
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewInput'
+      responses:
+        201:
+          description: Review created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/Review'
+        400:
+          $ref: '#/components/responses/ValidationError'
+        403:
+          description: Cannot review this rental
+
+  /reviews/{id}/helpful:
+    post:
+      tags:
+        - Reviews
+      summary: Mark review as helpful
+      description: Mark a review as helpful
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Review marked as helpful
+
+  /reviews/{id}/report:
+    post:
+      tags:
+        - Reviews
+      summary: Report review
+      description: Report a review for moderation
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        200:
+          description: Review reported successfully
+
+  /reviews/{id}/respond:
+    post:
+      tags:
+        - Reviews
+      summary: Respond to review
+      description: Vendor response to review
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  maxLength: 500
+      responses:
+        201:
+          description: Response added successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  # ==================== VENDOR ENDPOINTS ====================
+  /vendor/dashboard:
+    get:
+      tags:
+        - Vendors
+      summary: Get vendor dashboard
+      description: Get vendor dashboard statistics
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Dashboard data retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      stats:
+                        type: object
+                      recentRentals:
+                        type: array
+                      lowInventory:
+                        type: array
+                      pendingMaintenance:
+                        type: array
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+
+  /vendor/products:
+    get:
+      tags:
+        - Vendors
+      summary: Get vendor products
+      description: Get all products of the vendor
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        200:
+          description: Products retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+
+  /vendor/rentals:
+    get:
+      tags:
+        - Vendors
+      summary: Get vendor rentals
+      description: Get all rentals for vendor's products
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: status
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: Rentals retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+
+  /vendor/analytics:
+    get:
+      tags:
+        - Vendors
+      summary: Get vendor analytics
+      description: Get detailed analytics for vendor
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        200:
+          description: Analytics retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      revenue:
+                        type: object
+                      rentals:
+                        type: object
+                      products:
+                        type: object
+                      trends:
+                        type: object
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+
+  # ==================== ADMIN ENDPOINTS ====================
+  /admin/stats:
+    get:
+      tags:
+        - Admin
+      summary: Get platform statistics
+      description: Get overall platform statistics (Admin only)
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Statistics retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      users:
+                        type: object
+                      vendors:
+                        type: object
+                      rentals:
+                        type: object
+                      revenue:
+                        type: object
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+
+  /admin/users:
+    get:
+      tags:
+        - Admin
+      summary: Get all users
+      description: Get paginated list of all users (Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: role
+          in: query
+          schema:
+            type: string
+            enum: [user, vendor, admin]
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, blocked, pending]
+      responses:
+        200:
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+
+  /admin/users/{id}:
+    get:
+      tags:
+        - Admin
+      summary: Get user details
+      description: Get detailed user information (Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: User details retrieved successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+    put:
+      tags:
+        - Admin
+      summary: Update user
+      description: Update user information (Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                  enum: [user, vendor, admin]
+                status:
+                  type: object
+                  properties:
+                    isActive:
+                      type: boolean
+                    isBlocked:
+                      type: boolean
+      responses:
+        200:
+          description: User updated successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  /admin/vendors/pending:
+    get:
+      tags:
+        - Admin
+      summary: Get pending vendors
+      description: Get list of vendors pending approval (Admin only)
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Pending vendors retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Vendor'
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+
+  /admin/vendors/{id}/approve:
+    post:
+      tags:
+        - Admin
+      summary: Approve vendor
+      description: Approve a vendor application (Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                commission:
+                  type: number
+                notes:
+                  type: string
+      responses:
+        200:
+          description: Vendor approved successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  /admin/vendors/{id}/reject:
+    post:
+      tags:
+        - Admin
+      summary: Reject vendor
+      description: Reject a vendor application (Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        200:
+          description: Vendor rejected successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  /admin/reports/{type}:
+    get:
+      tags:
+        - Admin
+      summary: Generate report
+      description: Generate admin reports (Admin only)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [users, vendors, rentals, revenue, products]
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [json, csv, excel]
+            default: json
+      responses:
+        200:
+          description: Report generated successfully
+        403:
+          $ref: '#/components/responses/ForbiddenError'
+
+  # ==================== NOTIFICATION ENDPOINTS ====================
+  /notifications:
+    get:
+      tags:
+        - Notifications
+      summary: Get notifications
+      description: Get user's notifications
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: unreadOnly
+          in: query
+          schema:
+            type: boolean
+            default: false
+      responses:
+        200:
+          description: Notifications retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+
+  /notifications/unread-count:
+    get:
+      tags:
+        - Notifications
+      summary: Get unread count
+      description: Get count of unread notifications
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Unread count retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+
+  /notifications/{id}/read:
+    put:
+      tags:
+        - Notifications
+      summary: Mark as read
+      description: Mark notification as read
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Notification marked as read
+        404:
+          $ref: '#/components/responses/NotFoundError'
+
+  /notifications/read-all:
+    post:
+      tags:
+        - Notifications
+      summary: Mark all as read
+      description: Mark all notifications as read
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: All notifications marked as read
+
+  # ==================== DISCOUNT ENDPOINTS ====================
+  /discounts/validate:
+    post:
+      tags:
+        - Discounts
+      summary: Validate discount
+      description: Validate a discount code
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - code
+                - amount
+              properties:
+                code:
+                  type: string
+                amount:
+                  type: number
+                productIds:
+                  type: array
+                  items:
+                    type: string
+                rentalMonths:
+                  type: integer
+      responses:
+        200:
+          description: Discount validated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      valid:
+                        type: boolean
+                      discountAmount:
+                        type: number
+                      message:
+                        type: string
+
+  # ==================== SEARCH ENDPOINTS ====================
+  /search:
+    get:
+      tags:
+        - Search
+      summary: Search products
+      description: Advanced product search
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: minPrice
+          in: query
+          schema:
+            type: number
+        - name: maxPrice
+          in: query
+          schema:
+            type: number
+        - name: condition
+          in: query
+          schema:
+            type: string
+            enum: [new, like-new, good, fair]
+        - name: city
+          in: query
+          schema:
+            type: string
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [relevance, price_asc, price_desc, newest]
+            default: relevance
+      responses:
+        200:
+          description: Search results retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+
+  /search/suggestions:
+    get:
+      tags:
+        - Search
+      summary: Get search suggestions
+      description: Get autocomplete suggestions for search
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 5
+      responses:
+        200:
+          description: Suggestions retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                        type:
+                          type: string
+
+  # ==================== WEBHOOK ENDPOINTS ====================
+  /webhooks/razorpay:
+    post:
+      tags:
+        - Webhooks
+      summary: Razorpay webhook
+      description: Handle Razorpay payment webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        200:
+          description: Webhook processed successfully
+
+  /webhooks/cloudinary:
+    post:
+      tags:
+        - Webhooks
+      summary: Cloudinary webhook
+      description: Handle Cloudinary upload webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        200:
+          description: Webhook processed successfully
+
+  /webhooks/twilio:
+    post:
+      tags:
+        - Webhooks
+      summary: Twilio webhook
+      description: Handle Twilio SMS webhooks
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+      responses:
+        200:
+          description: Webhook processed successfully

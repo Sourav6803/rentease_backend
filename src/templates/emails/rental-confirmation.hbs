@@ -1,0 +1,58 @@
+{{#> layout}}
+    {{#*inline "body"}}
+        <h2>Rental Confirmed! 🎉</h2>
+        
+        <p>Hello {{name}},</p>
+        
+        <p>Great news! Your rental has been confirmed. Here are the details:</p>
+        
+        <table>
+            <tr>
+                <th>Rental Number:</th>
+                <td>#{{rentalNumber}}</td>
+            </tr>
+            <tr>
+                <th>Product:</th>
+                <td>{{productName}}</td>
+            </tr>
+            <tr>
+                <th>Rental Period:</th>
+                <td>{{startDate}} to {{endDate}}</td>
+            </tr>
+            <tr>
+                <th>Monthly Rent:</th>
+                <td>₹{{monthlyRent}}</td>
+            </tr>
+            <tr>
+                <th>Security Deposit:</th>
+                <td>₹{{securityDeposit}}</td>
+            </tr>
+            <tr>
+                <th>Total Amount:</th>
+                <td>₹{{totalAmount}}</td>
+            </tr>
+        </table>
+        
+        <h3>Delivery Address:</h3>
+        <p>
+            {{deliveryAddress.addressLine1}}<br>
+            {{deliveryAddress.addressLine2}}<br>
+            {{deliveryAddress.city}}, {{deliveryAddress.state}} - {{deliveryAddress.pincode}}
+        </p>
+        
+        <center>
+            <a href="{{trackUrl}}" class="button">Track Your Rental</a>
+        </center>
+        
+        <p>What's next?</p>
+        <ul>
+            <li>You'll receive delivery updates via email and SMS</li>
+            <li>Track your delivery in real-time</li>
+            <li>Contact the vendor if you have any questions</li>
+        </ul>
+        
+        <p>Thank you for choosing RentEase!</p>
+        
+        <p>Happy Renting,<br>The RentEase Team</p>
+    {{/inline}}
+{{/layout}}

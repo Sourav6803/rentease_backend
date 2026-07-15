@@ -1,0 +1,77 @@
+{{#> layout}}
+    {{#*inline "body"}}
+        <h2>Invoice #{{invoiceNumber}}</h2>
+        
+        <p>Hello {{name}},</p>
+        
+        <p>Thank you for your business. Please find your invoice details below:</p>
+        
+        <table>
+            <tr>
+                <th>Invoice Number:</th>
+                <td>#{{invoiceNumber}}</td>
+            </tr>
+            <tr>
+                <th>Invoice Date:</th>
+                <td>{{invoiceDate}}</td>
+            </tr>
+            <tr>
+                <th>Due Date:</th>
+                <td>{{dueDate}}</td>
+            </tr>
+        </table>
+        
+        <h3>Invoice Items:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each items}}
+                <tr>
+                    <td>{{description}}</td>
+                    <td>{{quantity}}</td>
+                    <td>₹{{unitPrice}}</td>
+                    <td>₹{{amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" style="text-align: right;"><strong>Subtotal:</strong></td>
+                    <td>₹{{subtotal}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: right;"><strong>Tax ({{taxRate}}%):</strong></td>
+                    <td>₹{{tax}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
+                    <td><strong>₹{{total}}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <div class="info-box">
+            <p><strong>Payment Status:</strong> {{paymentStatus}}</p>
+            {{#if paymentMethod}}
+            <p><strong>Payment Method:</strong> {{paymentMethod}}</p>
+            {{/if}}
+        </div>
+        
+        <center>
+            <a href="{{paymentUrl}}" class="button">Pay Now</a>
+        </center>
+        
+        <p>If you have any questions about this invoice, please contact our billing team.</p>
+        
+        <p>Thank you for choosing RentEase!</p>
+        
+        <p>The RentEase Team</p>
+    {{/inline}}
+{{/layout}}

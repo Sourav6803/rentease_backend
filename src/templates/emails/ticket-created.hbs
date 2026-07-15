@@ -1,0 +1,61 @@
+<h2>We've received your request 🎫</h2>
+
+<p>Hello {{name}},</p>
+
+<p>
+    Thanks for reaching out to RentEase Support. Your ticket has been created
+    successfully and our team is already on it. You can reply to this ticket
+    anytime from your Support Center.
+</p>
+
+<div class="info-box">
+    <h3 style="margin-top: 0;">Ticket Summary</h3>
+    <table>
+        <tr>
+            <th>Ticket Number</th>
+            <td><strong>{{ticketNumber}}</strong></td>
+        </tr>
+        <tr>
+            <th>Subject</th>
+            <td>{{subject}}</td>
+        </tr>
+        <tr>
+            <th>Priority</th>
+            <td>
+                <span style="display:inline-block; padding:4px 12px; border-radius:12px; font-size:13px; font-weight:600; text-transform:capitalize;
+                    {{#if (eq priority 'critical')}}background:#fee2e2; color:#7f1d1d;
+                    {{else if (eq priority 'urgent')}}background:#fef2f2; color:#ef4444;
+                    {{else if (eq priority 'high')}}background:#fef3c7; color:#b45309;
+                    {{else if (eq priority 'low')}}background:#f1f5f9; color:#475569;
+                    {{else}}background:#eff6ff; color:#2563eb;{{/if}}">
+                    {{priority}}
+                </span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<h3>Your Message</h3>
+<p style="white-space: pre-wrap; color:#555;">{{description}}</p>
+
+{{#if ticketUrl}}
+<center>
+    <a href="{{ticketUrl}}" class="button">View Your Ticket</a>
+</center>
+{{/if}}
+
+<div class="info-box" style="border-left-color:#21a056;">
+    <p style="margin:0;"><strong>What happens next?</strong></p>
+    <ul style="margin:10px 0 0 0; padding-left:20px;">
+        <li>Our support team reviews your ticket and responds based on its priority.</li>
+        <li>You'll get an email whenever there's an update.</li>
+        <li>You can add more details or attachments by replying in the Support Center.</li>
+    </ul>
+</div>
+
+<p style="font-size: 13px; color:#888;">
+    Please keep your ticket number <strong>{{ticketNumber}}</strong> handy for any
+    future correspondence about this issue.
+</p>
+
+<p>We're here to help,<br>The RentEase Support Team</p>

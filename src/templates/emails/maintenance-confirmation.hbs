@@ -1,0 +1,49 @@
+{{#> layout}}
+    {{#*inline "body"}}
+        <h2>Maintenance Request Confirmed 🔧</h2>
+        
+        <p>Hello {{name}},</p>
+        
+        <p>Your maintenance request has been received. Here are the details:</p>
+        
+        <table>
+            <tr>
+                <th>Request Number:</th>
+                <td>#{{requestNumber}}</td>
+            </tr>
+            <tr>
+                <th>Issue Type:</th>
+                <td>{{issueType}}</td>
+            </tr>
+            <tr>
+                <th>Priority:</th>
+                <td>{{priority}}</td>
+            </tr>
+            <tr>
+                <th>Requested Date:</th>
+                <td>{{requestedDate}}</td>
+            </tr>
+        </table>
+        
+        <h3>Issue Description:</h3>
+        <p>{{description}}</p>
+        
+        <div class="info-box">
+            <p><strong>What happens next?</strong></p>
+            <ol>
+                <li>A service technician will be assigned within 24 hours</li>
+                <li>You'll receive a confirmation with scheduled visit details</li>
+                <li>The technician will contact you before visiting</li>
+                <li>After service, you'll receive a completion report</li>
+            </ol>
+        </div>
+        
+        <center>
+            <a href="{{trackUrl}}" class="button">Track Request Status</a>
+        </center>
+        
+        <p>If this is an emergency, please call our support immediately at {{supportPhone}}.</p>
+        
+        <p>Thanks,<br>The RentEase Team</p>
+    {{/inline}}
+{{/layout}}
