@@ -28,7 +28,7 @@
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "docker:build": "docker-compose build",
-    "prepare": "husky install"
+    "prepare": "husky install || true"
   },
   "keywords": [
     "Ecommerce"
