@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "RentEase Ecommerce Platform",
-  "main": "app.js",
+  "main": "src/app.js",
   "directories": {
     "doc": "docs",
     "test": "tests"
