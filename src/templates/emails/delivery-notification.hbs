@@ -1,0 +1,52 @@
+{{#> layout}}
+    {{#*inline "body"}}
+        <h2>Delivery Scheduled! 🚚</h2>
+        
+        <p>Hello {{name}},</p>
+        
+        <p>Your delivery has been scheduled. Here are the details:</p>
+        
+        <table>
+            <tr>
+                <th>Delivery Number:</th>
+                <td>#{{deliveryNumber}}</td>
+            </tr>
+            <tr>
+                <th>Rental Number:</th>
+                <td>#{{rentalNumber}}</td>
+            </tr>
+            <tr>
+                <th>Scheduled Date:</th>
+                <td>{{deliveryDate}}</td>
+            </tr>
+            <tr>
+                <th>Delivery Slot:</th>
+                <td>{{deliverySlot}}</td>
+            </tr>
+        </table>
+        
+        <h3>Delivery Address:</h3>
+        <p>
+            {{address.addressLine1}}<br>
+            {{address.addressLine2}}<br>
+            {{address.city}}, {{address.state}} - {{address.pincode}}
+        </p>
+        
+        <div class="info-box">
+            <h3>Delivery Instructions:</h3>
+            <ul>
+                <li>Please ensure someone is available at the address</li>
+                <li>Keep your phone handy for delivery updates</li>
+                <li>You'll receive live tracking updates</li>
+            </ul>
+        </div>
+        
+        <center>
+            <a href="{{trackingUrl}}" class="button">Track Your Delivery</a>
+        </center>
+        
+        <p>Need to reschedule? Contact our support team at least 2 hours before delivery.</p>
+        
+        <p>Thanks,<br>The RentEase Team</p>
+    {{/inline}}
+{{/layout}}

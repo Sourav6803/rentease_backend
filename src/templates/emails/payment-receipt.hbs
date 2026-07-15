@@ -1,0 +1,51 @@
+{{#> layout}}
+    {{#*inline "body"}}
+        <h2>Payment Receipt</h2>
+        
+        <p>Hello {{name}},</p>
+        
+        <p>Thank you for your payment! Here's your receipt:</p>
+        
+        <table>
+            <tr>
+                <th>Receipt Number:</th>
+                <td>#{{paymentNumber}}</td>
+            </tr>
+            <tr>
+                <th>Rental Number:</th>
+                <td>#{{rentalNumber}}</td>
+            </tr>
+            <tr>
+                <th>Amount Paid:</th>
+                <td>₹{{amount}}</td>
+            </tr>
+            <tr>
+                <th>Payment Method:</th>
+                <td>{{paymentMethod}}</td>
+            </tr>
+            <tr>
+                <th>Payment Date:</th>
+                <td>{{paymentDate}}</td>
+            </tr>
+            <tr>
+                <th>Payment Type:</th>
+                <td>{{paymentType}}</td>
+            </tr>
+        </table>
+        
+        <div class="info-box">
+            <p><strong>Payment Status:</strong> ✅ Successful</p>
+            <p><strong>Transaction ID:</strong> {{transactionId}}</p>
+        </div>
+        
+        <center>
+            <a href="{{invoiceUrl}}" class="button">Download Invoice</a>
+        </center>
+        
+        <p>If you have any questions about this payment, please contact our support team.</p>
+        
+        <p>Thanks for choosing RentEase!</p>
+        
+        <p>The RentEase Team</p>
+    {{/inline}}
+{{/layout}}
