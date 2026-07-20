@@ -11,8 +11,8 @@ const { uploadVendorDocuments } = require('../../middlewares/upload.middleware')
 router.post('/register', authLimiter, validate(authValidations.register), authController.register);
 router.post('/login', authLimiter, validate(authValidations.login), authController.login);
 router.post('/refresh-token', authLimiter, validate(authValidations.refreshToken), authController.refreshToken);
-router.post('/forgot-password', authLimiter, validate(authValidations.forgotPassword), authController.forgotPassword);
-router.post('/reset-password', authLimiter, validate(authValidations.resetPassword), authController.resetPassword);
+router.post('/forgot-password', authLimiter,  authController.forgotPassword);
+router.post('/reset-password', authLimiter, authController.resetPassword);
 router.get('/verify-email/:token', validate(authValidations.verifyEmail), authController.verifyEmail);
 router.post('/resend-verification', authLimiter, validate(authValidations.resendVerification), authController.resendVerificationEmail);
 router.post('/send-otp', authLimiter, validate(authValidations.sendOTP), authController.sendPhoneOTP);

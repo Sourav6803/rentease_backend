@@ -718,6 +718,7 @@ class AuthService {
   async forgotPassword(email) {
     try {
       const user = await User.findOne({ email: email.toLowerCase() });
+      // console.log("user-->", user);
 
       if (!user) {
         // Return success even if user not found (security)
@@ -727,15 +728,21 @@ class AuthService {
       // Generate reset token
       const resetToken = this.generateToken();
       const resetTokenHash = this.encryption.hash(resetToken);
+      console.log("resetToken-->", resetToken);
+      console.log("resetTokenHash-->", resetTokenHash);
 
       user.security.passwordResetToken = resetTokenHash;
       user.security.passwordResetExpires = new Date(
-        Date.now() + 10 * 60 * 1000,
-      ); // 10 minutes
+        Date.now() + 15 * 60 * 1000,
+      ); // 15 minutes
       await user.save();
+
+      console.log("process.env.CLIENT_URL-->", process.env.CLIENT_URL)
 
       // Send reset email
       const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${resetToken}`;
+
+      console.log("resetUrl11-->", resetUrl);
 
       await addJob("email", "send", {
         to: user.email,
@@ -743,10 +750,14 @@ class AuthService {
         template: "password-reset",
         data: {
           name: user.profile.firstName,
+          email: user.email,
           resetUrl,
-          validity: "10 minutes",
+          expiryTime: "10 minutes",
+          year: new Date().getFullYear(),
         },
       });
+
+      console.log("resetUrl22-->", resetUrl);
 
       return { message: "If email exists, password reset link will be sent" };
     } catch (error) {
@@ -760,12 +771,20 @@ class AuthService {
    */
   async resetPassword(token, newPassword) {
     try {
+      console.log("Received token:", token);
+      console.log("Received token length:", token?.length);
       const tokenHash = this.encryption.hash(token);
 
       const user = await User.findOne({
         "security.passwordResetToken": tokenHash,
         "security.passwordResetExpires": { $gt: new Date() },
-      });
+      }).select('+password +security.passwordResetToken +security.passwordResetExpires +security.passwordHistory');
+
+       // Also log what's stored in the database
+      // const user = await User.findOne({
+      //   "security.passwordResetToken": { $exists: true }
+      // });
+      // console.log("user-->", user)
 
       if (!user) {
         throw new AppError("Invalid or expired reset token", 400);
@@ -798,6 +817,7 @@ class AuthService {
       // Hash new password
       const hashedPassword = await this.encryption.hashPassword(newPassword);
 
+      console.log("hashedPassword-->", hashedPassword)
       // Store old password in history
       const passwordHistory = user.security?.passwordHistory || [];
       passwordHistory.push({
@@ -805,6 +825,7 @@ class AuthService {
         changedAt: new Date(),
       });
 
+      console.log("passwordHistory-->", passwordHistory)
       // Keep only last 5 passwords
       if (passwordHistory.length > 5) {
         passwordHistory.shift();

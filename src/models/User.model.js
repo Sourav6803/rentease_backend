@@ -90,6 +90,19 @@ const userSchema = new mongoose.Schema({
     deactivationReason: String,
     deactivatedAt: Date
   },
+  // security: {
+  //   twoFactorEnabled: { type: Boolean, default: false },
+  //   twoFactorSecret: { type: String, select: false },
+  //   loginAttempts: { type: Number, default: 0 },
+  //   lockUntil: Date,
+  //   refreshTokens: [{
+  //     token: String,
+  //     deviceInfo: String,
+  //     ipAddress: String,
+  //     expiresAt: Date,
+  //     createdAt: Date
+  //   }]
+  // },
   security: {
     twoFactorEnabled: { type: Boolean, default: false },
     twoFactorSecret: { type: String, select: false },
@@ -101,8 +114,17 @@ const userSchema = new mongoose.Schema({
       ipAddress: String,
       expiresAt: Date,
       createdAt: Date
-    }]
+    }],
+    // ✅ Add these missing fields
+    passwordResetToken: { type: String, select: false },
+    passwordResetExpires: { type: Date, select: false },
+    passwordHistory: [{
+      password: { type: String, select: false },
+      changedAt: Date
+    }],
+    passwordLastChanged: { type: Date }
   },
+ 
   metadata: {
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     updatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }

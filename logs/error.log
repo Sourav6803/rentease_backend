@@ -23603,3 +23603,417 @@
 2026-07-15 10:24:30:2430 [31merror[39m: [31m❌ Redis error:[39m
 2026-07-15 10:24:31:2431 [31merror[39m: [31m❌ Redis error:[39m
 2026-07-15 10:24:31:2431 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 11:33:44:3344 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:41:1141 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:41:1141 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:42:1142 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:42:1142 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:42:1142 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:42:1142 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:43:1143 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:43:1143 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:43:1143 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:44:1144 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:44:1144 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:11:45:1145 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:54:44:5444 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:54:45:5445 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:54:45:5445 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:54:46:5446 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:54:47:5447 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 12:54:48:5448 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 13:28:55:2855 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 13:28:57:2857 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 13:28:58:2858 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:11:17:1117 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:12:36:1236 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:12:36:1236 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:12:36:1236 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:12:36:1236 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:12:36:1236 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:12:37:1237 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:12:37:1237 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:12:37:1237 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:12:39:1239 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:12:39:1239 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 16:12:40:1240 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:44:42:4442 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:44:45:4445 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:44:47:4447 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:44:49:4449 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:44:50:4450 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:44:52:4452 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:44:54:4454 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:44:57:4457 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:44:59:4459 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:01:451 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:02:452 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:04:454 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:05:455 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:07:457 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:08:458 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:10:4510 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:12:4512 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:13:4513 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:15:4515 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:16:4516 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:18:4518 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:20:4520 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:22:4522 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:25:4525 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:27:4527 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:30:4530 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:32:4532 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:34:4534 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:36:4536 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:39:4539 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:41:4541 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:44:4544 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:46:4546 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:48:4548 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:50:4550 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:52:4552 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:54:4554 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:56:4556 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:45:58:4558 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:46:00:460 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:46:02:462 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:46:04:464 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:46:07:467 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:46:09:469 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:46:11:4611 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:46:13:4613 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:46:17:4617 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:46:19:4619 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 17:46:22:4622 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:20:44:2044 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:21:4921 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:22:4922 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:22:4922 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:22:4922 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:23:4923 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:23:4923 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:23:4923 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:24:4924 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:24:4924 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:24:4924 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:25:4925 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:25:4925 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 18:49:26:4926 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 21:19:55:1955 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 21:19:56:1956 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 21:48:09:489 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-15 21:49:17:4917 [31merror[39m: [31mThis account is not a delivery partner. Use the correct login portal.[39m
+2026-07-15 21:50:05:505 [31merror[39m: [31mThis account is not a delivery partner. Use the correct login portal.[39m
+2026-07-15 21:56:53:5653 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 19:19:12:1912 [31merror[39m: [31mCan't find /api/v1/notifications/admin/overview on this server![39m
+2026-07-19 19:19:12:1912 [31merror[39m: [31mCannot find module '../models/Notification.model'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\api\controllers\notification.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\notification.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-07-19 19:19:12:1912 [31merror[39m: [31mNotification is not defined[39m
+2026-07-19 19:19:14:1914 [31merror[39m: [31mCan't find /api/v1/notifications/admin/overview on this server![39m
+2026-07-19 19:19:14:1914 [31merror[39m: [31mCannot find module '../models/Notification.model'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\api\controllers\notification.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\notification.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-07-19 19:19:14:1914 [31merror[39m: [31mNotification is not defined[39m
+2026-07-19 19:23:12:2312 [31merror[39m: [31mCan't find /api/v1/notifications/admin/overview on this server![39m
+2026-07-19 19:23:12:2312 [31merror[39m: [31mCannot find module '../models/Notification.model'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\api\controllers\notification.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\notification.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-07-19 19:23:12:2312 [31merror[39m: [31mNotification is not defined[39m
+2026-07-19 19:23:14:2314 [31merror[39m: [31mCannot find module '../models/Notification.model'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\api\controllers\notification.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\notification.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-07-19 19:23:14:2314 [31merror[39m: [31mCan't find /api/v1/notifications/admin/overview on this server![39m
+2026-07-19 19:23:14:2314 [31merror[39m: [31mNotification is not defined[39m
+2026-07-19 19:34:34:3434 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/events?page=1&limit=10 on this server![39m
+2026-07-19 19:34:34:3434 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/heatmap on this server![39m
+2026-07-19 19:34:34:3434 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/funnel on this server![39m
+2026-07-19 19:34:36:3436 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/heatmap on this server![39m
+2026-07-19 19:34:36:3436 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/events?page=1&limit=10 on this server![39m
+2026-07-19 19:34:36:3436 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/funnel on this server![39m
+2026-07-19 20:17:27:1727 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:28:1728 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:28:1728 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:28:1728 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:29:1729 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:29:1729 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:29:1729 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:30:1730 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:30:1730 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:31:1731 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:31:1731 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:32:1732 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:32:1732 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:33:1733 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:34:1734 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:34:1734 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:35:1735 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:36:1736 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:37:1737 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:38:1738 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:39:1739 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:40:1740 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:41:1741 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:42:1742 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:44:1744 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:45:1745 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:46:1746 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:47:1747 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:49:1749 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:50:1750 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:52:1752 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:53:1753 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:55:1755 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:57:1757 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:17:58:1758 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:00:180 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:02:182 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:04:184 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:06:186 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:08:188 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:10:1810 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:12:1812 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:14:1814 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:16:1816 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:18:1818 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:20:1820 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:22:1822 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:24:1824 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:26:1826 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:28:1828 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:18:30:1830 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 20:52:35:5235 [31merror[39m: [31mvalidation.run is not a function[39m
+2026-07-19 21:01:05:15 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 21:04:04:44 [31merror[39m: [31mvalidation.run is not a function[39m
+2026-07-19 21:13:48:1348 [31merror[39m: [31mForgot password error: Reached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 21:13:48:1348 [31merror[39m: [31mReached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 21:55:40:5540 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 22:25:15:2515 [31merror[39m: [31mForgot password error: Reached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 22:25:15:2515 [31merror[39m: [31mReached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 22:43:45:4345 [31merror[39m: [31mForgot password error: Reached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 22:43:45:4345 [31merror[39m: [31mReached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 22:49:14:4914 [31merror[39m: [31mForgot password error: Reached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 22:49:14:4914 [31merror[39m: [31mReached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 23:03:55:355 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-19 23:04:16:416 [31merror[39m: [31mForgot password error: Reached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 23:04:16:416 [31merror[39m: [31mReached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 23:19:39:1939 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-07-19 23:24:18:2418 [31merror[39m: [31mForgot password error: Reached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 23:24:18:2418 [31merror[39m: [31mReached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 23:34:41:3441 [31merror[39m: [31mForgot password error: Reached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 23:34:41:3441 [31merror[39m: [31mReached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-19 23:42:40:4240 [31merror[39m: [31mJob 1 (email) failed: Cannot read properties of undefined (reading 'initialized')[39m
+2026-07-19 23:43:45:4345 [31merror[39m: [31mJob 1 (email) failed: Cannot read properties of undefined (reading 'initialized')[39m
+2026-07-19 23:43:45:4345 [31merror[39m: [31mJob 2 (email) failed: Cannot read properties of undefined (reading 'initialized')[39m
+2026-07-19 23:44:55:4455 [31merror[39m: [31mJob 2 (email) failed: Cannot read properties of undefined (reading 'initialized')[39m
+2026-07-19 23:47:45:4745 [31merror[39m: [31mForgot password error: addJob is not a function[39m
+2026-07-19 23:47:45:4745 [31merror[39m: [31maddJob is not a function[39m
+2026-07-20 12:03:13:313 [31merror[39m: [31mForgot password error: Reached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-20 12:03:13:313 [31merror[39m: [31mReached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-20 12:48:36:4836 [31merror[39m: [31mUncaught Exception: listen EADDRINUSE: address already in use :::5000[39m
+2026-07-20 13:23:36:2336 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:23:37:2337 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:23:37:2337 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:23:37:2337 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:23:38:2338 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:23:38:2338 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:23:38:2338 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:23:39:2339 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:23:39:2339 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:23:40:2340 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:47:5047 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:49:5049 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:49:5049 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:50:5050 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:51:5051 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:51:5051 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:52:5052 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:53:5053 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:54:5054 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:55:5055 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:56:5056 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:57:5057 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:58:5058 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:50:59:5059 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:51:00:510 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:51:02:512 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:51:03:513 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:51:04:514 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:51:06:516 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:51:07:517 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 13:51:09:519 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 14:56:56:5656 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 14:56:57:5657 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 14:56:57:5657 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 14:56:57:5657 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 14:56:57:5657 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 14:56:58:5658 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 14:56:58:5658 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 14:56:59:5659 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 14:56:59:5659 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 14:57:00:570 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:46:46:4646 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:46:49:4649 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:46:51:4651 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:46:53:4653 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:46:54:4654 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:46:55:4655 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:46:56:4656 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:46:57:4657 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:46:58:4658 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:46:59:4659 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:00:470 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:01:471 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:03:473 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:04:474 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:05:475 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:06:476 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:08:478 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:09:479 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:10:4710 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:12:4712 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:13:4713 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:15:4715 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:17:4717 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:18:4718 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:20:4720 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:22:4722 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:24:4724 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:25:4725 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:27:4727 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:29:4729 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:31:4731 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:33:4733 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:35:4735 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:37:4737 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:39:4739 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:41:4741 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:43:4743 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:45:4745 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:47:4747 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:49:4749 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:51:4751 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:54:4754 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:56:4756 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:47:58:4758 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:48:00:480 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:48:02:482 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:48:04:484 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:48:06:486 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:48:08:488 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:48:10:4810 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:48:12:4812 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 17:48:14:4814 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 18:42:53:4253 [31merror[39m: [31mvalidation.run is not a function[39m
+2026-07-20 18:43:45:4345 [31merror[39m: [31mvalidation.run is not a function[39m
+2026-07-20 18:44:48:4448 [31merror[39m: [31mReset password error: Invalid or expired reset token[39m
+2026-07-20 18:44:48:4448 [31merror[39m: [31mInvalid or expired reset token[39m
+2026-07-20 18:46:15:4615 [31merror[39m: [31mReset password error: Invalid or expired reset token[39m
+2026-07-20 18:46:15:4615 [31merror[39m: [31mInvalid or expired reset token[39m
+2026-07-20 19:34:06:346 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 19:34:07:347 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 19:34:07:347 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 19:34:07:347 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 19:34:08:348 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 19:34:08:348 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 19:34:08:348 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 19:34:09:349 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:16:5616 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:18:5618 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:19:5619 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:19:5619 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:20:5620 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:21:5621 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:21:5621 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:22:5622 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:23:5623 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:24:5624 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:25:5625 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:26:5626 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:27:5627 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:28:5628 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:29:5629 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:30:5630 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:32:5632 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:33:5633 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:34:5634 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:36:5636 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:37:5637 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:38:5638 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:40:5640 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:41:5641 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:43:5643 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:45:5645 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:46:5646 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:48:5648 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:50:5650 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:52:5652 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:54:5654 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:56:5656 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:56:58:5658 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:57:00:570 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:57:02:572 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:57:04:574 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:57:06:576 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:57:08:578 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:57:10:5710 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:57:12:5712 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:57:14:5714 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 20:57:16:5716 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:04:54:454 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:04:57:457 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:04:59:459 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:01:51 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:03:53 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:05:55 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:07:57 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:10:510 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:12:512 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:14:514 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:16:516 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:18:518 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:20:520 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:22:522 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:24:524 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:26:526 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:28:528 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:30:530 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:32:532 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:34:534 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:36:536 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:38:538 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:40:540 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:42:542 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:44:544 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:46:546 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:48:548 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:50:550 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:52:552 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:54:554 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:05:56:556 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-20 21:19:14:1914 [31merror[39m: [31mReset password error: Invalid or expired reset token[39m
+2026-07-20 21:19:14:1914 [31merror[39m: [31mInvalid or expired reset token[39m
+2026-07-20 21:49:09:499 [31merror[39m: [31mReset password error: Invalid or expired reset token[39m
+2026-07-20 21:49:09:499 [31merror[39m: [31mInvalid or expired reset token[39m
+2026-07-20 22:02:08:28 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-07-20 22:04:22:422 [31merror[39m: [31mReset password error: Illegal arguments: string, undefined[39m
+2026-07-20 22:04:22:422 [31merror[39m: [31mIllegal arguments: string, undefined[39m
+2026-07-20 22:08:13:813 [31merror[39m: [31mReset password error: Illegal arguments: string, undefined[39m
+2026-07-20 22:08:13:813 [31merror[39m: [31mIllegal arguments: string, undefined[39m
