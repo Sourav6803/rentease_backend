@@ -3,6 +3,8 @@ const catchAsync = require('../../utils/catchAsync');
 const {ApiResponse} = require('../../utils/apiResponse');
 const AppError = require('../../utils/AppError');
 const logger = require('../../config/logger');
+const Notification = require('../../models/Notification.model');
+const User = require('../../models/User.model');
 
 class NotificationController {
   /**
@@ -111,7 +113,7 @@ class NotificationController {
   updatePreferences = catchAsync(async (req, res) => {
     const { notifications } = req.body;
 
-    const user = await require('../../models').User.findById(req.user._id);
+    const user = await User.findById(req.user._id);
     if (!user) {
       throw new AppError('User not found', 404);
     }
@@ -135,7 +137,7 @@ class NotificationController {
    * Get notification preferences
    */
   getPreferences = catchAsync(async (req, res) => {
-    const user = await require('../../models').User.findById(req.user._id)
+    const user = await User.findById(req.user._id)
       .select('preferences.notifications');
 
     if (!user) {
@@ -190,7 +192,7 @@ class NotificationController {
     const { page = 1, limit = 20, ...filters } = req.query;
     
     // This would be an admin view of all system notifications
-    const Notification = require('../models/Notification.model');
+  
     
     const skip = (page - 1) * limit;
     const query = {};

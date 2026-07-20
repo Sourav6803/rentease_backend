@@ -11,7 +11,7 @@ const deliveryTeamSchema = new mongoose.Schema({
   teamCode: {
     type: String,
     required: true,
-    unique: true
+    // unique: true
   },
   teamLead: {
     type: mongoose.Schema.Types.ObjectId,

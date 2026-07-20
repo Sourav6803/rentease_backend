@@ -11,7 +11,7 @@ const deliveryPersonSchema = new mongoose.Schema({
   employeeId: {
     type: String,
     required: true,
-    unique: true
+    // unique: true
   },
   vehicle: {
     type: {

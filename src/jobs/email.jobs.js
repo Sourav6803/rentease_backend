@@ -1,5 +1,5 @@
 const logger = require('../config/logger');
-const { sendEmail } = require('../services/email.service');
+const emailService = require('../services/email.service');
 
 // Email job processor
 const process = async (type, data) => {
@@ -7,10 +7,10 @@ const process = async (type, data) => {
 
   switch (type) {
     case 'send':
-      return await sendEmail(data);
+      return await emailService.sendEmail(data);
       
     case 'welcome':
-      return await sendEmail({
+      return await emailService.sendEmail({
         to: data.to,
         subject: 'Welcome to RentEase!',
         template: 'welcome',
@@ -21,7 +21,7 @@ const process = async (type, data) => {
       });
       
     case 'rental-confirmed':
-      return await sendEmail({
+      return await emailService.sendEmail({
         to: data.to,
         subject: 'Rental Confirmed - RentEase',
         template: 'rental-confirmed',
@@ -36,7 +36,7 @@ const process = async (type, data) => {
       });
       
     case 'payment-success':
-      return await sendEmail({
+      return await emailService.sendEmail({
         to: data.to,
         subject: 'Payment Successful - RentEase',
         template: 'payment-success',
@@ -50,7 +50,7 @@ const process = async (type, data) => {
       });
       
     case 'payment-failed':
-      return await sendEmail({
+      return await emailService.sendEmail({
         to: data.to,
         subject: 'Payment Failed - RentEase',
         template: 'payment-failed',
@@ -63,7 +63,7 @@ const process = async (type, data) => {
       });
       
     case 'rental-reminder':
-      return await sendEmail({
+      return await emailService.sendEmail({
         to: data.to,
         subject: 'Rental Reminder - RentEase',
         template: 'rental-reminder',
@@ -76,7 +76,7 @@ const process = async (type, data) => {
       });
       
     case 'kyc-approved':
-      return await sendEmail({
+      return await emailService.sendEmail({
         to: data.to,
         subject: 'KYC Approved - RentEase',
         template: 'kyc-approved',
@@ -86,7 +86,7 @@ const process = async (type, data) => {
       });
       
     case 'kyc-rejected':
-      return await sendEmail({
+      return await emailService.sendEmail({
         to: data.to,
         subject: 'KYC Update - RentEase',
         template: 'kyc-rejected',
@@ -98,7 +98,7 @@ const process = async (type, data) => {
       });
       
     case 'invoice':
-      return await sendEmail({
+      return await emailService.sendEmail({
         to: data.to,
         subject: `Invoice #${data.invoiceNumber} - RentEase`,
         template: 'invoice',
@@ -113,7 +113,7 @@ const process = async (type, data) => {
       });
       
     case 'newsletter':
-      return await sendEmail({
+      return await emailService.sendEmail({
         to: data.to,
         subject: data.subject,
         template: 'newsletter',

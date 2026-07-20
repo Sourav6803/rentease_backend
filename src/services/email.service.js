@@ -3,7 +3,6 @@ const hbs = require("nodemailer-express-handlebars");
 const path = require("path");
 const logger = require("../config/logger");
 const AppError = require("../utils/AppError");
-const { addJob } = require("../jobs");
 
 function stripHtml(html) {
   if (!html) return "";
@@ -36,9 +35,8 @@ class EmailService {
     if (this.initialized) return;
 
     try {
-      // Create transporter based on environment
-      if (process.env.NODE_ENV === "production") {
-        // Production: Use SMTP or sendgrid
+      // Use real SMTP whenever configured; fall back to ethereal only if not
+      if (process.env.NODE_ENV === "production" || process.env.SMTP_HOST) {
         this.transporter = nodemailer.createTransport({
           host: process.env.SMTP_HOST,
           port: parseInt(process.env.SMTP_PORT) || 587,
@@ -129,6 +127,8 @@ class EmailService {
         subject,
         attachments,
       };
+
+      console.log("template-->", template)
 
       const finalText = text || (html ? stripHtml(html) : "");
 

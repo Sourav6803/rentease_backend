@@ -13,7 +13,7 @@ const apiKeySchema = new mongoose.Schema({
   },
   allowedIPs: [{ type: String }],
   allowedDomains: [{ type: String }],
-  expiresAt: { type: Date, index: true },
+  expiresAt: { type: Date,  },
   lastUsedAt: Date,
   usageCount: { type: Number, default: 0 },
   status: { type: String, enum: ['active', 'revoked', 'expired'], default: 'active', index: true },

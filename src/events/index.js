@@ -1,7 +1,5 @@
 const eventEmitter = require('./eventEmitter');
 const logger = require('../config/logger');
-const { emitToUser, emitToVendor, emitToAdmins } = require('../socket');
-const { processJob } = require('../jobs');
 
 // Import all event handlers
 require('./user.events');
@@ -188,6 +186,7 @@ const emitEvent = async (event, data, options = {}) => {
 // Socket event handler
 const handleSocketEvents = async (event, data) => {
   try {
+    const { emitToUser, emitToVendor, emitToAdmins } = require('../socket');
     switch (event) {
       case EVENTS.RENTAL.CREATED:
         emitToUser(data.userId, 'rental:created', data);
@@ -303,6 +302,7 @@ const handleNotificationEvents = async (event, data) => {
 // Job event handler
 const handleJobEvents = async (event, data) => {
   try {
+    const { processJob } = require('../jobs');
     switch (event) {
       case EVENTS.RENTAL.CREATED:
         // Schedule rental confirmation reminder
