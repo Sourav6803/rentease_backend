@@ -4,6 +4,7 @@ const {ApiResponse} = require('../../utils/apiResponse');
 const AppError = require('../../utils/AppError');
 const logger = require('../../config/logger');
 const { addJob } = require('../../jobs');
+const Vendor = require('../../models/Vendor.model');
 
 // const {addJob} = require('../middlewares/cache.middleware')
 
@@ -394,9 +395,10 @@ class ProductController {
 
     const product = await ProductService.approveProduct(id, adminId, notes);
 
-    // Send notification to vendor
+    const vendor = await Vendor.findById(product.vendor).populate('user', 'email');
+
     await addJob("email", "send", {
-      to: product.vendor?.user?.email,
+      to: vendor?.user?.email,
       subject: "Your Product Has Been Approved",
       template: "product-approved",
       data: {

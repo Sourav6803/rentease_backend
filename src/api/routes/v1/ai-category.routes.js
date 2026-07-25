@@ -2,10 +2,12 @@
 const express = require('express');
 const router = express.Router();
 const aiCategoryController = require('../../controllers/ai-category.controller');
-const { protect, restrictTo } = require('../../middlewares/auth.middleware');
+// const { protect, } = require('../../middlewares/auth.middleware');
+const { restrictTo } = require('../../middlewares/permissions.middleware');
+const { protect } = require('../../middlewares/auth.middleware');
 
 // All routes require admin authentication
-// router.use(protect);
+// router.use(protect)
 // router.use(restrictTo('admin', 'super-admin'));
 
 // ==================== CATEGORY GENERATION ====================

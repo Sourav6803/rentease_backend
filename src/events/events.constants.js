@@ -49,6 +49,6 @@ const EVENTS = {
     ACCOUNT_BLOCKED: "vendor:account_blocked",
     ACCOUNT_UNBLOCKED: "vendor:account_unblocked",
   },
-};
+}; 
 
 module.exports = EVENTS;

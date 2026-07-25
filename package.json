@@ -45,6 +45,7 @@
     "bcryptjs": "^3.0.3",
     "bull": "^4.16.5",
     "bull-board": "^1.7.2",
+    "bullmq": "^5.80.10",
     "canvas": "^3.2.2",
     "cloudinary": "^2.9.0",
     "compression": "^1.8.1",

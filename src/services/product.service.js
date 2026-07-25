@@ -919,28 +919,28 @@ class ProductService {
   /**
  * Invalidate product list cache
  */
-async invalidateProductListCache() {
-  try {
-    if (this.redisClient) {
-      const patterns = [
-        'products:search:*',
-        'products:featured:*',
-        'products:trending:*',
-        'products:new-arrivals:*',
-        'products:most-popular:*'
-      ];
-      
-      for (const pattern of patterns) {
-        const keys = await this.redisClient.keys(pattern);
-        if (keys.length > 0) {
-          await this.redisClient.del(keys);
+  async invalidateProductListCache() {
+    try {
+      if (this.redisClient) {
+        const patterns = [
+          'products:search:*',
+          'products:featured:*',
+          'products:trending:*',
+          'products:new-arrivals:*',
+          'products:most-popular:*'
+        ];
+        
+        for (const pattern of patterns) {
+          const keys = await this.redisClient.keys(pattern);
+          if (keys.length > 0) {
+            await this.redisClient.del(keys);
+          }
         }
       }
+    } catch (error) {
+      logger.error('Error invalidating product list cache:', error);
     }
-  } catch (error) {
-    logger.error('Error invalidating product list cache:', error);
   }
-}
 
   /**
    * Approve product (admin only)
