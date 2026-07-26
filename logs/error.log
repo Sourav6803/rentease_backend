@@ -24619,3 +24619,55 @@
 2026-07-25 09:33:14:3314 [31merror[39m: [31m❌ Redis error:[39m
 2026-07-25 09:33:16:3316 [31merror[39m: [31m❌ Redis error:[39m
 2026-07-25 09:33:18:3318 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:11:3611 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:11:3611 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:11:3611 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:12:3612 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:12:3612 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:12:3612 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:13:3613 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:13:3613 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:13:3613 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:14:3614 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:14:3614 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:10:12:1012 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:19:45:1945 [31merror[39m: [31mCan't find /api/v1/admin/upload/image on this server![39m
+2026-07-25 18:41:44:4144 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:44:4144 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:44:4144 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:45:4145 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:45:4145 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:45:4145 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:45:4145 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:46:4146 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:46:4146 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:47:4147 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:54:2954 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:55:2955 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:55:2955 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:56:2956 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:57:2957 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:58:2958 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:59:2959 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:30:00:300 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:30:00:300 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:30:01:301 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:30:03:303 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:30:47:3047 [31merror[39m: [31mCan't find /api/v1/admin/upload/image on this server![39m
+2026-07-25 21:39:28:3928 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 22:07:23:723 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 22:39:42:3942 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-07-25 23:07:28:728 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:07:28:728 [31merror[39m: [31mCast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:07:29:729 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:07:29:729 [31merror[39m: [31mCast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:08:30:830 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:08:30:830 [31merror[39m: [31mCast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:08:31:831 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:08:31:831 [31merror[39m: [31mCast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:30:25:3025 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:30:25:3025 [31merror[39m: [31mCast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:30:25:3025 [31merror[39m: [31mError tracking category performance: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:30:26:3026 [31merror[39m: [31mError tracking category performance: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:30:26:3026 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:30:26:3026 [31merror[39m: [31mCast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m

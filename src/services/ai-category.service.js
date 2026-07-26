@@ -1890,22 +1890,175 @@ async function generateCategoryIcon(categoryName, description = "") {
 /**
  * Generate icon variations
  */
+// async function generateIconVariations(categoryName, description = "", count = 4) {
+//   const baseIcon = getDynamicIcon(categoryName);
+//   const colors = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'];
+//   const variations = [];
+  
+//   for (let i = 0; i < Math.min(count, 6); i++) {
+//     const color = colors[i].replace('#', '');
+//     variations.push({
+//       success: true,
+//       url: `https://via.placeholder.com/200x200/${color}/FFFFFF?text=${encodeURIComponent(baseIcon)}`,
+//       thumbnail: `https://via.placeholder.com/100x100/${color}/FFFFFF?text=${encodeURIComponent(baseIcon)}`,
+//       color: colors[i],
+//     });
+//   }
+  
+//   return { success: true, variations, count: variations.length };
+// }
+
+// services/ai-category.service.js
+
+/**
+ * Generate icon variations using Mistral AI to create SVG icons
+ */
 async function generateIconVariations(categoryName, description = "", count = 4) {
-  const baseIcon = getDynamicIcon(categoryName);
+  try {
+    console.log(`🎨 Generating ${count} icon variations for: ${categoryName}`);
+    
+    const baseIcon = getDynamicIcon(categoryName);
+    const colors = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'];
+    
+    // Try to generate icons with Mistral AI (SVG format)
+    try {
+      const prompt = `Create a simple, modern SVG icon for "${categoryName}" category.
+Description: ${description || `${categoryName} category`}
+Style: Clean, minimalist, flat design, e-commerce style like Amazon/Flipkart category icons.
+
+Generate an SVG icon with these EXACT specifications:
+- 200x200 pixels viewBox
+- Rounded rectangle background (rx="30")
+- Simple, recognizable symbol representing ${categoryName}
+- Modern gradient background
+- White or light-colored foreground symbol
+- No text in the icon
+- Professional, premium look
+
+Return ONLY valid SVG code wrapped in a JSON object like this:
+{
+  "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>...</svg>"
+}`;
+
+      const response = await generateWithMistral(prompt);
+      
+      // Extract SVG from response
+      let svgData = extractJSONFromResponse(response);
+      
+      if (svgData) {
+        const parsed = JSON.parse(svgData);
+        if (parsed.svg) {
+          // Convert SVG to data URLs with different colors
+          const variations = [];
+          
+          for (let i = 0; i < Math.min(count, colors.length); i++) {
+            const coloredSvg = parsed.svg.replace(
+              /<svg/,
+              `<svg style="background-color: ${colors[i]}"`
+            );
+            
+            const svgBase64 = Buffer.from(coloredSvg).toString('base64');
+            const dataUrl = `data:image/svg+xml;base64,${svgBase64}`;
+            
+            variations.push({
+              success: true,
+              url: dataUrl,
+              thumbnail: dataUrl,
+              color: colors[i],
+              svg: coloredSvg
+            });
+          }
+          
+          console.log(`✅ Generated ${variations.length} AI icons`);
+          return { success: true, variations, count: variations.length };
+        }
+      }
+    } catch (aiError) {
+      console.warn('AI icon generation failed, using fallback:', aiError.message);
+    }
+    
+    // Fallback: Generate colored emoji icons as data URLs
+    console.log('🔄 Using emoji-based fallback icons');
+    const variations = [];
+    
+    for (let i = 0; i < Math.min(count, colors.length); i++) {
+      const dataUrl = await createEmojiIconDataUrl(baseIcon, colors[i]);
+      
+      variations.push({
+        success: true,
+        url: dataUrl,
+        thumbnail: dataUrl,
+        color: colors[i],
+      });
+    }
+    
+    return { success: true, variations, count: variations.length };
+    
+  } catch (error) {
+    logger.error('Error generating icon variations:', error);
+    // Ultimate fallback
+    return generatePlaceholderIcons(categoryName, count);
+  }
+}
+
+/**
+ * Create a data URL with emoji on colored background
+ */
+async function createEmojiIconDataUrl(emoji, backgroundColor) {
+  // Create an SVG with emoji and colored background
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="30" fill="${backgroundColor}"/>
+  <text x="100" y="115" text-anchor="middle" font-size="80" fill="white">${emoji}</text>
+</svg>`;
+  
+  const svgBase64 = Buffer.from(svg).toString('base64');
+  return `data:image/svg+xml;base64,${svgBase64}`;
+}
+
+/**
+ * Generate placeholder icons (ultimate fallback)
+ */
+function generatePlaceholderIcons(categoryName, count = 4) {
+  const emoji = getDynamicIcon(categoryName);
   const colors = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'];
   const variations = [];
   
-  for (let i = 0; i < Math.min(count, 6); i++) {
-    const color = colors[i].replace('#', '');
+  for (let i = 0; i < Math.min(count, colors.length); i++) {
+    // Create a simple colored square with emoji using CSS gradient
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="grad${i}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:${colors[i]};stop-opacity:1" />
+      <stop offset="100%" style="stop-color:${lightenColor(colors[i])};stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="30" fill="url(#grad${i})"/>
+  <text x="100" y="120" text-anchor="middle" font-size="80">${emoji}</text>
+</svg>`;
+    
+    const svgBase64 = Buffer.from(svg).toString('base64');
+    
     variations.push({
       success: true,
-      url: `https://via.placeholder.com/200x200/${color}/FFFFFF?text=${encodeURIComponent(baseIcon)}`,
-      thumbnail: `https://via.placeholder.com/100x100/${color}/FFFFFF?text=${encodeURIComponent(baseIcon)}`,
+      url: `data:image/svg+xml;base64,${svgBase64}`,
+      thumbnail: `data:image/svg+xml;base64,${svgBase64}`,
       color: colors[i],
     });
   }
   
   return { success: true, variations, count: variations.length };
+}
+
+/**
+ * Lighten a hex color
+ */
+function lightenColor(hex, percent = 20) {
+  const num = parseInt(hex.replace('#', ''), 16);
+  const amt = Math.round(2.55 * percent);
+  const R = Math.min(255, (num >> 16) + amt);
+  const G = Math.min(255, ((num >> 8) & 0x00FF) + amt);
+  const B = Math.min(255, (num & 0x0000FF) + amt);
+  return `#${(1 << 24 | R << 16 | G << 8 | B).toString(16).slice(1)}`;
 }
 
 /**

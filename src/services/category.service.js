@@ -458,120 +458,584 @@ class CategoryService {
   /**
    * Create new category
    */
-  async createCategory(categoryData, userId) {
-    try {
-      const { name, parent, description, image, displayOrder, attributes } = categoryData;
+  // async createCategory(categoryData, userId) {
+  //   try {
+  //     const { name, parent, description, image, displayOrder, attributes } = categoryData;
 
-      // Generate slug
-      const slug = await this.generateSlug(name, parent);
+  //     // Generate slug
+  //     const slug = await this.generateSlug(name, parent);
 
-      // If parent is provided, check if it exists
-      if (parent) {
-        const parentCategory = await Category.findById(parent);
-        if (!parentCategory) {
-          throw new AppError('Parent category not found', 404);
+  //     // If parent is provided, check if it exists
+  //     if (parent) {
+  //       const parentCategory = await Category.findById(parent);
+  //       if (!parentCategory) {
+  //         throw new AppError('Parent category not found', 404);
+  //       }
+  //     }
+
+  //     // Create category
+  //     const category = await Category.create({
+  //       name,
+  //       slug,
+  //       description,
+  //       parent: parent || null,
+  //       image,
+  //       displayOrder: displayOrder || 0,
+  //       attributes: attributes || [],
+  //       metadata: {
+  //         createdBy: userId
+  //       }
+  //     });
+
+  //     // Invalidate cache
+  //     await this.invalidateCategoryCache();
+
+  //     // Emit event
+  //     eventEmitter.emit('category:created', {
+  //       categoryId: category._id,
+  //       name: category.name,
+  //       slug: category.slug,
+  //       createdBy: userId
+  //     });
+
+  //     return category;
+  //   } catch (error) {
+  //     logger.error('Error in createCategory:', error);
+  //     throw error;
+  //   }
+  // }
+
+  /**
+ * Create new category - COMPLETE FIX
+ */
+async createCategory(categoryData, userId) {
+  try {
+    const { 
+      name, 
+      parent, 
+      description, 
+      image,           // Can be { url, thumbnail } object or file
+      displayOrder, 
+      attributes,
+      icon,            // Emoji icon like '📱'
+      iconUrl,         // URL to icon image
+      isActive, 
+      isFeatured, 
+      meta,
+      level 
+    } = categoryData;
+
+    // Validate required fields
+    if (!name || name.trim().length < 2) {
+      throw new AppError('Category name must be at least 2 characters', 400);
+    }
+    if (name.length > 50) {
+      throw new AppError('Category name cannot exceed 50 characters', 400);
+    }
+
+    // Generate slug
+    const slug = await this.generateSlug(name.trim(), parent || null);
+
+    // If parent is provided, validate it exists
+    let parentCategory = null;
+    if (parent && parent !== 'none' && parent !== '') {
+      parentCategory = await Category.findById(parent);
+      if (!parentCategory) {
+        throw new AppError('Parent category not found', 404);
+      }
+    }
+
+    // Handle image - supports multiple formats
+    let processedImage = { url: '', thumbnail: '' };
+    
+    if (image) {
+      // Case 1: Image is already an object with url/thumbnail
+      if (typeof image === 'object' && (image.url || image.thumbnail)) {
+        processedImage = {
+          url: image.url || '',
+          thumbnail: image.thumbnail || image.url || ''
+        };
+      }
+      // Case 2: Image is a base64 string or file path (Cloudinary URL)
+      else if (typeof image === 'string' && image.length > 0) {
+        // Check if it's already a Cloudinary URL
+        if (image.includes('cloudinary.com') || image.includes('res.cloudinary.com')) {
+          processedImage = {
+            url: image,
+            thumbnail: image.replace('/upload/', '/upload/w_100,h_100,c_fill/')
+          };
+        } 
+        // Check if it's a base64 data URL
+        else if (image.startsWith('data:image')) {
+          try {
+            processedImage = await this.uploadBase64ToCloudinary(image, name);
+          } catch (uploadError) {
+            logger.error('Failed to upload base64 image:', uploadError);
+            // Continue without image if upload fails
+          }
+        }
+        // Assume it's a regular URL
+        else {
+          processedImage = {
+            url: image,
+            thumbnail: image
+          };
+        }
+      }
+      // Case 3: Image is a file object from multer/middleware
+      else if (typeof image === 'object' && image.path) {
+        try {
+          processedImage = await this.uploadFileToCloudinary(image, name);
+        } catch (uploadError) {
+          logger.error('Failed to upload image file:', uploadError);
+        }
+      }
+    }
+
+    // Handle icon - combine emoji and image
+    let finalIcon = icon || '📁';
+    let finalImage = processedImage;
+
+    // If iconUrl is provided, use it as the image
+    if (iconUrl && !processedImage.url) {
+      if (iconUrl.includes('cloudinary.com')) {
+        finalImage = {
+          url: iconUrl,
+          thumbnail: iconUrl.replace('/upload/', '/upload/w_100,h_100,c_fill/')
+        };
+      } else {
+        finalImage = {
+          url: iconUrl,
+          thumbnail: iconUrl
+        };
+      }
+    }
+
+    // If icon looks like an emoji, keep it; otherwise use first character
+    if (finalIcon.length > 2 && !this.isEmoji(finalIcon)) {
+      finalIcon = '📁'; // Default if not a valid emoji
+    }
+
+    // Prepare meta with fallbacks
+    const processedMeta = {
+      title: meta?.title || name.trim(),
+      description: meta?.description || description || `${name.trim()} - Rent quality products online`,
+      keywords: meta?.keywords || this.generateKeywords(name)
+    };
+
+    // Validate meta length
+    if (processedMeta.title.length > 60) {
+      processedMeta.title = processedMeta.title.substring(0, 60);
+    }
+    if (processedMeta.description.length > 160) {
+      processedMeta.description = processedMeta.description.substring(0, 160);
+    }
+
+    // Process attributes - validate and clean
+    const processedAttributes = this.processAttributesForSave(attributes || []);
+
+    // Build the category object
+    const categoryData_toSave = {
+      name: name.trim(),
+      slug,
+      description: description || '',
+      parent: parentCategory ? parentCategory._id : null,
+      image: finalImage,
+      icon: finalIcon,
+      displayOrder: displayOrder || 0,
+      isActive: isActive !== undefined ? Boolean(isActive) : true,
+      isFeatured: isFeatured !== undefined ? Boolean(isFeatured) : false,
+      level: level !== undefined ? parseInt(level) : 0,
+      attributes: processedAttributes,
+      meta: processedMeta,
+      metadata: {
+        createdBy: userId,
+        aiGenerated: false,
+        generatedAt: null
+      }
+    };
+
+    // Create category
+    const category = await Category.create(categoryData_toSave);
+
+    // Invalidate all relevant caches
+    await this.invalidateCategoryCache();
+    
+    // Also invalidate parent's cache if exists
+    if (parentCategory) {
+      await this.invalidateCategoryCache(parentCategory._id);
+    }
+
+    // Emit event
+    eventEmitter.emit('category:created', {
+      categoryId: category._id,
+      name: category.name,
+      slug: category.slug,
+      parentId: parentCategory?._id || null,
+      createdBy: userId,
+      timestamp: new Date().toISOString()
+    });
+
+    // Log creation
+    logger.info(`Category created: ${category.name} (${category._id}) by user ${userId}`);
+
+    return category;
+  } catch (error) {
+    logger.error('Error in createCategory:', error);
+    
+    // Rethrow AppError as-is, wrap others
+    if (error instanceof AppError) {
+      throw error;
+    }
+    throw new AppError(error.message || 'Failed to create category', 500);
+  }
+}
+
+/**
+ * Check if string is an emoji
+ */
+isEmoji(str) {
+  const emojiRegex = /^(\p{Emoji_Presentation}|\p{Emoji}\uFE0F)$/u;
+  return emojiRegex.test(str) || 
+         /^[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u.test(str);
+}
+
+/**
+ * Process and validate attributes before saving
+ */
+processAttributesForSave(attributes) {
+  if (!Array.isArray(attributes) || attributes.length === 0) {
+    return [];
+  }
+
+  return attributes
+    .filter(attr => attr.name && attr.name.trim() !== '')
+    .map(attr => {
+      const processed = {
+        name: attr.name.trim(),
+        type: ['text', 'number', 'boolean', 'select', 'multiselect'].includes(attr.type) 
+          ? attr.type 
+          : 'text',
+        required: Boolean(attr.required),
+        filterable: Boolean(attr.filterable),
+        unit: attr.unit || ''
+      };
+
+      // Handle options for select/multiselect
+      if (['select', 'multiselect'].includes(processed.type)) {
+        if (Array.isArray(attr.options) && attr.options.length > 0) {
+          processed.options = attr.options
+            .filter(opt => opt && opt.trim() !== '')
+            .map(opt => opt.trim())
+            .slice(0, 10); // Max 10 options
+        } else {
+          processed.options = ['Option 1', 'Option 2', 'Option 3'];
         }
       }
 
-      // Create category
-      const category = await Category.create({
-        name,
-        slug,
-        description,
-        parent: parent || null,
-        image,
-        displayOrder: displayOrder || 0,
-        attributes: attributes || [],
-        metadata: {
-          createdBy: userId
-        }
-      });
+      return processed;
+    })
+    .slice(0, 6); // Max 6 attributes
+}
 
-      // Invalidate cache
-      await this.invalidateCategoryCache();
+/**
+ * Generate keywords from category name
+ */
+generateKeywords(name) {
+  const words = name.toLowerCase().split(/\s+/);
+  const keywords = [
+    ...words,
+    'rental',
+    'rent',
+    'lease',
+    'online',
+    'delivery',
+    'affordable'
+  ];
+  return [...new Set(keywords)].slice(0, 10);
+}
 
-      // Emit event
-      eventEmitter.emit('category:created', {
-        categoryId: category._id,
-        name: category.name,
-        slug: category.slug,
-        createdBy: userId
-      });
-
-      return category;
-    } catch (error) {
-      logger.error('Error in createCategory:', error);
-      throw error;
+/**
+ * Upload base64 image to Cloudinary
+ */
+async uploadBase64ToCloudinary(base64String, categoryName) {
+  try {
+    const cloudinary = require('cloudinary').v2;
+    
+    if (!cloudinary.config().cloud_name) {
+      logger.warn('Cloudinary not configured, skipping image upload');
+      return { url: base64String, thumbnail: base64String };
     }
+
+    const result = await cloudinary.uploader.upload(base64String, {
+      folder: 'categories',
+      public_id: `${categoryName.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}`,
+      transformation: [
+        { width: 500, height: 500, crop: 'fill', quality: 'auto' }
+      ]
+    });
+
+    return {
+      url: result.secure_url,
+      thumbnail: cloudinary.url(result.public_id, {
+        width: 100,
+        height: 100,
+        crop: 'fill',
+        quality: 'auto'
+      })
+    };
+  } catch (error) {
+    logger.error('Error uploading to Cloudinary:', error);
+    // Return original as fallback
+    return { url: base64String, thumbnail: base64String };
   }
+}
+
+/**
+ * Upload file to Cloudinary
+ */
+async uploadFileToCloudinary(file, categoryName) {
+  try {
+    const cloudinary = require('cloudinary').v2;
+    
+    if (!cloudinary.config().cloud_name) {
+      logger.warn('Cloudinary not configured, skipping image upload');
+      return { url: file.path || '', thumbnail: file.path || '' };
+    }
+
+    const result = await cloudinary.uploader.upload(file.path, {
+      folder: 'categories',
+      public_id: `${categoryName.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}`,
+      transformation: [
+        { width: 500, height: 500, crop: 'fill', quality: 'auto' }
+      ]
+    });
+
+    return {
+      url: result.secure_url,
+      thumbnail: cloudinary.url(result.public_id, {
+        width: 100,
+        height: 100,
+        crop: 'fill',
+        quality: 'auto'
+      })
+    };
+  } catch (error) {
+    logger.error('Error uploading file to Cloudinary:', error);
+    return { url: '', thumbnail: '' };
+  }
+}
 
   /**
    * Update category
    */
-  async updateCategory(categoryId, updateData, userId) {
-    try {
-      const category = await Category.findById(categoryId);
+  // async updateCategory(categoryId, updateData, userId) {
+  //   try {
+  //     const category = await Category.findById(categoryId);
       
-      if (!category) {
-        throw new AppError('Category not found', 404);
+  //     if (!category) {
+  //       throw new AppError('Category not found', 404);
+  //     }
+
+  //     // If name is being updated, regenerate slug
+  //     if (updateData.name && updateData.name !== category.name) {
+  //       updateData.slug = await this.generateSlug(updateData.name, updateData.parent || category.parent);
+  //     }
+
+  //     // If parent is being updated, check if new parent exists
+  //     if (updateData.parent && updateData.parent !== String(category.parent)) {
+  //       if (updateData.parent === categoryId) {
+  //         throw new AppError('Category cannot be its own parent', 400);
+  //       }
+
+  //       const parentCategory = await Category.findById(updateData.parent);
+  //       if (!parentCategory) {
+  //         throw new AppError('Parent category not found', 404);
+  //       }
+
+  //       // Check for circular reference
+  //       let currentParent = parentCategory;
+  //       while (currentParent.parent) {
+  //         if (String(currentParent.parent) === categoryId) {
+  //           throw new AppError('Circular reference detected in category hierarchy', 400);
+  //         }
+  //         currentParent = await Category.findById(currentParent.parent);
+  //       }
+  //     }
+
+  //     // Update fields
+  //     Object.assign(category, updateData);
+  //     category.metadata.updatedBy = userId;
+      
+  //     await category.save();
+
+  //     // Update product counts for affected categories
+  //     await this.updateProductCount(categoryId);
+  //     if (category.parent) {
+  //       await this.updateProductCount(category.parent);
+  //     }
+
+  //     // Invalidate cache
+  //     await this.invalidateCategoryCache(categoryId);
+
+  //     // Emit event
+  //     eventEmitter.emit('category:updated', {
+  //       categoryId: category._id,
+  //       name: category.name,
+  //       slug: category.slug,
+  //       updatedBy: userId,
+  //       changes: Object.keys(updateData)
+  //     });
+
+  //     return category;
+  //   } catch (error) {
+  //     logger.error('Error in updateCategory:', error);
+  //     throw error;
+  //   }
+  // }
+
+
+  /**
+ * Update category - ALSO FIXED
+ */
+async updateCategory(categoryId, updateData, userId) {
+  try {
+    const category = await Category.findById(categoryId);
+    
+    if (!category) {
+      throw new AppError('Category not found', 404);
+    }
+
+    // If name is being updated, regenerate slug
+    if (updateData.name && updateData.name !== category.name) {
+      updateData.slug = await this.generateSlug(
+        updateData.name.trim(), 
+        updateData.parent || category.parent
+      );
+    }
+
+    // If parent is being updated, validate
+    if (updateData.parent !== undefined) {
+      const newParent = updateData.parent === 'none' || updateData.parent === '' 
+        ? null 
+        : updateData.parent;
+
+      if (newParent && newParent === categoryId) {
+        throw new AppError('Category cannot be its own parent', 400);
       }
 
-      // If name is being updated, regenerate slug
-      if (updateData.name && updateData.name !== category.name) {
-        updateData.slug = await this.generateSlug(updateData.name, updateData.parent || category.parent);
-      }
-
-      // If parent is being updated, check if new parent exists
-      if (updateData.parent && updateData.parent !== String(category.parent)) {
-        if (updateData.parent === categoryId) {
-          throw new AppError('Category cannot be its own parent', 400);
-        }
-
-        const parentCategory = await Category.findById(updateData.parent);
+      if (newParent) {
+        const parentCategory = await Category.findById(newParent);
         if (!parentCategory) {
           throw new AppError('Parent category not found', 404);
         }
 
         // Check for circular reference
-        let currentParent = parentCategory;
-        while (currentParent.parent) {
-          if (String(currentParent.parent) === categoryId) {
-            throw new AppError('Circular reference detected in category hierarchy', 400);
-          }
-          currentParent = await Category.findById(currentParent.parent);
+        const isCircular = await this.checkCircularReference(newParent, categoryId);
+        if (isCircular) {
+          throw new AppError('Circular reference detected in category hierarchy', 400);
         }
       }
-
-      // Update fields
-      Object.assign(category, updateData);
-      category.metadata.updatedBy = userId;
-      
-      await category.save();
-
-      // Update product counts for affected categories
-      await this.updateProductCount(categoryId);
-      if (category.parent) {
-        await this.updateProductCount(category.parent);
-      }
-
-      // Invalidate cache
-      await this.invalidateCategoryCache(categoryId);
-
-      // Emit event
-      eventEmitter.emit('category:updated', {
-        categoryId: category._id,
-        name: category.name,
-        slug: category.slug,
-        updatedBy: userId,
-        changes: Object.keys(updateData)
-      });
-
-      return category;
-    } catch (error) {
-      logger.error('Error in updateCategory:', error);
-      throw error;
     }
+
+    // Handle image update
+    if (updateData.image) {
+      if (typeof updateData.image === 'string' && updateData.image.startsWith('data:image')) {
+        try {
+          updateData.image = await this.uploadBase64ToCloudinary(
+            updateData.image, 
+            updateData.name || category.name
+          );
+        } catch (e) {
+          logger.error('Image upload failed during update:', e);
+        }
+      }
+    }
+
+    // Handle icon update
+    if (updateData.icon && updateData.icon.length > 2 && !this.isEmoji(updateData.icon)) {
+      updateData.icon = category.icon; // Keep existing if invalid
+    }
+
+    // Handle iconUrl
+    if (updateData.iconUrl && !updateData.image?.url) {
+      updateData.image = updateData.image || {};
+      updateData.image.url = updateData.iconUrl;
+      updateData.image.thumbnail = updateData.iconUrl;
+    }
+
+    // Process meta
+    if (updateData.meta) {
+      updateData.meta = {
+        title: updateData.meta.title?.substring(0, 60) || category.meta?.title || category.name,
+        description: updateData.meta.description?.substring(0, 160) || category.meta?.description || '',
+        keywords: updateData.meta.keywords || category.meta?.keywords || []
+      };
+    }
+
+    // Process attributes
+    if (updateData.attributes) {
+      updateData.attributes = this.processAttributesForSave(updateData.attributes);
+    }
+
+    // Update fields
+    Object.assign(category, updateData);
+    category.metadata.updatedBy = userId;
+    category.metadata.updatedAt = new Date();
+    
+    await category.save();
+
+    // Update product counts
+    await this.updateProductCount(categoryId);
+    if (category.parent) {
+      await this.updateProductCount(category.parent);
+    }
+
+    // Invalidate cache
+    await this.invalidateCategoryCache(categoryId);
+    if (category.parent) {
+      await this.invalidateCategoryCache(category.parent);
+    }
+
+    // Emit event
+    eventEmitter.emit('category:updated', {
+      categoryId: category._id,
+      name: category.name,
+      slug: category.slug,
+      updatedBy: userId,
+      changes: Object.keys(updateData).filter(k => k !== 'metadata')
+    });
+
+    return category;
+  } catch (error) {
+    logger.error('Error in updateCategory:', error);
+    if (error instanceof AppError) throw error;
+    throw new AppError(error.message || 'Failed to update category', 500);
   }
+}
+
+/**
+ * Check for circular reference in category hierarchy
+ */
+async checkCircularReference(parentId, categoryId) {
+  let currentId = parentId;
+  const visited = new Set();
+  
+  while (currentId) {
+    if (currentId.toString() === categoryId.toString()) {
+      return true;
+    }
+    if (visited.has(currentId.toString())) {
+      return true; // Already visited, circular
+    }
+    visited.add(currentId.toString());
+    
+    const parent = await Category.findById(currentId).select('parent');
+    currentId = parent?.parent;
+  }
+  
+  return false;
+}
 
   /**
    * Delete category

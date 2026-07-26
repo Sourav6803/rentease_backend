@@ -50807,3 +50807,273 @@
 2026-07-25 09:36:34:3634 [32minfo[39m: [32mMongoDB reconnected[39m
 2026-07-25 09:36:35:3635 [32minfo[39m: [32m✅ Redis connected successfully[39m
 2026-07-25 09:36:41:3641 [32minfo[39m: [32mSIGINT signal received[39m
+2026-07-25 14:30:15:3015 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-07-25 14:30:32:3032 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-07-25 14:30:35:3035 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-07-25 14:30:35:3035 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-07-25 14:30:35:3035 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-07-25 14:30:36:3036 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 14:30:36:3036 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 14:30:36:3036 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-07-25 14:30:36:3036 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-07-25 14:36:11:3611 [33mwarn[39m: [33mMongoDB disconnected. Attempting to reconnect...[39m
+2026-07-25 14:36:11:3611 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:11:3611 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:11:3611 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:12:3612 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:12:3612 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:12:3612 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:13:3613 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:13:3613 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:13:3613 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:14:3614 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 14:36:14:3614 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:10:12:1012 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:10:20:1020 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 18:10:25:1025 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-07-25 18:19:45:1945 [31merror[39m: [31mCan't find /api/v1/admin/upload/image on this server![39m
+2026-07-25 18:41:44:4144 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:44:4144 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-07-25 18:41:44:4144 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-07-25 18:41:44:4144 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:44:4144 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:45:4145 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:45:4145 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:45:4145 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:45:4145 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:46:4146 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:46:4146 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 18:41:47:4147 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:54:2954 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:55:2955 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:55:2955 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:56:2956 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:57:2957 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:58:2958 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:29:59:2959 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:30:00:300 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:30:00:300 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:30:01:301 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:30:03:303 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:30:05:305 [33mwarn[39m: [33mMongoDB disconnected. Attempting to reconnect...[39m
+2026-07-25 21:30:08:308 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:30:08:308 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-07-25 21:30:47:3047 [31merror[39m: [31mCan't find /api/v1/admin/upload/image on this server![39m
+2026-07-25 21:39:27:3927 [33mwarn[39m: [33mMongoDB disconnected. Attempting to reconnect...[39m
+2026-07-25 21:39:28:3928 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 21:39:30:3930 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:39:37:3937 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-07-25 21:48:08:488 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-07-25 21:48:14:4814 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-07-25 21:48:16:4816 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-07-25 21:48:16:4816 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-07-25 21:48:16:4816 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-07-25 21:48:17:4817 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:48:18:4818 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:48:18:4818 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-07-25 21:48:18:4818 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-07-25 21:48:23:4823 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-07-25 21:48:29:4829 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-07-25 21:48:31:4831 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-07-25 21:48:31:4831 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-07-25 21:48:31:4831 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-07-25 21:48:32:4832 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:48:33:4833 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:48:33:4833 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-07-25 21:48:33:4833 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-07-25 21:49:02:492 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-07-25 21:49:07:497 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-07-25 21:49:09:499 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-07-25 21:49:09:499 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-07-25 21:49:09:499 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-07-25 21:49:12:4912 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:49:12:4912 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:49:13:4913 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-07-25 21:49:13:4913 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-07-25 21:53:15:5315 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-07-25 21:53:20:5320 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-07-25 21:53:23:5323 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-07-25 21:53:24:5324 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-07-25 21:53:24:5324 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-07-25 21:53:25:5325 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:53:25:5325 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:53:25:5325 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-07-25 21:53:25:5325 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-07-25 21:54:06:546 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-07-25 21:54:17:5417 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-07-25 21:54:19:5419 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-07-25 21:54:19:5419 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-07-25 21:54:20:5420 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-07-25 21:54:21:5421 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:54:21:5421 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 21:54:21:5421 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-07-25 21:54:21:5421 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-07-25 21:58:29:5829 [32minfo[39m: [32mCategory created: Microwaves (6a64e42c02cf7b8789efa1b8) by user 69c2c47f9d1dd1404a8387f4[39m
+2026-07-25 22:07:23:723 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-25 22:07:23:723 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-07-25 22:07:23:723 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-07-25 22:07:25:725 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 22:07:34:734 [33mwarn[39m: [33mMongoDB disconnected. Attempting to reconnect...[39m
+2026-07-25 22:07:34:734 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-07-25 22:39:42:3942 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-07-25 23:07:28:728 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:07:28:728 [31merror[39m: [31mCast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:07:29:729 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:07:29:729 [31merror[39m: [31mCast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:08:30:830 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:08:30:830 [31merror[39m: [31mCast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:08:31:831 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:08:31:831 [31merror[39m: [31mCast to ObjectId failed for value "stats" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:17:21:1721 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-07-25 23:17:50:1750 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-07-25 23:17:51:1751 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-07-25 23:17:51:1751 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-07-25 23:17:52:1752 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-07-25 23:17:53:1753 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 23:17:53:1753 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 23:17:53:1753 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-07-25 23:17:53:1753 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-07-25 23:30:25:3025 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:30:25:3025 [31merror[39m: [31mCast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:30:25:3025 [31merror[39m: [31mError tracking category performance: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:30:26:3026 [31merror[39m: [31mError tracking category performance: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:30:26:3026 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:30:26:3026 [31merror[39m: [31mCast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-25 23:34:44:3444 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-07-25 23:34:53:3453 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-07-25 23:34:56:3456 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-07-25 23:34:56:3456 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-07-25 23:34:56:3456 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-07-25 23:34:57:3457 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 23:34:58:3458 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 23:34:58:3458 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-07-25 23:34:58:3458 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-07-25 23:57:42:5742 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-07-25 23:57:43:5743 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-07-25 23:57:59:5759 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-07-25 23:58:07:587 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-07-25 23:58:08:588 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-07-25 23:58:08:588 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-07-25 23:58:09:589 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-07-25 23:58:09:589 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 23:58:10:5810 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-07-25 23:58:10:5810 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-07-25 23:58:10:5810 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-07-26 00:14:29:1429 [32minfo[39m: [32mSIGINT signal received[39m

@@ -4,6 +4,7 @@ const { ApiResponse } = require('../../utils/apiResponse');
 const { AppError } = require('../../utils/AppError');
 const logger = require('../../config/logger');
 const Category = require('../../models/Category.model');
+const mongoose = require('mongoose');
 
 class CategoryController {
   /**
