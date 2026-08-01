@@ -6,8 +6,9 @@ const { validate, productValidations } = require('../../middlewares/validation.m
 const { vendorValidations } = require('../../middlewares/validation.middleware');
 const { cacheVendor, clearCache, invalidateCache } = require('../../middlewares/cache.middleware');
 const { restrictTo } = require('../../middlewares/permissions.middleware');
-const { uploadVendorDocuments, uploadProductImages } = require('../../middlewares/upload.middleware');
+const { uploadVendorDocuments, uploadProductImages, uploadVendorMedia, uploadProfilePicture } = require('../../middlewares/upload.middleware');
 const productController = require('../../controllers/product.controller');
+const userController = require('../../controllers/user.controller');
 
 // ==================== PUBLIC ROUTES ====================
 
@@ -42,6 +43,20 @@ router.post('/products',
   productController.createProduct
 );
 
+// Update product
+router.put('/products/:id', 
+  uploadProductImages,
+  validate(productValidations.updateProduct),
+  invalidateCache(['product:*', 'list:vendor-products*', 'list:featured-products*']),
+  productController.updateProduct
+);
+
+// Delete product
+router.delete('/products/:id', 
+  invalidateCache(['product:*', 'list:vendor-products*', 'list:featured-products*']),
+  productController.deleteProduct
+);
+
 // Check vendor registration status
 // router.get('/register/status', 
   
@@ -64,6 +79,15 @@ router.post('/documents',
 // Profile routes
 router.get('/profile/me', cacheVendor(), vendorController.getProfile);
 router.put('/profile', validate(vendorValidations.updateProfile), vendorController.updateProfile);
+router.post('/profile/avatar', uploadProfilePicture, userController.uploadAvatar);
+router.delete('/profile/avatar', userController.deleteAvatar);
+
+// Vendor media uploads
+router.post('/profile/upload-logo', uploadVendorMedia, vendorController.uploadLogo);
+router.post('/profile/upload-banner', uploadVendorMedia, vendorController.uploadBanner);
+router.post('/profile/upload-gallery', uploadVendorMedia, vendorController.uploadGallery);
+router.delete('/profile/gallery/:publicId', vendorController.removeGalleryImage);
+
 router.get('/dashboard', vendorController.getDashboard);
 router.get('/stats', vendorController.getStats);
 

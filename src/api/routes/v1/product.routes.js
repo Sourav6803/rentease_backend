@@ -53,6 +53,7 @@ router.get('/vendor/me', productController.getVendorProducts);
 
 // Create product
 router.post('/', 
+  restrictTo('vendor'),
   uploadProductImages,
   validate(productValidations.createProduct),
   invalidateCache(['list:vendor-products*', 'list:featured-products*']),
@@ -61,6 +62,7 @@ router.post('/',
 
 // Update product
 router.put('/:id', 
+  restrictTo('vendor'),
   uploadProductImages,
   validate(productValidations.updateProduct),
   invalidateCache(['product:*', 'list:vendor-products*', 'list:featured-products*']),
@@ -69,12 +71,14 @@ router.put('/:id',
 
 // Delete product
 router.delete('/:id', 
+  restrictTo('vendor'),
   invalidateCache(['product:*', 'list:vendor-products*', 'list:featured-products*']),
   productController.deleteProduct
 );
 
 // Bulk update products
 router.post('/bulk/update', 
+  restrictTo('vendor'),
   validate(productValidations.bulkUpdate),
   invalidateCache(['product:*', 'list:vendor-products*']),
   productController.bulkUpdateProducts
@@ -82,13 +86,17 @@ router.post('/bulk/update',
 
 // Update stock
 router.patch('/:id/stock', 
+  restrictTo('vendor'),
   validate(productValidations.updateStock),
   invalidateCache(['product:*', 'list:vendor-products*']),
   productController.updateStock
 );
 
 // Get product analytics
-router.get('/:id/analytics', productController.getProductAnalytics);
+router.get('/:id/analytics', 
+  restrictTo('vendor'),
+  productController.getProductAnalytics
+);
 
 // ==================== ADMIN ROUTES ====================
 

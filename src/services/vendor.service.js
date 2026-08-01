@@ -1,14 +1,28 @@
 const { Vendor, User, Product, Rental, Review, Payment } = require('../models');
-const  AppError  = require('../utils/AppError');
+const AppError = require('../utils/AppError');
 const { addJob } = require('../jobs');
 const { eventEmitter, EVENTS } = require('../events');
 const { getRedisClient } = require('../config/redis');
+const { invalidateCache } = require('../api/middlewares/cache.middleware');
 const logger = require('../config/logger');
 const mongoose = require('mongoose');
+
+const PROFILE_CACHE_KEY = 'vendor:undefined:/api/v1/vendor/profile/me';
 
 class VendorService {
   constructor() {
     this.redisClient = getRedisClient();
+  }
+
+  _clearProfileCache() {
+    try {
+      const result = invalidateCache([PROFILE_CACHE_KEY]);
+      if (result && typeof result.catch === 'function') {
+        result.catch(() => {});
+      }
+    } catch (e) {
+      // ignore cache invalidation errors
+    }
   }
 
   /**
@@ -46,7 +60,7 @@ class VendorService {
     try {
       const vendor = await Vendor.findOne({ vendorId })
         .populate('user', 'profile.firstName profile.lastName profile.avatar')
-        .select('business.name business.description performance.rating products.total addresses.serviceableCities')
+        .select('business.name business.description business.logo business.bannerImage business.gallery performance.rating products.total addresses.serviceableCities')
         .lean();
 
       if (!vendor) {
@@ -85,12 +99,24 @@ class VendorService {
         if (business.name) updateFields['business.name'] = business.name;
         if (business.description) updateFields['business.description'] = business.description;
         if (business.website) updateFields['business.website'] = business.website;
+        if (business.logo) updateFields['business.logo'] = business.logo;
+        if (business.bannerImage) updateFields['business.bannerImage'] = business.bannerImage;
+        if (business.gallery) updateFields['business.gallery'] = business.gallery;
+        if (business.legalName) updateFields['business.legalName'] = business.legalName;
+        if (business.registrationNumber) updateFields['business.registrationNumber'] = business.registrationNumber;
+        if (business.gstin) updateFields['business.gstin'] = business.gstin;
+        if (business.panNumber) updateFields['business.panNumber'] = business.panNumber;
+        if (business.foundedYear) updateFields['business.foundedYear'] = business.foundedYear;
+        if (business.employeeCount) updateFields['business.employeeCount'] = business.employeeCount;
+        if (business.businessType) updateFields['business.businessType'] = business.businessType;
       }
       if (contact) {
         if (contact.primaryPhone) updateFields['contact.primaryPhone'] = contact.primaryPhone;
         if (contact.secondaryPhone) updateFields['contact.secondaryPhone'] = contact.secondaryPhone;
         if (contact.supportEmail) updateFields['contact.supportEmail'] = contact.supportEmail;
         if (contact.supportPhone) updateFields['contact.supportPhone'] = contact.supportPhone;
+        if (contact.primaryEmail) updateFields['contact.primaryEmail'] = contact.primaryEmail;
+        if (contact.secondaryEmail) updateFields['contact.secondaryEmail'] = contact.secondaryEmail;
       }
       if (addresses) {
         if (addresses.serviceableCities) updateFields['addresses.serviceableCities'] = addresses.serviceableCities;
@@ -103,8 +129,11 @@ class VendorService {
         }
         if (settings.advanceNotice) updateFields['settings.advanceNotice'] = settings.advanceNotice;
         if (settings.cancellationPolicy) updateFields['settings.cancellationPolicy'] = settings.cancellationPolicy;
+        if (settings.minRentalDuration !== undefined) updateFields['settings.minRentalDuration'] = settings.minRentalDuration;
+        if (settings.maxRentalDuration !== undefined) updateFields['settings.maxRentalDuration'] = settings.maxRentalDuration;
+        if (settings.instantBooking !== undefined) updateFields['settings.instantBooking'] = settings.instantBooking;
       }
-
+ 
       const vendor = await Vendor.findOneAndUpdate(
         { user: userId },
         { $set: updateFields },
@@ -115,16 +144,133 @@ class VendorService {
         throw new AppError('Vendor profile not found', 404);
       }
 
-      // Emit event
       eventEmitter.emit('vendor:profile-updated', {
         vendorId: vendor.vendorId,
         userId: vendor.user._id,
         updatedFields: Object.keys(updateFields),
       });
 
+      this._clearProfileCache();
+
       return vendor;
     } catch (error) {
       logger.error('Error in updateVendorProfile:', error);
+      throw error;
+    }
+  }
+
+  async completeProfile(userId, data) {
+    try {
+      const vendor = await Vendor.findOne({ user: userId });
+      if (!vendor) {
+        throw new AppError('Vendor profile not found', 404);
+      }
+
+      const updateFields = {};
+      if (data.business) updateFields['business'] = { ...vendor.business, ...data.business };
+      if (data.contact) updateFields['contact'] = { ...vendor.contact, ...data.contact };
+      if (data.addresses) {
+        if (data.addresses.registeredOffice) {
+          updateFields['addresses.registeredOffice'] = data.addresses.registeredOffice;
+        }
+        updateFields['addresses.serviceableCities'] = data.addresses.serviceableCities ?? vendor.addresses.serviceableCities;
+        updateFields['addresses.serviceablePincodes'] = data.addresses.serviceablePincodes ?? vendor.addresses.serviceablePincodes;
+      }
+
+      vendor.set(updateFields);
+      await vendor.save();
+
+      this._clearProfileCache();
+
+      return vendor;
+    } catch (error) {
+      logger.error('Error in completeProfile:', error);
+      throw error;
+    }
+  }
+
+  async updateLogo(userId, logoData) {
+    try {
+      const vendor = await Vendor.findOne({ user: userId });
+      if (!vendor) throw new AppError('Vendor profile not found', 404);
+
+      vendor.business.logo = {
+        url: logoData.url,
+        publicId: logoData.publicId,
+      };
+      await vendor.save();
+
+      this._clearProfileCache();
+
+      return vendor.business.logo;
+    } catch (error) {
+      logger.error('Error in updateLogo:', error);
+      throw error;
+    }
+  }
+
+  async updateBanner(userId, bannerData) {
+    try {
+      const vendor = await Vendor.findOne({ user: userId });
+      if (!vendor) throw new AppError('Vendor profile not found', 404);
+
+      vendor.business.bannerImage = {
+        url: bannerData.url,
+        publicId: bannerData.publicId,
+      };
+      await vendor.save();
+
+      this._clearProfileCache();
+
+      return vendor.business.bannerImage;
+    } catch (error) {
+      logger.error('Error in updateBanner:', error);
+      throw error;
+    }
+  }
+
+  async addGalleryImage(userId, imageData) {
+    try {
+      const vendor = await Vendor.findOne({ user: userId });
+      if (!vendor) throw new AppError('Vendor profile not found', 404);
+
+      if (!vendor.business.gallery) {
+        vendor.business.gallery = [];
+      }
+      vendor.business.gallery.push({
+        url: imageData.url,
+        publicId: imageData.publicId,
+        alt: imageData.alt || '',
+        uploadedAt: new Date(),
+      });
+      await vendor.save();
+
+      this._clearProfileCache();
+
+      return vendor.business.gallery;
+    } catch (error) {
+      logger.error('Error in addGalleryImage:', error);
+      throw error;
+    }
+  }
+
+  async removeGalleryImage(userId, publicId) {
+    try {
+      const vendor = await Vendor.findOne({ user: userId });
+      if (!vendor) throw new AppError('Vendor profile not found', 404);
+
+      if (vendor.business.gallery) {
+        vendor.business.gallery = vendor.business.gallery.filter(
+          img => img.publicId !== publicId
+        );
+      }
+      await vendor.save();
+
+      this._clearProfileCache();
+
+      return vendor.business.gallery;
+    } catch (error) {
+      logger.error('Error in removeGalleryImage:', error);
       throw error;
     }
   }
@@ -1186,7 +1332,7 @@ class VendorService {
       .populate('user', 'profile.firstName profile.lastName profile.avatar')
       .sort({ 'performance.rating.average': -1, 'performance.metrics.completedRentals': -1 })
       .limit(limit)
-      .select('vendorId business.name performance.rating performance.metrics.completedRentals')
+      .select('vendorId business.name business.logo business.bannerImage business.gallery performance.rating performance.metrics.completedRentals')
       .lean();
 
       return vendors;

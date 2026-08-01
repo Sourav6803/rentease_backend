@@ -511,6 +511,68 @@ const uploadDelivery = multer({
   }
 });
 
+// Upload vendor media (logo, banner, gallery) to Cloudinary
+const uploadVendorMedia = [
+  uploadImage.fields([
+    { name: 'logo', maxCount: 1 },
+    { name: 'banner', maxCount: 1 },
+    { name: 'gallery', maxCount: 10 }
+  ]),
+  handleUploadError,
+  async (req, res, next) => {
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return next();
+    }
+
+    try {
+      const media = {};
+      const uploadPromises = [];
+
+      for (const [field, files] of Object.entries(req.files)) {
+        if (!files || files.length === 0) continue;
+
+        if (field === 'gallery') {
+          const galleryPromises = files.map(file => {
+            const folder = 'rentease/vendor-gallery';
+            return processAndUploadImage(file, folder).then((result) => ({
+              url: result.secure_url,
+              publicId: result.public_id,
+            }));
+          });
+          uploadPromises.push(
+            Promise.all(galleryPromises).then(results => {
+              media[field] = results;
+            })
+          );
+        } else {
+          const file = files[0];
+          let folder = 'rentease/vendor-gallery';
+          if (field === 'logo') {
+            folder = 'rentease/vendor-logos';
+          } else if (field === 'banner') {
+            folder = 'rentease/vendor-banners';
+          }
+
+          const promise = processAndUploadImage(file, folder).then((result) => {
+            media[field] = {
+              url: result.secure_url,
+              publicId: result.public_id,
+            };
+          });
+
+          uploadPromises.push(promise);
+        }
+      }
+
+      await Promise.all(uploadPromises);
+      req.vendorMedia = media;
+      next();
+    } catch (error) {
+      next(error);
+    }
+  }
+];
+
 module.exports = {
   // Original multer instances
   uploadImage,
@@ -526,9 +588,9 @@ module.exports = {
   uploadProfilePicture,
   uploadProductImages,
   uploadKycDocuments,
-
   uploadVendorDocuments,
-  
+  uploadVendorMedia,
+
   // Helper functions
   processAndUploadImage,
   deleteFile,

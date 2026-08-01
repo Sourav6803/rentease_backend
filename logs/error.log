@@ -24671,3 +24671,588 @@
 2026-07-25 23:30:26:3026 [31merror[39m: [31mError tracking category performance: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
 2026-07-25 23:30:26:3026 [31merror[39m: [31mError in getCategoryById: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
 2026-07-25 23:30:26:3026 [31merror[39m: [31mCast to ObjectId failed for value "2" (type string) at path "_id" for model "Category"[39m
+2026-07-26 07:20:32:2032 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 07:32:56:3256 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/events?page=1&limit=10 on this server![39m
+2026-07-26 07:32:56:3256 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/funnel on this server![39m
+2026-07-26 07:32:56:3256 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/heatmap on this server![39m
+2026-07-26 07:32:59:3259 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/events?page=1&limit=10 on this server![39m
+2026-07-26 07:32:59:3259 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/heatmap on this server![39m
+2026-07-26 07:32:59:3259 [31merror[39m: [31mCan't find /api/v1/admin/intelligence/behavior/funnel on this server![39m
+2026-07-26 07:36:47:3647 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 07:36:48:3648 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 07:36:48:3648 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 07:36:48:3648 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 07:36:48:3648 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 07:36:48:3648 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 07:56:58:5658 [31merror[39m: [31mCan't find /api/v1/products/69d76ff0542edec5f53e32e7/images on this server![39m
+2026-07-26 08:16:50:1650 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-07-26 08:19:20:1920 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-07-26 08:26:56:2656 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-07-26 08:30:39:3039 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-07-26 08:33:36:3336 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-07-26 08:39:36:3936 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-07-26 08:54:20:5420 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:04:30:430 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-07-26 09:36:02:362 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:49:3649 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:50:3650 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:50:3650 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:50:3650 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:50:3650 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:50:3650 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:51:3651 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:51:3651 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:52:3652 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:52:3652 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:53:3653 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:53:3653 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 09:36:54:3654 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 10:23:24:2324 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 10:23:26:2326 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 10:23:27:2327 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 10:23:28:2328 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 13:56:00:560 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 13:56:03:563 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 13:56:07:567 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 13:56:13:5613 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 13:56:14:5614 [31merror[39m: [31mReached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-26 13:56:16:5616 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 14:12:50:1250 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 14:12:51:1251 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 14:12:51:1251 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 14:12:51:1251 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 14:12:51:1251 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 14:12:51:1251 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 14:13:23:1323 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 14:13:24:1324 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 15:11:01:111 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 15:11:01:111 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 15:11:02:112 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 15:11:02:112 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 15:11:02:112 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 15:11:02:112 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 15:11:03:113 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 15:11:03:113 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 15:11:03:113 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 17:55:25:5525 [31merror[39m: [31mgetaddrinfo ENOTFOUND ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-07-26 17:55:26:5526 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 18:39:19:3919 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-07-26 18:39:19:3919 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-07-26 18:39:40:3940 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 18:40:56:4056 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-07-26 18:40:56:4056 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-07-26 18:40:56:4056 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-07-26 18:40:56:4056 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-07-26 18:40:56:4056 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-07-26 18:41:09:419 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 18:55:33:5533 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 18:55:34:5534 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 18:56:17:5617 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 18:56:17:5617 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 18:56:24:5624 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 18:56:26:5626 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 18:59:22:5922 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 18:59:22:5922 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:00:05:05 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:00:07:07 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:03:22:322 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:03:22:322 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:08:22:822 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:11:31:1131 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:11:31:1131 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 19:11:31:1131 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 19:11:32:1132 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 19:12:08:128 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:12:08:128 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:12:15:1215 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:12:17:1217 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:13:00:130 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:13:01:131 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:13:01:131 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:13:03:133 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500006. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-07-26 19:43:07:437 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-26 19:43:08:438 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-07-26 19:47:56:4756 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-26 19:47:57:4757 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-07-26 20:11:06:116 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:06:116 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:06:116 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:07:117 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:07:117 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:07:117 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:07:117 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:08:118 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:08:118 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:09:119 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:09:119 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:10:1110 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:10:1110 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:11:1111 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:12:1112 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:13:1113 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:14:1114 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:14:1114 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:15:1115 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:16:1116 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:17:1117 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:17:1117 [31merror[39m: [31mReached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-26 20:11:18:1118 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:20:1120 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:21:1121 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:22:1122 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:23:1123 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:25:1125 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:26:1126 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:28:1128 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:29:1129 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:31:1131 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:32:1132 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:34:1134 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:36:1136 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:37:1137 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:39:1139 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:41:1141 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:43:1143 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:45:1145 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:47:1147 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:49:1149 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:51:1151 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:53:1153 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:55:1155 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:57:1157 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:11:59:1159 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:01:121 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:03:123 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:05:125 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:07:127 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:09:129 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:11:1211 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:13:1213 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:15:1215 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:17:1217 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:19:1219 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:21:1221 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:23:1223 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:25:1225 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:27:1227 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:29:1229 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:31:1231 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:33:1233 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:35:1235 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:37:1237 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:39:1239 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:41:1241 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:43:1243 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:45:1245 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:47:1247 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:49:1249 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:51:1251 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:12:59:1259 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:09:139 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:11:1311 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:13:1313 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:15:1315 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:17:1317 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:19:1319 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:21:1321 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:23:1323 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:25:1325 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:28:1328 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:30:1330 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:42:1342 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:44:1344 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:46:1346 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:48:1348 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:50:1350 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:52:1352 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:54:1354 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:56:1356 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:13:58:1358 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:00:140 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:02:142 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:04:144 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:06:146 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:08:148 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:10:1410 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:12:1412 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:14:1414 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:16:1416 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:18:1418 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:20:1420 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:23:1423 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:25:1425 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:27:1427 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:30:1430 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:32:1432 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:37:1437 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:39:1439 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:42:1442 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:44:1444 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:46:1446 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:48:1448 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:50:1450 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:51:1451 [31merror[39m: [31mgetaddrinfo ENOTFOUND ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-07-26 20:14:52:1452 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:14:55:1455 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:15:07:157 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:15:09:159 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 20:15:11:1511 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 21:23:03:233 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 21:23:05:235 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 21:23:07:237 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 21:23:09:239 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 21:23:10:2310 [31merror[39m: [31mgetaddrinfo ENOTFOUND ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-07-26 21:23:11:2311 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 21:23:11:2311 [31merror[39m: [31mReached the max retries per request limit (which is 20). Refer to "maxRetriesPerRequest" option for details.[39m
+2026-07-26 21:23:13:2313 [31merror[39m: [31mgetaddrinfo ENOTFOUND ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-07-26 21:23:13:2313 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 21:23:17:2317 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 21:23:19:2319 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 22:03:58:358 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-26 22:03:59:359 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-07-26 22:14:21:1421 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 22:17:26:1726 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-26 22:17:30:1730 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-07-26 22:25:17:2517 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-26 22:38:12:3812 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 22:39:43:3943 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:39:43:3943 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:39:43:3943 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:39:44:3944 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:40:48:4048 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:40:48:4048 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 22:40:48:4048 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:40:49:4049 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 22:40:49:4049 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:40:50:4050 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 22:44:13:4413 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-26 22:54:25:5425 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-26 22:56:59:5659 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:56:59:5659 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:57:00:570 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:57:01:571 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:59:22:5922 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:59:22:5922 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 22:59:22:5922 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 22:59:24:5924 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 23:02:07:27 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 23:02:09:29 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 23:02:38:238 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 23:02:39:239 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 23:02:41:241 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 23:02:43:243 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 23:09:13:913 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-26 23:12:22:1222 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-26 23:20:53:2053 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 23:21:20:2120 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 23:21:41:2141 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 23:21:42:2142 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-26 23:21:42:2142 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-26 23:21:42:2142 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-27 07:02:36:236 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-27 07:02:36:236 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-27 07:02:36:236 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-27 07:02:37:237 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-27 07:02:37:237 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-27 07:02:38:238 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-27 07:47:28:4728 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-27 07:48:47:4847 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-27 08:07:40:740 [31merror[39m: [31mError in updateVendorProfile: invalidateCache(...).catch is not a function[39m
+2026-07-27 08:07:40:740 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-27 08:07:40:740 [31merror[39m: [31minvalidateCache(...).catch is not a function[39m
+2026-07-27 08:07:44:744 [31merror[39m: [31mError in addGalleryImage: invalidateCache(...).catch is not a function[39m
+2026-07-27 08:07:44:744 [31merror[39m: [31minvalidateCache(...).catch is not a function[39m
+2026-07-27 08:27:34:2734 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 08:27:35:2735 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 08:27:35:2735 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 08:27:35:2735 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 08:27:36:2736 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 08:27:36:2736 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 08:27:36:2736 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 08:27:37:2737 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 08:29:54:2954 [31merror[39m: [31mError in updateVendorProfile: invalidateCache(...).catch is not a function[39m
+2026-07-27 08:29:54:2954 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-27 08:29:54:2954 [31merror[39m: [31minvalidateCache(...).catch is not a function[39m
+2026-07-27 08:29:59:2959 [31merror[39m: [31mError in addGalleryImage: invalidateCache(...).catch is not a function[39m
+2026-07-27 08:29:59:2959 [31merror[39m: [31minvalidateCache(...).catch is not a function[39m
+2026-07-27 08:33:23:3323 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-27 08:51:44:5144 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 08:55:33:5533 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-27 08:56:32:5632 [31merror[39m: [31mError handling profile updated event: Queue audit not found[39m
+2026-07-27 09:08:14:814 [31merror[39m: [31mError in createNotification: Cannot read properties of undefined (reading 'generateNotificationNumber')[39m
+2026-07-27 09:08:14:814 [31merror[39m: [31mError handling user registered event: Cannot read properties of undefined (reading 'generateNotificationNumber')[39m
+2026-07-27 09:09:53:953 [31merror[39m: [31mEmail verification error: Invalid or expired verification token[39m
+2026-07-27 09:09:53:953 [31merror[39m: [31mInvalid or expired verification token[39m
+2026-07-27 13:43:06:436 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:07:437 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:07:437 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:08:438 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:08:438 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:08:438 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:08:438 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:09:439 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:09:439 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:10:4310 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:10:4310 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:11:4311 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:12:4312 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:12:4312 [31merror[39m: [31mgetaddrinfo ENOTFOUND ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-07-27 13:43:13:4313 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:14:4314 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:14:4314 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:15:4315 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:16:4316 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:17:4317 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:18:4318 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:19:4319 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:20:4320 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:21:4321 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:43:22:4322 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:52:56:5256 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:52:57:5257 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:52:58:5258 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:53:00:530 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:53:05:535 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 13:54:38:5438 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-27 13:54:39:5439 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-27 13:54:39:5439 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-27 14:09:12:912 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 14:16:40:1640 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-27 14:18:27:1827 [31merror[39m: [31mValidation failed[39m
+2026-07-27 22:19:52:1952 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-27 22:19:53:1953 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-27 22:19:53:1953 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-27 22:19:53:1953 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-27 22:19:53:1953 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-27 22:19:53:1953 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-27 22:21:35:2135 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-07-27 22:53:47:5347 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-27 22:53:48:5348 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 07:45:23:4523 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 07:45:23:4523 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 07:45:24:4524 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 07:45:24:4524 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 07:48:08:488 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 07:48:37:4837 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 07:50:23:5023 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 07:55:27:5527 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 07:58:42:5842 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 07:59:26:5926 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 07:59:57:5957 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 08:00:23:023 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 08:05:23:523 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 08:10:23:1023 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 08:15:23:1523 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-30 08:37:41:3741 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 08:37:41:3741 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 08:37:41:3741 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 08:37:42:3742 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 08:37:42:3742 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 08:37:42:3742 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 08:37:43:3743 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 08:37:43:3743 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 08:37:43:3743 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 08:37:44:3744 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 12:10:47:1047 [31merror[39m: [31mgetaddrinfo ENOTFOUND ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-07-30 12:10:47:1047 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 12:10:48:1048 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 12:10:49:1049 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 12:10:50:1050 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 12:10:50:1050 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 12:10:51:1051 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 12:10:52:1052 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 12:10:53:1053 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 12:10:54:1054 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 12:10:55:1055 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 13:20:41:2041 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 13:20:41:2041 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 13:20:41:2041 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 13:20:41:2041 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 13:20:41:2041 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 13:20:42:2042 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 13:20:42:2042 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 13:20:42:2042 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 13:20:43:2043 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 15:11:12:1112 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 15:11:13:1113 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 15:11:14:1114 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 15:11:14:1114 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 15:11:15:1115 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 15:11:16:1116 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 15:11:17:1117 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 15:11:17:1117 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 15:11:18:1118 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 15:11:19:1119 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:09:16:916 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:37:5737 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:38:5738 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:38:5738 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:38:5738 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:38:5738 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:39:5739 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:39:5739 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:39:5739 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:40:5740 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:40:5740 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:41:5741 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 17:57:41:5741 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:05:59:559 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:06:00:60 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:45:54:4554 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:45:54:4554 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:45:54:4554 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:45:54:4554 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:45:55:4555 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:45:55:4555 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:45:55:4555 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:45:56:4556 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:45:56:4556 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 18:45:56:4556 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:53:56:5356 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:53:58:5358 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:53:58:5358 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:53:59:5359 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:00:540 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:00:540 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:01:541 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:03:543 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:04:544 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:05:545 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:06:546 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:07:547 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:08:548 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:09:549 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:10:5410 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:12:5412 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:13:5413 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:14:5414 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:16:5416 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:17:5417 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:19:5419 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:20:5420 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:22:5422 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:24:5424 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:25:5425 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 22:54:27:5427 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 23:41:16:4116 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 23:41:17:4117 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 23:41:55:4155 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 23:41:56:4156 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-30 23:41:56:4156 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 08:17:15:1715 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-31 08:17:15:1715 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-31 08:17:15:1715 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-31 08:17:49:1749 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-31 08:22:16:2216 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-31 08:27:14:2714 [31merror[39m: [31mInvalid refresh token[39m
+2026-07-31 09:24:59:2459 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:00:250 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:00:250 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:00:250 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:01:251 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:01:251 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:01:251 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:02:252 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:03:253 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:03:253 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:04:254 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:05:255 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:05:255 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:06:256 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:06:256 [31merror[39m: [31mgetaddrinfo ENOTFOUND ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-07-31 09:25:07:257 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:07:257 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:08:258 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:09:259 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:10:2510 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:11:2511 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:12:2512 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:13:2513 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:14:2514 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:15:2515 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:16:2516 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:18:2518 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:19:2519 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:20:2520 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:22:2522 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:23:2523 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:25:2525 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:26:2526 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:28:2528 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:30:2530 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:31:2531 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:33:2533 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:35:2535 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:37:2537 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:25:39:2539 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 09:26:06:266 [31merror[39m: [31m❌ Email service initialization failed: getaddrinfo ENOTFOUND smtp.gmail.com[39m
+2026-07-31 09:26:06:266 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-07-31 10:14:47:1447 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 10:14:47:1447 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 10:14:48:1448 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 10:14:48:1448 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 10:14:48:1448 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 10:14:48:1448 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 10:14:49:1449 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 10:14:49:1449 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 10:14:50:1450 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 10:14:50:1450 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:49:4849 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:50:4850 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:51:4851 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:52:4852 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:52:4852 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:53:4853 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:54:4854 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:55:4855 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:56:4856 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:57:4857 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:58:4858 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 17:48:59:4859 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:54:55:5455 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:54:57:5457 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:54:58:5458 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:00:550 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:01:551 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:02:552 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:04:554 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:05:555 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:07:557 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:08:558 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:10:5510 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:11:5511 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:13:5513 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:15:5515 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:17:5517 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:19:5519 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:21:5521 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:23:5523 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:25:5525 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:27:5527 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:29:5529 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:31:5531 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:33:5533 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:35:5535 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:37:5537 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:39:5539 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:41:5541 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:43:5543 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:45:5545 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:47:5547 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:49:5549 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:51:5551 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:53:5553 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:55:5555 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:57:5557 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:55:59:5559 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:56:01:561 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:56:03:563 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:56:05:565 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:56:07:567 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:56:09:569 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:56:11:5611 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 21:56:13:5613 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 23:31:52:3152 [31merror[39m: [31m❌ Redis error:[39m
+2026-07-31 23:32:38:3238 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-01 00:14:20:1420 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-01 00:25:59:2559 [31merror[39m: [31m❌ Redis error:[39m

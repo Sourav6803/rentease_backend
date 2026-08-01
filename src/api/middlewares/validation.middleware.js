@@ -1886,6 +1886,41 @@ const vendorValidations = {
         }
         return true;
       }),
+
+    body('business.logo.url')
+      .optional()
+      .isString()
+      .withMessage('Logo URL must be a string'),
+
+    body('business.logo.publicId')
+      .optional()
+      .isString()
+      .withMessage('Logo publicId must be a string'),
+
+    body('business.bannerImage.url')
+      .optional()
+      .isString()
+      .withMessage('Banner image URL must be a string'),
+
+    body('business.bannerImage.publicId')
+      .optional()
+      .isString()
+      .withMessage('Banner image publicId must be a string'),
+
+    body('business.gallery')
+      .optional()
+      .isArray()
+      .withMessage('Gallery must be an array'),
+
+    body('business.gallery.*.url')
+      .optional()
+      .isString()
+      .withMessage('Gallery image URL must be a string'),
+
+    body('business.gallery.*.publicId')
+      .optional()
+      .isString()
+      .withMessage('Gallery image publicId must be a string'),
   ],
 
   bankDetails: [

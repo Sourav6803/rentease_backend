@@ -9,7 +9,9 @@ const normalizeRole = (role) => role?.toLowerCase().replace(/-/g, '_');
 const restrictTo = (...roles) => {
   return (req, res, next) => {
     const userRole = normalizeRole(req.admin?.role || req.userRole || req.user?.role || req.vendor?.user?.role);
+    console.log('User Role:', userRole)
     const allowedRoles = roles.map(normalizeRole);
+    console.log('Allowed Roles:', allowedRoles)
     if (!userRole || !allowedRoles.includes(userRole)) {
       return next(new AppError('You do not have permission to perform this action.', 403));
     }

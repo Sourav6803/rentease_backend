@@ -20,6 +20,69 @@ class VendorController {
     );
   });
 
+  uploadLogo = catchAsync(async (req, res) => {
+    if (!req.vendorMedia || !req.vendorMedia.logo) {
+      throw new AppError("Logo upload failed", 400);
+    }
+
+    const logo = await VendorService.updateLogo(req.user._id, {
+      url: req.vendorMedia.logo.url,
+      publicId: req.vendorMedia.logo.publicId,
+    });
+
+    return ApiResponse.success(res, 200, "Logo uploaded successfully", { logo });
+  });
+
+  uploadBanner = catchAsync(async (req, res) => {
+    if (!req.vendorMedia || !req.vendorMedia.banner) {
+      throw new AppError("Banner upload failed", 400);
+    }
+
+    const banner = await VendorService.updateBanner(req.user._id, {
+      url: req.vendorMedia.banner.url,
+      publicId: req.vendorMedia.banner.publicId,
+    });
+
+    return ApiResponse.success(res, 200, "Banner uploaded successfully", { banner });
+  });
+
+  uploadGallery = catchAsync(async (req, res) => {
+    if (!req.vendorMedia) {
+      throw new AppError("Gallery upload failed", 400);
+    }
+
+    let gallery = [];
+    if (Array.isArray(req.vendorMedia.gallery)) {
+      for (const img of req.vendorMedia.gallery) {
+        gallery = await VendorService.addGalleryImage(req.user._id, {
+          url: img.url,
+          publicId: img.publicId,
+          alt: '',
+        });
+      }
+    } else if (req.vendorMedia.gallery) {
+      gallery = await VendorService.addGalleryImage(req.user._id, {
+        url: req.vendorMedia.gallery.url,
+        publicId: req.vendorMedia.gallery.publicId,
+        alt: '',
+      });
+    }
+
+    return ApiResponse.success(res, 200, "Gallery images uploaded successfully", { gallery });
+  });
+
+  removeGalleryImage = catchAsync(async (req, res) => {
+    const { publicId } = req.params;
+
+    if (!publicId) {
+      throw new AppError("Public ID is required", 400);
+    }
+
+    const gallery = await VendorService.removeGalleryImage(req.user._id, publicId);
+
+    return ApiResponse.success(res, 200, "Gallery image removed successfully", { gallery });
+  });
+
   /**
    * Upload vendor documents
    */
