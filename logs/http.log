@@ -52715,3 +52715,56 @@
 2026-08-01 00:14:22:1422 [32minfo[39m: [32m✅ Redis connected successfully[39m
 2026-08-01 00:25:59:2559 [31merror[39m: [31m❌ Redis error:[39m
 2026-08-01 00:26:01:261 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-08-01 22:06:12:612 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-08-01 22:07:34:734 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-08-01 22:07:37:737 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-08-01 22:07:37:737 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-08-01 22:07:38:738 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-08-01 22:07:38:738 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-08-01 22:07:38:738 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-08-01 22:07:38:738 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-08-01 22:07:38:738 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-08-01 22:11:58:1158 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 22:13:06:136 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 22:19:51:1951 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 22:19:51:1951 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 22:32:06:326 [33mwarn[39m: [33mMongoDB disconnected. Attempting to reconnect...[39m
+2026-08-01 22:32:07:327 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-01 22:32:13:3213 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-08-01 22:32:17:3217 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-08-01 22:54:07:547 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-01 22:54:07:547 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-01 22:54:07:547 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-01 23:15:49:1549 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 23:15:50:1550 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 23:18:53:1853 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 23:18:53:1853 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 23:19:01:191 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 23:19:01:191 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 23:19:18:1918 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 23:19:19:1919 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 23:26:56:2656 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-01 23:26:56:2656 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-01 23:26:56:2656 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-01 23:26:57:2657 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-01 23:26:57:2657 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-01 23:27:59:2759 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-01 23:28:09:289 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 23:28:09:289 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-08-01 23:28:09:289 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-01 23:28:09:289 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-01 23:28:11:2811 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-01 23:28:27:2827 [31merror[39m: [31mYour token has expired. Please log in again.[39m
