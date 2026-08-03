@@ -206,17 +206,30 @@ const processNotification = async (notification) => {
 // Send in-app notification
 const sendInAppNotification = async (notification) => {
   const user = notification.user;
-  
+
   if (user) {
+    const content = notification.content || {};
+    // Keep this payload identical to the events bridge
+    // (events/notification.events.js -> notification:receive) so the frontend
+    // sees one consistent shape regardless of which path delivered it.
     emitToUser(user._id, 'notification:receive', {
       id: notification._id,
       title: notification.title,
-      content: notification.content,
-      data: notification.data,
-      timestamp: notification.createdAt,
+      body:
+        typeof content === 'string'
+          ? content
+          : content.text || content.preview || '',
+      content,
+      type: notification.type,
+      category: notification.category,
+      priority: notification.priority,
+      data: notification.data || {},
+      read: Boolean(notification.readAt || notification.tracking?.readAt),
+      createdAt: notification.createdAt,
+      timestamp: notification.createdAt || new Date(),
     });
   }
-  
+
   notification.tracking.deliveredAt = new Date();
   await notification.save();
 };
