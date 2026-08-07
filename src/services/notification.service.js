@@ -568,6 +568,36 @@ class NotificationService {
   }
 
   /**
+   * Check whether a user already has a usable push subscription.
+   *
+   * Used at login so the client can skip the permission prompt / token
+   * generation when a token already exists. When `deviceId` is supplied the
+   * check is scoped to that browser/device (the stable per-device id), so a
+   * new device still triggers registration even if other devices are set up.
+   *
+   * @returns {Promise<{ exists: boolean, hasAnyToken: boolean }>}
+   */
+  async hasActivePushToken(userId, deviceId) {
+    const user = await User.findById(userId)
+      .select('pushTokens deviceTokens')
+      .lean();
+    if (!user) {
+      return { exists: false, hasAnyToken: false };
+    }
+
+    const activeDeviceTokens = (user.deviceTokens || []).filter((d) => d.isActive);
+    const hasAnyToken =
+      (user.pushTokens && user.pushTokens.length > 0) || activeDeviceTokens.length > 0;
+
+    // Scope to this device when we can, otherwise fall back to "any token".
+    const exists = deviceId
+      ? activeDeviceTokens.some((d) => d.deviceId === deviceId)
+      : hasAnyToken;
+
+    return { exists, hasAnyToken };
+  }
+
+  /**
    * Unregister a push token (logout / permission revoked).
    */
   async unregisterPushToken(userId, token) {

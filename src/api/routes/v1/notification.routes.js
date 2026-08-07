@@ -33,10 +33,13 @@ router.post('/read-all', notificationController.markAllAsRead);
 router.get('/stats', notificationController.getNotificationStats);
 
 // Register push token
-router.post('/push/register', 
+router.post('/push/register',
   validate(notificationValidations.registerPushToken),
   notificationController.registerPushToken
 );
+
+// Check push token status for this device (login-time existence check)
+router.get('/push/status', notificationController.getPushTokenStatus);
 
 // Unregister push token
 router.post('/push/unregister', 

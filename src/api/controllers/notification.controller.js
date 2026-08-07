@@ -103,8 +103,24 @@ class NotificationController {
     }
 
     const result = await NotificationService.unregisterPushToken(req.user._id, token);
-    
+
     return ApiResponse.success(res, 200, result.message);
+  });
+
+  /**
+   * Push token status.
+   * Lets the client check on login whether an active token already exists for
+   * this device — if so it can skip re-generating and re-registering.
+   */
+  getPushTokenStatus = catchAsync(async (req, res) => {
+    const { deviceId } = req.query;
+
+    const result = await NotificationService.hasActivePushToken(
+      req.user._id,
+      deviceId
+    );
+
+    return ApiResponse.success(res, 200, 'Push token status retrieved', result);
   });
 
   /**
