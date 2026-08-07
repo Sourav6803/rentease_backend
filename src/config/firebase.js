@@ -26,7 +26,18 @@ let initialised = false;
 function decodePrivateKey(key) {
   if (!key) return key;
   // Env values often store the key with literal "\n"; restore real newlines.
-  return key.replace(/\\n/g, '\n');
+  let k = key.replace(/\\n/g, '\n');
+  // Extract just the PEM block by its BEGIN/END markers. This discards any
+  // surrounding double-quotes, trailing commas, or stray whitespace that get
+  // left behind when the key is pasted straight out of a JSON service-account
+  // file — the exact corruption that makes OpenSSL throw
+  // "error:1E08010C:DECODER routines::unsupported" (app/invalid-credential)
+  // at token-signing time even though initializeApp() succeeded.
+  const match = k.match(
+    /-----BEGIN (?:RSA )?PRIVATE KEY-----[\s\S]*?-----END (?:RSA )?PRIVATE KEY-----/
+  );
+  if (match) k = match[0];
+  return k.trim() + '\n';
 }
 
 function buildCredential() {
@@ -35,10 +46,25 @@ function buildCredential() {
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
 
   if (projectId && privateKey && clientEmail) {
-    return {
-      credential: admin.credential.cert({ projectId, privateKey, clientEmail }),
-      source: 'env',
-    };
+    try {
+      return {
+        credential: admin.credential.cert({ projectId, privateKey, clientEmail }),
+        source: 'env',
+      };
+    } catch (err) {
+      // admin.credential.cert() eagerly parses the PEM and throws a
+      // FirebaseAppError (e.g. "Failed to parse private key: Invalid PEM
+      // formatted message") when FIREBASE_PRIVATE_KEY is malformed — most
+      // commonly because the \n escapes weren't preserved, or the value was
+      // stored unquoted/multiline in .env and got truncated. Degrade instead
+      // of crashing the whole server at boot.
+      logger.error(
+        `❌ Firebase env credential invalid (${err.message}). ` +
+          'Check FIREBASE_PRIVATE_KEY — it must be a single-line value with literal "\\n" escapes, ' +
+          'wrapped in double quotes. Push notifications will be disabled.'
+      );
+      // fall through to the file / ADC branches below
+    }
   }
 
   // 2. JSON file

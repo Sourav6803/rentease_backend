@@ -283,7 +283,13 @@ class NotificationController {
                   month: { $month: '$createdAt' },
                   day: { $dayOfMonth: '$createdAt' }
                 },
-                count: { $sum: 1 }
+                count: { $sum: 1 },
+                delivered: {
+                  $sum: { $cond: [{ $in: ['$status', ['sent', 'delivered', 'read']] }, 1, 0] }
+                },
+                failed: {
+                  $sum: { $cond: [{ $eq: ['$status', 'failed'] }, 1, 0] }
+                }
               }
             },
             { $sort: { '_id.year': 1, '_id.month': 1, '_id.day': 1 } }
@@ -309,6 +315,67 @@ class NotificationController {
     ]);
 
     return ApiResponse.success(res, 200, 'Notification analytics retrieved successfully', analytics[0]);
+  });
+
+  /**
+   * Get notification overview (admin only)
+   * Returns the flat KPI shape the admin intelligence dashboard consumes.
+   */
+  getNotificationOverview = catchAsync(async (req, res) => {
+    const { startDate, endDate } = req.query;
+
+    const match = {};
+    if (startDate || endDate) {
+      match.createdAt = {};
+      if (startDate) match.createdAt.$gte = new Date(startDate);
+      if (endDate) match.createdAt.$lte = new Date(endDate);
+    }
+
+    const [agg] = await Notification.aggregate([
+      { $match: match },
+      {
+        $group: {
+          _id: null,
+          totalSent: {
+            $sum: { $cond: [{ $in: ['$status', ['sent', 'delivered', 'read']] }, 1, 0] },
+          },
+          delivered: {
+            $sum: { $cond: [{ $ne: ['$tracking.deliveredAt', null] }, 1, 0] },
+          },
+          opened: {
+            $sum: { $cond: [{ $ne: ['$readAt', null] }, 1, 0] },
+          },
+          clicked: {
+            $sum: { $cond: [{ $gt: [{ $size: { $ifNull: ['$tracking.events', []] } }, 0] }, 1, 0] },
+          },
+          failed: {
+            $sum: { $cond: [{ $eq: ['$status', 'failed'] }, 1, 0] },
+          },
+          pendingQueue: {
+            $sum: { $cond: [{ $in: ['$status', ['pending', 'processing', 'scheduled', 'queued']] }, 1, 0] },
+          },
+        },
+      },
+    ]);
+
+    const totalSent = agg?.totalSent || 0;
+    const delivered = agg?.delivered || 0;
+    const opened = agg?.opened || 0;
+    const clicked = agg?.clicked || 0;
+
+    const overview = {
+      totalSent,
+      delivered,
+      opened,
+      clicked,
+      failed: agg?.failed || 0,
+      ctr: opened > 0 ? Number(((clicked / opened) * 100).toFixed(1)) : 0,
+      deliveryRate: totalSent > 0 ? Number(((delivered / totalSent) * 100).toFixed(1)) : 0,
+      avgDeliveryTimeSeconds: 0,
+      pendingQueue: agg?.pendingQueue || 0,
+    };
+
+    return ApiResponse.success(res, 200, 'Notification overview retrieved successfully', overview);
   });
 
   /**

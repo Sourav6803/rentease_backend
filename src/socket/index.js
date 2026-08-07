@@ -59,12 +59,15 @@ const initializeSocket = (server) => {
           socket.userType = 'vendor';
           socket.vendorData = vendor;
         } else {
-          // Check if admin
-          const admin = await Admin.findOne({ user: decoded.id })
-            .populate('user', '-password')
-            .lean();
+          // Check if admin. Admin access tokens carry the Admin document's
+          // own _id as `decoded.id` (see admin-auth.service generateTokens),
+          // so look up by _id first, then fall back to the user ref for any
+          // token shape that stores the linked user id.
+          const admin =
+            (await Admin.findById(decoded.id).populate('user', '-password').lean()) ||
+            (await Admin.findOne({ user: decoded.id }).populate('user', '-password').lean());
           if (admin) {
-            user = admin.user;
+            user = admin.user || admin;
             socket.userType = 'admin';
             socket.adminData = admin;
           }

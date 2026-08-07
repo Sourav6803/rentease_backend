@@ -70,6 +70,9 @@ router.post('/admin/broadcast',
 // Get all notifications (admin view)
 router.get('/admin/all', notificationController.getAllNotifications);
 
+// Get notification overview KPIs
+router.get('/admin/overview', notificationController.getNotificationOverview);
+
 // Get notification analytics
 router.get('/admin/analytics', notificationController.getNotificationAnalytics);
 

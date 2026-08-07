@@ -193,7 +193,7 @@ notificationSchema.pre('save', async function(next) {
     this.expiryDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
   }
   
-  next();
+  // next();
 });
 
 // Method to mark as sent

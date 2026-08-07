@@ -2,7 +2,7 @@ const { Notification, User, Vendor } = require('../models');
 const { getMessaging } = require('../config/firebase');
 const { getRedisClient } = require('../config/redis');
 const { addJob } = require('../jobs');
-const { eventEmitter } = require('../events');
+const eventEmitter = require('../events/eventEmitter');
 const logger = require('../config/logger');
 const mongoose = require('mongoose');
 const webpush = require('web-push');
@@ -89,7 +89,7 @@ class NotificationService {
     try {
       const {
         userId,
-        type = 'in_app',
+        type = 'push',
         category = 'transactional',
         title,
         content,
@@ -101,6 +101,8 @@ class NotificationService {
         template,
         channelDetails
       } = data;
+
+      console.log("createNotification data-->", data.type)
 
       // Check if user has opted out
       if (type !== 'in_app') {
@@ -134,8 +136,11 @@ class NotificationService {
         channelDetails
       });
 
+      console.log("scheduledFor-->", scheduledFor)
+
       // Process immediately if not scheduled
       if (!scheduledFor) {
+        console.log("Processing notification immediately")
         await this.processNotification(notification);
       } else {
         // Schedule for later
@@ -199,6 +204,8 @@ class NotificationService {
       await notification.save();
 
       let result;
+
+      console.log("notification.type-->", notification.type)
 
       switch (notification.type) {
         case 'in_app':
@@ -357,7 +364,9 @@ class NotificationService {
    * errors prune the token), and safe payload shaping for Android/APNS/WebPush.
    */
   async sendPushNotification(notification) {
+    // console.log("from notification-->", notification)
     const fcm = this.fcm;
+    // console.log("fcm-->", fcm)
     if (!fcm) {
       // Firebase disabled — in-app delivery already happened; just no-op.
       logger.warn(`Messaging unavailable; skipping push for ${notification._id}`);
@@ -366,7 +375,10 @@ class NotificationService {
 
     const userId = notification.user?._id || notification.user;
     const user = await User.findById(userId).select('pushTokens deviceTokens');
+    // console.log("user-->", user)
     const tokens = (user?.pushTokens || []).filter(Boolean);
+
+    console.log('tokens-->', tokens)
 
     if (tokens.length === 0) {
       return { deliveredAt: new Date(), method: 'fcm', skipped: true, reason: 'no_tokens' };
@@ -435,20 +447,27 @@ class NotificationService {
       }
     };
 
+    // console.log("baseMessage-->", baseMessage)
+
     let successTotal = 0;
     let failedTotal = 0;
     const invalidTokens = new Set();
+
+    console.log("Sending push notification to user:", userId , "with tokens:", tokens, )
 
     for (let i = 0; i < tokens.length; i += FCM_MAX_TOKENS_PER_MULTICAST) {
       const slice = tokens.slice(i, i + FCM_MAX_TOKENS_PER_MULTICAST);
       let response;
       try {
         response = await fcm.sendEachForMulticast({ ...baseMessage, tokens: slice });
+        
       } catch (err) {
         // Whole-multicast failure (auth/quota/network). Tokens stay valid; let retry handle it.
         logger.error('FCM sendEachForMulticast failed:', err.message);
         throw err;
       }
+
+      console.log("response-->", response)
 
       successTotal += response.successCount;
       failedTotal += response.failureCount;
@@ -779,11 +798,11 @@ class NotificationService {
   /**
    * Send test notification
    */
-  async sendTestNotification(userId, type = 'in_app') {
+  async sendTestNotification(userId, type = 'push', channelDetails = {}, scheduledFor = null) {
     return this.createNotification({
       userId,
-      type,
-      category: 'test',
+      type: 'push',
+      category: 'system',
       title: 'Test Notification',
       content: {
         text: 'This is a test notification from RentEase',
@@ -1165,7 +1184,7 @@ class NotificationService {
       title,
       content,
       type = 'push',
-      category = 'announcement',
+      category = 'system',
       target = 'all', // 'all', 'users', 'vendors', 'specific'
       userIds = [],
       priority = 'medium',
