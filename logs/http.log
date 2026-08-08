@@ -54538,3 +54538,84 @@
 [32m      =====================================[39m
 [32m      [39m
 2026-08-06 23:33:49:3349 [32minfo[39m: [32mSocket connected: jbaC2ZNe6x0ESTOMAAAB for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-08-07 09:09:46:946 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-08-07 09:09:52:952 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-08-07 09:09:54:954 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-08-07 09:09:54:954 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-08-07 09:09:54:954 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-08-07 09:09:54:954 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-08-07 09:09:54:954 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-08-07 09:09:54:954 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-08-07 09:09:54:954 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-08-07 09:10:14:1014 [32minfo[39m: [32mSocket connected: RI3i-NzUwAB6GY_HAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-08-07 09:15:15:1515 [32minfo[39m: [32mSocket disconnected: RI3i-NzUwAB6GY_HAAAB for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-08-07 09:15:15:1515 [32minfo[39m: [32mSocket connected: UvWV8ZK6D0anT-juAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-08-07 09:44:21:4421 [32minfo[39m: [32mSocket disconnected: UvWV8ZK6D0anT-juAAAD for user: 6a66d2a55672a851e1a94ca5, reason: transport error[39m
+2026-08-07 09:44:21:4421 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-07 09:44:21:4421 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-08-07 09:44:23:4423 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-08-07 09:44:26:4426 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-07 09:44:30:4430 [32minfo[39m: [32mSocket connected: UnPAui5crv51cWv8AAAH for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-08-07 23:30:00:300 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-08-07 23:31:10:3110 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-08-07 23:31:12:3112 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-08-07 23:31:12:3112 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-08-07 23:31:13:3113 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-08-07 23:31:13:3113 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-08-07 23:31:14:3114 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-08-07 23:31:14:3114 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-08-07 23:31:14:3114 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-08-07 23:31:54:3154 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-08 06:47:53:4753 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-08-08 06:48:14:4814 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-08-08 06:48:19:4819 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-08-08 06:48:19:4819 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-08-08 06:48:20:4820 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-08-08 06:48:21:4821 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-08-08 06:48:21:4821 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-08-08 06:48:21:4821 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-08-08 06:48:21:4821 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: more-warthog-73636.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-08-08 06:51:40:5140 [32minfo[39m: [32mSocket connected: k2gHcovXvl-weM8IAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-08-08 07:02:42:242 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-08 07:10:23:1023 [32minfo[39m: [32mSocket disconnected: k2gHcovXvl-weM8IAAAB for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-08-08 07:10:24:1024 [32minfo[39m: [32mSocket connected: WGmY-_qxAMz2r0XwAAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-08-08 07:20:22:2022 [32minfo[39m: [32mSocket disconnected: WGmY-_qxAMz2r0XwAAAF for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m

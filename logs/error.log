@@ -25915,3 +25915,7 @@
 2026-08-06 23:18:41:1841 [31merror[39m: [31m❌ Redis error:[39m
 2026-08-06 23:18:42:1842 [31merror[39m: [31m❌ Redis error:[39m
 2026-08-06 23:18:43:1843 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-07 09:44:21:4421 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-07 09:44:26:4426 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-07 23:31:54:3154 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-08 07:02:42:242 [31merror[39m: [31mSocket authentication error: jwt expired[39m

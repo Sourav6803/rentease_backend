@@ -160,7 +160,8 @@ class NotificationService {
   /**
    * Create bulk notifications
    */
-  async createBulkNotifications(userIds, data) {
+  async createBulkNotifications(userIds, data, options = {}) {
+    const { concurrency = 25 } = options;
     try {
       const notifications = [];
       const results = {
@@ -169,20 +170,31 @@ class NotificationService {
         errors: []
       };
 
-      for (const userId of userIds) {
-        try {
-          const notification = await this.createNotification({
-            userId,
-            ...data
-          });
-          if (notification) {
-            notifications.push(notification);
-            results.successful++;
+      // Process in bounded-concurrency batches instead of strictly one-at-a-time.
+      // Keeps large broadcasts fast without opening an unbounded number of
+      // simultaneous DB/network operations. Each recipient is isolated so one
+      // failure never aborts the rest of the batch.
+      for (let i = 0; i < userIds.length; i += concurrency) {
+        const batch = userIds.slice(i, i + concurrency);
+        const settled = await Promise.allSettled(
+          batch.map((userId) => this.createNotification({ userId, ...data }))
+        );
+
+        settled.forEach((outcome, idx) => {
+          if (outcome.status === 'fulfilled') {
+            // A null result means the user opted out — neither success nor error.
+            if (outcome.value) {
+              notifications.push(outcome.value);
+              results.successful++;
+            }
+          } else {
+            results.failed++;
+            results.errors.push({
+              userId: batch[idx],
+              error: outcome.reason?.message || String(outcome.reason)
+            });
           }
-        } catch (error) {
-          results.failed++;
-          results.errors.push({ userId, error: error.message });
-        }
+        });
       }
 
       return {
@@ -1236,7 +1248,7 @@ class NotificationService {
       recipients = userIds;
     }
 
-    const results = await this.createBulkNotifications(recipients, {
+    const payload = {
       type,
       category,
       title,
@@ -1247,9 +1259,32 @@ class NotificationService {
         broadcast: true,
         sentBy: data.sentBy
       }
+    };
+
+    if (recipients.length === 0) {
+      return { queued: false, recipientCount: 0, target };
+    }
+
+    // Fanning out to every recipient (per-user DB writes + push/email network
+    // calls) is slow. Doing it inline makes the HTTP request exceed the client /
+    // hosting-proxy timeout on large audiences. Resolve the audience
+    // synchronously, then hand delivery off to the background so the request
+    // returns immediately. Individual failures are logged, not surfaced to the
+    // caller — the admin UI already treats this as "queued for delivery".
+    setImmediate(() => {
+      this.createBulkNotifications(recipients, payload)
+        .then(({ results }) => {
+          logger.info(
+            `Admin broadcast delivered: ${results.successful} sent, ${results.failed} failed ` +
+            `(target=${target}, recipients=${recipients.length})`
+          );
+        })
+        .catch((err) => {
+          logger.error('Admin broadcast background processing failed:', err);
+        });
     });
 
-    return results;
+    return { queued: true, recipientCount: recipients.length, target };
   }
 }
 

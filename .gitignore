@@ -36,6 +36,10 @@ out/
 .cache/
 .parcel-cache
 
+.logs/*
+
+
+
 # Environment variables and secrets
 .env
 .env.local

@@ -197,8 +197,12 @@ class NotificationController {
     };
 
     const results = await NotificationService.sendAdminBroadcast(broadcastData);
-    
-    return ApiResponse.success(res, 200, 'Broadcast notification sent successfully', results);
+
+    const message = results.queued
+      ? `Broadcast queued for delivery to ${results.recipientCount} recipient(s)`
+      : 'No active recipients matched the selected audience';
+
+    return ApiResponse.success(res, 200, message, results);
   });
 
   /**
