@@ -25919,3 +25919,76 @@
 2026-08-07 09:44:26:4426 [31merror[39m: [31mSocket authentication error: jwt expired[39m
 2026-08-07 23:31:54:3154 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
 2026-08-08 07:02:42:242 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-08 18:54:01:541 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 20:41:17:4117 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-08 20:41:17:4117 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-08 20:41:18:4118 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-08 20:41:18:4118 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-08 20:41:18:4118 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-08 20:41:18:4118 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-08 20:41:18:4118 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-08 20:41:18:4118 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-08 20:41:18:4118 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-08 20:41:19:4119 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-08 20:41:44:4144 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-08 21:26:53:2653 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 21:26:55:2655 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 21:32:27:3227 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 21:32:29:3229 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 21:32:30:3230 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 22:54:59:5459 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 22:55:00:550 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 22:55:00:550 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 22:55:00:550 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 22:55:01:551 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 22:55:01:551 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 22:55:01:551 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 22:55:02:552 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 22:55:02:552 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 22:55:02:552 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 23:56:10:5610 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 23:56:11:5611 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 23:56:12:5612 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 23:56:13:5613 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 23:56:14:5614 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 23:56:15:5615 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 23:56:15:5615 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 23:56:16:5616 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 23:56:17:5617 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-08 23:56:18:5618 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-09 21:02:48:248 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-08-09 21:54:44:5444 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-08-09 21:55:19:5519 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-08-09 22:00:57:057 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-08-09 22:05:13:513 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-09 22:05:14:514 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-09 22:08:49:849 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-09 22:10:06:106 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-09 22:10:06:106 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-09 22:10:07:107 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-09 22:10:07:107 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-09 22:10:07:107 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-09 22:10:07:107 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-09 22:10:08:108 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-09 22:10:12:1012 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-09 22:10:53:1053 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-09 22:10:53:1053 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-09 22:10:54:1054 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-09 22:10:54:1054 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-09 22:10:54:1054 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-09 22:10:54:1054 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-09 22:10:54:1054 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-09 22:10:54:1054 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-09 22:10:55:1055 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-09 22:10:55:1055 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-09 22:11:07:117 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-09 22:14:21:1421 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-09 22:17:35:1735 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-09 22:21:12:2112 [31merror[39m: [31mJob 1 (notification) failed: require(...).process is not a function[39m
+2026-08-09 22:22:17:2217 [31merror[39m: [31mJob 2 (notification) failed: require(...).process is not a function[39m
+2026-08-09 22:23:09:239 [31merror[39m: [31mJob 3 (notification) failed: require(...).process is not a function[39m
+2026-08-09 22:26:56:2656 [31merror[39m: [31mJob 4 (notification) failed: require(...).process is not a function[39m
+2026-08-09 22:50:51:5051 [31merror[39m: [31mJob 5 (notification) failed: require(...).process is not a function[39m
+2026-08-09 22:58:45:5845 [31merror[39m: [31mJob 6 (notification) failed: require(...).process is not a function[39m
+2026-08-09 23:22:38:2238 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-09 23:38:09:389 [31merror[39m: [31mSocket authentication error: jwt expired[39m

@@ -5,6 +5,7 @@ const AppError = require('../../utils/AppError');
 const logger = require('../../config/logger');
 const Notification = require('../../models/Notification.model');
 const User = require('../../models/User.model');
+const { queues, workers, addJob } = require('../../jobs');
 
 class NotificationController {
   /**
@@ -366,7 +367,23 @@ class NotificationController {
             $sum: { $cond: [{ $ne: ['$readAt', null] }, 1, 0] },
           },
           clicked: {
-            $sum: { $cond: [{ $gt: [{ $size: { $ifNull: ['$tracking.events', []] } }, 0] }, 1, 0] },
+            // A notification counts as "clicked" only when there is a real
+            // click (a `tracking.clickedAt` or a 'clicked' tracking event).
+            // The old check counted any doc with >=1 tracking event — but
+            // sent/delivered/read all push events, so the CTR was inflated by
+            // every delivered notification.
+            $sum: {
+              $cond: [
+                {
+                  $or: [
+                    { $ne: ['$tracking.clickedAt', null] },
+                    { $in: ['clicked', { $ifNull: ['$tracking.events.event', []] }] },
+                  ],
+                },
+                1,
+                0,
+              ],
+            },
           },
           failed: {
             $sum: { $cond: [{ $eq: ['$status', 'failed'] }, 1, 0] },
@@ -422,14 +439,152 @@ class NotificationController {
     }
 
     notification.status = 'pending';
+    // Reset the retry budget: if the previous attempts already hit maxRetries
+    // (3), scheduleRetry() refuses to enqueue another retry. A manual admin
+    // resend is a fresh attempt, so clear the count (and stale failure marks)
+    // to give it the full backoff window again.
+    notification.tracking = {
+      ...notification.tracking,
+      retryCount: 0,
+      failureReason: undefined,
+      failedAt: undefined,
+    };
     await notification.save();
 
-    // Process asynchronously
+    // Process asynchronously. Resolving the audience + fanning out is slow for
+    // email/push, so we hand off and return "initiated" immediately.
     NotificationService.processNotification(notification).catch(error => {
       logger.error(`Error resending notification ${id}:`, error);
     });
 
     return ApiResponse.success(res, 200, 'Notification resend initiated');
+  });
+
+  /**
+   * Broadcast diagnostic. Confirms whether the BullMQ worker is alive, whether
+   * the notification queue is consuming jobs, and whether broadcasts actually
+   * produced notification documents. Use this to tell apart "worker not running
+   * / disconnected" from "delivery reached no one".
+   */
+  getBroadcastStatus = catchAsync(async (req, res) => {
+    const queue = queues.notification;
+
+    let counts = null;
+    if (queue) {
+      try {
+        counts = await queue.getJobCounts(); // waiting/active/completed/failed/delayed/paused
+      } catch (err) {
+        logger.error('getBroadcastStatus: getJobCounts failed:', err.message);
+      }
+    }
+
+    const recentJobs = { completed: [], failed: [] };
+    if (queue) {
+      try {
+        recentJobs.completed = (await queue.getCompleted(0, 10)).map((j) => ({
+          id: j.id,
+          name: j.name,
+          timestamp: j.timestamp,
+          returnvalue: j.returnvalue,
+        }));
+      } catch { /* ignore */ }
+      try {
+        recentJobs.failed = (await queue.getFailed(0, 10)).map((j) => ({
+          id: j.id,
+          name: j.name,
+          timestamp: j.timestamp,
+          failedReason: j.failedReason,
+          data: j.data,
+        }));
+      } catch { /* ignore */ }
+    }
+
+    const recentDocs = await Notification.find({ 'data.broadcast': true })
+      .select('notificationNumber user type title status category createdAt tracking.readAt data.broadcastId')
+      .sort({ createdAt: -1 })
+      .limit(20)
+      .lean();
+
+    return ApiResponse.success(res, 200, 'Broadcast status retrieved', {
+      workerRunning: Boolean(workers.notification),
+      redisConnected: counts !== null,
+      counts,
+      recentJobs,
+      recentBroadcastDocuments: recentDocs,
+    });
+  });
+
+  /**
+   * Broadcast self-test. Runs two probes in one call to isolate WHERE delivery
+   * breaks:
+   *  - sync: createBulkNotifications + processNotification INLINE (no BullMQ) —
+   *          proves the fan-out + in-app delivery logic works on its own.
+   *  - async: enqueues a real BullMQ 'broadcast' job and reads queue counts
+   *           after a short wait — proves whether the worker consumes it.
+   * If sync succeeds but async never moves waiting→completed/failed, the worker
+   * is the problem; if both fail, it's the fan-out/delivery code.
+   */
+  testBroadcast = catchAsync(async (req, res) => {
+    const { target = 'users', title = 'Broadcast Self-Test', type = 'in_app' } = req.body;
+
+    // Resolve up to 2 recipients exactly as sendAdminBroadcast does.
+    let recipients = [];
+    if (target === 'all') {
+      recipients = await User.find({ 'status.isActive': true }).limit(2).distinct('_id');
+    } else if (target === 'vendors') {
+      recipients = await User.find({ role: 'user', 'status.isActive': true }).limit(2).distinct('_id');
+    } else {
+      recipients = await User.find({ role: 'user', 'status.isActive': true }).limit(2).distinct('_id');
+    }
+
+    const payload = {
+      type,
+      category: 'system',
+      title,
+      content: { text: `${title} (self-test)` },
+      priority: 'medium',
+      data: { broadcast: true, selfTest: true, sentBy: req.admin?._id },
+    };
+
+    // 1) SYNCHRONOUS probe — no BullMQ involved.
+    let syncResult;
+    const syncStart = Date.now();
+    try {
+      const { notifications, results } = await NotificationService.createBulkNotifications(recipients, payload);
+      syncResult = {
+        ok: true,
+        ms: Date.now() - syncStart,
+        created: notifications.length,
+        results,
+      };
+    } catch (err) {
+      syncResult = { ok: false, ms: Date.now() - syncStart, error: err.message };
+    }
+
+    // 2) ASYNC probe — real BullMQ 'broadcast' job, then read queue state.
+    let asyncResult;
+    const queue = queues.notification;
+    try {
+      const recipientIds = recipients.map((id) => String(id));
+      const job = await addJob(
+        'notification',
+        'broadcast',
+        { broadcastId: 'SELFTEST', recipients: recipientIds, payload, target },
+        { attempts: 1 }
+      );
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const counts = queue ? await queue.getJobCounts() : null;
+      asyncResult = { queuedJobId: job?.id ?? null, ok: true, counts };
+    } catch (err) {
+      asyncResult = { ok: false, error: err.message };
+    }
+
+    return ApiResponse.success(res, 200, 'Broadcast self-test complete', {
+      recipients: recipients.length,
+      type,
+      syncResult,
+      asyncResult,
+    });
   });
 }
 

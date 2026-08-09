@@ -65,10 +65,16 @@ router.delete('/', notificationController.clearAllNotifications);
 router.use('/admin', restrictTo('admin', 'super-admin'));
 
 // Send broadcast notification
-router.post('/admin/broadcast', 
+router.post('/admin/broadcast',
   validate(notificationValidations.broadcast),
   notificationController.sendBroadcast
 );
+
+// Broadcast diagnostic: worker liveness + queue counts + recent docs
+router.get('/admin/broadcast/status', notificationController.getBroadcastStatus);
+
+// Broadcast self-test: sync probe + async job, to isolate worker vs delivery
+router.post('/admin/broadcast/test', notificationController.testBroadcast);
 
 // Get all notifications (admin view)
 router.get('/admin/all', notificationController.getAllNotifications);

@@ -19,7 +19,22 @@ const adminRooms = new Map(); // adminId -> Set of socketIds
 const initializeSocket = (server) => {
   io = socketIO(server, {
     cors: {
-      origin: process.env.CLIENT_URL || 'http://localhost:3000',
+      // Allow both the configured production frontend (CLIENT_URL) and any
+      // localhost dev origin. A cross-origin WebSocket is a credentialed
+      // request, so the browser requires Access-Control-Allow-Origin to match
+      // the page origin exactly — a single CLIENT_URL (which in dev points at
+      // the deployed Vercel frontend) can never match "http://localhost:3000",
+      // and that mismatch was blocking the websocket upgrade. Using a function
+      // keeps CLIENT_URL working in prod while letting local dev connect from
+      // any port (3000/3001/…).
+      origin: (origin, callback) => {
+        const allowedDev = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin || '');
+        const allowedProd = process.env.CLIENT_URL;
+        if (!origin || allowedDev || origin === allowedProd) {
+          return callback(null, true);
+        }
+        return callback(new Error('Not allowed by CORS'));
+      },
       credentials: true,
       methods: ['GET', 'POST'],
     },

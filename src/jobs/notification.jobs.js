@@ -1,8 +1,5 @@
 const logger = require('../config/logger');
 const { Notification } = require('../models');
-const { emitToUser } = require('../socket');
-const { sendEmail } = require('../services/email.service');
-const { sendSMS } = require('../services/sms.service');
 const NotificationService = require('../services/notification.service');
 
 // Notification job processor
@@ -15,9 +12,15 @@ const process = async (type, data) => {
        
     case 'send':
       return await handleSendNotification(data);
-       
+
+    case 'send-scheduled':
+      return await handleSendScheduledNotification(data);
+
     case 'batch':
       return await handleBatchNotification(data);
+
+    case 'broadcast':
+      return await handleBroadcastNotification(data);
        
     case 'reminder':
       return await handleReminderNotification(data);
@@ -71,7 +74,7 @@ const handleCreateNotification = async (data) => {
 // Handle send notification
 const handleSendNotification = async (data) => {
   const { notificationId } = data;
-  
+
   const notification = await Notification.findById(notificationId)
     .populate('user');
 
@@ -80,6 +83,30 @@ const handleSendNotification = async (data) => {
   }
 
   return processNotification(notification);
+};
+
+// Handle a scheduled notification whose delay has elapsed.
+// Enqueued by NotificationService.createNotification with a BullMQ delay equal
+// to `scheduledFor - now`. When it fires we flip the doc out of 'scheduled' and
+// hand it to the SHARED service processor (retry/event/tracking logic) rather
+// than the divergent copy in this file.
+const handleSendScheduledNotification = async (data) => {
+  const { notificationId } = data;
+
+  const notification = await Notification.findById(notificationId);
+  if (!notification) {
+    throw new Error(`Notification not found: ${notificationId}`);
+  }
+
+  // Already delivered/cancelled by another path — nothing to do.
+  if (['sent', 'delivered', 'read', 'cancelled'].includes(notification.status)) {
+    return notification;
+  }
+
+  notification.status = 'pending';
+  await notification.save();
+
+  return NotificationService.processNotification(notification);
 };
 
 // Handle batch notifications
@@ -105,6 +132,31 @@ const handleBatchNotification = async (data) => {
   }
   
   return { count: notifications.length };
+};
+
+// Handle a durable admin broadcast. Enqueued by
+// NotificationService.sendAdminBroadcast as a BullMQ job (attempts: 1) so the
+// audience fan-out survives a server restart — the previous setImmediate was
+// lost entirely if the process died after the HTTP response. Each recipient is
+// still created through createNotification, which keeps its own per-notification
+// durability (and schedules per-recipient delay jobs when scheduledFor is set).
+const handleBroadcastNotification = async (data) => {
+  const { broadcastId, recipients = [], payload = {} } = data;
+  const tag = broadcastId ? `[broadcast ${broadcastId}]` : '[broadcast]';
+
+  logger.info(`${tag} worker processing ${recipients.length} recipient(s)`);
+
+  if (!Array.isArray(recipients) || recipients.length === 0) {
+    logger.warn(`${tag} no recipients — nothing to fan out`);
+    return { queued: false, recipientCount: 0 };
+  }
+
+  const { notifications, results } = await NotificationService.createBulkNotifications(recipients, payload);
+  logger.info(
+    `${tag} done: ${results.successful} sent, ${results.failed} failed ` +
+    `(recipients=${recipients.length}, docs=${notifications?.length || 0})`
+  );
+  return results;
 };
 
 // Handle reminder notifications
@@ -159,115 +211,14 @@ const handleCleanupNotifications = async (data) => {
   return result;
 };
 
-// Process individual notification
+// Process individual notification.
+// Delegates to the SHARED service processor so every enqueued job (create,
+// batch, send, scheduled, retry) goes through one code path with retry/backoff,
+// unread-cache invalidation, and the notification:sent socket bridge. The
+// previous local copy had none of those, so create/batch jobs silently skipped
+// retries and real-time delivery for in-app notifications.
 const processNotification = async (notification) => {
-  try {
-    // Update status to processing
-    notification.status = 'processing';
-    await notification.save();
-
-    // Send based on type
-    switch (notification.type) {
-      case 'in_app':
-        await sendInAppNotification(notification);
-        break;
-        
-      case 'email':
-        await sendEmailNotification(notification);
-        break;
-        
-      case 'sms':
-        await sendSMSNotification(notification);
-        break;
-        
-      case 'push':
-        await sendPushNotification(notification);
-        break;
-    }
-
-    // Update status to sent
-    notification.status = 'sent';
-    notification.tracking.sentAt = new Date();
-    await notification.save();
-
-    return notification;
-  } catch (error) {
-    logger.error('Error processing notification:', error);
-    
-    notification.status = 'failed';
-    notification.tracking.failedAt = new Date();
-    notification.tracking.failureReason = error.message;
-    await notification.save();
-    
-    throw error;
-  }
-};
-
-// Send in-app notification
-const sendInAppNotification = async (notification) => {
-  const user = notification.user;
-
-  if (user) {
-    const content = notification.content || {};
-    // Keep this payload identical to the events bridge
-    // (events/notification.events.js -> notification:receive) so the frontend
-    // sees one consistent shape regardless of which path delivered it.
-    emitToUser(user._id, 'notification:receive', {
-      id: notification._id,
-      title: notification.title,
-      body:
-        typeof content === 'string'
-          ? content
-          : content.text || content.preview || '',
-      content,
-      type: notification.type,
-      category: notification.category,
-      priority: notification.priority,
-      data: notification.data || {},
-      read: Boolean(notification.readAt || notification.tracking?.readAt),
-      createdAt: notification.createdAt,
-      timestamp: notification.createdAt || new Date(),
-    });
-  }
-
-  notification.tracking.deliveredAt = new Date();
-  await notification.save();
-};
-
-// Send email notification
-const sendEmailNotification = async (notification) => {
-  const user = notification.user;
-  
-  if (!user?.email) {
-    throw new Error('User email not found');
-  }
-
-  await sendEmail({
-    to: user.email,
-    subject: notification.title,
-    html: notification.content,
-    data: notification.data,
-  });
-};
-
-// Send SMS notification
-const sendSMSNotification = async (notification) => {
-  const user = notification.user;
-  
-  if (!user?.phone) {
-    throw new Error('User phone not found');
-  }
-
-  await sendSMS({
-    to: user.phone,
-    message: notification.content,
-    data: notification.data,
-  });
-};
-
-// Send push notification (delegates to the shared service so FCM logic stays in one place)
-const sendPushNotification = async (notification) => {
-  return NotificationService.sendPushNotification(notification);
+  return NotificationService.processNotification(notification);
 };
 
 module.exports = { process };

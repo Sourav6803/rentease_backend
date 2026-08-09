@@ -61,7 +61,8 @@ const userSchema = new mongoose.Schema({
     notifications: {
       email: { type: Boolean, default: true },
       sms: { type: Boolean, default: true },
-      push: { type: Boolean, default: true }
+      push: { type: Boolean, default: true },
+      in_app: { type: Boolean, default: true }
     }
   },
   // ── Push notification device tokens (FCM / Web Push) ──────────────

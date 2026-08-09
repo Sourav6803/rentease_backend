@@ -5,6 +5,7 @@ const { addJob } = require('../jobs');
 const eventEmitter = require('../events/eventEmitter');
 const logger = require('../config/logger');
 const mongoose = require('mongoose');
+const crypto = require('crypto');
 const webpush = require('web-push');
 const PushNotifications = require('node-pushnotifications');
 
@@ -77,8 +78,11 @@ class NotificationService {
    * Generate unique notification number
    */
   generateNotificationNumber() {
+    // crypto random with a 2^48 space (was Math.random * 10000 — only 4 digits,
+    // which collided on the unique index when a broadcast created many docs in
+    // the same millisecond). Matches the model's pre-save generator.
     const timestamp = Date.now().toString().slice(-8);
-    const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    const random = crypto.randomBytes(6).toString('hex').toUpperCase();
     return `NOT${timestamp}${random}`;
   }
 
@@ -102,12 +106,10 @@ class NotificationService {
         channelDetails
       } = data;
 
-      console.log("createNotification data-->", data.type)
-
       // Check if user has opted out
       if (type !== 'in_app') {
         const user = await User.findById(userId);
-        if (user?.preferences?.notifications && 
+        if (user?.preferences?.notifications &&
             user.preferences.notifications[type] === false) {
           logger.info(`User ${userId} has opted out of ${type} notifications`);
           return null;
@@ -115,7 +117,7 @@ class NotificationService {
       }
 
       const notificationNumber = this.generateNotificationNumber();
-      
+
       const notification = await Notification.create({
         notificationNumber,
         user: userId,
@@ -136,18 +138,23 @@ class NotificationService {
         channelDetails
       });
 
-      console.log("scheduledFor-->", scheduledFor)
-
       // Process immediately if not scheduled
       if (!scheduledFor) {
-        console.log("Processing notification immediately")
         await this.processNotification(notification);
       } else {
-        // Schedule for later
-        await addJob('notification', 'send-scheduled', {
-          notificationId: notification._id,
-          scheduledAt: scheduledFor
-        });
+        // Schedule for later: hold the job in the queue until scheduledFor via a
+        // BullMQ `delay`. Without the delay the worker would run it immediately,
+        // defeating the schedule. A non-positive delay (past date) runs ASAP.
+        const delay = Math.max(0, new Date(scheduledFor).getTime() - Date.now());
+        await addJob(
+          'notification',
+          'send-scheduled',
+          {
+            notificationId: notification._id,
+            scheduledAt: scheduledFor
+          },
+          { delay }
+        );
       }
 
       return notification;
@@ -217,8 +224,6 @@ class NotificationService {
 
       let result;
 
-      console.log("notification.type-->", notification.type)
-
       switch (notification.type) {
         case 'in_app':
           result = await this.sendInAppNotification(notification);
@@ -250,6 +255,9 @@ class NotificationService {
 
       // Emit real-time event for in-app notifications
       if (notification.type === 'in_app') {
+        // A new unread in-app notification changes the badge count — drop the
+        // cached value so the next getUnreadCount() reflects it immediately.
+        await this.invalidateUnreadCache(notification.user);
         eventEmitter.emit('notification:sent', {
           userId: notification.user,
           notification: notification.toObject()
@@ -296,7 +304,7 @@ class NotificationService {
   async sendEmailNotification(notification) {
     try {
       const user = await User.findById(notification.user);
-      
+
       if (!user?.email) {
         throw new Error('User email not found');
       }
@@ -376,7 +384,7 @@ class NotificationService {
    * errors prune the token), and safe payload shaping for Android/APNS/WebPush.
    */
   async sendPushNotification(notification) {
-    // console.log("from notification-->", notification)
+    console.log("from notification-->", notification)
     const fcm = this.fcm;
     // console.log("fcm-->", fcm)
     if (!fcm) {
@@ -387,10 +395,7 @@ class NotificationService {
 
     const userId = notification.user?._id || notification.user;
     const user = await User.findById(userId).select('pushTokens deviceTokens');
-    // console.log("user-->", user)
     const tokens = (user?.pushTokens || []).filter(Boolean);
-
-    console.log('tokens-->', tokens)
 
     if (tokens.length === 0) {
       return { deliveredAt: new Date(), method: 'fcm', skipped: true, reason: 'no_tokens' };
@@ -465,21 +470,17 @@ class NotificationService {
     let failedTotal = 0;
     const invalidTokens = new Set();
 
-    console.log("Sending push notification to user:", userId , "with tokens:", tokens, )
-
     for (let i = 0; i < tokens.length; i += FCM_MAX_TOKENS_PER_MULTICAST) {
       const slice = tokens.slice(i, i + FCM_MAX_TOKENS_PER_MULTICAST);
       let response;
       try {
         response = await fcm.sendEachForMulticast({ ...baseMessage, tokens: slice });
-        
+
       } catch (err) {
         // Whole-multicast failure (auth/quota/network). Tokens stay valid; let retry handle it.
         logger.error('FCM sendEachForMulticast failed:', err.message);
         throw err;
       }
-
-      console.log("response-->", response)
 
       successTotal += response.successCount;
       failedTotal += response.failureCount;
@@ -519,14 +520,18 @@ class NotificationService {
         throw new Error('User phone number not found');
       }
 
-      // This would integrate with WhatsApp Business API
-      // Placeholder for WhatsApp integration
-      logger.info(`WhatsApp notification would be sent to ${user.phone}`);
+      // No WhatsApp Business API gateway is configured, so this channel cannot
+      // actually deliver. Reporting `delivered: true` would be a lie — it would
+      // mark the notification 'sent' and inflate delivery stats. Report an
+      // explicit skip instead (same convention as push when FCM is unavailable),
+      // so callers know nothing was delivered and no retry storm is triggered.
+      logger.warn(`WhatsApp gateway not configured; skipping ${notification._id} to ${user.phone}`);
 
       return {
-        deliveredAt: new Date(),
         method: 'whatsapp',
-        recipient: user.phone
+        recipient: user.phone,
+        skipped: true,
+        reason: 'whatsapp_gateway_unavailable'
       };
     } catch (error) {
       logger.error('Error sending WhatsApp notification:', error);
@@ -704,9 +709,16 @@ class NotificationService {
         throw new Error('Notification not found');
       }
 
-      notification.readAt = new Date();
+      const now = new Date();
+      notification.readAt = now;
+      // Keep tracking.readAt in sync with the root readAt — the model's
+      // markRead() sets both, and unread logic keys off readAt, so a mismatch
+      // here makes the two disagree on what's "read".
+      notification.tracking = { ...notification.tracking, readAt: now };
       notification.status = 'read';
       await notification.save();
+
+      await this.invalidateUnreadCache(userId);
 
       return notification;
     } catch (error) {
@@ -720,19 +732,23 @@ class NotificationService {
    */
   async markAllAsRead(userId) {
     try {
+      const now = new Date();
       await Notification.updateMany(
-        { 
-          user: userId, 
+        {
+          user: userId,
           readAt: { $exists: false },
           type: 'in_app'
         },
-        { 
-          $set: { 
-            readAt: new Date(),
+        {
+          $set: {
+            readAt: now,
+            'tracking.readAt': now,
             status: 'read'
-          } 
+          }
         }
       );
+
+      await this.invalidateUnreadCache(userId);
 
       return { message: 'All notifications marked as read' };
     } catch (error) {
@@ -755,6 +771,8 @@ class NotificationService {
         throw new Error('Notification not found');
       }
 
+      await this.invalidateUnreadCache(userId);
+
       return { message: 'Notification deleted successfully' };
     } catch (error) {
       logger.error('Error deleting notification:', error);
@@ -767,10 +785,12 @@ class NotificationService {
    */
   async clearAllNotifications(userId) {
     try {
-      await Notification.deleteMany({ 
+      await Notification.deleteMany({
         user: userId,
         type: 'in_app'
       });
+
+      await this.invalidateUnreadCache(userId);
 
       return { message: 'All notifications cleared' };
     } catch (error) {
@@ -813,6 +833,24 @@ class NotificationService {
   }
 
   /**
+   * Drop the cached unread count for a user.
+   *
+   * getUnreadCount() memoizes the count in Redis for 60s. Any operation that
+   * changes how many unread in-app notifications a user has (read one, read
+   * all, delete, clear, or deliver a new in-app notification) must call this,
+   * otherwise the badge stays stale for up to a minute. No-op when Redis is
+   * not configured.
+   */
+  async invalidateUnreadCache(userId) {
+    if (!this.redisClient || !userId) return;
+    try {
+      await this.redisClient.del(`notifications:unread:${userId}`);
+    } catch (err) {
+      logger.error('Error invalidating unread cache:', err.message);
+    }
+  }
+
+  /**
    * Schedule a durable retry via the job queue (survives process restarts).
    * Retry count is already incremented in processNotification's catch block.
    */
@@ -840,10 +878,13 @@ class NotificationService {
   /**
    * Send test notification
    */
-  async sendTestNotification(userId, type = 'push', channelDetails = {}, scheduledFor = null) {
+  async sendTestNotification(userId, type = 'in_app', channelDetails = {}, scheduledFor = null) {
     return this.createNotification({
       userId,
-      type: 'push',
+      // Honour the requested channel. The controller passes req.body.type
+      // (default 'in_app'); previously this was hardcoded to 'push', so a
+      // user testing their in-app or email delivery always got a push instead.
+      type,
       category: 'system',
       title: 'Test Notification',
       content: {
@@ -854,6 +895,8 @@ class NotificationService {
         test: true,
         timestamp: new Date().toISOString()
       },
+      channelDetails,
+      scheduledFor,
       priority: 'low'
     });
   }
@@ -1233,6 +1276,12 @@ class NotificationService {
       scheduledFor
     } = data;
 
+    console.log("type->", type, "category->", category, "target->", target, "userIds->", userIds, "priority->", priority, "scheduledFor->", scheduledFor)
+    // Traceability: a single short id threads through enqueue → worker
+    // processing → DB docs, so a given broadcast can be matched across the
+    // server console and the notifications collection when debugging.
+    const broadcastId = `BC${Date.now().toString(36)}`;
+
     let recipients = [];
 
     if (target === 'all') {
@@ -1257,32 +1306,44 @@ class NotificationService {
       scheduledFor,
       data: {
         broadcast: true,
+        broadcastId,
         sentBy: data.sentBy
       }
     };
 
+    console.log("recipients->", recipients.length, )
+
     if (recipients.length === 0) {
-      return { queued: false, recipientCount: 0, target };
+      return { queued: false, recipientCount: 0, target, broadcastId };
     }
 
     // Fanning out to every recipient (per-user DB writes + push/email network
     // calls) is slow. Doing it inline makes the HTTP request exceed the client /
-    // hosting-proxy timeout on large audiences. Resolve the audience
-    // synchronously, then hand delivery off to the background so the request
-    // returns immediately. Individual failures are logged, not surfaced to the
-    // caller — the admin UI already treats this as "queued for delivery".
-    setImmediate(() => {
-      this.createBulkNotifications(recipients, payload)
-        .then(({ results }) => {
-          logger.info(
-            `Admin broadcast delivered: ${results.successful} sent, ${results.failed} failed ` +
-            `(target=${target}, recipients=${recipients.length})`
-          );
-        })
-        .catch((err) => {
-          logger.error('Admin broadcast background processing failed:', err);
-        });
-    });
+    // hosting-proxy timeout on large audiences. Resolve the audience, then hand
+    // delivery to a DURABLE BullMQ job so it survives a server restart (the old
+    // setImmediate was lost entirely if the process died after the response).
+    // attempts:1 avoids re-running already-delivered recipients on a retry —
+    // a retried whole-fanout would otherwise send duplicate broadcast pushes.
+    // Per-recipient createNotification still carries its own durability and
+    // schedules its own delay when scheduledFor is set.
+    try {
+      // BullMQ serializes job data to JSON. `recipients` are Mongoose ObjectIds
+      // (from .distinct('_id')), which would round-trip as `{_bsontype, id}`
+      // plain objects that Mongoose can't re-cast. Send plain id strings —
+      // Mongoose casts those back to ObjectId reliably in createNotification.
+      const recipientIds = recipients.map((id) => String(id));
+      logger.info(`[broadcast ${broadcastId}] enqueued fan-out to ${recipientIds.length} recipient(s) (target=${target})`);
+      const job = await addJob(
+        'notification',
+        'broadcast',
+        { broadcastId, recipients: recipientIds, payload, target },
+        { attempts: 1 }
+      );
+      logger.info(`[broadcast ${broadcastId}] BullMQ job queued with id ${job?.id}`);
+    } catch (err) {
+      logger.error(`[broadcast ${broadcastId}] Failed to enqueue admin broadcast:`, err);
+      return { queued: false, recipientCount: recipients.length, target, error: err.message };
+    }
 
     return { queued: true, recipientCount: recipients.length, target };
   }

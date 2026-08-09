@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
 const path = require("path");
+const PDFDocument = require("pdfkit");
 const logger = require("../config/logger");
 const AppError = require("../utils/AppError");
 
@@ -100,7 +101,6 @@ class EmailService {
    * Send email
    */
   async sendEmail(options) {
-    console.log("from send email function-->", options);
     if (!this.initialized) {
       await this.initialize();
     }
@@ -127,8 +127,6 @@ class EmailService {
         subject,
         attachments,
       };
-
-      console.log("template-->", template)
 
       const finalText = text || (html ? stripHtml(html) : "");
 
@@ -491,12 +489,110 @@ class EmailService {
   }
 
   /**
-   * Generate invoice PDF (placeholder - implement with pdfkit)
+   * Generate a real, valid invoice PDF and return it as a Buffer for email
+   * attachments. Handles both call shapes — the payment-receipt path passes
+   * `(payment, rental, user)` while the invoice path passes `(invoice)` — so
+   * every field is read defensively. Replaces the old fixed
+   * `Buffer.from("PDF content placeholder")` (a 27-byte fake file sent to
+   * customers).
    */
   async generateInvoicePDF(invoice, rental, user) {
-    // TODO: Implement PDF generation using pdfkit
-    // This is a placeholder
-    return Buffer.from("PDF content placeholder");
+    return new Promise((resolve, reject) => {
+      const doc = new PDFDocument({
+        size: "A4",
+        margin: 50,
+        info: { Title: "RentEase Invoice", Author: "RentEase" },
+      });
+
+      const chunks = [];
+      doc.on("data", (c) => chunks.push(c));
+      doc.on("end", () => resolve(Buffer.concat(chunks)));
+      doc.on("error", reject);
+
+      const fmtMoney = (n) => {
+        if (n === undefined || n === null || Number.isNaN(Number(n))) return "—";
+        return new Intl.NumberFormat("en-IN", {
+          style: "currency",
+          currency: "INR",
+        }).format(Number(n));
+      };
+      const fmtDate = (d) =>
+        d
+          ? new Date(d).toLocaleDateString("en-IN", {
+              year: "numeric",
+              month: "short",
+              day: "2-digit",
+            })
+          : "—";
+
+      // ---- Header ----
+      doc.fontSize(18).font("Helvetica-Bold").fillColor("#4f46e5").text("RentEase", { align: "center" });
+      doc.fontSize(10).font("Helvetica").fillColor("#6b7280").text("Furniture & Appliance Rentals", { align: "center" }).moveDown(1.2);
+
+      const invoiceNumber = invoice.invoiceNumber || invoice.paymentNumber || "N/A";
+      const items = Array.isArray(invoice.items) ? invoice.items : [];
+      const subtotal = invoice.subtotal ?? invoice.amount;
+      const tax = invoice.tax ?? 0;
+      const total = invoice.total ?? subtotal;
+      const date = invoice.date || invoice.createdAt || invoice.paymentDate || new Date();
+
+      doc.fontSize(13).font("Helvetica-Bold").fillColor("#000000").text("TAX INVOICE / RECEIPT", { align: "center" });
+      doc.fontSize(9).font("Helvetica").fillColor("#6b7280")
+        .text(`Invoice No: ${invoiceNumber}`, { align: "center" })
+        .text(`Date: ${fmtDate(date)}`, { align: "center" })
+        .moveDown();
+
+      // ---- Billing party ----
+      const customerName = user?.profile?.firstName || user?.name || invoice.customer?.name;
+      if (customerName || user?.email) {
+        doc.fontSize(10).font("Helvetica-Bold").fillColor("#000000").text("Billed To");
+        doc.font("Helvetica").fillColor("#374151");
+        if (customerName) doc.text(customerName);
+        if (user?.email) doc.text(user.email);
+        if (rental?.rentalNumber) doc.text(`Rental #${rental.rentalNumber}`);
+        doc.moveDown();
+      }
+
+      // ---- Items table ----
+      if (items.length > 0) {
+        doc.fontSize(10).font("Helvetica-Bold").text("Items");
+        const tableTop = doc.y;
+        const line = { left: 50, right: 545 };
+        doc.moveTo(line.left, tableTop).lineTo(line.right, tableTop).strokeColor("#e5e7eb").stroke();
+        let y = tableTop + 6;
+        items.forEach((item) => {
+          const label = item.name || item.description || item.label || "Item";
+          const amount = item.price ?? item.amount ?? item.rent ?? 0;
+          doc.fontSize(9).font("Helvetica").fillColor("#374151").text(label, line.left, y, { width: 320 });
+          doc.text(fmtMoney(amount), line.right, y, { align: "right" });
+          y += 18;
+        });
+        doc.moveTo(line.left, y).lineTo(line.right, y).strokeColor("#e5e7eb").stroke();
+        doc.moveDown(0.5);
+      }
+
+      // ---- Totals ----
+      doc.fontSize(9);
+      const totals = [];
+      if (subtotal !== undefined && subtotal !== null) totals.push(["Subtotal", fmtMoney(subtotal)]);
+      if (tax) totals.push(["Tax (GST)", fmtMoney(tax)]);
+      totals.push(["Total", fmtMoney(total)]);
+      let totalsY = doc.y;
+      totals.forEach(([label, value]) => {
+        doc.font("Helvetica").fillColor("#6b7280").text(`${label}:`, 350, totalsY, { width: 145 });
+        doc.font("Helvetica-Bold").fillColor("#000000").text(value, 495, totalsY, { width: 50, align: "right" });
+        totalsY += 16;
+      });
+      doc.y = totalsY;
+
+      // ---- Footer ----
+      const footerY = Math.max(doc.y + 24, doc.page.height - 60);
+      doc.fontSize(8).font("Helvetica").fillColor("#9ca3af")
+        .text("This is a computer-generated invoice and does not require a physical signature.", 50, footerY, { align: "center" })
+        .text("For any queries, please contact support@rentease.com", 50, footerY + 12, { align: "center" });
+
+      doc.end();
+    });
   }
 
   /**

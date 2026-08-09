@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const crypto = require('crypto');
 
 const notificationSchema = new mongoose.Schema({
   notificationNumber: {
@@ -181,19 +182,30 @@ notificationSchema.index({ type: 1, status: 1, 'schedule.scheduledFor': 1 });
 notificationSchema.index({ 'tracking.sentAt': 1 });
 notificationSchema.index({ expiryDate: 1 }, { expireAfterSeconds: 0 });
 
-// Pre-save middleware to generate notification number
-notificationSchema.pre('save', async function(next) {
+// Pre-save middleware to generate notification number.
+// NOTE: this is an async hook with NO `next` parameter — Mongoose awaits the
+// returned promise, so there is nothing to call. Do not re-introduce a `next`
+// arg: mixing `next` with an async function is the fragile trap that the old
+// commented-out `next()` left behind (change it back to non-async and saves
+// would hang forever).
+notificationSchema.pre('save', async function () {
+  // Generate a collision-resistant number WITHOUT a COUNT query. The previous
+  // `countDocuments() + 1` approach raced under concurrent creates (e.g. an
+  // admin broadcast fanning out 25-at-a-time): two docs read the same count,
+  // built the same number, and collided on the unique index — so those saves
+  // failed. Timestamp + high-entropy random is race-free.
   if (this.isNew && !this.notificationNumber) {
-    const count = await mongoose.model('Notification').countDocuments();
-    this.notificationNumber = `NOT${Date.now().toString().slice(-8)}${(count + 1).toString().padStart(4, '0')}`;
+    // crypto random with a 2^48 space so concurrent creates (an admin broadcast
+    // fanning out many-at-a-time within the same millisecond) cannot collide on
+    // the unique index — no COUNT query, no race.
+    const random = crypto.randomBytes(6).toString('hex').toUpperCase();
+    this.notificationNumber = `NOT${Date.now().toString().slice(-8)}${random}`;
   }
-  
+
   // Set expiry date (30 days from creation)
   if (!this.expiryDate) {
     this.expiryDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
   }
-  
-  // next();
 });
 
 // Method to mark as sent
@@ -298,27 +310,32 @@ notificationSchema.statics.createNotification = async function(data) {
   return this.create(data);
 };
 
-// Static method to get unread count
+// Static method to get unread count.
+// "Unread" == an in-app notification the user has not opened yet. Defined by
+// `readAt` (not status) so this static and NotificationService.getUnreadCount
+// can never disagree on the badge count.
 notificationSchema.statics.getUnreadCount = function(userId) {
   return this.countDocuments({
     user: userId,
     type: 'in_app',
-    status: { $in: ['sent', 'delivered'] }
+    readAt: { $exists: false }
   });
 };
 
-// Static method to mark all as read
+// Static method to mark all as read (readAt-based, matching the service).
 notificationSchema.statics.markAllAsRead = async function(userId) {
+  const now = new Date();
   return this.updateMany(
     {
       user: userId,
       type: 'in_app',
-      status: { $in: ['sent', 'delivered'] }
+      readAt: { $exists: false }
     },
     {
       $set: {
         status: 'read',
-        'tracking.readAt': new Date()
+        readAt: now,
+        'tracking.readAt': now
       }
     }
   );
@@ -329,7 +346,10 @@ notificationSchema.statics.processScheduled = async function() {
   const now = new Date();
   
   const notifications = await this.find({
-    status: 'pending',
+    // Scheduled docs are written with status 'scheduled' (see
+    // NotificationService.createNotification). The old 'pending' filter never
+    // matched them, so this sweep silently found nothing.
+    status: 'scheduled',
     'schedule.scheduledFor': { $lte: now },
     expiryDate: { $gt: now }
   });
