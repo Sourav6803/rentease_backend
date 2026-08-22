@@ -25992,3 +25992,719 @@
 2026-08-09 22:58:45:5845 [31merror[39m: [31mJob 6 (notification) failed: require(...).process is not a function[39m
 2026-08-09 23:22:38:2238 [31merror[39m: [31mSocket authentication error: jwt expired[39m
 2026-08-09 23:38:09:389 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-10 22:35:31:3531 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-08-10 22:36:58:3658 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-08-10 22:52:56:5256 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-08-19 08:36:47:3647 [31merror[39m: [31mRefresh token expired[39m
+2026-08-19 08:36:48:3648 [31merror[39m: [31mRefresh token expired[39m
+2026-08-19 08:36:48:3648 [31merror[39m: [31mRefresh token expired[39m
+2026-08-19 08:36:49:3649 [31merror[39m: [31mRefresh token expired[39m
+2026-08-19 08:36:49:3649 [31merror[39m: [31mRefresh token expired[39m
+2026-08-19 08:36:57:3657 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-19 08:36:57:3657 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-19 08:36:58:3658 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-19 08:37:02:372 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-19 08:37:21:3721 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-19 08:38:08:388 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-19 08:38:25:3825 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-19 08:38:32:3832 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-19 08:38:37:3837 [31merror[39m: [31mError in loginAdmin: Invalid credentials[39m
+2026-08-19 08:38:37:3837 [31merror[39m: [31mInvalid credentials[39m
+2026-08-19 08:38:59:3859 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-19 08:39:07:397 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-19 08:39:35:3935 [31merror[39m: [31mError in loginAdmin: Invalid credentials[39m
+2026-08-19 08:39:35:3935 [31merror[39m: [31mInvalid credentials[39m
+2026-08-19 08:40:26:4026 [31merror[39m: [31mError in loginAdmin: Invalid credentials[39m
+2026-08-19 08:40:26:4026 [31merror[39m: [31mInvalid credentials[39m
+2026-08-19 08:40:45:4045 [31merror[39m: [31mLogin error: Invalid credentials[39m
+2026-08-19 08:40:45:4045 [31merror[39m: [31mInvalid credentials[39m
+2026-08-19 08:41:48:4148 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-19 08:42:36:4236 [31merror[39m: [31mError in loginAdmin: Account is locked. Try again in 28 minutes[39m
+2026-08-19 08:42:36:4236 [31merror[39m: [31mAccount is locked. Try again in 28 minutes[39m
+2026-08-19 08:45:15:4515 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-19 09:31:17:3117 [31merror[39m: [31mRefresh token expired[39m
+2026-08-19 09:31:20:3120 [31merror[39m: [31mRefresh token expired[39m
+2026-08-19 09:31:20:3120 [31merror[39m: [31mRefresh token expired[39m
+2026-08-19 09:31:20:3120 [31merror[39m: [31mRefresh token expired[39m
+2026-08-19 09:31:20:3120 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-19 09:31:21:3121 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-19 09:31:21:3121 [31merror[39m: [31mRefresh token expired[39m
+2026-08-19 09:31:21:3121 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-19 09:31:22:3122 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-19 09:31:22:3122 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-19 09:31:23:3123 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-19 09:31:36:3136 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-19 09:31:47:3147 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-19 09:35:10:3510 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-20 22:05:07:57 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-20 22:05:08:58 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-20 22:05:08:58 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-20 22:05:08:58 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-20 22:05:08:58 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:05:08:58 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:05:08:58 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:05:08:58 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-20 22:05:09:59 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:05:09:59 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:05:18:518 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-20 22:05:18:518 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-20 22:05:18:518 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-20 22:05:18:518 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-20 22:05:18:518 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-20 22:05:18:518 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:05:18:518 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-20 22:05:18:518 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:05:19:519 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:05:19:519 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:05:19:519 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:05:30:530 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-20 22:05:45:545 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-20 22:05:54:554 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-20 22:10:39:1039 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-20 22:21:44:2144 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-20 22:24:38:2438 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-20 22:24:38:2438 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-20 22:24:38:2438 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:24:39:2439 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:24:39:2439 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:24:39:2439 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-20 22:24:39:2439 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:24:41:2441 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-20 22:27:55:2755 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-20 23:48:27:4827 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-21 08:00:55:055 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-21 08:27:52:2752 [31merror[39m: [31m❌ Worker email error: read ECONNRESET[39m
+2026-08-21 08:27:52:2752 [31merror[39m: [31m❌ Worker rental error: read ECONNRESET[39m
+2026-08-21 08:27:52:2752 [31merror[39m: [31m❌ Worker report error: read ECONNRESET[39m
+2026-08-21 08:27:52:2752 [31merror[39m: [31m❌ Worker default error: read ECONNRESET[39m
+2026-08-21 08:27:52:2752 [31merror[39m: [31m❌ Worker delivery error: read ECONNRESET[39m
+2026-08-21 08:27:52:2752 [31merror[39m: [31m❌ Worker sms error: read ECONNRESET[39m
+2026-08-21 08:27:52:2752 [31merror[39m: [31m❌ Worker payment error: read ECONNRESET[39m
+2026-08-21 08:27:52:2752 [31merror[39m: [31m❌ Worker cleanup error: read ECONNRESET[39m
+2026-08-21 08:27:52:2752 [31merror[39m: [31m❌ Worker notification error: read ECONNRESET[39m
+2026-08-21 08:27:53:2753 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-21 08:27:53:2753 [31merror[39m: [31m🔴 Queue email error: read ECONNRESET[39m
+2026-08-21 08:27:53:2753 [31merror[39m: [31m❌ Worker email error: read ECONNRESET[39m
+2026-08-21 08:27:53:2753 [31merror[39m: [31m🔴 Queue sms error: read ECONNRESET[39m
+2026-08-21 08:27:53:2753 [31merror[39m: [31m❌ Worker sms error: read ECONNRESET[39m
+2026-08-21 08:27:53:2753 [31merror[39m: [31m🔴 Queue notification error: read ECONNRESET[39m
+2026-08-21 08:27:53:2753 [31merror[39m: [31m❌ Worker notification error: read ECONNRESET[39m
+2026-08-21 08:27:53:2753 [31merror[39m: [31m🔴 Queue payment error: read ECONNRESET[39m
+2026-08-21 08:27:53:2753 [31merror[39m: [31m❌ Worker payment error: read ECONNRESET[39m
+2026-08-21 08:27:53:2753 [31merror[39m: [31m🔴 Queue rental error: read ECONNRESET[39m
+2026-08-21 08:27:53:2753 [31merror[39m: [31m❌ Worker rental error: read ECONNRESET[39m
+2026-08-21 08:27:54:2754 [31merror[39m: [31m🔴 Queue delivery error: read ECONNRESET[39m
+2026-08-21 08:27:54:2754 [31merror[39m: [31m❌ Worker delivery error: read ECONNRESET[39m
+2026-08-21 08:27:54:2754 [31merror[39m: [31m🔴 Queue report error: read ECONNRESET[39m
+2026-08-21 08:27:54:2754 [31merror[39m: [31m❌ Worker report error: read ECONNRESET[39m
+2026-08-21 08:27:54:2754 [31merror[39m: [31m🔴 Queue cleanup error: read ECONNRESET[39m
+2026-08-21 08:27:54:2754 [31merror[39m: [31m❌ Worker cleanup error: read ECONNRESET[39m
+2026-08-21 08:27:54:2754 [31merror[39m: [31m🔴 Queue default error: read ECONNRESET[39m
+2026-08-21 08:27:54:2754 [31merror[39m: [31m❌ Worker default error: read ECONNRESET[39m
+2026-08-21 08:28:04:284 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-21 08:40:37:4037 [31merror[39m: [31m❌ Worker notification error: write EPIPE[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m🔴 Queue email error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker email error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m🔴 Queue sms error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker sms error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m🔴 Queue notification error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker notification error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m🔴 Queue payment error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker payment error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m🔴 Queue rental error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker rental error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m🔴 Queue delivery error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker delivery error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m🔴 Queue report error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker report error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m🔴 Queue cleanup error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker cleanup error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m🔴 Queue default error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker default error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker sms error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker rental error: read ECONNRESET[39m
+2026-08-21 08:41:04:414 [31merror[39m: [31m❌ Worker default error: read ECONNRESET[39m
+2026-08-21 08:54:15:5415 [31merror[39m: [31m❌ Worker payment error: read ECONNRESET[39m
+2026-08-21 08:54:15:5415 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-21 08:54:15:5415 [31merror[39m: [31m🔴 Queue email error: read ECONNRESET[39m
+2026-08-21 08:54:15:5415 [31merror[39m: [31m❌ Worker email error: read ECONNRESET[39m
+2026-08-21 08:54:15:5415 [31merror[39m: [31m🔴 Queue sms error: read ECONNRESET[39m
+2026-08-21 08:54:15:5415 [31merror[39m: [31m❌ Worker sms error: read ECONNRESET[39m
+2026-08-21 08:54:15:5415 [31merror[39m: [31m🔴 Queue notification error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m❌ Worker notification error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m🔴 Queue payment error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m❌ Worker payment error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m🔴 Queue rental error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m❌ Worker rental error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m🔴 Queue delivery error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m❌ Worker delivery error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m🔴 Queue report error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m❌ Worker report error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m🔴 Queue cleanup error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m❌ Worker cleanup error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m🔴 Queue default error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m❌ Worker default error: read ECONNRESET[39m
+2026-08-21 08:54:16:5416 [31merror[39m: [31m❌ Worker cleanup error: read ECONNRESET[39m
+2026-08-21 08:54:17:5417 [31merror[39m: [31m❌ Worker delivery error: read ECONNRESET[39m
+2026-08-21 08:54:17:5417 [31merror[39m: [31m❌ Worker report error: read ECONNRESET[39m
+2026-08-21 08:54:17:5417 [31merror[39m: [31m❌ Worker notification error: read ECONNRESET[39m
+2026-08-21 08:54:17:5417 [31merror[39m: [31m❌ Worker email error: read ECONNRESET[39m
+2026-08-21 08:54:18:5418 [31merror[39m: [31m❌ Worker sms error: connect ETIMEDOUT[39m
+2026-08-21 08:54:18:5418 [31merror[39m: [31m❌ Worker default error: connect ETIMEDOUT[39m
+2026-08-21 08:54:28:5428 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-21 09:06:38:638 [31merror[39m: [31m⚠️ ALL 1 token(s) failed with [messaging/mismatched-credential]. Skipping token pruning — check that the server Firebase service account and the app google-services.json point to the SAME Firebase project.[39m
+2026-08-21 09:09:24:924 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-21 09:42:14:4214 [31merror[39m: [31m⚠️ ALL 1 token(s) failed with [messaging/mismatched-credential]. Skipping token pruning — check that the server Firebase service account and the app google-services.json point to the SAME Firebase project.[39m
+2026-08-21 09:43:17:4317 [31merror[39m: [31m⚠️ ALL 1 token(s) failed with [messaging/mismatched-credential]. Skipping token pruning — check that the server Firebase service account and the app google-services.json point to the SAME Firebase project.[39m
+2026-08-21 09:46:35:4635 [31merror[39m: [31m❌ Worker payment error: read ECONNRESET[39m
+2026-08-21 09:46:35:4635 [31merror[39m: [31m❌ Worker email error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker sms error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker delivery error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker rental error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker report error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker cleanup error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker default error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker notification error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m🔴 Queue email error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker email error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m🔴 Queue sms error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker sms error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m🔴 Queue notification error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker notification error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m🔴 Queue payment error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker payment error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m🔴 Queue rental error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker rental error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m🔴 Queue delivery error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker delivery error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m🔴 Queue report error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker report error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m🔴 Queue cleanup error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker cleanup error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m🔴 Queue default error: read ECONNRESET[39m
+2026-08-21 09:46:36:4636 [31merror[39m: [31m❌ Worker default error: read ECONNRESET[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m🔴 Queue email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m❌ Worker email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m🔴 Queue sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m❌ Worker sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m🔴 Queue notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m❌ Worker notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m🔴 Queue payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m❌ Worker payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m🔴 Queue rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m❌ Worker rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m🔴 Queue delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m❌ Worker delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m🔴 Queue report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m❌ Worker report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m🔴 Queue cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m❌ Worker cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m🔴 Queue default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m❌ Worker default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:38:4638 [31merror[39m: [31m❌ Worker notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:39:4639 [31merror[39m: [31m❌ Worker default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:39:4639 [31merror[39m: [31m❌ Worker cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:39:4639 [31merror[39m: [31m❌ Worker report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:39:4639 [31merror[39m: [31m❌ Worker rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:39:4639 [31merror[39m: [31m❌ Worker delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:39:4639 [31merror[39m: [31m❌ Worker sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:39:4639 [31merror[39m: [31m❌ Worker email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 09:46:39:4639 [31merror[39m: [31m❌ Worker payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:13:5413 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m🔴 Queue email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m❌ Worker email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m🔴 Queue sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m❌ Worker sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m🔴 Queue notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m❌ Worker notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m🔴 Queue payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m❌ Worker payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m🔴 Queue rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m❌ Worker rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m🔴 Queue delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:14:5414 [31merror[39m: [31m❌ Worker delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m🔴 Queue report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m🔴 Queue cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m🔴 Queue default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:15:5415 [31merror[39m: [31m❌ Worker sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m🔴 Queue email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m🔴 Queue sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m🔴 Queue notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m🔴 Queue payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m🔴 Queue rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m🔴 Queue delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m🔴 Queue report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m🔴 Queue cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m🔴 Queue default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 16:54:23:5423 [31merror[39m: [31m❌ Worker delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:34:3934 [31merror[39m: [31m❌ Worker notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:34:3934 [31merror[39m: [31m❌ Redis error:[39m
+2026-08-21 20:39:34:3934 [31merror[39m: [31m🔴 Queue email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:34:3934 [31merror[39m: [31m❌ Worker email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:34:3934 [31merror[39m: [31m🔴 Queue sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:34:3934 [31merror[39m: [31m❌ Worker sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:34:3934 [31merror[39m: [31m🔴 Queue notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:34:3934 [31merror[39m: [31m❌ Worker notification error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:34:3934 [31merror[39m: [31m🔴 Queue payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m🔴 Queue rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m🔴 Queue delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m🔴 Queue report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m🔴 Queue cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m🔴 Queue default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker email error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker sms error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker default error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker rental error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker report error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker payment error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker cleanup error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:39:35:3935 [31merror[39m: [31m❌ Worker delivery error: getaddrinfo ENOTFOUND frank-basilisk-95118.upstash.io[39m
+2026-08-21 20:42:37:4237 [31merror[39m: [31m❌ UNHANDLED REJECTION:[39m
+2026-08-21 20:42:50:4250 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-21 20:45:22:4522 [31merror[39m: [31m⚠️ ALL 1 token(s) failed with [messaging/mismatched-credential]. Skipping token pruning — check that the server Firebase service account and the app google-services.json point to the SAME Firebase project.[39m
+2026-08-21 20:53:25:5325 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-08-21 20:56:57:5657 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-08-21 20:58:09:589 [31merror[39m: [31mMongoDB connection error: Socket 'secureConnect' timed out after 30102ms (connectTimeoutMS: 30000)[39m
+2026-08-21 21:01:21:121 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-08-21 21:02:43:243 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-08-21 21:09:40:940 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-08-21 21:17:42:1742 [31merror[39m: [31m❌ UNHANDLED REJECTION: MongoNetworkTimeoutError: Socket 'secureConnect' timed out after 30077ms (connectTimeoutMS: 30000)[39m
+[31m    at TLSSocket.<anonymous> (D:\RentEase\backend\node_modules\mongodb\lib\cmap\connect.js:299:20)[39m
+[31m    at Object.onceWrapper (node:events:621:28)[39m
+[31m    at TLSSocket.emit (node:events:507:28)[39m
+[31m    at Socket._onTimeout (node:net:609:8)[39m
+[31m    at listOnTimeout (node:internal/timers:608:17)[39m
+[31m    at process.processTimers (node:internal/timers:543:7)[39m
+2026-08-21 21:18:19:1819 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-08-21 21:34:33:3433 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-21 21:35:54:3554 [31merror[39m: [31m⚠️ ALL 1 token(s) failed with [messaging/mismatched-credential]. Skipping token pruning — check that the server Firebase service account and the app google-services.json point to the SAME Firebase project.[39m
+2026-08-21 21:53:21:5321 [31merror[39m: [31m❌ Redis error: write ECONNRESET[39m
+2026-08-21 22:05:07:57 [31merror[39m: [31m⚠️ ALL 1 token(s) failed with [messaging/mismatched-credential]. Skipping token pruning — check that the server Firebase service account and the app google-services.json point to the SAME Firebase project.[39m
+2026-08-21 22:08:32:832 [31merror[39m: [31m⚠️ ALL 1 token(s) failed with [messaging/mismatched-credential]. Skipping token pruning — check that the server Firebase service account and the app google-services.json point to the SAME Firebase project.[39m
+2026-08-21 22:29:12:2912 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500003. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-08-21 22:29:13:2913 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500003. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-08-21 22:29:20:2920 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500003. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-08-21 22:29:21:2921 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500003. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-08-21 22:29:53:2953 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500003. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-08-21 22:30:07:307 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500003. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-08-21 22:30:10:3010 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500003. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-08-21 22:30:38:3038 [31merror[39m: [31m❌ Failed to add job to notification: ERR max requests limit exceeded. Limit: 500000, Usage: 500003. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-08-21 22:30:38:3038 [31merror[39m: [31m[broadcast BCmt373y36] Failed to enqueue admin broadcast: ERR max requests limit exceeded. Limit: 500000, Usage: 500003. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-08-21 22:51:45:5145 [31merror[39m: [31m⚠️ ALL 1 token(s) failed with [messaging/mismatched-credential]. Skipping token pruning — check that the server Firebase service account and the app google-services.json point to the SAME Firebase project.[39m
+2026-08-21 23:13:41:1341 [31merror[39m: [31m⚠️ ALL 1 token(s) failed with [messaging/mismatched-credential]. Skipping token pruning — check that the server Firebase service account and the app google-services.json point to the SAME Firebase project.[39m
+2026-08-21 23:35:51:3551 [31merror[39m: [31m⚠️ ALL 1 token(s) failed with [messaging/mismatched-credential]. Skipping token pruning — check that the server Firebase service account and the app google-services.json point to the SAME Firebase project.[39m
+2026-08-22 00:03:33:333 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-08-22 00:03:33:333 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-08-22 00:32:57:3257 [31merror[39m: [31mRedis connection ended[39m
+2026-08-22 07:20:57:2057 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 07:20:57:2057 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 07:20:58:2058 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 07:20:58:2058 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 07:20:58:2058 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 07:20:58:2058 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 07:20:58:2058 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 07:21:00:210 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-22 07:21:01:211 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 07:21:03:213 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 07:21:23:2123 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 07:21:24:2124 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 07:21:24:2124 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 07:21:24:2124 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 07:21:24:2124 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 07:21:26:2126 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 07:21:26:2126 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 07:21:26:2126 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 07:21:26:2126 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 07:21:27:2127 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-22 07:21:28:2128 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 07:21:40:2140 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-22 07:21:58:2158 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-22 07:47:43:4743 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-08-22 07:47:55:4755 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-08-22 08:36:23:3623 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-08-22 08:37:06:376 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-08-22 08:37:18:3718 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-08-22 08:37:22:3722 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:37:40:3740 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-08-22 08:37:56:3756 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:38:26:3826 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:38:56:3856 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:39:26:3926 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:39:56:3956 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:40:26:4026 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:40:56:4056 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:41:26:4126 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:51:17:5117 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-08-22 08:51:19:5119 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:51:23:5123 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:51:32:5132 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 08:51:48:5148 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fitting-rat-130765.upstash.io[39m
+2026-08-22 19:46:44:4644 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-08-22 19:54:35:5435 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 19:54:36:5436 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 19:54:37:5437 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 19:54:37:5437 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 19:54:37:5437 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 19:54:37:5437 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 19:54:38:5438 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-22 19:54:38:5438 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 19:54:39:5439 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 19:54:40:5440 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 19:55:13:5513 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-08-22 19:58:39:5839 [31merror[39m: [31mError in createNotification: Notification validation failed: template: Cast to string failed for value "{ slug: 'welcome-rentease' }" (type Object) at path "template"[39m
+2026-08-22 19:58:39:5839 [31merror[39m: [31mError in createNotification: Notification validation failed: template: Cast to string failed for value "{ slug: 'welcome-rentease' }" (type Object) at path "template"[39m
+2026-08-22 19:59:37:5937 [31merror[39m: [31mError in createNotification: Notification validation failed: template: Cast to string failed for value "{ slug: 'welcome-rentease' }" (type Object) at path "template"[39m
+2026-08-22 19:59:37:5937 [31merror[39m: [31mError in createNotification: Notification validation failed: template: Cast to string failed for value "{ slug: 'welcome-rentease' }" (type Object) at path "template"[39m
+2026-08-22 20:00:07:07 [31merror[39m: [31mError in createNotification: Notification validation failed: template: Cast to string failed for value "{ slug: 'welcome-rentease' }" (type Object) at path "template"[39m
+2026-08-22 20:00:07:07 [31merror[39m: [31mError in createNotification: Notification validation failed: template: Cast to string failed for value "{ slug: 'welcome-rentease' }" (type Object) at path "template"[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Job 26 from email failed: Failed to send email[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Job 27 from email failed: Failed to send email[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Job 28 from email failed: Failed to send email[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Job 29 from email failed: Failed to send email[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:07:67 [31merror[39m: [31m❌ Job 30 from email failed: Failed to send email[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 26 (email) failed:[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 27 (email) failed:[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 28 (email) failed:[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 29 (email) failed:[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 30 (email) failed:[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 31 from email failed: Failed to send email[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 32 from email failed: Failed to send email[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 33 from email failed: Failed to send email[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 34 from email failed: Failed to send email[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 35 from email failed: Failed to send email[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 31 (email) failed:[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 32 (email) failed:[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 33 (email) failed:[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 34 (email) failed:[39m
+2026-08-22 20:06:08:68 [31merror[39m: [31m❌ Job 35 (email) failed:[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 36 from email failed: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 37 from email failed: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 38 from email failed: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 39 from email failed: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 40 from email failed: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 36 (email) failed:[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 37 (email) failed:[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 38 (email) failed:[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 39 (email) failed:[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 40 (email) failed:[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 41 from email failed: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 42 from email failed: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 43 from email failed: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 44 from email failed: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 45 from email failed: Failed to send email[39m
+2026-08-22 20:06:09:69 [31merror[39m: [31m❌ Job 41 (email) failed:[39m
+2026-08-22 20:06:10:610 [31merror[39m: [31m❌ Job 42 (email) failed:[39m
+2026-08-22 20:06:10:610 [31merror[39m: [31m❌ Job 43 (email) failed:[39m
+2026-08-22 20:06:10:610 [31merror[39m: [31m❌ Job 44 (email) failed:[39m
+2026-08-22 20:06:10:610 [31merror[39m: [31m❌ Job 45 (email) failed:[39m
+2026-08-22 20:06:10:610 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:10:610 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:10:610 [31merror[39m: [31m❌ Job 46 from email failed: Failed to send email[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Job 46 (email) failed:[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Job 47 from email failed: Failed to send email[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Job 48 from email failed: Failed to send email[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Job 49 from email failed: Failed to send email[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:06:11:611 [31merror[39m: [31m❌ Job 50 from email failed: Failed to send email[39m
+2026-08-22 20:06:12:612 [31merror[39m: [31m❌ Job 47 (email) failed:[39m
+2026-08-22 20:06:12:612 [31merror[39m: [31m❌ Job 48 (email) failed:[39m
+2026-08-22 20:06:12:612 [31merror[39m: [31m❌ Job 49 (email) failed:[39m
+2026-08-22 20:06:12:612 [31merror[39m: [31m❌ Job 50 (email) failed:[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 26 from email failed: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 27 from email failed: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 28 from email failed: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 29 from email failed: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 30 from email failed: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 26 (email) failed:[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 31 from email failed: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 27 (email) failed:[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 28 (email) failed:[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 29 (email) failed:[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 30 (email) failed:[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 32 from email failed: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 33 from email failed: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 34 from email failed: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:09:79 [31merror[39m: [31m❌ Job 35 from email failed: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 31 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 36 from email failed: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 32 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 33 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 34 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 37 from email failed: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 38 from email failed: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 39 from email failed: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 35 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 40 from email failed: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 36 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 41 from email failed: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 37 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 38 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 42 from email failed: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 43 from email failed: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 39 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 44 from email failed: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 40 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 45 from email failed: Failed to send email[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 41 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 42 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 43 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 44 (email) failed:[39m
+2026-08-22 20:07:10:710 [31merror[39m: [31m❌ Job 45 (email) failed:[39m
+2026-08-22 20:07:11:711 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:11:711 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:11:711 [31merror[39m: [31m❌ Job 46 from email failed: Failed to send email[39m
+2026-08-22 20:07:11:711 [31merror[39m: [31m❌ Job 46 (email) failed:[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Job 47 from email failed: Failed to send email[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Job 48 from email failed: Failed to send email[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Job 49 from email failed: Failed to send email[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:07:13:713 [31merror[39m: [31m❌ Job 50 from email failed: Failed to send email[39m
+2026-08-22 20:07:14:714 [31merror[39m: [31m❌ Job 47 (email) failed:[39m
+2026-08-22 20:07:14:714 [31merror[39m: [31m❌ Job 48 (email) failed:[39m
+2026-08-22 20:07:14:714 [31merror[39m: [31m❌ Job 49 (email) failed:[39m
+2026-08-22 20:07:14:714 [31merror[39m: [31m❌ Job 50 (email) failed:[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Job 26 from email failed: Failed to send email[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Job 27 from email failed: Failed to send email[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Job 28 from email failed: Failed to send email[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Job 29 from email failed: Failed to send email[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:22:1122 [31merror[39m: [31m❌ Job 30 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 26 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 31 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 27 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 28 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 29 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 30 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 32 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 33 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 34 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 35 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 31 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 32 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 36 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 37 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 33 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 34 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 35 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 38 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 40 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 39 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 36 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 41 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 37 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 42 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 38 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 43 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 40 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 44 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 39 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 45 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 41 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 46 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 42 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 47 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 43 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 48 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 44 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 45 (email) failed:[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 49 from email failed: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error sending email: ENOENT: no such file or directory, open 'D:\RentEase\backend\src\templates\emails\welcome-rentease.hbs'[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Error processing job email/send: Failed to send email[39m
+2026-08-22 20:11:23:1123 [31merror[39m: [31m❌ Job 50 from email failed: Failed to send email[39m
+2026-08-22 20:11:24:1124 [31merror[39m: [31m❌ Job 46 (email) failed:[39m
+2026-08-22 20:11:24:1124 [31merror[39m: [31m❌ Job 47 (email) failed:[39m
+2026-08-22 20:11:24:1124 [31merror[39m: [31m❌ Job 48 (email) failed:[39m
+2026-08-22 20:11:24:1124 [31merror[39m: [31m❌ Job 49 (email) failed:[39m
+2026-08-22 20:11:24:1124 [31merror[39m: [31m❌ Job 50 (email) failed:[39m
+2026-08-22 20:11:49:1149 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 20:11:51:1151 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 20:11:52:1152 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 20:11:53:1153 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 20:11:53:1153 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 20:11:53:1153 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 20:11:54:1154 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 20:12:07:127 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-22 20:12:09:129 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-08-22 20:15:22:1522 [31merror[39m: [31mInvalid refresh token[39m
+2026-08-22 20:15:27:1527 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-22 20:15:28:1528 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-08-22 20:15:47:1547 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m

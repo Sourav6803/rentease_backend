@@ -1,4 +1,4 @@
-const { Notification, User, Vendor } = require('../models');
+const { Notification, User, Vendor, Cart } = require('../models');
 const { getMessaging } = require('../config/firebase');
 const { getRedisClient } = require('../config/redis');
 const { addJob } = require('../jobs');
@@ -134,7 +134,9 @@ class NotificationService {
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
         } : undefined,
         expiryDate: expiresAt || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
-        template,
+        // The model stores `template` as a string slug; broadcast payloads may
+        // carry an object { slug, variables } — normalize to the slug here.
+        template: typeof template === 'string' ? template : template?.slug || undefined,
         channelDetails
       });
 
@@ -384,7 +386,6 @@ class NotificationService {
    * errors prune the token), and safe payload shaping for Android/APNS/WebPush.
    */
   async sendPushNotification(notification) {
-    console.log("from notification-->", notification)
     const fcm = this.fcm;
     // console.log("fcm-->", fcm)
     if (!fcm) {
@@ -396,6 +397,10 @@ class NotificationService {
     const userId = notification.user?._id || notification.user;
     const user = await User.findById(userId).select('pushTokens deviceTokens');
     const tokens = (user?.pushTokens || []).filter(Boolean);
+    console.log("tokens-->", tokens)
+    if (tokens.length > 0) {
+      logger.info(`Push tokens for user ${userId}: ${tokens.length} (prefixes: ${tokens.map((t) => t.slice(0, 12)).join(', ')})`);
+    }
 
     if (tokens.length === 0) {
       return { deliveredAt: new Date(), method: 'fcm', skipped: true, reason: 'no_tokens' };
@@ -403,7 +408,9 @@ class NotificationService {
 
     const title = notification.title;
     const body = notification.content?.text || notification.title;
-    const imageUrl = notification.data?.imageUrl;
+    // Hero image, falling back to the first carousel image so a push with only
+    // carousel images still shows an image (web/Android support a single image).
+    const imageUrl = notification.data?.imageUrl || notification.data?.images?.[0] || '';
     const isHighPriority = notification.priority === 'high' || notification.priority === 'urgent';
     const primaryActionUrl = notification.actions?.[0]?.url;
 
@@ -425,6 +432,7 @@ class NotificationService {
         notification: {
           channelId: 'rentease_notifications',
           clickAction: 'OPEN_ACTIVITY',
+          sound: 'default',
           ...(imageUrl ? { imageUrl } : {})
         }
       },
@@ -469,6 +477,10 @@ class NotificationService {
     let successTotal = 0;
     let failedTotal = 0;
     const invalidTokens = new Set();
+    const failureCodes = new Map(); // FCM error code -> how many tokens failed with it
+
+    console.log('invalidTokens-->', invalidTokens)
+    console.log('failureCodes-->', failureCodes)
 
     for (let i = 0; i < tokens.length; i += FCM_MAX_TOKENS_PER_MULTICAST) {
       const slice = tokens.slice(i, i + FCM_MAX_TOKENS_PER_MULTICAST);
@@ -485,9 +497,29 @@ class NotificationService {
       successTotal += response.successCount;
       failedTotal += response.failureCount;
 
+      // Diagnostic: always log the FCM verdict so delivery issues are visible
+      // (successCount > 0 but nothing on device = client-side delivery problem)
+      logger.info(
+        `FCM multicast result: ${slice.length} token(s) -> ${response.successCount} success, ${response.failureCount} failed`,
+        {
+          errorCodes: response.responses
+            .map((r) => r.error?.errorInfo?.code)
+            .filter(Boolean),
+        }
+      );
+
       response.responses.forEach((resp, idx) => {
         if (resp.success) return;
-        const code = resp.error?.errorInfo?.code || '';
+        const err = resp.error;
+        const code = err?.errorInfo?.code || 'unknown';
+        const message = err?.errorInfo?.message || err?.message || String(err);
+
+        failureCodes.set(code, (failureCodes.get(code) || 0) + 1);
+        // Log the REAL code + message — plain console.log only showed "[FirebaseMessagingError]"
+        logger.warn(`FCM token failed (${idx}): [${code}] ${message}`, {
+          tokenPrefix: slice[idx]?.slice(0, 12),
+        });
+
         if (isPermanentFcmError(code)) {
           invalidTokens.add(slice[idx]);
         }
@@ -497,7 +529,29 @@ class NotificationService {
     }
 
     if (invalidTokens.size > 0) {
-      await this.removeTokens(userId, Array.from(invalidTokens));
+      // Safety guard: if EVERY token failed with the SAME config-level error
+      // (e.g. mismatched-credential — the server service account and the app's
+      // google-services.json belong to different Firebase projects), pruning
+      // tokens fixes nothing and just deletes valid tokens. Log loudly instead.
+      const configLevelErrors = new Set([
+        'messaging/mismatched-credential',
+        'messaging/authentication-error',
+        'messaging/third-party-auth-error',
+      ]);
+      const isConfigLevelAllFailure =
+        invalidTokens.size === tokens.length &&
+        failureCodes.size === 1 &&
+        configLevelErrors.has([...failureCodes.keys()][0]);
+
+      if (isConfigLevelAllFailure) {
+        logger.error(
+          `⚠️ ALL ${tokens.length} token(s) failed with [${[...failureCodes.keys()][0]}]. ` +
+            'Skipping token pruning — check that the server Firebase service account and the app ' +
+            'google-services.json point to the SAME Firebase project.'
+        );
+      } else {
+        await this.removeTokens(userId, Array.from(invalidTokens));
+      }
     }
 
     return {
@@ -1264,6 +1318,125 @@ class NotificationService {
   /**
    * Send admin broadcast notification
    */
+  /**
+   * Broadcast with per-recipient template rendering.
+   *
+   * Resolves {{variables}} for every recipient in ONE pass (batched user +
+   * cart lookups) so personalization is not N+1 queries. Supported variables:
+   *   {{firstName}}, {{lastName}}, {{name}}  — from the user's profile
+   *   {{cartCount}}, {{cartItems}}            — from the user's cart (withCart)
+   *   any static key in template.variables    — e.g. {{discount}}, {{endTime}}
+   *
+   * When the template is cart-based, the user's cart product images are
+   * attached to the notification (carousel + hero) automatically.
+   */
+  async createPersonalizedBroadcast(recipients, payload) {
+    const { template = {}, title, content } = payload;
+    const staticVars = template.variables || {};
+    const needsCart = template.withCart === true || String(template.slug || '').includes('cart');
+
+    // Batch-fetch recipient profiles (avoids one query per user)
+    const users = await User.find({ _id: { $in: recipients } })
+      .select('profile.firstName profile.lastName')
+      .lean();
+    const userMap = new Map(users.map((u) => [String(u._id), u]));
+
+    // Batch-fetch carts with product details when the template needs them
+    let cartMap = new Map();
+    if (needsCart) {
+      const carts = await Cart.find({ user: { $in: recipients } })
+        .populate('items.product', 'title images')
+        .lean();
+      for (const cart of carts) {
+        cartMap.set(String(cart.user), cart);
+      }
+    }
+
+    const renderText = (text, user, cart) => {
+      if (!text) return text;
+      const firstName = user?.profile?.firstName || '';
+      const lastName = user?.profile?.lastName || '';
+      const name = [firstName, lastName].filter(Boolean).join(' ').trim() || 'there';
+      const productTitles = (cart?.items || [])
+        .map((item) => item.product?.title)
+        .filter(Boolean);
+      const itemsCount = cart?.summary?.itemsCount ?? cart?.items?.length ?? 0;
+      const vars = {
+        ...staticVars,
+        firstName,
+        lastName,
+        name,
+        cartCount: String(itemsCount),
+        cartItems: productTitles.length
+          ? `${productTitles.slice(0, 3).join(', ')}${productTitles.length > 3 ? ` and ${productTitles.length - 3} more` : ''}`
+          : 'your cart items',
+      };
+      return String(text).replace(/\{\{\s*([\w]+)\s*\}\}/g, (match, key) =>
+        key in vars ? String(vars[key]) : match
+      );
+    };
+
+    const results = { successful: 0, failed: 0, errors: [] };
+    const notifications = [];
+    const concurrency = 10;
+
+    for (let i = 0; i < recipients.length; i += concurrency) {
+      const batch = recipients.slice(i, i + concurrency);
+      const settled = await Promise.allSettled(
+        batch.map(async (userId) => {
+          const user = userMap.get(String(userId)) || null;
+          const cart = needsCart ? cartMap.get(String(userId)) : null;
+
+          const renderedTitle = renderText(title, user, cart);
+          const renderedContent = {
+            ...(content || {}),
+            text: renderText(content?.text, user, cart),
+          };
+
+          // Cart product images become the notification's hero + carousel
+          const cartImages = needsCart
+            ? (cart?.items || [])
+                .map((item) => item.product?.images?.[0])
+                .filter(Boolean)
+                .slice(0, 5)
+            : [];
+
+          const personalPayload = {
+            ...payload,
+            title: renderedTitle,
+            content: renderedContent,
+            data: {
+              ...(payload.data || {}),
+              ...(cartImages.length
+                ? { imageUrl: cartImages[0], images: cartImages }
+                : {}),
+            },
+          };
+
+          const notification = await this.createNotification({ userId, ...personalPayload });
+          return notification;
+        })
+      );
+
+      settled.forEach((outcome) => {
+        if (outcome.status === 'fulfilled') {
+          // A null result means the user opted out — neither success nor error.
+          if (outcome.value) {
+            notifications.push(outcome.value);
+            results.successful++;
+          }
+        } else {
+          results.failed++;
+          results.errors.push({
+            error: outcome.reason?.message || String(outcome.reason)
+          });
+        }
+      });
+    }
+
+    return { notifications, results };
+  }
+
   async sendAdminBroadcast(data) {
     const {
       title,
@@ -1273,7 +1446,15 @@ class NotificationService {
       target = 'all', // 'all', 'users', 'vendors', 'specific'
       userIds = [],
       priority = 'medium',
-      scheduledFor
+      scheduledFor,
+      // Rich-media / deep-link fields (Flipkart-style push):
+      imageUrl,      // hero image shown in the push notification
+      images,        // optional carousel image list
+      actionUrl,     // deep link opened when the notification is tapped
+      actionLabel,   // button/action label for the deep link
+      // Template personalization: { slug, variables } enables per-recipient
+      // rendering ({{firstName}}, {{cartCount}}, {{cartItems}}, static vars).
+      template
     } = data;
 
     console.log("type->", type, "category->", category, "target->", target, "userIds->", userIds, "priority->", priority, "scheduledFor->", scheduledFor)
@@ -1307,8 +1488,18 @@ class NotificationService {
       data: {
         broadcast: true,
         broadcastId,
-        sentBy: data.sentBy
-      }
+        sentBy: data.sentBy,
+        // Fall back to the first carousel image so pushes always carry an image
+        // when the admin attached a carousel without a separate hero image.
+        ...(imageUrl || (images && images.length) ? { imageUrl: imageUrl || images[0] } : {}),
+        ...(images && Array.isArray(images) && images.length ? { images } : {}),
+        ...(actionUrl ? { url: actionUrl } : {})
+      },
+      // Deep link: the push layer reads actions[0].url for webpush link and
+      // click routing (notification.service.sendPushNotification).
+      ...(actionUrl ? { actions: [{ label: actionLabel || 'View', url: actionUrl }] } : {}),
+      // Template personalization (per-recipient rendering in the broadcast job).
+      ...(template ? { template } : {})
     };
 
     console.log("recipients->", recipients.length, )

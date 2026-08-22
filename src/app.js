@@ -33,7 +33,7 @@ const { initializeSocket } = require('./socket');
 const { errorHandler, notFound } = require('./api/middlewares/errorHandler.middleware');
 const { apiLimiter, authLimiter } = require('./api/middlewares/rateLimiter.middleware');
 const { eventEmitter, EVENTS } = require('./events');
-const { queues } = require('./jobs');
+const { queues, initializeQueues, closeWorkers } = require('./jobs');
 
 // Import routes
 const routes = require('./api/routes');
@@ -255,25 +255,19 @@ app.use(errorHandler);
 // UNHANDLED REJECTIONS/EXCEPTIONS
 // ====================================
 process.on('unhandledRejection', (reason, promise) => {
-  logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
-  // Application continues running
-});
-
-process.on('unhandledRejection', (reason, promise) => {
+  const error = reason instanceof Error ? reason : new Error(String(reason));
+  logger.error('❌ UNHANDLED REJECTION: ' + (error?.stack || error));
   console.error('❌❌❌ UNHANDLED REJECTION ❌❌❌');
-  console.error('Reason:', reason);
-  console.error('Reason stack:', reason?.stack);
+  console.error('Reason:', error?.stack || error);
   console.error('Promise:', promise);
-  
-  // Log to file as well
-  logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
-  
-  // Don't exit, but log details
+  // Non-fatal — keeps the server alive, but the crash cause is now visible in logs
 });
 
 process.on('uncaughtException', (error) => {
-  logger.error('Uncaught Exception:', error);
-  // Gracefully shutdown
+  logger.error('❌ UNCAUGHT EXCEPTION: ' + (error?.stack || error));
+  console.error('❌❌❌ UNCAUGHT EXCEPTION ❌❌❌');
+  console.error(error?.stack || error);
+  // Gracefully shutdown so active jobs are released back to the queue
   gracefulShutdown('UNCAUGHT EXCEPTION');
 });
 
@@ -325,7 +319,10 @@ const gracefulShutdown = async (signal) => {
       logger.info('Elasticsearch connection closed');
     }
 
-    // Wait for all jobs to complete (with timeout)
+    // Close BullMQ workers first so active jobs are released, then queues
+    await closeWorkers();
+
+    // Wait for all queues to close (with timeout)
     await Promise.race([
       Promise.all(Object.values(queues).map(queue => queue.close())),
       new Promise(resolve => setTimeout(resolve, 10000)), // 10 second timeout
@@ -353,13 +350,21 @@ const startServer = async () => {
     // setupAssociations();
     // logger.info('✅ Model associations setup completed');
 
-    // Connect to Redis
+    // Connect to Redis (single shared client — BullMQ reuses it)
     const redisClient = await connectRedis();
     if (redisClient) {
       global.redisClient = redisClient;
       logger.info('✅ Redis connected successfully');
     } else {
       logger.warn('⚠️ Redis connection failed - running without Redis');
+    }
+
+    // Initialize BullMQ queues AFTER Redis, reusing the shared client
+    try {
+      initializeQueues();
+      logger.info('✅ BullMQ queues initialized');
+    } catch (error) {
+      logger.error('❌ Failed to initialize BullMQ queues:', error);
     }
 
     // Connect to Elasticsearch

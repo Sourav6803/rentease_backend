@@ -141,6 +141,7 @@ const handleBatchNotification = async (data) => {
 // still created through createNotification, which keeps its own per-notification
 // durability (and schedules per-recipient delay jobs when scheduledFor is set).
 const handleBroadcastNotification = async (data) => {
+  console.log('from handleBroadcastNotification')
   const { broadcastId, recipients = [], payload = {} } = data;
   const tag = broadcastId ? `[broadcast ${broadcastId}]` : '[broadcast]';
 
@@ -151,7 +152,11 @@ const handleBroadcastNotification = async (data) => {
     return { queued: false, recipientCount: 0 };
   }
 
-  const { notifications, results } = await NotificationService.createBulkNotifications(recipients, payload);
+  // Template broadcasts render {{variables}} per recipient (name, cart items…).
+  // Plain broadcasts fan out the exact same payload to everyone.
+  const { notifications, results } = payload.template
+    ? await NotificationService.createPersonalizedBroadcast(recipients, payload)
+    : await NotificationService.createBulkNotifications(recipients, payload);
   logger.info(
     `${tag} done: ${results.successful} sent, ${results.failed} failed ` +
     `(recipients=${recipients.length}, docs=${notifications?.length || 0})`
