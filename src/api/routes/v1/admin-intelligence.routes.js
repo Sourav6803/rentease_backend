@@ -31,12 +31,16 @@ router.get('/email-templates', ctrl.listTemplates);
 router.post('/email-templates', ctrl.createTemplate);
 router.put('/email-templates/:id', ctrl.updateTemplate);
 router.get('/campaigns', ctrl.listCampaigns);
+router.get('/campaigns/analytics', ctrl.getCampaignAnalytics);
 router.post('/campaigns', ctrl.createCampaign);
 router.post('/campaigns/:id/schedule', ctrl.scheduleCampaign);
 router.post('/campaigns/:id/send', ctrl.sendCampaign);
+router.delete('/campaigns/:id', ctrl.deleteCampaign);
+router.delete('/email-templates/:id', ctrl.deleteTemplate);
 router.get('/segments', ctrl.listSegments);
 router.post('/segments', ctrl.createSegment);
 router.put('/segments/:id', ctrl.updateSegment);
+router.delete('/segments/:id', ctrl.deleteSegment);
 
 // Module 5 — Product intelligence
 router.get('/product-intelligence', ctrl.getProductIntelligence);

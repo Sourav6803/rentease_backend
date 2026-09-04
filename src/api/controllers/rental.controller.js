@@ -70,7 +70,7 @@ class RentalController {
     const { page = 1, limit = 10, ...filters } = req.query;
     
     const rentals = await RentalService.getVendorRentals(
-      req.user._id,
+      req.vendor._id,
       parseInt(page),
       parseInt(limit),
       filters
@@ -84,7 +84,8 @@ class RentalController {
    */
   confirmRental = catchAsync(async (req, res) => {
     const { id } = req.params;
-    const rental = await RentalService.confirmRental(id, req.user._id);
+    console.log('Confirming rental with ID:', id, 'by vendor:', req.vendor._id)
+    const rental = await RentalService.confirmRental(id, req.vendor._id);
     
     return ApiResponse.success(res, 200, 'Rental confirmed successfully', { rental });
   });
@@ -258,33 +259,34 @@ class RentalController {
   // });
 
   // Add this method to your rental controller
-downloadInvoice = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  
-  // Get invoice data
-  const invoice = await RentalService.generateInvoice(id);
-  
-  // Create temp directory if it doesn't exist
-  const tempDir = path.join(__dirname, '../temp');
-  if (!fs.existsSync(tempDir)) {
-    fs.mkdirSync(tempDir, { recursive: true });
-  }
-  
-  // Generate PDF
-  const pdfPath = path.join(tempDir, `invoice-${id}-${Date.now()}.pdf`);
-  await PDFService.generateInvoicePDF(invoice, pdfPath);
-  
-  // Send file
-  res.download(pdfPath, `invoice-${invoice.rental.number}.pdf`, (err) => {
-    if (err) {
-      console.error('Error downloading invoice:', err);
+  downloadInvoice = catchAsync(async (req, res) => {
+    const { id } = req.params;
+    
+    // Get invoice data
+    const invoice = await RentalService.generateInvoice(id);
+    
+    // Create temp directory if it doesn't exist
+    const tempDir = path.join(__dirname, '../temp');
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
     }
-    // Clean up temp file after download
-    fs.unlink(pdfPath, (unlinkErr) => {
-      if (unlinkErr) console.error('Error deleting temp file:', unlinkErr);
+    
+    // Generate PDF
+    const pdfPath = path.join(tempDir, `invoice-${id}-${Date.now()}.pdf`);
+    await PDFService.generateInvoicePDF(invoice, pdfPath);
+    
+    // Send file
+    res.download(pdfPath, `invoice-${invoice.rental.number}.pdf`, (err) => {
+      if (err) {
+        console.error('Error downloading invoice:', err);
+      }
+      // Clean up temp file after download
+      fs.unlink(pdfPath, (unlinkErr) => {
+        if (unlinkErr) console.error('Error deleting temp file:', unlinkErr);
+      });
     });
   });
-});
+  
   /**
    * Get rental summary for dashboard
    */

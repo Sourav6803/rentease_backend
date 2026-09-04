@@ -32,6 +32,20 @@ const EVENTS = {
     FAILED: "payment:failed",
     REFUNDED: "payment:refunded",
   },
+
+  DELIVERY: {
+    SCHEDULED: "delivery:scheduled",
+    ASSIGNED: "delivery:assigned",
+    OUT_FOR_DELIVERY: "delivery:outfordelivery",
+    IN_TRANSIT: "delivery:intransit",
+    REACHED: "delivery:reached",
+    DELIVERED: "delivery:delivered",
+    PICKED_UP: "delivery:pickedup",
+    FAILED: "delivery:failed",
+    RESCHEDULED: "delivery:rescheduled",
+    CANCELLED: "delivery:cancelled",
+  },
+
   VENDOR: {
     REGISTERED: "vendor:registered",
     APPROVED: "vendor:approved",

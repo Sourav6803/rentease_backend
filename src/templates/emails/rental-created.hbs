@@ -1,0 +1,53 @@
+        <h2>New Rental Order Received 📦</h2>
+
+        <p>Hello {{vendorName}},</p>
+
+        <p>You have received a new rental order. Please review the details and confirm it to proceed with delivery.</p>
+
+        <div class="info-box">
+            <strong>Order #{{rentalNumber}}</strong>
+        </div>
+
+        <table>
+            <tr>
+                <th>Customer:</th>
+                <td>{{customerName}}</td>
+            </tr>
+            <tr>
+                <th>Product:</th>
+                <td>{{productName}}</td>
+            </tr>
+            <tr>
+                <th>Rental Period:</th>
+                <td>{{startDate}} to {{endDate}}</td>
+            </tr>
+            <tr>
+                <th>Monthly Rent:</th>
+                <td>₹{{monthlyRent}}</td>
+            </tr>
+            <tr>
+                <th>Security Deposit:</th>
+                <td>₹{{securityDeposit}}</td>
+            </tr>
+            <tr>
+                <th>Total Amount:</th>
+                <td>₹{{totalAmount}}</td>
+            </tr>
+        </table>
+
+        <h3>Delivery Address:</h3>
+        <p>
+            {{deliveryAddress.addressLine1}}<br>
+            {{#if deliveryAddress.addressLine2}}{{deliveryAddress.addressLine2}}<br>{{/if}}
+            {{deliveryAddress.city}}, {{deliveryAddress.state}} - {{deliveryAddress.pincode}}
+        </p>
+
+        <center>
+            <a href="{{verifyUrl}}" class="button">Confirm This Order</a>
+        </center>
+
+        <p>If the order looks good, confirm it from your vendor dashboard as soon as possible so the delivery can be scheduled.</p>
+
+        <p>Thank you for being a RentEase partner!</p>
+
+        <p>Best Regards,<br>The RentEase Team</p>

@@ -1,0 +1,64 @@
+        {{#if isVendor}}
+        <h2>Delivery Failed ⚠️</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>The delivery for your order <strong>could not be completed</strong>. Please review the details below and take the necessary action.</p>
+        {{else}}
+        <h2>Delivery Attempt Failed ⚠️</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>We're sorry — the delivery of your order <strong>could not be completed</strong>. Our team is looking into it.</p>
+        {{/if}}
+
+        <div class="info-box">
+            <strong>Delivery #{{deliveryNumber}}</strong>
+        </div>
+
+        <table>
+            <tr>
+                <th>Order:</th>
+                <td>#{{rentalNumber}}</td>
+            </tr>
+            {{#if productName}}
+            <tr>
+                <th>Product:</th>
+                <td>{{productName}}</td>
+            </tr>
+            {{/if}}
+            {{#if reason}}
+            <tr>
+                <th>Reason:</th>
+                <td>{{reason}}</td>
+            </tr>
+            {{/if}}
+            {{#if rescheduled}}
+            <tr>
+                <th>Status:</th>
+                <td>Rescheduled</td>
+            </tr>
+            {{/if}}
+        </table>
+
+        {{#if isVendor}}
+        <center>
+            <a href="{{trackUrl}}" class="button">View Order</a>
+        </center>
+
+        <p>Please check the order and coordinate with the delivery partner for a retry.</p>
+        {{else}}
+        <center>
+            <a href="{{trackUrl}}" class="button">Contact Support</a>
+        </center>
+
+        {{#if rescheduled}}
+        <p>Good news — your delivery has been <strong>rescheduled</strong>. We'll notify you with the new slot soon.</p>
+        {{else}}
+        <p>Our team will contact you shortly to arrange a new delivery slot.</p>
+        {{/if}}
+        {{/if}}
+
+        <p>We apologise for the inconvenience.</p>
+
+        <p>Happy Renting,<br>The RentEase Team</p>

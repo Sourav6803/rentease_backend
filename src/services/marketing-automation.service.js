@@ -144,6 +144,72 @@ class MarketingAutomationService {
   async updateSegment(id, payload) {
     return CustomerSegment.findByIdAndUpdate(id, payload, { new: true });
   }
+
+  async deleteCampaign(campaignId) {
+    return EmailCampaign.findByIdAndDelete(campaignId);
+  }
+
+  async deleteTemplate(templateId) {
+    return EmailTemplate.findByIdAndDelete(templateId);
+  }
+
+  async deleteSegment(segmentId) {
+    return CustomerSegment.findByIdAndDelete(segmentId);
+  }
+
+  /**
+   * Real campaign analytics for the marketing charts — aggregates what actually
+   * exists in the EmailCampaign collection (no fabricated numbers).
+   */
+  async getCampaignAnalytics({ days = 14 } = {}) {
+    const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+    const campaigns = await EmailCampaign.find({ createdAt: { $gte: since } })
+      .select('name status audience scheduledAt sentAt createdAt metadata')
+      .lean();
+
+    // Engagement timeline: one bucket per day (last N days), with opens/clicks
+    // summed from each campaign's metadata when tracking data exists.
+    const dayMap = new Map();
+    for (let i = days - 1; i >= 0; i--) {
+      const d = new Date(Date.now() - i * 24 * 60 * 60 * 1000);
+      const label = d.toISOString().slice(0, 10);
+      dayMap.set(label, { label, opens: 0, clicks: 0, campaigns: 0 });
+    }
+    campaigns.forEach((c) => {
+      const created = c.createdAt ? new Date(c.createdAt).toISOString().slice(0, 10) : null;
+      const bucket = dayMap.get(created);
+      if (bucket) {
+        bucket.campaigns += 1;
+        bucket.opens += Number(c.metadata?.opened ?? 0);
+        bucket.clicks += Number(c.metadata?.clicked ?? 0);
+      }
+    });
+
+    const totals = campaigns.reduce(
+      (acc, c) => {
+        acc.campaigns += 1;
+        acc.targeted += Number(c.metadata?.targeted ?? 0);
+        acc.sent += Number(c.metadata?.sent ?? 0);
+        acc.opened += Number(c.metadata?.opened ?? 0);
+        acc.clicked += Number(c.metadata?.clicked ?? 0);
+        acc.bounced += Number(c.metadata?.bounced ?? 0);
+        acc.revenue += Number(c.metadata?.revenue ?? 0);
+        return acc;
+      },
+      { campaigns: 0, targeted: 0, sent: 0, opened: 0, clicked: 0, bounced: 0, revenue: 0 },
+    );
+
+    return {
+      deliveryTimeline: [...dayMap.values()],
+      // Device/hourly/geography need an email tracking integration (open/click
+      // pixels report device, time and location) — return empty so the charts
+      // show "no data" instead of fabricated numbers.
+      deviceBreakdown: [],
+      opensByHour: [],
+      geography: [],
+      totals,
+    };
+  }
 }
 
 module.exports = new MarketingAutomationService();

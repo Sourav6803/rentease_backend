@@ -1,0 +1,56 @@
+        <h2>Your Order Is Out for Delivery! 🚚</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>Great news! Your order has been <strong>picked up</strong> and the delivery partner is now on the way. Here are the details:</p>
+
+        <div class="info-box">
+            <strong>Delivery #{{deliveryNumber}}</strong>
+        </div>
+
+        <table>
+            <tr>
+                <th>Order:</th>
+                <td>#{{rentalNumber}}</td>
+            </tr>
+            {{#if productName}}
+            <tr>
+                <th>Product:</th>
+                <td>{{productName}}</td>
+            </tr>
+            {{/if}}
+            <tr>
+                <th>Scheduled Date:</th>
+                <td>{{deliveryDate}}</td>
+            </tr>
+            {{#if deliverySlot}}
+            <tr>
+                <th>Delivery Slot:</th>
+                <td>{{deliverySlot}}</td>
+            </tr>
+            {{/if}}
+        </table>
+
+        <h3>Delivery Address:</h3>
+        <p>
+            {{address.addressLine1}}<br>
+            {{#if address.addressLine2}}{{address.addressLine2}}<br>{{/if}}
+            {{address.city}}, {{address.state}} - {{address.pincode}}
+        </p>
+
+        <center>
+            <a href="{{trackUrl}}" class="button">Track Your Delivery</a>
+        </center>
+
+        <div class="info-box">
+            <h3>Please Note:</h3>
+            <ul>
+                <li>Please keep your phone handy — the delivery partner may call you</li>
+                <li>Have your ID ready for verification</li>
+                <li>You can track the delivery partner's live location</li>
+            </ul>
+        </div>
+
+        <p>Thank you for choosing RentEase!</p>
+
+        <p>Happy Renting,<br>The RentEase Team</p>

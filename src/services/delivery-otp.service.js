@@ -40,14 +40,27 @@ class DeliveryOTPService {
       }
     }, (options.expiryMinutes || this.otpExpiryMinutes) * 60 * 1000);
     
-    // Send OTP via SMS
-    await addJob('sms', 'send', {
-      to: customerPhone,
-      message: `Your RentEase delivery OTP is ${otp}. Valid for ${options.expiryMinutes || this.otpExpiryMinutes} minutes.`
-    });
+    // Send OTP via SMS (if phone available)
+    if (customerPhone) {
+      await addJob('sms', 'send', {
+        to: customerPhone,
+        message: `Your RentEase delivery OTP is ${otp}. Valid for ${options.expiryMinutes || this.otpExpiryMinutes} minutes.`
+      });
+    }
+    
+    // Send via email (fallback when SMS is not configured, or always as backup)
+    if (options.customerEmail) {
+      await addJob('email', 'delivery-otp', {
+        to: options.customerEmail,
+        name: options.customerName || 'Customer',
+        otp,
+        deliveryNumber: options.deliveryNumber,
+        expiryMinutes: options.expiryMinutes || this.otpExpiryMinutes
+      });
+    }
     
     // Send via WhatsApp if available
-    if (options.whatsappEnabled) {
+    if (options.whatsappEnabled && customerPhone) {
       await addJob('whatsapp', 'send', {
         to: customerPhone,
         message: `🔐 *Delivery OTP*\n\nYour OTP for delivery #${deliveryId} is:\n*${otp}*\n\nValid for ${options.expiryMinutes || this.otpExpiryMinutes} minutes.`
@@ -57,7 +70,7 @@ class DeliveryOTPService {
     return {
       sent: true,
       expiresAt,
-      method: 'sms'
+      method: options.customerEmail ? 'email' : (customerPhone ? 'sms' : 'none')
     };
   }
 

@@ -1,0 +1,43 @@
+        <h2>Your Delivery Is On the Way! 🛵</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>Your delivery partner is <strong>en route</strong> to your address. Here's the latest update:</p>
+
+        <div class="info-box">
+            <strong>Delivery #{{deliveryNumber}}</strong>
+        </div>
+
+        <table>
+            <tr>
+                <th>Order:</th>
+                <td>#{{rentalNumber}}</td>
+            </tr>
+            {{#if productName}}
+            <tr>
+                <th>Product:</th>
+                <td>{{productName}}</td>
+            </tr>
+            {{/if}}
+            {{#if estimatedArrival}}
+            <tr>
+                <th>Estimated Arrival:</th>
+                <td>{{estimatedArrival}}</td>
+            </tr>
+            {{/if}}
+        </table>
+
+        <h3>Delivery Address:</h3>
+        <p>
+            {{address.addressLine1}}<br>
+            {{#if address.addressLine2}}{{address.addressLine2}}<br>{{/if}}
+            {{address.city}}, {{address.state}} - {{address.pincode}}
+        </p>
+
+        <center>
+            <a href="{{trackUrl}}" class="button">Track Live Location</a>
+        </center>
+
+        <p>Please be available at the address. The delivery partner will reach you shortly.</p>
+
+        <p>Happy Renting,<br>The RentEase Team</p>

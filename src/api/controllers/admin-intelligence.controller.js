@@ -1,5 +1,6 @@
 const catchAsync = require('../../utils/catchAsync');
 const { ApiResponse } = require('../../utils/apiResponse');
+const { AppError } = require('../../utils/AppError');
 const AdminIntelligenceService = require('../../services/admin-intelligence.service');
 const BehaviorTrackingService = require('../../services/behavior-tracking.service');
 const InterestDetectionService = require('../../services/interest-detection.service');
@@ -124,6 +125,29 @@ class AdminIntelligenceController {
   updateSegment = catchAsync(async (req, res) => {
     const data = await MarketingAutomationService.updateSegment(req.params.id, req.body);
     return ApiResponse.success(res, 200, 'Segment updated', { segment: data });
+  });
+
+  getCampaignAnalytics = catchAsync(async (req, res) => {
+    const data = await MarketingAutomationService.getCampaignAnalytics(req.query);
+    return ApiResponse.success(res, 200, 'Campaign analytics retrieved', { analytics: data });
+  });
+
+  deleteCampaign = catchAsync(async (req, res) => {
+    const data = await MarketingAutomationService.deleteCampaign(req.params.id);
+    if (!data) throw new AppError('Campaign not found', 404);
+    return ApiResponse.success(res, 200, 'Campaign deleted');
+  });
+
+  deleteTemplate = catchAsync(async (req, res) => {
+    const data = await MarketingAutomationService.deleteTemplate(req.params.id);
+    if (!data) throw new AppError('Email template not found', 404);
+    return ApiResponse.success(res, 200, 'Email template deleted');
+  });
+
+  deleteSegment = catchAsync(async (req, res) => {
+    const data = await MarketingAutomationService.deleteSegment(req.params.id);
+    if (!data) throw new AppError('Segment not found', 404);
+    return ApiResponse.success(res, 200, 'Segment deleted');
   });
 
   // ─── Module 5: Product intelligence ──────────────────────────────────────

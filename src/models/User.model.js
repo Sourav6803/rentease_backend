@@ -67,7 +67,7 @@ const userSchema = new mongoose.Schema({
   },
   // ── Push notification device tokens (FCM / Web Push) ──────────────
   // Flat list of active FCM registration tokens, used for multicast sends.
-  pushTokens: [{ type: String, index: true }],
+  pushTokens: [{ type: String }],
   // Rich per-device subscription records for metadata + safe cleanup.
   deviceTokens: [{
     token: { type: String, required: true },

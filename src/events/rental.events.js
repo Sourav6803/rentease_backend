@@ -3,39 +3,174 @@
 const eventEmitter = require('./eventEmitter');
 const EVENTS = require('./events.constants');
 const logger = require('../config/logger');
-const { emitToUser, emitToVendor, emitToAdmins } = require('../socket');
+// Lazy require breaks the socket <-> events circular dependency (see user.events).
+const socketApi = () => require('../socket');
+const emitToUser = (...args) => socketApi().emitToUser(...args);
+const emitToVendor = (...args) => socketApi().emitToVendor(...args);
+const emitToAdmins = (...args) => socketApi().emitToAdmins(...args);
 const { createNotification } = require('../services/notification.service');
 const { processJob } = require('../jobs');
+const { Rental, User } = require('../models');
+
+// Shared helpers ----------------------------------------------------------
+
+// Format a date for emails ("26 Aug 2026"). Returns a dash when missing so
+// templates never render "undefined".
+const formatDate = (d) =>
+  d ? new Date(d).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
+
+const fullName = (u) =>
+  u?.profile ? `${u.profile.firstName || ''} ${u.profile.lastName || ''}`.trim() : (u?.name || 'Customer');
+
+const money = (n) => (n === null || n === undefined || isNaN(n) ? '0' : Number(n).toLocaleString('en-IN'));
+
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
+
+// Fetch all admin/super-admin user ids for admin notifications.
+const getAdminUserIds = async () => {
+  try {
+    const admins = await User.find({ role: { $in: ['admin', 'super-admin'] } })
+      .select('_id')
+      .lean();
+    return admins.map((a) => a._id);
+  } catch (err) {
+    logger.error('Error fetching admin ids:', err);
+    return [];
+  }
+};
+
+// Send a notification to every admin, isolated so a single failure cannot
+// break the rest of the flow.
+const notifyAdmins = async (payload) => {
+  const adminIds = await getAdminUserIds();
+  for (const adminId of adminIds) {
+    try {
+      await createNotification({ userId: adminId, ...payload });
+    } catch (err) {
+      logger.error(`Error notifying admin ${adminId}:`, err.message);
+    }
+  }
+};
+
+// Load the full rental document (user, product, vendor) for notification/email
+// content. Returns null when the rental no longer exists (edge case).
+const loadRentalForEvent = async (rentalId) => {
+  try {
+    return await Rental.findById(rentalId)
+      .populate('user', 'email profile.firstName profile.lastName')
+      .populate('product', 'basicInfo.name pricing.monthlyRent')
+      .populate({
+        path: 'vendor',
+        select: 'user business.name',
+        populate: { path: 'user', select: 'email profile.firstName profile.lastName' },
+      })
+      .lean();
+  } catch (err) {
+    logger.error(`Error loading rental ${rentalId}:`, err.message);
+    return null;
+  }
+};
 
 // Rental created
 eventEmitter.on(EVENTS.RENTAL.CREATED, async (data) => {
   try {
     logger.info(`Rental created: ${data.rentalNumber}`);
 
-    // Notify user
+    const rental = await loadRentalForEvent(data.rentalId || data._id);
+    if (!rental) {
+      logger.warn(`Rental created event: rental not found, skipping notifications`);
+      return;
+    }
+
+    const user = rental.user;
+    const vendor = rental.vendor;
+    const product = rental.product;
+    const rd = rental.rentalDetails || {};
+    const addr = rental.addressDetails || {};
+    const customerName = fullName(user);
+    const rentalNumber = rental.rentalNumber;
+
+    const notificationData = {
+      rentalId: rental._id,
+      rentalNumber,
+      productName: product?.basicInfo?.name,
+      startDate: formatDate(rd.startDate),
+      endDate: formatDate(rd.endDate),
+      monthlyRent: money(rd.monthlyRent),
+      securityDeposit: money(rd.securityDeposit),
+      totalAmount: money(rd.totalAmount),
+      deliveryAddress: {
+        addressLine1: addr.addressLine1 || '',
+        addressLine2: addr.addressLine2 || '',
+        city: addr.city || '',
+        state: addr.state || '',
+        pincode: addr.pincode || '',
+      },
+    };
+
+    // 1) Customer — in-app + email
     await createNotification({
-      userId: data.userId,
+      userId: rental.user,
       type: 'in_app',
       title: 'Rental Request Received',
-      content: `Your rental request #${data.rentalNumber} has been received and is pending confirmation.`,
-      data: { rentalId: data._id, rentalNumber: data.rentalNumber },
+      content: `Your rental request #${rentalNumber} has been received and is pending vendor confirmation.`,
+      data: { rentalId: rental._id, rentalNumber },
     });
 
-    // Notify vendor
+    if (user?.email) {
+      await processJob('email:send', {
+        to: user.email,
+        subject: `Order Received #${rentalNumber} - RentEase`,
+        template: 'rental-created',
+        data: {
+          name: customerName,
+          customerName,
+          vendorName: vendor?.business?.name || 'Vendor',
+          ...notificationData,
+          trackUrl: `${CLIENT_URL}/dashboard/rentals/${rental._id}`,
+        },
+      });
+    }
+
+    // 2) Vendor — in-app + email with verify CTA
+    const vendorUser = vendor?.user;
     await createNotification({
-      userId: data.vendorId,
+      userId: vendorUser?._id || data.vendorId,
       type: 'in_app',
-      title: 'New Rental Request',
-      content: `You have a new rental request #${data.rentalNumber}.`,
-      data: { rentalId: data._id, rentalNumber: data.rentalNumber },
+      title: 'New Rental Order',
+      content: `You have a new rental order #${rentalNumber} from ${customerName}. Please verify it.`,
+      data: { rentalId: rental._id, rentalNumber },
     });
 
-    emitToUser(data.userId, 'rental:created', data);
+    if (vendorUser?.email) {
+      await processJob('email:send', {
+        to: vendorUser.email,
+        subject: `New Rental Order #${rentalNumber} - Action Required`,
+        template: 'rental-created',
+        data: {
+          vendorName: vendor?.business?.name || 'Vendor',
+          customerName,
+          ...notificationData,
+          verifyUrl: `${CLIENT_URL}/vendor/orders`,
+        },
+      });
+    }
+
+    // 3) Admin — in-app alert
+    await notifyAdmins({
+      type: 'in_app',
+      title: 'New Rental Order',
+      content: `New rental order #${rentalNumber} received (₹${notificationData.totalAmount}).`,
+      data: { rentalId: rental._id, rentalNumber },
+    });
+
+    emitToUser(rental.user, 'rental:created', data);
     emitToVendor(data.vendorId, 'rental:created', data);
+    emitToAdmins('rental:created', { rentalId: rental._id, rentalNumber });
 
     // Schedule confirmation reminder
     await processJob('rental:confirmation-reminder', {
-      rentalId: data._id,
+      rentalId: rental._id,
       vendorId: data.vendorId,
       scheduledAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
     });
@@ -49,36 +184,86 @@ eventEmitter.on(EVENTS.RENTAL.CONFIRMED, async (data) => {
   try {
     logger.info(`Rental confirmed: ${data.rentalNumber}`);
 
-    // Notify user
+    const rental = await loadRentalForEvent(data.rentalId || data._id);
+    if (!rental) {
+      logger.warn(`Rental confirmed event: rental not found, skipping notifications`);
+      return;
+    }
+
+    const user = rental.user;
+    const vendor = rental.vendor;
+    const product = rental.product;
+    const rd = rental.rentalDetails || {};
+    const addr = rental.addressDetails || {};
+    const rentalNumber = rental.rentalNumber;
+    const customerName = fullName(user);
+
+    const notificationData = {
+      rentalId: rental._id,
+      rentalNumber,
+      productName: product?.basicInfo?.name,
+      startDate: formatDate(rd.startDate),
+      endDate: formatDate(rd.endDate),
+      monthlyRent: money(rd.monthlyRent),
+      securityDeposit: money(rd.securityDeposit),
+      totalAmount: money(rd.totalAmount),
+      deliveryAddress: {
+        addressLine1: addr.addressLine1 || '',
+        addressLine2: addr.addressLine2 || '',
+        city: addr.city || '',
+        state: addr.state || '',
+        pincode: addr.pincode || '',
+      },
+    };
+
+    // 1) Customer — in-app + email with full details
     await createNotification({
-      userId: data.userId,
+      userId: rental.user,
       type: 'in_app',
       title: 'Rental Confirmed!',
-      content: `Your rental #${data.rentalNumber} has been confirmed. We'll notify you when it's out for delivery.`,
-      data: { rentalId: data._id, rentalNumber: data.rentalNumber },
+      content: `Your rental #${rentalNumber} has been confirmed by the vendor. We'll notify you when it's out for delivery.`,
+      data: { rentalId: rental._id, rentalNumber },
     });
 
-    // Send email confirmation
-    await processJob('email:send', {
-      to: data.user?.email,
-      template: 'rental-confirmed',
-      data: {
-        name: data.user?.profile?.firstName,
-        rentalNumber: data.rentalNumber,
-        productName: data.product?.basicInfo?.name,
-        startDate: data.rentalDetails.startDate,
-        endDate: data.rentalDetails.endDate,
-        totalAmount: data.rentalDetails.totalAmount,
-      },
+    if (user?.email) {
+      await processJob('email:send', {
+        to: user.email,
+        subject: `Rental Confirmed #${rentalNumber} - RentEase`,
+        template: 'rental-confirmed',
+        data: {
+          name: customerName,
+          ...notificationData,
+          trackUrl: `${CLIENT_URL}/dashboard/rentals/${rental._id}`,
+        },
+      });
+    }
+
+    // 2) Vendor — in-app confirmation
+    const vendorUser = vendor?.user;
+    await createNotification({
+      userId: vendorUser?._id || data.vendorId,
+      type: 'in_app',
+      title: 'Order Confirmed',
+      content: `Order #${rentalNumber} has been confirmed. Delivery will be scheduled soon.`,
+      data: { rentalId: rental._id, rentalNumber },
     });
 
-    emitToUser(data.userId, 'rental:confirmed', data);
+    // 3) Admin — in-app alert
+    await notifyAdmins({
+      type: 'in_app',
+      title: 'Rental Order Confirmed',
+      content: `Rental order #${rentalNumber} confirmed (₹${notificationData.totalAmount}).`,
+      data: { rentalId: rental._id, rentalNumber },
+    });
+
+    emitToUser(rental.user, 'rental:confirmed', data);
     emitToVendor(data.vendorId, 'rental:confirmed', data);
+    emitToAdmins('rental:confirmed', { rentalId: rental._id, rentalNumber });
 
     // Schedule delivery preparation
     await processJob('delivery:prepare', {
-      rentalId: data._id,
-      scheduledAt: new Date(data.rentalDetails.startDate).setHours(-24), // 24 hours before delivery
+      rentalId: rental._id,
+      scheduledAt: new Date(data.rentalDetails?.startDate || rental.rentalDetails?.startDate).setHours(-24), // 24 hours before delivery
     });
   } catch (error) {
     logger.error('Error handling rental confirmed event:', error);
@@ -121,6 +306,11 @@ eventEmitter.on(EVENTS.RENTAL.DELIVERED, async (data) => {
   try {
     logger.info(`Rental delivered: ${data.rentalNumber}`);
 
+    const rental = await loadRentalForEvent(data.rentalId || data._id);
+    const customerName = rental ? fullName(rental.user) : 'Customer';
+    const vendorUser = rental?.vendor?.user || {};
+    const productName = rental?.product?.basicInfo?.name || 'Your item';
+
     await createNotification({
       userId: data.userId,
       type: 'in_app',
@@ -128,6 +318,64 @@ eventEmitter.on(EVENTS.RENTAL.DELIVERED, async (data) => {
       content: `Your rented product has been delivered. Enjoy your rental!`,
       data: { rentalId: data._id, rentalNumber: data.rentalNumber },
     });
+
+    // Customer email
+    if (rental?.user?.email) {
+      await processJob('email:send', {
+        to: rental.user.email,
+        subject: `Your Order Has Been Delivered #${data.rentalNumber} - RentEase`,
+        template: 'delivery-delivered',
+        data: {
+          name: customerName,
+          deliveryNumber: data.deliveryNumber || '',
+          rentalNumber: data.rentalNumber,
+          productName,
+          receivedBy: data.receivedBy,
+          address: {
+            addressLine1: rental?.address?.addressLine1 || rental?.deliveryAddress?.addressLine1 || '',
+            addressLine2: rental?.address?.addressLine2 || rental?.deliveryAddress?.addressLine2 || '',
+            city: rental?.address?.city || rental?.deliveryAddress?.city || '',
+            state: rental?.address?.state || rental?.deliveryAddress?.state || '',
+            pincode: rental?.address?.pincode || rental?.deliveryAddress?.pincode || '',
+          },
+          trackUrl: `${CLIENT_URL}/dashboard/rentals/${data.rentalId || data._id}`,
+        },
+      });
+    }
+
+    // Vendor in-app + email
+    if (vendorUser?._id) {
+      await createNotification({
+        userId: vendorUser._id,
+        type: 'in_app',
+        title: 'Delivery Completed ✅',
+        content: `Delivery for order #${data.rentalNumber} has been completed.`,
+        data: { rentalId: data._id, rentalNumber: data.rentalNumber },
+      });
+      if (vendorUser.email) {
+        await processJob('email:send', {
+          to: vendorUser.email,
+          subject: `Delivery Completed #${data.rentalNumber} - RentEase`,
+          template: 'delivery-delivered',
+          data: {
+            name: fullName(vendorUser) || 'Vendor',
+            isVendor: true,
+            deliveryNumber: data.deliveryNumber || '',
+            rentalNumber: data.rentalNumber,
+            productName,
+            receivedBy: data.receivedBy,
+            address: {
+              addressLine1: rental?.address?.addressLine1 || rental?.deliveryAddress?.addressLine1 || '',
+              addressLine2: rental?.address?.addressLine2 || rental?.deliveryAddress?.addressLine2 || '',
+              city: rental?.address?.city || rental?.deliveryAddress?.city || '',
+              state: rental?.address?.state || rental?.deliveryAddress?.state || '',
+              pincode: rental?.address?.pincode || rental?.deliveryAddress?.pincode || '',
+            },
+            trackUrl: `${CLIENT_URL}/vendor/orders`,
+          },
+        });
+      }
+    }
 
     emitToUser(data.userId, 'rental:delivered', data);
     emitToVendor(data.vendorId, 'rental:delivered', data);
@@ -140,7 +388,7 @@ eventEmitter.on(EVENTS.RENTAL.DELIVERED, async (data) => {
     });
 
     // Schedule return reminder
-    const returnDate = new Date(data.rentalDetails.endDate);
+    const returnDate = new Date(data.rentalDetails?.endDate || rental?.rentalDetails?.endDate || Date.now());
     returnDate.setDate(returnDate.getDate() - 3); // 3 days before return
     
     await processJob('rental:return-reminder', {
@@ -277,17 +525,86 @@ eventEmitter.on(EVENTS.RENTAL.CANCELLED, async (data) => {
   try {
     logger.info(`Rental cancelled: ${data.rentalNumber} - Reason: ${data.reason}`);
 
+    const rental = await loadRentalForEvent(data.rentalId || data._id);
+    const customerName = rental ? fullName(rental.user) : 'Customer';
+    const vendorUser = rental?.vendor?.user || {};
+    const productName = rental?.product?.basicInfo?.name || 'Your item';
+    const address = rental?.address || {};
+    const addr = address?.addressLine1
+      ? address
+      : (rental?.deliveryAddress || {});
+
     await createNotification({
       userId: data.userId,
       type: 'in_app',
       title: 'Rental Cancelled',
-      content: `Your rental #${data.rentalNumber} has been cancelled.${data.refundAmount ? ` Refund of ₹${data.refundAmount} will be processed.` : ''}`,
+      content: `Your rental #${data.rentalNumber} has been cancelled.${data.refundAmount ? ` Refund of ₹${money(data.refundAmount)} will be processed.` : ''}`,
       data: { 
         rentalId: data._id, 
         reason: data.reason,
         refundAmount: data.refundAmount,
       },
     });
+
+    // Customer email
+    if (rental?.user?.email) {
+      await processJob('email:send', {
+        to: rental.user.email,
+        subject: `Order Cancelled #${data.rentalNumber} - RentEase`,
+        template: 'delivery-cancelled',
+        data: {
+          name: customerName,
+          deliveryNumber: '',
+          rentalNumber: data.rentalNumber,
+          productName,
+          reason: data.reason,
+          refundAmount: data.refundAmount,
+          address: {
+            addressLine1: addr.addressLine1 || '',
+            addressLine2: addr.addressLine2 || '',
+            city: addr.city || '',
+            state: addr.state || '',
+            pincode: addr.pincode || '',
+          },
+          trackUrl: `${CLIENT_URL}/browse`,
+        },
+      });
+    }
+
+    // Vendor in-app + email
+    if (vendorUser?._id) {
+      await createNotification({
+        userId: vendorUser._id,
+        type: 'in_app',
+        title: 'Order Cancelled',
+        content: `Order #${data.rentalNumber} has been cancelled by ${data.cancelledBy === data.userId ? 'the customer' : 'the vendor'}.`,
+        data: { rentalId: data._id, reason: data.reason, refundAmount: data.refundAmount },
+      });
+      if (vendorUser.email) {
+        await processJob('email:send', {
+          to: vendorUser.email,
+          subject: `Order Cancelled #${data.rentalNumber} - RentEase`,
+          template: 'delivery-cancelled',
+          data: {
+            name: fullName(vendorUser) || 'Vendor',
+            isVendor: true,
+            deliveryNumber: '',
+            rentalNumber: data.rentalNumber,
+            productName,
+            reason: data.reason,
+            refundAmount: data.refundAmount,
+            address: {
+              addressLine1: addr.addressLine1 || '',
+              addressLine2: addr.addressLine2 || '',
+              city: addr.city || '',
+              state: addr.state || '',
+              pincode: addr.pincode || '',
+            },
+            trackUrl: `${CLIENT_URL}/vendor/orders`,
+          },
+        });
+      }
+    }
 
     // Process refund if applicable
     if (data.refundAmount > 0) {

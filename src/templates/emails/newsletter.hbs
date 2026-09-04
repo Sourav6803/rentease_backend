@@ -1,0 +1,38 @@
+        <h2>{{title}}</h2>
+
+        {{#if intro}}
+        <p>{{intro}}</p>
+        {{/if}}
+
+        {{#if bodyHtml}}
+        {{{bodyHtml}}}
+        {{else}}
+        {{#if body}}
+        <p>{{body}}</p>
+        {{/if}}
+        {{/if}}
+
+        {{#if items.length}}
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Details</th>
+            </tr>
+            {{#each items}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.details}}</td>
+            </tr>
+            {{/each}}
+        </table>
+        {{/if}}
+
+        {{#if ctaText}}
+        <center>
+            <a href="{{ctaUrl}}" class="button">{{ctaText}}</a>
+        </center>
+        {{/if}}
+
+        <p>Thank you for being part of the RentEase community!</p>
+
+        <p>Stay tuned for more updates,<br>The RentEase Team</p>

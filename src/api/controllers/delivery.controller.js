@@ -931,10 +931,12 @@ class DeliveryController {
    */
   getDeliveryHistory = catchAsync(async (req, res) => {
     const { page = 1, limit = 10, status } = req.query;
-    return ApiResponse.success(res, 200, 'Delivery history retrieved', {
-      deliveries: [],
-      pagination: { page, limit, total: 0, pages: 0 }
+    const result = await DeliveryPartnerService.getDeliveryHistory(req.user._id, {
+      page: parseInt(page, 10),
+      limit: parseInt(limit, 10),
+      status,
     });
+    return ApiResponse.success(res, 200, 'Delivery history retrieved', result);
   });
 
   /**
@@ -960,16 +962,58 @@ class DeliveryController {
   completeDelivery = catchAsync(async (req, res) => {
     const { deliveryId } = req.params;
     const { recipientName, recipientPhone, otp, notes } = req.body;
-    
-    // Verify OTP if provided
+    const person = await DeliveryPartnerService.resolvePersonByUserId(req.user._id);
+
+    // Verify OTP if provided (2FA check before completing).
+    // OTP_ALREADY_USED is OK — the partner already verified it via the
+    // verify-otp step; completing with the same OTP is the expected flow.
     if (otp) {
       const otpResult = await DeliveryOTPService.verifyDeliveryOTP(deliveryId, otp);
-      if (!otpResult.verified) {
-        throw new AppError(otpResult.error, 400);
+      if (!otpResult.verified && otpResult.code !== 'OTP_ALREADY_USED') {
+        throw new AppError(otpResult.error, 400, otpResult.code);
       }
     }
-    
-    return ApiResponse.success(res, 200, 'Delivery completed successfully', { deliveryId });
+
+    // Extract uploaded files (multipart handled by upload.fields middleware,
+    // memory storage → files come as buffers)
+    const signatureFile = req.files?.signature?.[0];
+    const photoFiles = (req.files?.photos || []).filter((f) => f.buffer);
+
+    let signature;
+    let photos = [];
+
+    // Upload to Cloudinary if present
+    if (signatureFile) {
+      const sig = await DeliveryProofService.uploadSignature(
+        deliveryId,
+        { buffer: signatureFile.buffer, mimetype: signatureFile.mimetype },
+        req.user._id
+      );
+      signature = sig?.signature?.url || sig?.url || sig?.signatureUrl || null;
+    }
+    if (photoFiles.length) {
+      const proof = await DeliveryProofService.uploadDeliveryPhotos(
+        deliveryId,
+        photoFiles.map((f) => ({ buffer: f.buffer, mimetype: f.mimetype })),
+        req.user._id
+      );
+      photos = (proof?.photos || []).map((p) => p.url || p);
+    }
+
+    const delivery = await DeliveryService.markAsDelivered(deliveryId, person._id, {
+      recipientName,
+      recipientPhone,
+      signature,
+      photos,
+      otp,
+      notes,
+    });
+
+    return ApiResponse.success(res, 200, 'Delivery completed successfully', {
+      deliveryId,
+      status: delivery.status,
+      deliveryNumber: delivery.deliveryNumber,
+    });
   });
 
   /**
@@ -978,7 +1022,23 @@ class DeliveryController {
   failDelivery = catchAsync(async (req, res) => {
     const { deliveryId } = req.params;
     const { reason, notes, reschedule } = req.body;
-    return ApiResponse.success(res, 200, 'Delivery marked as failed', { deliveryId, reason });
+
+    if (!reason) {
+      throw new AppError('Reason is required to fail a delivery', 400);
+    }
+
+    const delivery = await DeliveryService.markAsFailed(deliveryId, req.user._id, {
+      reason,
+      notes,
+      reschedule: !!reschedule,
+    });
+
+    return ApiResponse.success(res, 200, 'Delivery marked as failed', {
+      deliveryId,
+      status: delivery.status,
+      deliveryNumber: delivery.deliveryNumber,
+      reason,
+    });
   });
 
   /**
@@ -987,7 +1047,36 @@ class DeliveryController {
   reportDeliveryIssue = catchAsync(async (req, res) => {
     const { deliveryId } = req.params;
     const { issueType, description, photos } = req.body;
-    return ApiResponse.success(res, 200, 'Issue reported successfully', { deliveryId });
+
+    const delivery = await Delivery.findById(deliveryId);
+    if (!delivery) {
+      throw new AppError('Delivery not found', 404);
+    }
+
+    delivery.issues = delivery.issues || [];
+    delivery.issues.push({
+      type: issueType,
+      description,
+      reportedAt: new Date(),
+      reportedBy: req.user?._id,
+      photos: photos || [],
+    });
+    await delivery.save();
+
+    // Notify vendor + customer about the issue
+    const { eventEmitter, EVENTS } = require('../../events');
+    eventEmitter.emit(EVENTS.DELIVERY.ISSUE_REPORTED || 'delivery:issue', {
+      deliveryId: delivery._id,
+      deliveryNumber: delivery.deliveryNumber,
+      userId: delivery.rental?.user,
+      issueType,
+      description,
+    });
+
+    return ApiResponse.success(res, 200, 'Issue reported successfully', {
+      deliveryId,
+      issues: delivery.issues,
+    });
   });
 
   /**
@@ -995,10 +1084,25 @@ class DeliveryController {
    */
   getTrackingInfo = catchAsync(async (req, res) => {
     const { trackingNumber } = req.params;
+    const delivery = await Delivery.findOne({ deliveryNumber: trackingNumber })
+      .populate('address')
+      .lean();
+
+    if (!delivery) {
+      throw new AppError('Delivery not found', 404);
+    }
+
     return ApiResponse.success(res, 200, 'Tracking info retrieved', {
       trackingNumber,
-      status: 'in_transit',
-      estimatedArrival: new Date()
+      status: delivery.status,
+      estimatedArrival: delivery.tracking?.estimatedArrival || delivery.schedule?.deadline || null,
+      actualArrival: delivery.tracking?.actualArrival || null,
+      timeline: delivery.tracking?.timeline || [],
+      currentLocation: delivery.tracking?.currentLocation || null,
+      address: delivery.address || null,
+      scheduledSlot: delivery.schedule?.scheduledSlot || null,
+      scheduledDate: delivery.schedule?.scheduledDate || null,
+      deliveryNumber: delivery.deliveryNumber,
     });
   });
 
@@ -1007,10 +1111,25 @@ class DeliveryController {
    */
   getPublicTrackingInfo = catchAsync(async (req, res) => {
     const { trackingNumber } = req.params;
+    const delivery = await Delivery.findOne({ deliveryNumber: trackingNumber })
+      .populate('address')
+      .lean();
+
+    if (!delivery) {
+      throw new AppError('Delivery not found', 404);
+    }
+
+    // Public view — expose only safe subset
     return ApiResponse.success(res, 200, 'Tracking info retrieved', {
       trackingNumber,
-      status: 'in_transit',
-      estimatedArrival: new Date()
+      status: delivery.status,
+      estimatedArrival: delivery.tracking?.estimatedArrival || delivery.schedule?.deadline || null,
+      actualArrival: delivery.tracking?.actualArrival || null,
+      timeline: (delivery.tracking?.timeline || []).map(({ status: s, timestamp, note }) => ({ status: s, timestamp, note })),
+      currentLocation: delivery.tracking?.currentLocation || null,
+      scheduledSlot: delivery.schedule?.scheduledSlot || null,
+      scheduledDate: delivery.schedule?.scheduledDate || null,
+      deliveryNumber: delivery.deliveryNumber,
     });
   });
 
@@ -1042,17 +1161,29 @@ class DeliveryController {
    */
   generateDeliveryOTP = catchAsync(async (req, res) => {
     const { deliveryId } = req.params;
-    const delivery = await Delivery.findById(deliveryId).populate('rental');
+    const delivery = await Delivery.findById(deliveryId)
+      .populate('rental')
+      .populate({
+        path: 'rental',
+        populate: { path: 'user', select: 'email profile.firstName profile.lastName phone' },
+      });
     
     if (!delivery) {
       throw new AppError('Delivery not found', 404);
     }
     
     const customerPhone = delivery.contact?.phone || delivery.rental?.user?.phone;
+    const customerEmail = delivery.contact?.email || delivery.rental?.user?.email;
+    const customerName = delivery.contact?.name
+      || [delivery.rental?.user?.profile?.firstName, delivery.rental?.user?.profile?.lastName].filter(Boolean).join(' ')
+      || 'Customer';
     
     const result = await DeliveryOTPService.createDeliveryOTP(deliveryId, customerPhone, {
       length: 6,
-      expiryMinutes: 5
+      expiryMinutes: 5,
+      customerEmail,
+      customerName,
+      deliveryNumber: delivery.deliveryNumber,
     });
     
     return ApiResponse.success(res, 200, 'OTP generated successfully', result);
@@ -1079,15 +1210,30 @@ class DeliveryController {
    */
   resendDeliveryOTP = catchAsync(async (req, res) => {
     const { deliveryId } = req.params;
-    const delivery = await Delivery.findById(deliveryId).populate('rental');
+    const delivery = await Delivery.findById(deliveryId)
+      .populate('rental')
+      .populate({
+        path: 'rental',
+        populate: { path: 'user', select: 'email profile.firstName profile.lastName phone' },
+      });
     
     if (!delivery) {
       throw new AppError('Delivery not found', 404);
     }
     
     const customerPhone = delivery.contact?.phone || delivery.rental?.user?.phone;
+    const customerEmail = delivery.contact?.email || delivery.rental?.user?.email;
+    const customerName = delivery.contact?.name
+      || [delivery.rental?.user?.profile?.firstName, delivery.rental?.user?.profile?.lastName].filter(Boolean).join(' ')
+      || 'Customer';
     
-    const result = await DeliveryOTPService.resendOTP(deliveryId, customerPhone);
+    const result = await DeliveryOTPService.resendOTP(deliveryId, customerPhone, {
+      length: 6,
+      expiryMinutes: 5,
+      customerEmail,
+      customerName,
+      deliveryNumber: delivery.deliveryNumber,
+    });
     
     return ApiResponse.success(res, 200, 'OTP resent successfully', result);
   });
@@ -1106,7 +1252,7 @@ class DeliveryController {
     
     const result = await DeliveryProofService.uploadSignature(
       deliveryId,
-      { base64: req.file.buffer.toString('base64') },
+      { buffer: req.file.buffer, mimetype: req.file.mimetype },
       req.user._id
     );
     
@@ -1124,7 +1270,8 @@ class DeliveryController {
     }
     
     const photos = req.files.map(file => ({
-      base64: file.buffer.toString('base64'),
+      buffer: file.buffer,
+      mimetype: file.mimetype,
       caption: req.body.captions ? req.body.captions[file.fieldname] : null
     }));
     

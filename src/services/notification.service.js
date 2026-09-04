@@ -1540,4 +1540,17 @@ class NotificationService {
   }
 }
 
-module.exports = new NotificationService();
+// Export a singleton INSTANCE with every prototype method pre-bound to it.
+// Many modules destructure methods (e.g. `const { createNotification } =
+// require('../services/notification.service')`) and call them standalone;
+// without binding, `this` is undefined and calls like
+// `this.generateNotificationNumber()` throw "Cannot read properties of
+// undefined".
+const notificationServiceInstance = new NotificationService();
+for (const key of Object.getOwnPropertyNames(NotificationService.prototype)) {
+  if (typeof notificationServiceInstance[key] === 'function') {
+    notificationServiceInstance[key] =
+      notificationServiceInstance[key].bind(notificationServiceInstance);
+  }
+}
+module.exports = notificationServiceInstance;

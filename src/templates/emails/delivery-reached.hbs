@@ -1,0 +1,44 @@
+        <h2>Your Delivery Partner Has Arrived! 📍</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>Your delivery partner has <strong>reached your location</strong>. Please be ready to receive your order.</p>
+
+        <div class="info-box">
+            <strong>Delivery #{{deliveryNumber}}</strong>
+        </div>
+
+        <table>
+            <tr>
+                <th>Order:</th>
+                <td>#{{rentalNumber}}</td>
+            </tr>
+            {{#if productName}}
+            <tr>
+                <th>Product:</th>
+                <td>{{productName}}</td>
+            </tr>
+            {{/if}}
+        </table>
+
+        <h3>Delivery Address:</h3>
+        <p>
+            {{address.addressLine1}}<br>
+            {{#if address.addressLine2}}{{address.addressLine2}}<br>{{/if}}
+            {{address.city}}, {{address.state}} - {{address.pincode}}
+        </p>
+
+        <center>
+            <a href="{{trackUrl}}" class="button">Track Your Delivery</a>
+        </center>
+
+        <div class="info-box">
+            <h3>Please Note:</h3>
+            <ul>
+                <li>Keep your phone and ID ready</li>
+                <li>Inspect the product before receiving it</li>
+                <li>Sign / provide OTP when the delivery is complete</li>
+            </ul>
+        </div>
+
+        <p>Happy Renting,<br>The RentEase Team</p>

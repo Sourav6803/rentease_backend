@@ -949,9 +949,13 @@ async getAllDeliveryTeams(page = 1, limit = 20, filters = {}) {
         if (!skipAvailabilityCheck) {
           console.log('Checking availability for delivery person:', personId, 'Pincode:', address.pincode)
           const isAvailable = await person.isAvailableForDelivery(address.pincode);
-          console.log('Availability result:', isAvailable)
+          console.log('Availability result:', isAvailable, '| person serviceablePincodes:', JSON.stringify(person.serviceablePincodes))
 
           if (!isAvailable && !force) {
+            console.log('[DEBUG-AUTOASSIGN] ❌ Availability check FAILED for pincode:', address.pincode,
+              '| person pincodes:', JSON.stringify(person.serviceablePincodes),
+              '| isAvailable flag:', person.availability?.isAvailable,
+              '| isOnDuty:', person.availability?.isOnDuty)
             throw new AppError('Delivery person is not available', 400);
           }
         }

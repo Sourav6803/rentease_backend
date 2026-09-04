@@ -2,7 +2,12 @@
 const eventEmitter = require('./eventEmitter');
 const EVENTS = require('./events.constants');
 const logger = require('../config/logger');
-const { emitToUser, emitToAdmins } = require('../socket');
+// Lazy require breaks the socket <-> events circular dependency: socket loads
+// handlers -> services -> events while events are still loading. Deferring the
+// require to call time keeps every call site unchanged.
+const socketApi = () => require('../socket');
+const emitToUser = (...args) => socketApi().emitToUser(...args);
+const emitToAdmins = (...args) => socketApi().emitToAdmins(...args);
 const { createNotification } = require('../services/notification.service');
 const { processJob } = require('../jobs');
 

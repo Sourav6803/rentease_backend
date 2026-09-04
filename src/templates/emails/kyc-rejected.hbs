@@ -1,0 +1,30 @@
+        <h2>KYC Verification Update 📋</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>We're sorry, but your <strong>KYC verification could not be approved</strong> at this time.</p>
+
+        {{#if reason}}
+        <div class="info-box">
+            <strong>Reason:</strong> {{reason}}
+        </div>
+        {{/if}}
+
+        {{#if comments}}
+        <p><strong>Additional details:</strong> {{comments}}</p>
+        {{/if}}
+
+        <p>Here's what you can do:</p>
+        <ul>
+            <li>Double-check the documents you submitted (make sure they are clear and valid)</li>
+            <li>Re-submit your KYC documents from your profile page</li>
+            <li>Contact support if you believe this is a mistake</li>
+        </ul>
+
+        <center>
+            <a href="{{kycUrl}}" class="button">Re-submit KYC</a>
+        </center>
+
+        <p>We're here to help — feel free to reach out anytime.</p>
+
+        <p>Best Regards,<br>The RentEase Team</p>

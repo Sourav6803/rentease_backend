@@ -166,14 +166,23 @@ deliveryPersonSchema.virtual('fullName').get(async function() {
 
 // Methods
 deliveryPersonSchema.methods.isAvailableForDelivery = async function(pincode) {
+  console.log('[DEBUG-AUTOASSIGN] ⏰ isAvailableForDelivery | pincode:', pincode,
+    '| isAvailable:', this.availability?.isAvailable,
+    '| isOnDuty:', this.availability?.isOnDuty,
+    '| activeAssignments:', this.currentAssignments?.length,
+    '| maxConcurrent:', this.maxConcurrentDeliveries,
+    '| serviceablePincodes:', JSON.stringify(this.serviceablePincodes),
+    '| zone:', this.zone);
   if (!this.availability.isAvailable || !this.availability.isOnDuty) return false;
   if (this.currentAssignments.length >= this.maxConcurrentDeliveries) return false;
   if (!this.serviceablePincodes.includes(pincode) && this.zone !== 'all') return false;
   
-  // Check shift timing
+  // Check shift timing (IST-aware: shifts are configured in IST, so evaluate
+  // the current wall-clock time in IST regardless of server timezone).
   const now = new Date();
-  const currentHour = now.getHours();
-  const currentMinute = now.getMinutes();
+  const istNow = new Date(now.getTime() + 5.5 * 60 * 60 * 1000);
+  const currentHour = istNow.getUTCHours();
+  const currentMinute = istNow.getUTCMinutes();
   const shiftStart = this.availability.shifts.start.split(':').map(Number);
   const shiftEnd = this.availability.shifts.end.split(':').map(Number);
   

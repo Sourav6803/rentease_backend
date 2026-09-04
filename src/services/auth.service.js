@@ -231,7 +231,7 @@ class AuthService {
         roleData = await Admin.findOne({ user: user._id });
       }
 
-      console.log("🔍roledata-->", roleData)
+      // console.log("🔍roledata-->", roleData)
 
       // Emit login event
       eventEmitter.emit(EVENTS.USER.LOGGED_IN, {

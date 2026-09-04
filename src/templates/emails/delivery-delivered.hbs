@@ -1,0 +1,68 @@
+        {{#if isVendor}}
+        <h2>Delivery Completed ✅</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>The delivery for your order has been <strong>completed successfully</strong>. The product is now with the customer.</p>
+        {{else}}
+        <h2>Your Order Has Been Delivered! 🎉</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>Great news! Your order has been <strong>delivered successfully</strong>. Enjoy your rental!</p>
+        {{/if}}
+
+        <div class="info-box">
+            <strong>Delivery #{{deliveryNumber}}</strong>
+        </div>
+
+        <table>
+            <tr>
+                <th>Order:</th>
+                <td>#{{rentalNumber}}</td>
+            </tr>
+            {{#if productName}}
+            <tr>
+                <th>Product:</th>
+                <td>{{productName}}</td>
+            </tr>
+            {{/if}}
+            {{#if receivedBy}}
+            <tr>
+                <th>Received By:</th>
+                <td>{{receivedBy}}</td>
+            </tr>
+            {{/if}}
+        </table>
+
+        <h3>Delivery Address:</h3>
+        <p>
+            {{address.addressLine1}}<br>
+            {{#if address.addressLine2}}{{address.addressLine2}}<br>{{/if}}
+            {{address.city}}, {{address.state}} - {{address.pincode}}
+        </p>
+
+        {{#if isVendor}}
+        <center>
+            <a href="{{trackUrl}}" class="button">View Order</a>
+        </center>
+
+        <p>If you have not received confirmation or notice any discrepancy, please contact support immediately.</p>
+        {{else}}
+        <center>
+            <a href="{{trackUrl}}" class="button">View Your Rental</a>
+        </center>
+
+        <div class="info-box">
+            <h3>What's Next?</h3>
+            <ul>
+                <li>Your rental period has started — enjoy the product!</li>
+                <li>In case of any damage, report it within 24 hours</li>
+                <li>A return reminder will be sent before your rental ends</li>
+            </ul>
+        </div>
+        {{/if}}
+
+        <p>Thank you for choosing RentEase!</p>
+
+        <p>Happy Renting,<br>The RentEase Team</p>

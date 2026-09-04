@@ -20,10 +20,30 @@ const process = async (type, data) => {
         },
       });
       
+    case 'rental-created':
+      return await emailService.sendEmail({
+        to: data.to,
+        subject: `New Rental Order #${data.rentalNumber} - Action Required`,
+        template: 'rental-created',
+        data: {
+          vendorName: data.vendorName,
+          customerName: data.customerName,
+          rentalNumber: data.rentalNumber,
+          productName: data.productName,
+          startDate: data.startDate,
+          endDate: data.endDate,
+          monthlyRent: data.monthlyRent,
+          securityDeposit: data.securityDeposit,
+          totalAmount: data.totalAmount,
+          deliveryAddress: data.deliveryAddress,
+          verifyUrl: data.verifyUrl,
+        },
+      });
+
     case 'rental-confirmed':
       return await emailService.sendEmail({
         to: data.to,
-        subject: 'Rental Confirmed - RentEase',
+        subject: `Rental Confirmed #${data.rentalNumber} - RentEase`,
         template: 'rental-confirmed',
         data: {
           name: data.name,
@@ -31,7 +51,11 @@ const process = async (type, data) => {
           productName: data.productName,
           startDate: data.startDate,
           endDate: data.endDate,
+          monthlyRent: data.monthlyRent,
+          securityDeposit: data.securityDeposit,
           totalAmount: data.totalAmount,
+          deliveryAddress: data.deliveryAddress,
+          trackUrl: data.trackUrl,
         },
       });
       
@@ -117,9 +141,129 @@ const process = async (type, data) => {
         to: data.to,
         subject: data.subject,
         template: 'newsletter',
-        data: data.content,
+        data: typeof data.content === 'string'
+          ? { title: data.subject || 'RentEase Updates', body: data.content }
+          : (data.content || {}),
       });
       
+    case 'delivery-out-for-delivery':
+      return await emailService.sendEmail({
+        to: data.to,
+        subject: `Your Order Is Out for Delivery #${data.deliveryNumber} - RentEase`,
+        template: 'delivery-out-for-delivery',
+        data: {
+          name: data.name,
+          deliveryNumber: data.deliveryNumber,
+          rentalNumber: data.rentalNumber,
+          productName: data.productName,
+          deliveryDate: data.deliveryDate,
+          deliverySlot: data.deliverySlot,
+          address: data.address,
+          trackUrl: data.trackUrl,
+        },
+      });
+
+    case 'delivery-in-transit':
+      return await emailService.sendEmail({
+        to: data.to,
+        subject: `Your Delivery Is On the Way #${data.deliveryNumber} - RentEase`,
+        template: 'delivery-in-transit',
+        data: {
+          name: data.name,
+          deliveryNumber: data.deliveryNumber,
+          rentalNumber: data.rentalNumber,
+          productName: data.productName,
+          estimatedArrival: data.estimatedArrival,
+          address: data.address,
+          trackUrl: data.trackUrl,
+        },
+      });
+
+    case 'delivery-reached':
+      return await emailService.sendEmail({
+        to: data.to,
+        subject: `Your Delivery Partner Has Arrived #${data.deliveryNumber} - RentEase`,
+        template: 'delivery-reached',
+        data: {
+          name: data.name,
+          deliveryNumber: data.deliveryNumber,
+          rentalNumber: data.rentalNumber,
+          productName: data.productName,
+          address: data.address,
+          trackUrl: data.trackUrl,
+        },
+      });
+
+    case 'delivery-delivered':
+      return await emailService.sendEmail({
+        to: data.to,
+        subject: data.isVendor
+          ? `Delivery Completed #${data.deliveryNumber} - RentEase`
+          : `Your Order Has Been Delivered #${data.deliveryNumber} - RentEase`,
+        template: 'delivery-delivered',
+        data: {
+          name: data.name,
+          isVendor: data.isVendor,
+          deliveryNumber: data.deliveryNumber,
+          rentalNumber: data.rentalNumber,
+          productName: data.productName,
+          receivedBy: data.receivedBy,
+          address: data.address,
+          trackUrl: data.trackUrl,
+        },
+      });
+
+    case 'delivery-failed':
+      return await emailService.sendEmail({
+        to: data.to,
+        subject: data.isVendor
+          ? `Delivery Failed #${data.deliveryNumber} - Action Required`
+          : `Delivery Attempt Failed #${data.deliveryNumber} - RentEase`,
+        template: 'delivery-failed',
+        data: {
+          name: data.name,
+          isVendor: data.isVendor,
+          deliveryNumber: data.deliveryNumber,
+          rentalNumber: data.rentalNumber,
+          productName: data.productName,
+          reason: data.reason,
+          rescheduled: data.rescheduled,
+          address: data.address,
+          trackUrl: data.trackUrl,
+        },
+      });
+
+    case 'delivery-cancelled':
+      return await emailService.sendEmail({
+        to: data.to,
+        subject: `Order Cancelled #${data.rentalNumber} - RentEase`,
+        template: 'delivery-cancelled',
+        data: {
+          name: data.name,
+          isVendor: data.isVendor,
+          deliveryNumber: data.deliveryNumber,
+          rentalNumber: data.rentalNumber,
+          productName: data.productName,
+          reason: data.reason,
+          refundAmount: data.refundAmount,
+          address: data.address,
+          trackUrl: data.trackUrl,
+        },
+      });
+
+    case 'delivery-otp':
+      return await emailService.sendEmail({
+        to: data.to,
+        subject: `Your Delivery OTP - RentEase`,
+        template: 'delivery-otp',
+        data: {
+          name: data.name,
+          otp: data.otp,
+          deliveryNumber: data.deliveryNumber,
+          expiryMinutes: data.expiryMinutes,
+        },
+      });
+
     default:
       throw new Error(`Unknown email job type: ${type}`);
   }

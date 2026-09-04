@@ -1,0 +1,28 @@
+        <h2>Payment Failed ⚠️</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>Unfortunately, your payment could <strong>not be processed</strong>. Here are the details:</p>
+
+        <div class="info-box">
+            <strong>Order #{{rentalNumber}}</strong>
+        </div>
+
+        <table>
+            <tr>
+                <th>Amount:</th>
+                <td>₹{{amount}}</td>
+            </tr>
+            {{#if reason}}
+            <tr>
+                <th>Reason:</th>
+                <td>{{reason}}</td>
+            </tr>
+            {{/if}}
+        </table>
+
+        <p>Don't worry — you can try again anytime. Please check your payment method details or use a different payment option to avoid any interruption in your rental.</p>
+
+        <p>If you need help, our support team is always here for you.</p>
+
+        <p>Best Regards,<br>The RentEase Team</p>

@@ -1,5 +1,5 @@
 const { Delivery, Rental, User, Vendor, Address, DeliveryPerson } = require('../models');
-const { AppError } = require('../utils/AppError');
+const  AppError  = require('../utils/AppError');
 const { addJob } = require('../jobs');
 const { eventEmitter, EVENTS } = require('../events');
 const { getRedisClient } = require('../config/redis');
@@ -162,7 +162,11 @@ class DeliveryService {
           product: rental.product._id,
           inventory: rental.inventory,
           name: rental.product.basicInfo.name,
-          quantity: 1
+          quantity: 1,
+          images: (rental.product.media?.images || [])
+            .slice(0, 5)
+            .map((img) => img.url)
+            .filter(Boolean),
         }],
         route: route ? {
           distance: route.distance,
@@ -275,7 +279,6 @@ class DeliveryService {
         })
         .populate('address')
         .populate('deliveryPerson', 'profile.firstName profile.lastName phone')
-        .populate('assignedTeam', 'profile.firstName profile.lastName')
         .populate('items.product', 'basicInfo.name')
         .populate('items.inventory', 'sku')
         .lean();
@@ -795,22 +798,13 @@ class DeliveryService {
 
       await session.commitTransaction();
 
-      // Notify customer
-      await addJob('notification', 'create', {
-        userId: delivery.rental.user,
-        type: 'in_app',
-        title: 'Delivery Started',
-        content: `Your delivery #${delivery.deliveryNumber} is on the way!`,
-        data: {
-          deliveryId: delivery._id,
-          trackingUrl: `${process.env.CLIENT_URL}/deliveries/track/${delivery.deliveryNumber}`
-        }
-      });
-
-      // Send SMS
-      await addJob('sms', 'send', {
-        to: delivery.contact.phone,
-        message: `Your RentEase delivery #${delivery.deliveryNumber} is on the way! Track here: ${process.env.CLIENT_URL}/deliveries/track/${delivery.deliveryNumber}`
+      // Emit event — notification + email + SMS handled centrally in
+      // delivery.events.js (OUT_FOR_DELIVERY handler) to avoid duplication.
+      eventEmitter.emit(EVENTS.DELIVERY.OUT_FOR_DELIVERY, {
+        deliveryId: delivery._id,
+        deliveryNumber: delivery.deliveryNumber,
+        userId: delivery.rental?.user,
+        status: 'out_for_delivery',
       });
 
       // Invalidate cache
@@ -962,6 +956,8 @@ class DeliveryService {
         deliveryNumber: delivery.deliveryNumber,
         status: newStatus,
         userId: delivery.rental?.user,
+        estimatedArrival: delivery.tracking?.estimatedArrival,
+        location,
       });
 
       eventEmitter.emit('delivery:location-updated', {
@@ -1028,30 +1024,37 @@ class DeliveryService {
     session.startTransaction();
 
     try {
-      const { signature, photos, otp, notes } = proofData;
+      const { recipientName, signature, photos, otp, notes } = proofData;
 
       const delivery = await Delivery.findOne({
         _id: deliveryId,
-        deliveryPerson: deliveryPersonId,
-        status: { $in: ['out_for_delivery', 'in_transit'] }
+        ...this.partnerDeliveryQuery(deliveryPersonId),
+        status: { $in: ['out_for_delivery', 'in_transit', 'reached'] }
       }).populate('rental').session(session);
 
       if (!delivery) {
         throw new AppError('Delivery not found or not in transit', 404);
       }
 
-      // Verify OTP if required
-      if (delivery.proof?.otp && delivery.proof.otp !== otp) {
+      // Verify OTP if required (proof.otp may be a string code or { code, verified })
+      const storedOtp = typeof delivery.proof?.otp === 'string' ? delivery.proof.otp : delivery.proof?.otp?.code;
+      if (storedOtp && storedOtp !== otp) {
         throw new AppError('Invalid OTP', 400);
       }
 
       delivery.status = 'delivered';
       delivery.tracking.actualArrival = new Date();
       delivery.proof = {
-        deliveredTo: delivery.contact.name,
-        signature,
-        photos: photos || [],
-        otp: otp ? { verified: true, verifiedAt: new Date() } : undefined
+        deliveredTo: recipientName || delivery.contact.name,
+        // Schema expects { data, capturedAt } — normalize URL/string input.
+        signature: signature
+          ? (typeof signature === 'object' ? signature : { data: signature, capturedAt: new Date() })
+          : undefined,
+        // Schema expects [{ url, caption, timestamp }] — normalize strings.
+        photos: Array.isArray(photos)
+          ? photos.map((p) => (typeof p === 'object' && p !== null ? p : { url: p, timestamp: new Date() }))
+          : [],
+        otp: otp ? { code: otp, verified: true, verifiedAt: new Date() } : undefined
       };
 
       delivery.tracking.timeline.push({
@@ -1070,7 +1073,7 @@ class DeliveryService {
           actualDate: new Date(),
           status: 'delivered',
           deliveredBy: deliveryPersonId,
-          receivedBy: delivery.contact.name,
+          receivedBy: recipientName || delivery.contact.name,
           signature
         };
         await delivery.rental.save({ session });
@@ -1171,16 +1174,16 @@ class DeliveryService {
 
       await session.commitTransaction();
 
-      // Notify customer
-      await addJob('notification', 'create', {
-        userId: delivery.rental.user,
-        type: 'in_app',
-        title: 'Delivery Failed',
-        content: `Your delivery #${delivery.deliveryNumber} failed. Reason: ${reason}`,
-        data: {
-          deliveryId: delivery._id,
-          rescheduled: !!reschedule
-        }
+      // Emit event — notification + email handled centrally in
+      // delivery.events.js (FAILED handler).
+      eventEmitter.emit(EVENTS.DELIVERY.FAILED, {
+        deliveryId: delivery._id,
+        deliveryNumber: delivery.deliveryNumber,
+        userId: delivery.rental?.user,
+        status: 'failed',
+        reason,
+        notes,
+        rescheduled: !!reschedule,
       });
 
       // Invalidate cache

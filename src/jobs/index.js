@@ -141,9 +141,12 @@ const initializeQueues = () => {
         {
           connection,
           concurrency: config.concurrency,
-          // Gentler stalled-job handling for serverless Redis (Upstash):
-          // checks stalled jobs every 60s and allows one recovery attempt
-          stalledInterval: 60000,
+          // Upstash free tier bills per command — keep worker churn low:
+          // - lockDuration 60s    -> lock heartbeat every 30s instead of 15s
+          // - stalledInterval 120s -> stalled checks twice as rare
+          // - maxStalledCount 2   -> one recovery attempt before failing
+          lockDuration: 60000,
+          stalledInterval: 120000,
           maxStalledCount: 2,
         }
       );

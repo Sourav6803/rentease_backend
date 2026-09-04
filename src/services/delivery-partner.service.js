@@ -35,6 +35,15 @@ class DeliveryPartnerService {
       slot?.label ||
       (slot?.start && slot?.end ? `${slot.start} - ${slot.end}` : 'Flexible slot');
 
+    // Product may be populated on rental (nested populate). Used as image
+    // fallback when item-level images are missing on the delivery doc.
+    const rentalProduct = delivery.rental?.product;
+    const productImages = Array.isArray(rentalProduct?.media?.images)
+      ? rentalProduct.media.images
+          .map((img) => (typeof img === 'string' ? img : img?.url || img?.thumbnail))
+          .filter(Boolean)
+      : [];
+
     return {
       _id: delivery._id,
       deliveryNumber: delivery.deliveryNumber,
@@ -60,11 +69,32 @@ class DeliveryPartnerService {
         name: item.name,
         quantity: item.quantity || 1,
         sku: item.sku,
+        condition: item.condition || 'new',
+        // Schema stores images as plain URL strings ([String]), but be
+        // defensive and also handle {url} objects just in case.
+        images: (item.images || []).length
+          ? (item.images || [])
+              .map((img) => (typeof img === 'string' ? img : img?.url))
+              .filter(Boolean)
+          : productImages,
       })),
       distance: delivery.route?.distance || null,
       estimatedDuration: delivery.route?.duration || null,
       earnings: delivery.charges?.totalCharge || DELIVERY_EARNING_PER_STOP,
-      rental: delivery.rental,
+      rental: rentalProduct
+        ? {
+            _id: delivery.rental._id,
+            rentalNumber: delivery.rental.rentalNumber,
+            status: delivery.rental.status,
+            product: {
+              _id: rentalProduct._id,
+              name: rentalProduct.basicInfo?.name,
+              sku: rentalProduct.basicInfo?.sku,
+              category: rentalProduct.category,
+              images: productImages,
+            },
+          }
+        : delivery.rental,
     };
   }
 
@@ -313,7 +343,14 @@ class DeliveryPartnerService {
       status: { $nin: ['cancelled', 'failed'] },
     })
       .populate('address')
-      .populate({ path: 'rental', select: 'rentalNumber' })
+      .populate({
+        path: 'rental',
+        select: 'rentalNumber user vendor product address rentalDetails payment status',
+        populate: {
+          path: 'product',
+          select: 'basicInfo.name basicInfo.sku media.images category',
+        },
+      })
       .sort({ priority: -1, 'schedule.scheduledDate': 1 })
       .lean();
 
@@ -331,8 +368,17 @@ class DeliveryPartnerService {
       status: { $in: ['assigned', 'out_for_delivery', 'in_transit', 'reached', 'batched'] },
     })
       .populate('address')
+      .populate({
+        path: 'rental',
+        select: 'rentalNumber user vendor product address rentalDetails payment status',
+        populate: {
+          path: 'product',
+          select: 'basicInfo.name basicInfo.sku media.images category',
+        },
+      })
       .sort({ 'schedule.scheduledDate': 1 })
       .lean();
+
 
     return {
       deliveries: deliveries.map((d) => this.formatDeliveryForPartner(d)),
@@ -352,7 +398,7 @@ class DeliveryPartnerService {
       status: 'delivered',
       'tracking.actualArrival': { $gte: startDate.toDate() },
     })
-      .select('deliveryNumber tracking.actualArrival charges charges.totalCharge')
+      .select('deliveryNumber tracking.actualArrival charges')
       .lean();
 
     const breakdown = deliveries.map((d) => ({
@@ -434,6 +480,37 @@ class DeliveryPartnerService {
     });
 
     return { activities: activities.slice(0, limit) };
+  }
+
+  /**
+   * Get paginated delivery history for the current partner
+   */
+  async getDeliveryHistory(userId, { page = 1, limit = 10, status } = {}) {
+    const person = await this.resolvePersonByUserId(userId);
+
+    const filter = { ...this.personDeliveryQuery(person._id) };
+    if (status) filter.status = status;
+
+    const [deliveries, total] = await Promise.all([
+      Delivery.find(filter)
+        .populate('address')
+        .populate({ path: 'rental', select: 'rentalNumber' })
+        .sort({ updatedAt: -1 })
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .lean(),
+      Delivery.countDocuments(filter),
+    ]);
+
+    return {
+      deliveries: deliveries.map((d) => this.formatDeliveryForPartner(d)),
+      pagination: {
+        page,
+        limit,
+        total,
+        pages: Math.ceil(total / limit) || 0,
+      },
+    };
   }
 
   timelineToAction(status) {

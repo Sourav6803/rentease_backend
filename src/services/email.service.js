@@ -132,7 +132,20 @@ class EmailService {
 
       if (template) {
         mailOptions.template = template;
-        mailOptions.context = data || {};
+        // Merge shared template context (logo, links, year) with caller data so
+        // every template automatically gets the RentEase logo/links without each
+        // call site having to pass them. Caller data wins on collisions.
+        mailOptions.context = {
+          logoUrl:
+            process.env.LOGO_URL ||
+            `${process.env.API_URL || 'http://localhost:5000'}/public/logo.png`,
+          supportUrl: `${process.env.CLIENT_URL || ''}/support`,
+          privacyUrl: `${process.env.CLIENT_URL || ''}/privacy`,
+          termsUrl: `${process.env.CLIENT_URL || ''}/terms`,
+          year: new Date().getFullYear(),
+          email: to,
+          ...(data || {}),
+        };
       } else {
         if (html) mailOptions.html = html;
       }

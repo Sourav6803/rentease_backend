@@ -120,6 +120,7 @@ const EVENTS = {
     PICKED_UP: 'delivery:pickedup',
     FAILED: 'delivery:failed',
     RESCHEDULED: 'delivery:rescheduled',
+    CANCELLED: 'delivery:cancelled',
   },
 
   // System events

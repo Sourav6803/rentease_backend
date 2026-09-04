@@ -3,6 +3,7 @@ const { Delivery } = require('../models');
 const { addJob } = require('../jobs');
 const logger = require('../config/logger');
 const cloudinary = require('cloudinary').v2;
+const { Readable } = require('stream');
 
 class DeliveryProofService {
   constructor() {
@@ -15,22 +16,47 @@ class DeliveryProofService {
   }
 
   /**
+   * Upload a Buffer to Cloudinary via stream (fast, avoids base64 conversion).
+   * Camera phone photos are 3-5MB; base64 encoding adds 33% overhead and
+   * causes Cloudinary timeouts (499). Stream upload keeps it in-memory.
+   */
+  uploadBufferToCloudinary(buffer, options = {}) {
+    return new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        options,
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+      const stream = new Readable();
+      stream.push(buffer);
+      stream.push(null);
+      stream.pipe(uploadStream);
+    });
+  }
+
+  /**
    * Upload signature image
    */
   async uploadSignature(deliveryId, signatureData, capturedBy) {
     try {
       let signatureUrl = null;
-      
-      if (signatureData.base64) {
-        // Upload to Cloudinary
-        const result = await cloudinary.uploader.upload(signatureData.base64, {
-          folder: `delivery-signatures/${deliveryId}`,
-          public_id: `signature_${Date.now()}`,
-          transformation: [{ width: 800, crop: 'limit' }]
-        });
+      const uploadOptions = {
+        folder: `delivery-signatures/${deliveryId}`,
+        public_id: `signature_${Date.now()}`,
+        transformation: [{ width: 800, crop: 'limit' }]
+      };
+
+      if (signatureData?.buffer) {
+        const result = await this.uploadBufferToCloudinary(signatureData.buffer, uploadOptions);
         signatureUrl = result.secure_url;
-      } else if (signatureData.url) {
-        signatureUrl = signatureData.url;
+      } else if (signatureData?.base64 || signatureData?.url) {
+        const source = this.toCloudinarySource(signatureData);
+        if (source) {
+          const result = await cloudinary.uploader.upload(source, uploadOptions);
+          signatureUrl = result.secure_url;
+        }
       }
       
       const delivery = await Delivery.findById(deliveryId);
@@ -68,16 +94,21 @@ class DeliveryProofService {
       
       for (const photo of photos) {
         let photoUrl = null;
+        const uploadOptions = {
+          folder: `delivery-photos/${deliveryId}`,
+          public_id: `photo_${Date.now()}_${uploadedPhotos.length}`,
+          transformation: [{ width: 1200, crop: 'limit' }]
+        };
         
-        if (photo.base64) {
-          const result = await cloudinary.uploader.upload(photo.base64, {
-            folder: `delivery-photos/${deliveryId}`,
-            public_id: `photo_${Date.now()}_${uploadedPhotos.length}`,
-            transformation: [{ width: 1200, crop: 'limit' }]
-          });
+        if (photo.buffer) {
+          const result = await this.uploadBufferToCloudinary(photo.buffer, uploadOptions);
           photoUrl = result.secure_url;
-        } else if (photo.url) {
-          photoUrl = photo.url;
+        } else if (photo.base64 || photo.url) {
+          const source = this.toCloudinarySource(photo);
+          if (source) {
+            const result = await cloudinary.uploader.upload(source, uploadOptions);
+            photoUrl = result.secure_url;
+          }
         }
         
         uploadedPhotos.push({

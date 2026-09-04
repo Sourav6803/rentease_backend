@@ -238,6 +238,7 @@
 
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
+const path = require('path');
 
 // ─── Brand tokens ─────────────────────────────────────────────────────────────
 const C = {
@@ -299,10 +300,18 @@ function hLine(doc, x1, x2, y, color = C.slate300, lw = 0.4) {
      .strokeColor(color).lineWidth(lw).stroke();
 }
 
-// Draw house/home icon in pure pdfkit primitives
-function drawLogo(doc, x, y, sz = 28) {
+// Draw logo image with procedural fallback
+function drawLogo(doc, x, y, sz = 32) {
+  const logoPath = path.join(__dirname, '../public/logo.png');
+  try {
+    if (fs.existsSync(logoPath)) {
+      doc.image(logoPath, x, y, { width: sz, height: sz });
+      return;
+    }
+  } catch (e) {
+    // fall through to procedural
+  }
   const s = sz / 48;
-  // House body
   doc.save();
   doc.polygon(
     [x + 8*s,  y + 4*s],
@@ -310,16 +319,13 @@ function drawLogo(doc, x, y, sz = 28) {
     [x + 40*s, y + 44*s],
     [x + 8*s,  y + 44*s]
   ).fillColor(C.indigo).fill();
-  // Roof
   doc.polygon(
     [x + 24*s, y],
     [x + 48*s, y + 22*s],
     [x,        y + 22*s]
   ).fillColor(C.indigoDark).fill();
-  // Door
   doc.roundedRect(x + 19*s, y + 28*s, 10*s, 16*s, 1.5*s)
      .fillColor(C.indigoMid).fill();
-  // Windows
   [[10, 17], [30, 17]].forEach(([wx, wy]) => {
     doc.roundedRect(x + wx*s, y + wy*s, 9*s, 8*s, 1.5*s)
        .fillColor(C.white).fillOpacity(0.9).fill().fillOpacity(1);
@@ -435,8 +441,13 @@ function drawRentalStrip(doc, inv, y) {
     }
     doc.font('Helvetica-Bold').fontSize(7).fillColor(C.indigo)
        .text(col.label, cx, y + 11, { lineBreak: false });
-    doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.slate700)
-       .text(col.val, cx, y + 24, { width: segW - 14, lineBreak: false });
+    if (i === 1) {
+      doc.font('Helvetica-Bold').fontSize(7.5).fillColor(C.slate700)
+         .text(col.val, cx, y + 22, { width: segW - 14 });
+    } else {
+      doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.slate700)
+         .text(col.val, cx, y + 24, { width: segW - 14, lineBreak: false });
+    }
   });
 
   return y + H + 8;
@@ -486,9 +497,9 @@ function drawChargesTable(doc, inv, y) {
        .text(note, ML + 230, ry + 7, { lineBreak: false });
     // Amount
     const amtColor = amt < 0 ? C.red : C.slate700;
-    doc.font(i === 1 ? 'Helvetica-Bold' : 'Helvetica').fontSize(9)
+    doc.font(i === 1 ? 'Helvetica-Bold' : 'Helvetica').fontSize(11)
        .fillColor(amtColor)
-       .text(fmtINR(amt), 0, ry + 7, { align: 'right', width: MR - 6, lineBreak: false });
+       .text(fmtINR(amt), 0, ry + 7, { align: 'right', width: MR - 12, lineBreak: false });
     hLine(doc, ML + 2, MR - 2, ry + ROW_H, C.slate300, 0.3);
     ry += ROW_H;
   });
@@ -502,12 +513,12 @@ function drawChargesTable(doc, inv, y) {
   doc.font('Helvetica-Bold').fontSize(10).fillColor(C.white)
      .text('TOTAL AMOUNT DUE', ML + 10, ry + 9, { lineBreak: false });
   doc.font('Helvetica-Bold').fontSize(12).fillColor(C.white)
-     .text(fmtINR(ch.total), 0, ry + 8, { align: 'right', width: MR - 6, lineBreak: false });
+     .text(fmtINR(ch.total), 0, ry + 8, { align: 'right', width: MR - 12, lineBreak: false });
 
   return y + tableH + 10;
 }
 
-function drawPaymentSection(doc, inv, y) {
+function drawPaymentSection(doc, inv, y, width = CW) {
   const ch = inv.charges;
   const isPaid = (ch.due || 0) === 0;
 
@@ -530,12 +541,12 @@ function drawPaymentSection(doc, inv, y) {
   const PHR = 18, PHH_H = 18;
   const tableH = PHH_H + payments.length * PHR + 2;
 
-  fillRect(doc, ML, ty, CW, tableH, C.slate50, 4);
-  strokeRect(doc, ML, ty, CW, tableH, C.slate300, 0.4, 4);
+  fillRect(doc, ML, ty, width, tableH, C.slate50, 4);
+  strokeRect(doc, ML, ty, width, tableH, C.slate300, 0.4, 4);
 
   // PH header
-  fillRect(doc, ML, ty, CW, PHH_H, C.slate100, 4);
-  doc.rect(ML, ty + PHH_H - 4, CW, 4).fillColor(C.slate100).fill();
+  fillRect(doc, ML, ty, width, PHH_H, C.slate100, 4);
+  doc.rect(ML, ty + PHH_H - 4, width, 4).fillColor(C.slate100).fill();
 
   const pcols = [ML+8, ML+90, ML+190, ML+285];
   const phdrs = ['DATE', 'AMOUNT', 'METHOD', 'STATUS'];
@@ -547,15 +558,15 @@ function drawPaymentSection(doc, inv, y) {
   let py = ty + PHH_H;
   payments.forEach((pmt, i) => {
     if (i % 2 === 0) {
-      doc.rect(ML+1, py, CW-2, PHR).fillColor(C.white).fill();
+      doc.rect(ML+1, py, width-2, PHR).fillColor(C.white).fill();
     }
-    doc.font('Helvetica').fontSize(8).fillColor(C.slate700);
+    doc.font('Helvetica').fontSize(10).fillColor(C.slate700);
     doc.text(fmtDate(pmt.date),   pcols[0], py + 5, { lineBreak: false });
     doc.text(fmtINR(pmt.amount),  pcols[1], py + 5, { lineBreak: false });
     doc.text(pmt.method.replace(/_/g,' ').replace(/\b\w/g,l=>l.toUpperCase()), pcols[2], py + 5, { lineBreak: false });
     // status pill
-    const sc = pmt.status === 'completed' ? C.green
-             : pmt.status === 'pending'   ? C.amber : C.red;
+    const sc = pmt.status === 'success' || pmt.status === 'completed' ? C.green
+             : pmt.status === 'pending' || pmt.status === 'processing' ? C.amber : C.red;
     pill(doc, pcols[3], py + 4, pmt.status.toUpperCase(), sc, C.white, 6.5);
     py += PHR;
   });
@@ -641,9 +652,10 @@ class PDFService {
       y = drawRentalStrip(doc, invoiceData, y);
       y = drawChargesTable(doc, invoiceData, y);
 
-      // QR on right, payment section on left
-      drawQRPlaceholder(doc, MR - 60, y);
-      drawPaymentSection(doc, invoiceData, y);
+      const qrX = MR - 60;
+      const paymentW = qrX - ML - 8;
+      drawQRPlaceholder(doc, qrX, y);
+      drawPaymentSection(doc, invoiceData, y, paymentW);
 
       drawFooter(doc);
 

@@ -12,6 +12,15 @@ const DAY_NAMES = [
   'saturday',
 ];
 
+// India Standard Time (delivery shifts are configured in IST).
+const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
+
+// Convert a Date to its IST wall-clock equivalent (as a shifted Date) so
+// getUTCHours()/getUTCDay() return the IST time of day / weekday.
+function toIST(date) {
+  return new Date(date.getTime() + IST_OFFSET_MS);
+}
+
 const DEFAULT_WEIGHTS = {
   distance: 0.35,
   workload: 0.25,
@@ -54,7 +63,7 @@ function parseTimeToMinutes(timeStr) {
 function isWorkingDay(person, date = new Date()) {
   const workingDays = person?.availability?.shifts?.workingDays;
   if (!workingDays?.length) return true;
-  return workingDays.includes(DAY_NAMES[date.getDay()]);
+  return workingDays.includes(DAY_NAMES[toIST(date).getUTCDay()]);
 }
 
 /**
@@ -71,7 +80,11 @@ function isWithinShift(person, referenceDate = new Date()) {
     return { ok: true };
   }
 
-  const refMinutes = referenceDate.getHours() * 60 + referenceDate.getMinutes();
+  // Evaluate the reference time in IST (shifts are configured in IST) so a
+  // UTC-stored scheduledDate (e.g. 04:05Z = 09:35 IST) is not wrongly
+  // rejected as being before 09:00.
+  const ref = toIST(referenceDate);
+  const refMinutes = ref.getUTCHours() * 60 + ref.getUTCMinutes();
   if (refMinutes < start || refMinutes > end) {
     return { ok: false, reason: 'Outside partner shift hours for scheduled time' };
   }
@@ -96,8 +109,9 @@ function getEligibility(person, { pincode, scheduledAt = new Date(), additionalS
   const reasons = [];
 
   if (!person?.status?.isActive) reasons.push('Partner is inactive');
-  if (person?.status?.verificationStatus !== 'verified') {
-    reasons.push(`Verification status: ${person?.status?.verificationStatus || 'unknown'}`);
+  const verificationStatus = person?.status?.verificationStatus;
+  if (verificationStatus === 'rejected' || verificationStatus === 'suspended') {
+    reasons.push(`Verification status: ${verificationStatus}`);
   }
   if (!person?.availability?.isAvailable) reasons.push('Marked unavailable');
   if (!person?.availability?.isOnDuty) reasons.push('Not on duty');

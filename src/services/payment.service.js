@@ -394,9 +394,13 @@ class PaymentService {
         rental.payment.nextDueDate = nextDueDate;
       }
 
-      // Update rental status if payment is complete
-      if (paymentStatus === "completed") {
-        rental.status = "active"; // Change from 'pending_payment' to 'active'
+      // Update rental status if payment is complete.
+      // IMPORTANT: A 'pending' rental must NOT be activated by payment alone —
+      // the vendor has to confirm it first (see confirmRental). Only rentals that
+      // are already past that gate (confirmed / active / overdue) get activated,
+      // which also keeps monthly-payment recovery for active/overdue rentals intact.
+      if (paymentStatus === "completed" && rental.status !== "pending") {
+        rental.status = "active"; // e.g. 'confirmed'/'overdue' → 'active'
 
         // Add to timeline if not already there
         const hasActiveTimeline = rental.timeline?.some(

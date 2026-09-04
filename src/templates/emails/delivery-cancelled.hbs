@@ -1,0 +1,56 @@
+        {{#if isVendor}}
+        <h2>Order Cancelled</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>Your order <strong>#{{rentalNumber}}</strong> has been cancelled. Here are the details:</p>
+        {{else}}
+        <h2>Your Order Has Been Cancelled</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>Your order <strong>#{{rentalNumber}}</strong> has been cancelled. Here are the details:</p>
+        {{/if}}
+
+        <div class="info-box">
+            <strong>Order #{{rentalNumber}}</strong>
+        </div>
+
+        <table>
+            {{#if productName}}
+            <tr>
+                <th>Product:</th>
+                <td>{{productName}}</td>
+            </tr>
+            {{/if}}
+            {{#if reason}}
+            <tr>
+                <th>Reason:</th>
+                <td>{{reason}}</td>
+            </tr>
+            {{/if}}
+            {{#if refundAmount}}
+            <tr>
+                <th>Refund:</th>
+                <td>₹{{refundAmount}}</td>
+            </tr>
+            {{/if}}
+        </table>
+
+        {{#if isVendor}}
+        <p>If this cancellation was unexpected or the product is already in transit, please contact support immediately.</p>
+        {{else}}
+        {{#if refundAmount}}
+        <p>Your refund of <strong>₹{{refundAmount}}</strong> will be processed to your original payment method. It may take 3-5 business days to reflect.</p>
+        {{else}}
+        <p>No refund is applicable for this cancellation.</p>
+        {{/if}}
+
+        <center>
+            <a href="{{trackUrl}}" class="button">Browse More Rentals</a>
+        </center>
+        {{/if}}
+
+        <p>If you have any questions, please contact our support team.</p>
+
+        <p>Happy Renting,<br>The RentEase Team</p>
