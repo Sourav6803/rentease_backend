@@ -1,5 +1,5 @@
 const logger = require('../config/logger');
-const { Notification } = require('../models');
+const { Notification, User } = require('../models');
 const NotificationService = require('../services/notification.service');
 
 // Notification job processor
@@ -51,13 +51,49 @@ const handleRetryNotification = async (data) => {
 
 // Handle create notification
 const handleCreateNotification = async (data) => {
-  const { userId, type, title, content, data: metaData, scheduledFor } = data;
+  const { userId, role, type, title, content, data: metaData, scheduledFor } = data;
+
+  // Role-based delivery: fan out to every active user with the given role(s).
+  // Previously `role` was silently ignored → Notification.create received
+  // user:undefined → validation error → admin notifications never arrived.
+  if (!userId && role) {
+    const roles = Array.isArray(role) ? role : String(role).split(',').map((r) => r.trim()).filter(Boolean);
+    const recipients = await User.find({
+      role: { $in: roles },
+      'status.isActive': { $ne: false },
+    }).select('_id').lean();
+
+    const normalizedContent = typeof content === 'string' ? { text: content } : content;
+    const created = [];
+    for (const recipient of recipients) {
+      try {
+        const n = await Notification.create({
+          user: recipient._id,
+          type,
+          title,
+          content: normalizedContent,
+          data: metaData,
+          status: scheduledFor ? 'scheduled' : 'pending',
+          schedule: scheduledFor ? { scheduledFor } : undefined,
+        });
+        if (!scheduledFor) {
+          await processNotification(n);
+        }
+        created.push(n);
+      } catch (err) {
+        logger.error(`Role notification failed for user ${recipient._id}:`, err.message);
+      }
+    }
+    return { recipients: created.length };
+  }
 
   const notification = await Notification.create({
     user: userId,
     type,
     title,
-    content,
+    // Normalize string content into the schema's { text } shape — same as
+    // NotificationService.createNotification (line ~127).
+    content: typeof content === 'string' ? { text: content } : content,
     data: metaData,
     status: scheduledFor ? 'scheduled' : 'pending',
     schedule: scheduledFor ? { scheduledFor } : undefined,

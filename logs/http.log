@@ -89235,3 +89235,1423 @@
 2026-09-04 09:58:09:589 [32minfo[39m: [32mSIGINT signal received[39m
 2026-09-04 09:58:09:589 [32minfo[39m: [32mSIGINT - Starting graceful shutdown...[39m
 2026-09-04 09:58:09:589 [32minfo[39m: [32mSocket disconnected: S56BeDujVx38UEhiAAAZ for user: 6a089f44232941bea1cb7665, reason: server shutting down[39m
+2026-09-04 23:08:29:829 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-04 23:09:23:923 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-04 23:09:26:926 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-04 23:09:26:926 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-04 23:09:26:926 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-04 23:09:27:927 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-04 23:09:27:927 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-04 23:09:27:927 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-04 23:09:27:927 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-04 23:09:27:927 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-04 23:09:27:927 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-04 23:09:27:927 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-04 23:11:05:115 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-04 23:11:09:119 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-04 23:11:10:1110 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-04 23:11:10:1110 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-04 23:11:11:1111 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-04 23:11:11:1111 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-04 23:11:11:1111 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-04 23:11:11:1111 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-04 23:11:12:1112 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-04 23:11:12:1112 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-04 23:11:12:1112 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-04 23:11:12:1112 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-04 23:11:41:1141 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-04 23:11:41:1141 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-04 23:11:43:1143 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-04 23:11:43:1143 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:11:43:1143 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:11:43:1143 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:11:43:1143 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-04 23:11:45:1145 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-04 23:11:45:1145 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:11:46:1146 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:12:53:1253 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:12:54:1254 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:13:16:1316 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-04 23:16:14:1614 [32minfo[39m: [32mSocket connected: GDLo-UxV8TqSUWpYAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-04 23:33:05:335 [32minfo[39m: [32mSocket disconnected: GDLo-UxV8TqSUWpYAAAD for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-04 23:33:09:339 [32minfo[39m: [32mSocket connected: fca_zryRG5fxQvZGAAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-04 23:35:46:3546 [32minfo[39m: [32mSocket connected: MzlRU3msZOrrzQ9cAAAH for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-04 23:37:37:3737 [32minfo[39m: [32mSocket disconnected: MzlRU3msZOrrzQ9cAAAH for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-04 23:41:36:4136 [32minfo[39m: [32mSIGINT signal received[39m
+2026-09-05 08:21:58:2158 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 08:23:22:2322 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 08:23:26:2326 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 08:23:26:2326 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 08:23:27:2327 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 08:23:27:2327 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:23:28:2328 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:23:28:2328 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 08:23:28:2328 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 08:23:28:2328 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 08:23:28:2328 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 08:23:29:2329 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 08:23:31:2331 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 08:23:45:2345 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 08:23:45:2345 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 08:23:45:2345 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 08:23:46:2346 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 08:23:48:2348 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 08:23:48:2348 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:23:48:2348 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:23:48:2348 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:23:50:2350 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:24:06:246 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:24:07:247 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:24:11:2411 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:24:12:2412 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:24:24:2424 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-05 08:24:43:2443 [32minfo[39m: [32mSocket connected: 8xcbaf-8AojpWRQ-AAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 08:26:36:2636 [31merror[39m: [31mError in createReview: next is not a function[39m
+2026-09-05 08:26:36:2636 [31merror[39m: [31mnext is not a function[39m
+2026-09-05 08:27:55:2755 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 08:28:01:281 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 08:28:06:286 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 08:28:06:286 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 08:28:07:287 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:28:08:288 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:28:08:288 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 08:28:08:288 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 08:28:08:288 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 08:28:08:288 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 08:28:08:288 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 08:28:12:2812 [32minfo[39m: [32mSocket connected: Y9pIAhpUyKb5I2HJAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 08:28:13:2813 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 08:28:22:2822 [31merror[39m: [31mError in createReview: next is not a function[39m
+2026-09-05 08:28:22:2822 [31merror[39m: [31mnext is not a function[39m
+2026-09-05 08:28:44:2844 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 08:28:49:2849 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 08:28:50:2850 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 08:28:50:2850 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 08:28:53:2853 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:28:54:2854 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:28:54:2854 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 08:28:54:2854 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 08:28:54:2854 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 08:28:54:2854 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 08:28:54:2854 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 08:29:15:2915 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 08:29:51:2951 [32minfo[39m: [32mSocket connected: vVV5ZDvH3JRqdlu7AAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 08:37:29:3729 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 08:37:36:3736 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 08:37:39:3739 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 08:37:39:3739 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 08:37:40:3740 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:37:41:3741 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:37:41:3741 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 08:37:41:3741 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 08:37:41:3741 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 08:37:41:3741 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 08:37:41:3741 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 08:37:47:3747 [32minfo[39m: [32mSocket connected: 6aAOKXmPwTUkLUJjAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 08:37:48:3748 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 08:39:26:3926 [32minfo[39m: [32mSocket disconnected: 6aAOKXmPwTUkLUJjAAAB for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-09-05 08:39:30:3930 [32minfo[39m: [32mSocket connected: 166ROsMavKa-XRp7AAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 08:43:07:437 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 08:43:16:4316 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 08:43:18:4318 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-09-05 08:43:18:4318 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 08:43:18:4318 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 08:43:18:4318 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:43:19:4319 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:43:19:4319 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 08:43:19:4319 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 08:43:19:4319 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 08:43:19:4319 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 08:43:19:4319 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 08:46:24:4624 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 08:46:30:4630 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 08:46:31:4631 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 08:46:31:4631 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 08:46:32:4632 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 08:46:32:4632 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:46:33:4633 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 08:46:33:4633 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 08:46:33:4633 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 08:46:33:4633 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 08:46:33:4633 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 08:46:33:4633 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 08:46:54:4654 [32minfo[39m: [32mSocket connected: ZH2cQoprplXMG6ylAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 08:47:01:471 [32minfo[39m: [32mSocket disconnected: ZH2cQoprplXMG6ylAAAB for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 08:47:16:4716 [32minfo[39m: [32mSocket connected: Ltwg_o3lBBBHAnKZAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 08:48:37:4837 [32minfo[39m: [32mSocket disconnected: Ltwg_o3lBBBHAnKZAAAD for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 08:48:43:4843 [32minfo[39m: [32mSocket connected: AcGejs031XxmbcvzAAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 08:53:41:5341 [32minfo[39m: [32mSocket disconnected: AcGejs031XxmbcvzAAAF for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-09-05 08:53:42:5342 [32minfo[39m: [32mSocket connected: Eu_TlSQ8TTgz45zKAAAH for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 09:04:24:424 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-05 09:04:29:429 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 09:04:56:456 [32minfo[39m: [32mSocket disconnected: Eu_TlSQ8TTgz45zKAAAH for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 09:11:35:1135 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-05 09:11:37:1137 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 09:11:37:1137 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 09:11:39:1139 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 09:11:39:1139 [32minfo[39m: [32mSocket connected: ZiEu9zjPZg0gWbAUAAAN for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 09:12:09:129 [32minfo[39m: [32mSIGINT signal received[39m
+2026-09-05 09:12:09:129 [32minfo[39m: [32mSIGINT - Starting graceful shutdown...[39m
+2026-09-05 09:12:09:129 [32minfo[39m: [32mSocket disconnected: ZiEu9zjPZg0gWbAUAAAN for user: 6a66d2a55672a851e1a94ca5, reason: server shutting down[39m
+2026-09-05 09:12:09:129 [32minfo[39m: [32mHTTP server closed[39m
+2026-09-05 18:31:25:3125 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 18:32:28:3228 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 18:32:30:3230 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 18:32:30:3230 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 18:32:31:3231 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 18:32:32:3232 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 18:32:32:3232 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 18:32:32:3232 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 18:32:32:3232 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 18:32:32:3232 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 18:32:32:3232 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 18:32:32:3232 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 18:42:36:4236 [32minfo[39m: [32mSocket connected: WuWRxfg6fsBhwkzcAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 18:49:48:4948 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 18:50:39:5039 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 18:50:41:5041 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 18:50:41:5041 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 18:50:42:5042 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 18:50:42:5042 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 18:50:43:5043 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 18:50:43:5043 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 18:50:43:5043 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 18:50:43:5043 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 18:50:43:5043 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 18:50:43:5043 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 18:50:52:5052 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 18:50:55:5055 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 18:50:57:5057 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 18:50:57:5057 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 18:50:57:5057 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 18:50:58:5058 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 18:50:58:5058 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 18:50:58:5058 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 18:50:58:5058 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 18:50:58:5058 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 18:50:58:5058 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 18:50:58:5058 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 18:51:33:5133 [32minfo[39m: [32mSocket connected: sLYvclsC6L1eiVfIAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 18:59:16:5916 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 18:59:22:5922 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 18:59:22:5922 [31merror[39m: [31m❌ UNHANDLED REJECTION: Error: queryTxt EREFUSED cluster0.ffmnsa4.mongodb.net[39m
+[31m    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)[39m
+2026-09-05 18:59:26:5926 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 18:59:26:5926 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 18:59:26:5926 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 18:59:29:5929 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 18:59:30:5930 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 18:59:30:5930 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 18:59:30:5930 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 18:59:30:5930 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 18:59:30:5930 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 18:59:30:5930 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 18:59:31:5931 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 19:00:17:017 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 19:00:30:030 [32minfo[39m: [32mSocket connected: D65vVt5D-jO8pC6UAAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:00:58:058 [32minfo[39m: [32mSocket disconnected: D65vVt5D-jO8pC6UAAAF for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 19:01:05:15 [32minfo[39m: [32mSocket connected: JjjCNWuS7YJ7L2I-AAAH for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:11:04:114 [32minfo[39m: [32mSocket disconnected: JjjCNWuS7YJ7L2I-AAAH for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-09-05 19:11:06:116 [32minfo[39m: [32mSocket connected: lHbSUVrY-ztLlu5iAAAJ for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:11:18:1118 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 19:11:25:1125 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 19:11:26:1126 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 19:11:26:1126 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 19:11:26:1126 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 19:11:27:1127 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:11:27:1127 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:11:27:1127 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 19:11:27:1127 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 19:11:27:1127 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 19:11:27:1127 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 19:11:27:1127 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 19:11:33:1133 [32minfo[39m: [32mSocket connected: 8Y6tHT8Uu2PJVq_SAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:11:53:1153 [32minfo[39m: [32mSocket disconnected: 8Y6tHT8Uu2PJVq_SAAAB for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 19:12:02:122 [32minfo[39m: [32mSocket connected: sCeS3NBx2i6IPM9BAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:13:24:1324 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 19:13:30:1330 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 19:13:34:1334 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 19:13:36:1336 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 19:13:36:1336 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 19:13:39:1339 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:13:41:1341 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: Redis ping timeout[39m
+2026-09-05 19:13:41:1341 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-09-05 19:13:41:1341 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 19:13:41:1341 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 19:13:41:1341 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 19:13:41:1341 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 19:13:41:1341 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 19:13:46:1346 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:13:51:1351 [32minfo[39m: [32mSocket connected: tvczMPh_hEMzH64rAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:15:58:1558 [32minfo[39m: [32mSocket connected: v71DULIxQc7nbcmiAAAD for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:17:37:1737 [32minfo[39m: [32mSocket disconnected: v71DULIxQc7nbcmiAAAD for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 19:17:41:1741 [32minfo[39m: [32mSocket connected: q5PtXiSB1oHHnNxGAAAF for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:23:22:2322 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 19:23:40:2340 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 19:23:41:2341 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-09-05 19:23:41:2341 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 19:23:42:2342 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 19:23:42:2342 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:23:43:2343 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:23:43:2343 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 19:23:43:2343 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 19:23:43:2343 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 19:23:43:2343 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 19:23:43:2343 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 19:23:48:2348 [32minfo[39m: [32mSocket connected: woHVJ3jZwGDOJUmLAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:24:50:2450 [32minfo[39m: [32mSocket connected: 3jCvM9Qxbb2tP-NbAAAD for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:27:03:273 [32minfo[39m: [32mSocket disconnected: woHVJ3jZwGDOJUmLAAAB for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-09-05 19:27:07:277 [32minfo[39m: [32mSocket connected: IGCoH9UEBTo3wNJYAAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:29:55:2955 [32minfo[39m: [32mSocket disconnected: IGCoH9UEBTo3wNJYAAAF for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 19:30:04:304 [32minfo[39m: [32mSocket connected: daNsU3cHWBauzVBnAAAH for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:30:22:3022 [32minfo[39m: [32mSocket disconnected: 3jCvM9Qxbb2tP-NbAAAD for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 19:30:27:3027 [32minfo[39m: [32mSocket connected: VIJcbayLWYUPBedLAAAJ for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:30:51:3051 [31merror[39m: [31mError in getReview: Cannot read properties of undefined (reading 'toString')[39m
+2026-09-05 19:30:51:3051 [31merror[39m: [31mCannot read properties of undefined (reading 'toString')[39m
+2026-09-05 19:31:29:3129 [31merror[39m: [31mCan't find /favicon.ico on this server![39m
+2026-09-05 19:31:53:3153 [32minfo[39m: [32mSocket disconnected: VIJcbayLWYUPBedLAAAJ for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 19:31:58:3158 [32minfo[39m: [32mSocket connected: 8tm0G3NQ2lCUgv37AAAL for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:34:18:3418 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 19:34:30:3430 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 19:34:31:3431 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 19:34:31:3431 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 19:34:32:3432 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:34:32:3432 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 19:34:32:3432 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:34:32:3432 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 19:34:32:3432 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 19:34:32:3432 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 19:34:32:3432 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 19:34:33:3433 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 19:34:34:3434 [32minfo[39m: [32mSocket connected: 9ojEgUauFaCYkFmyAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:34:36:3436 [32minfo[39m: [32mSocket connected: IIV6oujblkxH1m6SAAAD for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:36:25:3625 [32minfo[39m: [32mSocket disconnected: IIV6oujblkxH1m6SAAAD for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 19:36:42:3642 [32minfo[39m: [32mSocket connected: sr3Srax4UrmIZZ6qAAAF for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:39:40:3940 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 19:39:46:3946 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 19:39:47:3947 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-09-05 19:39:47:3947 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 19:39:47:3947 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 19:39:47:3947 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:39:48:3948 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:39:48:3948 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 19:39:48:3948 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 19:39:48:3948 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 19:39:48:3948 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 19:39:48:3948 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 19:39:49:3949 [32minfo[39m: [32mSocket connected: gcu-rNVZeZbV3xmYAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:39:51:3951 [32minfo[39m: [32mSocket connected: SsCFjUSbNwEaoBqDAAAD for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:40:09:409 [32minfo[39m: [32mSocket disconnected: SsCFjUSbNwEaoBqDAAAD for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 19:40:14:4014 [32minfo[39m: [32mSocket connected: xJmyIvPhhKoFYoDNAAAF for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:40:54:4054 [32minfo[39m: [32mSocket disconnected: xJmyIvPhhKoFYoDNAAAF for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 19:40:59:4059 [32minfo[39m: [32mSocket connected: ko8ZYE-mAdTMRNjOAAAH for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:41:12:4112 [31merror[39m: [31mError in getReview: AppError is not a constructor[39m
+2026-09-05 19:41:12:4112 [31merror[39m: [31mAppError is not a constructor[39m
+2026-09-05 19:41:39:4139 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 19:41:45:4145 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 19:41:49:4149 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 19:41:50:4150 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 19:41:50:4150 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 19:41:53:4153 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:41:53:4153 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:41:53:4153 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 19:41:53:4153 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 19:41:53:4153 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 19:41:53:4153 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 19:41:53:4153 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 19:41:54:4154 [32minfo[39m: [32mSocket connected: eJELxg_trfi7W98bAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:41:59:4159 [32minfo[39m: [32mSocket connected: Hh9_O-GJxcVcjbVaAAAD for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:42:30:4230 [32minfo[39m: [32mSocket disconnected: Hh9_O-GJxcVcjbVaAAAD for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 19:42:36:4236 [32minfo[39m: [32mSocket connected: V-Ol5Iw1npHWhWgjAAAF for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:44:18:4418 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 19:44:24:4424 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 19:44:26:4426 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 19:44:26:4426 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 19:44:26:4426 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 19:44:27:4427 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:44:27:4427 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:44:27:4427 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 19:44:27:4427 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 19:44:27:4427 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 19:44:27:4427 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 19:44:27:4427 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 19:44:27:4427 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 19:44:30:4430 [32minfo[39m: [32mSocket connected: rBVbUZkfXNYmdMoBAAAD for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:44:32:4432 [32minfo[39m: [32mSocket disconnected: rBVbUZkfXNYmdMoBAAAD for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 19:44:36:4436 [32minfo[39m: [32mSocket connected: 1RojXVmEihksnuyHAAAF for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:45:04:454 [32minfo[39m: [32mSocket connected: gleC7OfD9X5JYePbAAAH for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:47:08:478 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 19:47:13:4713 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 19:47:14:4714 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 19:47:14:4714 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 19:47:14:4714 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 19:47:15:4715 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:47:15:4715 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 19:47:15:4715 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 19:47:15:4715 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 19:47:15:4715 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 19:47:15:4715 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 19:47:15:4715 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 19:47:19:4719 [32minfo[39m: [32mSocket connected: UzsgCBy_c8zX1o09AAAB for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:47:20:4720 [32minfo[39m: [32mSocket connected: 2BhFtCRUQ7laPk74AAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 19:48:08:488 [32minfo[39m: [32mSocket disconnected: UzsgCBy_c8zX1o09AAAB for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 19:48:14:4814 [32minfo[39m: [32mSocket connected: _kRLrQZAScqG_U-1AAAF for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 19:53:30:5330 [32minfo[39m: [32mSIGINT signal received[39m
+2026-09-05 19:53:30:5330 [32minfo[39m: [32mSIGINT - Starting graceful shutdown...[39m
+2026-09-05 19:53:30:5330 [32minfo[39m: [32mSocket disconnected: 2BhFtCRUQ7laPk74AAAD for user: 6a66d2a55672a851e1a94ca5, reason: server shutting down[39m
+2026-09-05 19:53:30:5330 [32minfo[39m: [32mSocket disconnected: _kRLrQZAScqG_U-1AAAF for user: 69c2c47f9d1dd1404a838802, reason: server shutting down[39m
+2026-09-05 21:21:27:2127 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 21:21:33:2133 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 21:21:34:2134 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 21:21:34:2134 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 21:21:35:2135 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 21:21:35:2135 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:21:36:2136 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:21:36:2136 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 21:21:36:2136 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 21:21:36:2136 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 21:21:36:2136 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 21:21:36:2136 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 21:22:45:2245 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 21:22:46:2246 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 21:22:46:2246 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 21:22:46:2246 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 21:22:46:2246 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 21:22:47:2247 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 21:22:47:2247 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 21:22:48:2248 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 21:22:59:2259 [31merror[39m: [31mError in getReview: AppError is not a constructor[39m
+2026-09-05 21:22:59:2259 [31merror[39m: [31mAppError is not a constructor[39m
+2026-09-05 21:23:06:236 [32minfo[39m: [32mSocket connected: 1BPUR575hh1MJX8NAAAD for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 21:25:12:2512 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 21:25:20:2520 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 21:25:22:2522 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 21:25:25:2525 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 21:25:25:2525 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 21:25:27:2527 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:25:27:2527 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:25:27:2527 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 21:25:27:2527 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 21:25:27:2527 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 21:25:27:2527 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 21:25:27:2527 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 21:25:31:2531 [32minfo[39m: [32mSocket connected: pL_XMmvmujTxiEU8AAAB for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 21:27:43:2743 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 21:28:04:284 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 21:28:20:2820 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 21:28:23:2823 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-09-05 21:28:23:2823 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 21:28:24:2824 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 21:28:25:2825 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:28:25:2825 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:28:25:2825 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 21:28:25:2825 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 21:28:25:2825 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 21:28:25:2825 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 21:28:25:2825 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 21:28:29:2829 [32minfo[39m: [32mSocket connected: p3kdjLLXgHXunLtVAAAB for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 21:28:30:2830 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 21:28:38:2838 [32minfo[39m: [32mSocket connected: bwr5q7osP8LU0r-CAAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 21:28:55:2855 [32minfo[39m: [32mSocket disconnected: p3kdjLLXgHXunLtVAAAB for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 21:29:02:292 [32minfo[39m: [32mSocket connected: XzrgOvI7w2XRaT8gAAAH for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 21:29:06:296 [31merror[39m: [31mError in getReview: Review is pending moderation[39m
+2026-09-05 21:29:06:296 [31merror[39m: [31mReview is pending moderation[39m
+2026-09-05 21:29:08:298 [31merror[39m: [31mError in getReview: Review is pending moderation[39m
+2026-09-05 21:29:08:298 [31merror[39m: [31mReview is pending moderation[39m
+2026-09-05 21:30:54:3054 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 21:31:00:310 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 21:31:02:312 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 21:31:02:312 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 21:31:02:312 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 21:31:04:314 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:31:04:314 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:31:04:314 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 21:31:04:314 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 21:31:04:314 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 21:31:04:314 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 21:31:04:314 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 21:31:09:319 [32minfo[39m: [32mSocket connected: WdgX0iX9q5Gh1TJrAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 21:31:10:3110 [32minfo[39m: [32mSocket connected: Ut6B8K7Pt0qcGxlSAAAB for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 21:32:49:3249 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 21:32:54:3254 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 21:32:56:3256 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 21:32:56:3256 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 21:32:57:3257 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:32:57:3257 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 21:32:57:3257 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:32:57:3257 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 21:32:57:3257 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 21:32:57:3257 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 21:32:57:3257 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 21:32:57:3257 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 21:33:00:330 [32minfo[39m: [32mSocket connected: UmyRz5krw7E6uwmrAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 21:33:02:332 [32minfo[39m: [32mSocket connected: j4tThCe3MwSFgHkgAAAB for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 21:36:49:3649 [32minfo[39m: [32mSocket disconnected: j4tThCe3MwSFgHkgAAAB for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 21:36:55:3655 [31merror[39m: [31mError in getReview: Cast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:36:55:3655 [31merror[39m: [31mCast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:36:55:3655 [32minfo[39m: [32mSocket connected: yFDXeygVwFtPJ7DWAAAF for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 21:37:19:3719 [31merror[39m: [31mError in getReview: Cast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:19:3719 [31merror[39m: [31mCast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:23:3723 [32minfo[39m: [32mSocket disconnected: yFDXeygVwFtPJ7DWAAAF for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 21:37:30:3730 [32minfo[39m: [32mSocket connected: WiQ6--NcDUFTvaacAAAH for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 21:37:30:3730 [31merror[39m: [31mError in getReview: Review is pending moderation[39m
+2026-09-05 21:37:30:3730 [31merror[39m: [31mReview is pending moderation[39m
+2026-09-05 21:37:30:3730 [31merror[39m: [31mError in getReview: Cast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:30:3730 [31merror[39m: [31mCast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:32:3732 [31merror[39m: [31mError in getReview: Cast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:32:3732 [31merror[39m: [31mCast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:49:3749 [31merror[39m: [31mError in getReview: Cast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:49:3749 [31merror[39m: [31mCast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:40:27:4027 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 21:40:33:4033 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 21:40:36:4036 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 21:40:39:4039 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 21:40:39:4039 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 21:40:41:4041 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:40:43:4043 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:40:43:4043 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 21:40:43:4043 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 21:40:43:4043 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 21:40:43:4043 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 21:40:43:4043 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 21:40:41:4041 [33mwarn[39m: [33m⚠️ Firebase not configured. Set FIREBASE_* env vars or provide a service-account JSON. Push notifications will be disabled.[39m
+2026-09-05 21:40:44:4044 [32minfo[39m: [32mSocket connected: oN_x3owjOd_4DwD2AAAC for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 21:40:47:4047 [32minfo[39m: [32mSocket connected: oF-c1EX-iUPL3nthAAAD for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 21:43:12:4312 [32minfo[39m: [32mSocket disconnected: oN_x3owjOd_4DwD2AAAC for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-09-05 21:43:14:4314 [32minfo[39m: [32mSocket connected: Znn55zsvJR4pVR3WAAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 21:43:17:4317 [32minfo[39m: [32mSocket disconnected: oF-c1EX-iUPL3nthAAAD for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 21:43:23:4323 [32minfo[39m: [32mSocket connected: MAcnMaYo8Kj3_eLwAAAH for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 21:49:33:4933 [32minfo[39m: [32m📝 Job options for notification/create:[39m
+2026-09-05 21:49:34:4934 [32minfo[39m: [32m✅ Job added successfully: notification/create - Job ID: 9[39m
+2026-09-05 21:49:34:4934 [32minfo[39m: [32m🔄 Job 9 (notification) started processing[39m
+2026-09-05 21:49:34:4934 [32minfo[39m: [32m📊 Queue notification status after add:[39m
+2026-09-05 21:49:34:4934 [32minfo[39m: [32mJob added: notification/create - Job ID: 9[39m
+2026-09-05 21:49:34:4934 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-05 21:49:34:4934 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-05 21:49:34:4934 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:34:4934 [31merror[39m: [31m❌ Job 9 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:35:4935 [31merror[39m: [31m❌ Job 9 (notification) failed:[39m
+2026-09-05 21:49:40:4940 [32minfo[39m: [32m🔄 Job 9 (notification) started processing[39m
+2026-09-05 21:49:40:4940 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-05 21:49:40:4940 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-05 21:49:40:4940 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:40:4940 [31merror[39m: [31m❌ Job 9 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:41:4941 [31merror[39m: [31m❌ Job 9 (notification) failed:[39m
+2026-09-05 21:49:45:4945 [32minfo[39m: [32mSocket disconnected: Znn55zsvJR4pVR3WAAAF for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 21:49:46:4946 [32minfo[39m: [32m🔄 Job 9 (notification) started processing[39m
+2026-09-05 21:49:47:4947 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-05 21:49:47:4947 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-05 21:49:47:4947 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:47:4947 [31merror[39m: [31m❌ Job 9 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:47:4947 [31merror[39m: [31m❌ Job 9 (notification) failed:[39m
+2026-09-05 21:49:55:4955 [32minfo[39m: [32mSocket connected: gxI9zEA7tQvFn0rCAAAJ for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 21:58:44:5844 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 21:58:49:5849 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 21:59:02:592 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 21:59:03:593 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 21:59:03:593 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 21:59:08:598 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: Redis ping timeout[39m
+2026-09-05 21:59:08:598 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-09-05 21:59:08:598 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 21:59:08:598 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 21:59:08:598 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 21:59:08:598 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 21:59:08:598 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 21:59:09:599 [32minfo[39m: [32mSocket connected: eFfypUxiX0p6ZnoNAAAB for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 21:59:09:599 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 21:59:09:599 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 21:59:13:5913 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-05 21:59:16:5916 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 22:01:37:137 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 22:01:43:143 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 22:01:45:145 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 22:01:45:145 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 22:01:46:146 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 22:01:47:147 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 22:01:47:147 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 22:01:47:147 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 22:01:47:147 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 22:01:47:147 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 22:01:47:147 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 22:01:47:147 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 22:01:50:150 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:01:51:151 [32minfo[39m: [32mSocket connected: c3KkYgucJx16oh4vAAAB for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 22:01:53:153 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:01:54:154 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:01:55:155 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:01:55:155 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:01:55:155 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 22:01:56:156 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:01:57:157 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:01:57:157 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:05:11:511 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:05:11:511 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:05:11:511 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:05:11:511 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:06:53:653 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:06:54:654 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:07:12:712 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:07:12:712 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:07:17:717 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:07:18:718 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:11:15:1115 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:11:16:1116 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:11:52:1152 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-05 22:12:03:123 [32minfo[39m: [32mSocket connected: EYc8AHqKC7KStSe2AAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 22:14:04:144 [31merror[39m: [31mError in createReview: Review already exists for this rental[39m
+2026-09-05 22:14:04:144 [31merror[39m: [31mReview already exists for this rental[39m
+2026-09-05 22:25:02:252 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 22:25:09:259 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 22:25:10:2510 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 22:25:10:2510 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 22:25:11:2511 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 22:25:11:2511 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 22:25:12:2512 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 22:25:12:2512 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 22:25:12:2512 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 22:25:12:2512 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 22:25:12:2512 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 22:25:12:2512 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 22:25:13:2513 [32minfo[39m: [32mSocket connected: Z7yLvFH1VzlqKkWyAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 22:25:16:2516 [32minfo[39m: [32mSocket connected: huEMs60KOnaxvWl-AAAD for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 22:25:29:2529 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 22:25:35:2535 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 22:25:41:2541 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 22:25:43:2543 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 22:25:43:2543 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 22:25:44:2544 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 22:25:44:2544 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 22:25:44:2544 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 22:25:44:2544 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 22:25:44:2544 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 22:25:44:2544 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 22:25:44:2544 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 22:25:47:2547 [32minfo[39m: [32mSocket connected: LHwZeK-uWXUYp0TXAAAB for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 22:25:47:2547 [32minfo[39m: [32mSocket connected: Vm8NrdUQXATBnMUvAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 22:26:55:2655 [32minfo[39m: [32mSocket disconnected: Vm8NrdUQXATBnMUvAAAD for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-09-05 22:26:57:2657 [32minfo[39m: [32mSocket connected: SgJndE2QvRGFFOQnAAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 22:27:52:2752 [32minfo[39m: [32mSocket disconnected: SgJndE2QvRGFFOQnAAAF for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 22:27:56:2756 [32minfo[39m: [32mSocket connected: tfx0LelQ0g8Ya5XWAAAH for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 22:31:25:3125 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 22:31:29:3129 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 22:31:30:3130 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-09-05 22:31:30:3130 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 22:31:31:3131 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 22:31:31:3131 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 22:31:31:3131 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 22:31:31:3131 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 22:31:31:3131 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 22:31:31:3131 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 22:31:31:3131 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 22:31:31:3131 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 22:31:34:3134 [32minfo[39m: [32mSocket connected: Ff3JxGFzsa_Fv-M4AAAB for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 22:31:37:3137 [32minfo[39m: [32mSocket connected: aEakrjiFlXb7fi43AAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 22:32:32:3232 [32minfo[39m: [32mSocket disconnected: aEakrjiFlXb7fi43AAAD for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 22:32:37:3237 [32minfo[39m: [32mSocket connected: 15zwuzGmFv-aaLYaAAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 22:42:37:4237 [32minfo[39m: [32mSocket disconnected: 15zwuzGmFv-aaLYaAAAF for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-09-05 22:42:38:4238 [32minfo[39m: [32mSocket connected: xnBP2dXMkJEEIqEMAAAH for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 22:48:53:4853 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 22:49:25:4925 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 22:49:26:4926 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 22:49:26:4926 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-05 22:49:26:4926 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 22:49:27:4927 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 22:49:27:4927 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 22:49:27:4927 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 22:49:27:4927 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 22:49:27:4927 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 22:49:27:4927 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 22:49:27:4927 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 22:50:53:5053 [32minfo[39m: [32mSocket connected: HKxmYXlnSHcW5--hAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 23:00:52:052 [32minfo[39m: [32mSocket disconnected: HKxmYXlnSHcW5--hAAAB for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-09-05 23:00:53:053 [32minfo[39m: [32mSocket connected: 4ZVXZG340FOL6r7BAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 23:00:59:059 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 23:01:11:111 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 23:01:13:113 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 23:01:13:113 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 23:01:14:114 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 23:01:15:115 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 23:01:15:115 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 23:01:15:115 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 23:01:15:115 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 23:01:15:115 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 23:01:15:115 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 23:01:15:115 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 23:01:17:117 [32minfo[39m: [32mSocket connected: _mKCRtrHi04r8Ap5AAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 23:01:19:119 [32minfo[39m: [32mSocket disconnected: _mKCRtrHi04r8Ap5AAAB for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 23:01:36:136 [32minfo[39m: [32mSocket connected: Mw1_Cdv-tGsMYX5hAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 23:04:14:414 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 23:04:18:418 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 23:04:19:419 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 23:04:19:419 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 23:04:19:419 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 23:04:20:420 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 23:04:20:420 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 23:04:20:420 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 23:04:20:420 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 23:04:20:420 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 23:04:20:420 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 23:04:20:420 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 23:04:23:423 [32minfo[39m: [32mSocket connected: CxwLM_dTtDzzYAbtAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 23:05:34:534 [32minfo[39m: [32mSocket disconnected: CxwLM_dTtDzzYAbtAAAB for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 23:05:41:541 [32minfo[39m: [32mSocket connected: DLYaMTL5OCvQf8CyAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 23:06:21:621 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 23:06:24:624 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 23:06:25:625 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-09-05 23:06:25:625 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 23:06:26:626 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 23:06:26:626 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 23:06:26:626 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 23:06:27:627 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 23:06:27:627 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 23:06:27:627 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 23:06:27:627 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 23:06:27:627 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 23:06:30:630 [32minfo[39m: [32mSocket connected: 8CDroeO6ECb6g3b5AAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 23:13:32:1332 [32minfo[39m: [32mSocket connected: Aq0x_8Kl8H2IJ6J9AAAD for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 23:13:50:1350 [32minfo[39m: [32m📝 Job options for notification/create:[39m
+2026-09-05 23:13:51:1351 [32minfo[39m: [32m🔄 Job 10 (notification) started processing[39m
+2026-09-05 23:13:51:1351 [32minfo[39m: [32m✅ Job added successfully: notification/create - Job ID: 10[39m
+2026-09-05 23:13:52:1352 [32minfo[39m: [32m📊 Queue notification status after add:[39m
+2026-09-05 23:13:52:1352 [32minfo[39m: [32mJob added: notification/create - Job ID: 10[39m
+2026-09-05 23:13:52:1352 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-05 23:13:52:1352 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-05 23:13:52:1352 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:13:52:1352 [31merror[39m: [31m❌ Job 10 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:13:52:1352 [31merror[39m: [31m❌ Job 10 (notification) failed:[39m
+2026-09-05 23:13:57:1357 [32minfo[39m: [32m🔄 Job 10 (notification) started processing[39m
+2026-09-05 23:13:57:1357 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-05 23:13:57:1357 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-05 23:13:57:1357 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:13:57:1357 [31merror[39m: [31m❌ Job 10 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:13:58:1358 [31merror[39m: [31m❌ Job 10 (notification) failed:[39m
+2026-09-05 23:14:02:142 [32minfo[39m: [32mSocket disconnected: 8CDroeO6ECb6g3b5AAAB for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-05 23:14:03:143 [32minfo[39m: [32m🔄 Job 10 (notification) started processing[39m
+2026-09-05 23:14:03:143 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-05 23:14:03:143 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-05 23:14:03:143 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:14:03:143 [31merror[39m: [31m❌ Job 10 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:14:04:144 [31merror[39m: [31m❌ Job 10 (notification) failed:[39m
+2026-09-05 23:14:08:148 [32minfo[39m: [32mSocket connected: PqJ5SdUu5iKGJJTZAAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 23:19:06:196 [32minfo[39m: [32mSocket disconnected: PqJ5SdUu5iKGJJTZAAAF for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-09-05 23:19:07:197 [32minfo[39m: [32mSocket connected: pHZmC6bubqDCp_AEAAAH for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-05 23:19:33:1933 [32minfo[39m: [32mSocket disconnected: pHZmC6bubqDCp_AEAAAH for user: 6a66d2a55672a851e1a94ca5, reason: client namespace disconnect[39m
+2026-09-05 23:19:33:1933 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-05 23:24:01:241 [32minfo[39m: [32mSocket connected: 9CNPcmSb92k1G-0wAAAJ for user: 69c65e7dbe4d9f5600e020ce (vendor)[39m
+2026-09-05 23:27:29:2729 [32minfo[39m: [32mSocket disconnected: 9CNPcmSb92k1G-0wAAAJ for user: 69c65e7dbe4d9f5600e020ce, reason: transport close[39m
+2026-09-05 23:27:41:2741 [32minfo[39m: [32mSocket connected: zci3x9UYubvOsYSfAAAL for user: 69c65e7dbe4d9f5600e020ce (vendor)[39m
+2026-09-05 23:30:13:3013 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-05 23:30:19:3019 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-05 23:30:20:3020 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-05 23:30:20:3020 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-05 23:30:20:3020 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-05 23:30:21:3021 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 23:30:21:3021 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-05 23:30:21:3021 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-05 23:30:21:3021 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-05 23:30:21:3021 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-05 23:30:21:3021 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-05 23:30:21:3021 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-05 23:30:22:3022 [32minfo[39m: [32mSocket connected: Q606JpXmqlZXl0IeAAAB for user: 69c65e7dbe4d9f5600e020ce (vendor)[39m
+2026-09-05 23:30:26:3026 [32minfo[39m: [32mSocket connected: GPMI5yhAsqG4UB7XAAAD for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 23:33:30:3330 [32minfo[39m: [32mSocket disconnected: Q606JpXmqlZXl0IeAAAB for user: 69c65e7dbe4d9f5600e020ce, reason: transport close[39m
+2026-09-05 23:33:41:3341 [32minfo[39m: [32mSocket connected: WOWy8RDFUc0CPYCqAAAF for user: 69c65e7dbe4d9f5600e020ce (vendor)[39m
+2026-09-05 23:38:36:3836 [32minfo[39m: [32mSocket disconnected: WOWy8RDFUc0CPYCqAAAF for user: 69c65e7dbe4d9f5600e020ce, reason: client namespace disconnect[39m
+2026-09-05 23:38:37:3837 [32minfo[39m: [32mSocket connected: bdQwW_-ktAVGWIGaAAAH for user: 69c65e7dbe4d9f5600e020ce (vendor)[39m
+2026-09-05 23:38:46:3846 [32minfo[39m: [32mSocket disconnected: bdQwW_-ktAVGWIGaAAAH for user: 69c65e7dbe4d9f5600e020ce, reason: transport close[39m
+2026-09-05 23:38:58:3858 [32minfo[39m: [32mSocket connected: 0BGTorcF-sIdTT_nAAAJ for user: 69c65e7dbe4d9f5600e020ce (vendor)[39m
+2026-09-05 23:45:44:4544 [32minfo[39m: [32mSocket disconnected: GPMI5yhAsqG4UB7XAAAD for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 23:45:46:4546 [32minfo[39m: [32mSocket connected: pi22BJTnHnTFU-O3AAAL for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 23:46:53:4653 [32minfo[39m: [32mSocket disconnected: pi22BJTnHnTFU-O3AAAL for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 23:46:55:4655 [32minfo[39m: [32mSocket connected: SB1SSo3-yZDyLyD7AAAN for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 23:46:57:4657 [32minfo[39m: [32mSocket disconnected: SB1SSo3-yZDyLyD7AAAN for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 23:46:59:4659 [32minfo[39m: [32mSocket connected: J76HhRCjVCvO0ovYAAAP for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 23:50:36:5036 [32minfo[39m: [32mSocket disconnected: J76HhRCjVCvO0ovYAAAP for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 23:50:41:5041 [32minfo[39m: [32mSocket connected: XsBEApJOTFULu6jxAAAR for user: 69c2c47f9d1dd1404a838802 (super-admin)[39m
+2026-09-05 23:53:05:535 [32minfo[39m: [32mSocket disconnected: XsBEApJOTFULu6jxAAAR for user: 69c2c47f9d1dd1404a838802, reason: transport close[39m
+2026-09-05 23:53:09:539 [32minfo[39m: [32mSIGINT signal received[39m
+2026-09-05 23:53:09:539 [32minfo[39m: [32mSIGINT - Starting graceful shutdown...[39m
+2026-09-05 23:53:09:539 [32minfo[39m: [32mSocket disconnected: 0BGTorcF-sIdTT_nAAAJ for user: 69c65e7dbe4d9f5600e020ce, reason: server shutting down[39m
+2026-09-05 23:53:09:539 [32minfo[39m: [32mHTTP server closed[39m
+2026-09-06 07:25:06:256 [33mwarn[39m: [33m⚠️ Firebase not configured. Set FIREBASE_* env vars or provide a service-account JSON. Push notifications will be disabled.[39m
+2026-09-06 07:26:35:2635 [33mwarn[39m: [33m⚠️ Firebase not configured. Set FIREBASE_* env vars or provide a service-account JSON. Push notifications will be disabled.[39m
+2026-09-06 07:26:35:2635 [33mwarn[39m: [33mnatural NLP unavailable, using fallback tokenizer: require() of ES Module D:\RentEase\backend\node_modules\afinn-165\index.js from D:\RentEase\backend\node_modules\natural\lib\natural\sentiment\SentimentAnalyzer.js not supported.[39m
+[33mInstead change the require of index.js in D:\RentEase\backend\node_modules\natural\lib\natural\sentiment\SentimentAnalyzer.js to a dynamic import() which is available in all CommonJS modules.[39m
+2026-09-06 07:27:32:2732 [33mwarn[39m: [33m⚠️ Firebase not configured. Set FIREBASE_* env vars or provide a service-account JSON. Push notifications will be disabled.[39m
+2026-09-06 07:27:32:2732 [33mwarn[39m: [33mnatural NLP unavailable, using fallback tokenizer: require() of ES Module D:\RentEase\backend\node_modules\afinn-165\index.js from D:\RentEase\backend\node_modules\natural\lib\natural\sentiment\SentimentAnalyzer.js not supported.[39m
+[33mInstead change the require of index.js in D:\RentEase\backend\node_modules\natural\lib\natural\sentiment\SentimentAnalyzer.js to a dynamic import() which is available in all CommonJS modules.[39m
+2026-09-06 09:28:19:2819 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-06 09:29:12:2912 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-06 09:29:14:2914 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-09-06 09:29:14:2914 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-06 09:29:14:2914 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-06 09:29:15:2915 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-06 09:29:15:2915 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-06 09:29:15:2915 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-06 09:29:15:2915 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-06 09:29:15:2915 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-06 09:29:15:2915 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-06 09:29:15:2915 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-06 09:30:05:305 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:05:305 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:06:306 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:06:306 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:08:308 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:08:308 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:08:308 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:08:308 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:09:309 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:09:309 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-06 09:30:10:3010 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:10:3010 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:12:3012 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:12:3012 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:37:3037 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-06 09:31:54:3154 [32minfo[39m: [32mSocket connected: aXxjv9HI3h1EH84CAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-06 09:33:11:3311 [32minfo[39m: [32m📝 Job options for notification/create:[39m
+2026-09-06 09:33:11:3311 [32minfo[39m: [32m✅ Job added successfully: notification/create - Job ID: 11[39m
+2026-09-06 09:33:12:3312 [32minfo[39m: [32m📊 Queue notification status after add:[39m
+2026-09-06 09:33:12:3312 [32minfo[39m: [32mJob added: notification/create - Job ID: 11[39m
+2026-09-06 09:33:12:3312 [32minfo[39m: [32m🔄 Job 11 (notification) started processing[39m
+2026-09-06 09:33:12:3312 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-06 09:33:12:3312 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-06 09:33:12:3312 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:12:3312 [31merror[39m: [31m❌ Job 11 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:12:3312 [31merror[39m: [31m❌ Job 11 (notification) failed:[39m
+2026-09-06 09:33:18:3318 [32minfo[39m: [32m🔄 Job 11 (notification) started processing[39m
+2026-09-06 09:33:18:3318 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-06 09:33:18:3318 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-06 09:33:18:3318 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:18:3318 [31merror[39m: [31m❌ Job 11 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:19:3319 [31merror[39m: [31m❌ Job 11 (notification) failed:[39m
+2026-09-06 09:33:24:3324 [32minfo[39m: [32m🔄 Job 11 (notification) started processing[39m
+2026-09-06 09:33:24:3324 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-06 09:33:24:3324 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-06 09:33:24:3324 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:24:3324 [31merror[39m: [31m❌ Job 11 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:24:3324 [31merror[39m: [31m❌ Job 11 (notification) failed:[39m
+2026-09-06 09:34:02:342 [32minfo[39m: [32m📝 Job options for notification/create:[39m
+2026-09-06 09:34:02:342 [32minfo[39m: [32m✅ Job added successfully: notification/create - Job ID: 12[39m
+2026-09-06 09:34:02:342 [32minfo[39m: [32m📊 Queue notification status after add:[39m
+2026-09-06 09:34:02:342 [32minfo[39m: [32mJob added: notification/create - Job ID: 12[39m
+2026-09-06 09:34:02:342 [32minfo[39m: [32m🔄 Job 12 (notification) started processing[39m
+2026-09-06 09:34:02:342 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-06 09:34:02:342 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-06 09:34:02:342 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:02:342 [31merror[39m: [31m❌ Job 12 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:03:343 [31merror[39m: [31m❌ Job 12 (notification) failed:[39m
+2026-09-06 09:34:08:348 [32minfo[39m: [32m🔄 Job 12 (notification) started processing[39m
+2026-09-06 09:34:09:349 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-06 09:34:09:349 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-06 09:34:09:349 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:09:349 [31merror[39m: [31m❌ Job 12 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:09:349 [31merror[39m: [31m❌ Job 12 (notification) failed:[39m
+2026-09-06 09:34:15:3415 [32minfo[39m: [32m🔄 Job 12 (notification) started processing[39m
+2026-09-06 09:34:15:3415 [32minfo[39m: [32m⚙️ Processing job from notification queue:[39m
+2026-09-06 09:34:15:3415 [32minfo[39m: [32mProcessing notification job: create[39m
+2026-09-06 09:34:15:3415 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:15:3415 [31merror[39m: [31m❌ Job 12 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:16:3416 [31merror[39m: [31m❌ Job 12 (notification) failed:[39m
+2026-09-06 09:36:52:3652 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-06 09:36:58:3658 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-06 09:36:59:3659 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-06 09:36:59:3659 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-06 09:36:59:3659 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-06 09:37:00:370 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-06 09:37:12:3712 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-06 09:37:20:3720 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-06 09:37:21:3721 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-09-06 09:37:21:3721 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-06 09:37:21:3721 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-06 09:37:22:3722 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-06 09:37:22:3722 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-06 09:37:22:3722 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-06 09:37:22:3722 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-06 09:37:22:3722 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-06 09:37:22:3722 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-06 09:37:22:3722 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-06 09:37:40:3740 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-06 09:37:46:3746 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-06 09:37:47:3747 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-09-06 09:37:47:3747 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-06 09:37:48:3748 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-06 09:37:48:3748 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-06 09:37:48:3748 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-06 09:37:48:3748 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-06 09:37:48:3748 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-06 09:37:48:3748 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-06 09:37:48:3748 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-06 09:37:48:3748 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-06 09:38:21:3821 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-06 09:38:25:3825 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-06 09:38:30:3830 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-09-06 09:38:30:3830 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-06 09:38:31:3831 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-06 09:38:31:3831 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-06 09:38:31:3831 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-06 09:38:31:3831 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-06 09:38:31:3831 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-06 09:38:31:3831 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-06 09:38:31:3831 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-06 09:38:31:3831 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-06 09:39:38:3938 [32minfo[39m: [32mSocket connected: axmobO5xpheb1XoVAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-06 09:48:17:4817 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:48:18:4818 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:48:30:4830 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-06 09:48:36:4836 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-06 09:48:45:4845 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-06 09:49:27:4927 [32minfo[39m: [32mSocket disconnected: axmobO5xpheb1XoVAAAB for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-06 09:49:37:4937 [32minfo[39m: [32mSocket connected: Bia-uytCc7L7MrdOAAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-06 10:01:04:14 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-06 10:01:17:117 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-06 10:01:26:126 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-06 10:01:41:141 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-09-06 10:01:43:143 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-06 10:01:43:143 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-09-06 10:01:44:144 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-06 10:01:45:145 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-06 10:01:45:145 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-06 10:01:45:145 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-06 10:01:45:145 [32minfo[39m: [32m🎯 All BullMQ queues initialized successfully![39m
+2026-09-06 10:01:45:145 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-09-06 10:01:45:145 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-09-06 10:01:45:145 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: select-stinkbug-138900.upstash.io:6379:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-09-06 10:04:35:435 [32minfo[39m: [32mSocket connected: SaIHZy8FiQ_0Q_HfAAAB for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-06 10:10:38:1038 [32minfo[39m: [32mSocket disconnected: SaIHZy8FiQ_0Q_HfAAAB for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-06 10:11:00:110 [32minfo[39m: [32mSocket connected: PNKyGec71BZ88wV8AAAD for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-06 10:12:32:1232 [32minfo[39m: [32mSocket disconnected: PNKyGec71BZ88wV8AAAD for user: 6a66d2a55672a851e1a94ca5, reason: transport close[39m
+2026-09-06 10:12:43:1243 [32minfo[39m: [32mSocket connected: jg28uJwGj2hqRxsOAAAF for user: 6a66d2a55672a851e1a94ca5 (user)[39m
+2026-09-06 10:14:19:1419 [32minfo[39m: [32mUser 6a66d2a55672a851e1a94ca5 added item to cart[39m

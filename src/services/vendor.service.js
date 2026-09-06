@@ -965,9 +965,16 @@ class VendorService {
   async getVendorReviews(userId, page = 1, limit = 10) {
     try {
       const skip = (page - 1) * limit;
+      const vendor = await Vendor.findOne({ user: userId }).select('_id').lean();
+
+      if (!vendor) {
+        throw new AppError('Vendor profile not found', 404);
+      }
+
+      const vendorId = vendor._id;
 
       const [reviews, total] = await Promise.all([
-        Review.find({ vendor: userId })
+        Review.find({ vendor: vendorId })
           .populate('user', 'profile.firstName profile.lastName profile.avatar')
           .populate('product', 'basicInfo.name')
           .populate('rental', 'rentalNumber')
@@ -975,12 +982,12 @@ class VendorService {
           .skip(skip)
           .limit(limit)
           .lean(),
-        Review.countDocuments({ vendor: userId })
+        Review.countDocuments({ vendor: vendorId })
       ]);
 
       // Calculate rating distribution
       const distribution = await Review.aggregate([
-        { $match: { vendor: userId } },
+        { $match: { vendor: vendorId } },
         {
           $group: {
             _id: '$ratings.overall',
@@ -1022,8 +1029,10 @@ class VendorService {
         throw new AppError('Review not found', 404);
       }
 
-      // Check if vendor owns this review
-      if (review.vendor.toString() !== userId.toString()) {
+      const vendor = await Vendor.findOne({ user: userId }).select('_id').lean();
+
+      // Review.vendor stores the Vendor document ID, not the User ID.
+      if (!vendor || review.vendor.toString() !== vendor._id.toString()) {
         throw new AppError('Unauthorized to reply to this review', 403);
       }
 

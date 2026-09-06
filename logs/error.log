@@ -46905,3 +46905,160 @@
 2026-09-04 09:34:47:3447 [31merror[39m: [31mYour token has expired. Please log in again.[39m
 2026-09-04 09:35:29:3529 [31merror[39m: [31mInvalid refresh token[39m
 2026-09-04 09:35:32:3532 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:11:41:1141 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-04 23:11:41:1141 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-04 23:11:43:1143 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-04 23:11:43:1143 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:11:43:1143 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:11:43:1143 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:11:43:1143 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-04 23:11:45:1145 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-04 23:11:45:1145 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:11:46:1146 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:12:53:1253 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:12:54:1254 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-04 23:13:16:1316 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-05 08:23:31:2331 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 08:23:45:2345 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 08:23:45:2345 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 08:23:45:2345 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 08:23:46:2346 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 08:23:48:2348 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 08:23:48:2348 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:23:48:2348 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:23:48:2348 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:23:50:2350 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:24:06:246 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:24:07:247 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:24:11:2411 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:24:12:2412 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 08:24:24:2424 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-05 08:26:36:2636 [31merror[39m: [31mError in createReview: next is not a function[39m
+2026-09-05 08:26:36:2636 [31merror[39m: [31mnext is not a function[39m
+2026-09-05 08:28:22:2822 [31merror[39m: [31mError in createReview: next is not a function[39m
+2026-09-05 08:28:22:2822 [31merror[39m: [31mnext is not a function[39m
+2026-09-05 09:04:24:424 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-05 09:11:35:1135 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-05 09:11:37:1137 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 09:11:37:1137 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 18:59:22:5922 [31merror[39m: [31m❌ UNHANDLED REJECTION: Error: queryTxt EREFUSED cluster0.ffmnsa4.mongodb.net[39m
+[31m    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)[39m
+2026-09-05 18:59:31:5931 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 19:00:17:017 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 19:30:51:3051 [31merror[39m: [31mError in getReview: Cannot read properties of undefined (reading 'toString')[39m
+2026-09-05 19:30:51:3051 [31merror[39m: [31mCannot read properties of undefined (reading 'toString')[39m
+2026-09-05 19:31:29:3129 [31merror[39m: [31mCan't find /favicon.ico on this server![39m
+2026-09-05 19:41:12:4112 [31merror[39m: [31mError in getReview: AppError is not a constructor[39m
+2026-09-05 19:41:12:4112 [31merror[39m: [31mAppError is not a constructor[39m
+2026-09-05 19:44:27:4427 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 21:22:45:2245 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 21:22:46:2246 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 21:22:46:2246 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 21:22:46:2246 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 21:22:46:2246 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 21:22:47:2247 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 21:22:47:2247 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 21:22:48:2248 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 21:22:59:2259 [31merror[39m: [31mError in getReview: AppError is not a constructor[39m
+2026-09-05 21:22:59:2259 [31merror[39m: [31mAppError is not a constructor[39m
+2026-09-05 21:27:43:2743 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 21:28:30:2830 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 21:29:06:296 [31merror[39m: [31mError in getReview: Review is pending moderation[39m
+2026-09-05 21:29:06:296 [31merror[39m: [31mReview is pending moderation[39m
+2026-09-05 21:29:08:298 [31merror[39m: [31mError in getReview: Review is pending moderation[39m
+2026-09-05 21:29:08:298 [31merror[39m: [31mReview is pending moderation[39m
+2026-09-05 21:36:55:3655 [31merror[39m: [31mError in getReview: Cast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:36:55:3655 [31merror[39m: [31mCast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:19:3719 [31merror[39m: [31mError in getReview: Cast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:19:3719 [31merror[39m: [31mCast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:30:3730 [31merror[39m: [31mError in getReview: Review is pending moderation[39m
+2026-09-05 21:37:30:3730 [31merror[39m: [31mReview is pending moderation[39m
+2026-09-05 21:37:30:3730 [31merror[39m: [31mError in getReview: Cast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:30:3730 [31merror[39m: [31mCast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:32:3732 [31merror[39m: [31mError in getReview: Cast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:32:3732 [31merror[39m: [31mCast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:49:3749 [31merror[39m: [31mError in getReview: Cast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:37:49:3749 [31merror[39m: [31mCast to ObjectId failed for value "pending" (type string) at path "_id" for model "Review"[39m
+2026-09-05 21:49:34:4934 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:34:4934 [31merror[39m: [31m❌ Job 9 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:35:4935 [31merror[39m: [31m❌ Job 9 (notification) failed:[39m
+2026-09-05 21:49:40:4940 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:40:4940 [31merror[39m: [31m❌ Job 9 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:41:4941 [31merror[39m: [31m❌ Job 9 (notification) failed:[39m
+2026-09-05 21:49:47:4947 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:47:4947 [31merror[39m: [31m❌ Job 9 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 21:49:47:4947 [31merror[39m: [31m❌ Job 9 (notification) failed:[39m
+2026-09-05 21:59:09:599 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 21:59:13:5913 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-05 22:01:50:150 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:01:53:153 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:01:54:154 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:01:55:155 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:01:55:155 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:01:55:155 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-05 22:01:56:156 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:01:57:157 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:01:57:157 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:05:11:511 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:05:11:511 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:05:11:511 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:05:11:511 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:06:53:653 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-05 22:06:54:654 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:07:12:712 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:07:12:712 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:07:17:717 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:07:18:718 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:11:15:1115 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:11:16:1116 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-05 22:11:52:1152 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-05 22:14:04:144 [31merror[39m: [31mError in createReview: Review already exists for this rental[39m
+2026-09-05 22:14:04:144 [31merror[39m: [31mReview already exists for this rental[39m
+2026-09-05 23:13:52:1352 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:13:52:1352 [31merror[39m: [31m❌ Job 10 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:13:52:1352 [31merror[39m: [31m❌ Job 10 (notification) failed:[39m
+2026-09-05 23:13:57:1357 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:13:57:1357 [31merror[39m: [31m❌ Job 10 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:13:58:1358 [31merror[39m: [31m❌ Job 10 (notification) failed:[39m
+2026-09-05 23:14:03:143 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:14:03:143 [31merror[39m: [31m❌ Job 10 from notification failed: Notification validation failed: category: Path `category` is required.[39m
+2026-09-05 23:14:04:144 [31merror[39m: [31m❌ Job 10 (notification) failed:[39m
+2026-09-05 23:19:33:1933 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-06 09:30:05:305 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:05:305 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:06:306 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:06:306 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:08:308 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:08:308 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:08:308 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:08:308 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:09:309 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 09:30:09:309 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-06 09:30:10:3010 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:10:3010 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:12:3012 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:12:3012 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:30:37:3037 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-06 09:33:12:3312 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:12:3312 [31merror[39m: [31m❌ Job 11 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:12:3312 [31merror[39m: [31m❌ Job 11 (notification) failed:[39m
+2026-09-06 09:33:18:3318 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:18:3318 [31merror[39m: [31m❌ Job 11 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:19:3319 [31merror[39m: [31m❌ Job 11 (notification) failed:[39m
+2026-09-06 09:33:24:3324 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:24:3324 [31merror[39m: [31m❌ Job 11 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:33:24:3324 [31merror[39m: [31m❌ Job 11 (notification) failed:[39m
+2026-09-06 09:34:02:342 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:02:342 [31merror[39m: [31m❌ Job 12 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:03:343 [31merror[39m: [31m❌ Job 12 (notification) failed:[39m
+2026-09-06 09:34:09:349 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:09:349 [31merror[39m: [31m❌ Job 12 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:09:349 [31merror[39m: [31m❌ Job 12 (notification) failed:[39m
+2026-09-06 09:34:15:3415 [31merror[39m: [31m❌ Error processing job notification/create: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:15:3415 [31merror[39m: [31m❌ Job 12 from notification failed: Notification validation failed: category: Path `category` is required., type: `marketing` is not a valid enum value for path `type`.[39m
+2026-09-06 09:34:16:3416 [31merror[39m: [31m❌ Job 12 (notification) failed:[39m
+2026-09-06 09:48:17:4817 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:48:18:4818 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 09:48:30:4830 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-06 09:48:36:4836 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-06 09:48:45:4845 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m

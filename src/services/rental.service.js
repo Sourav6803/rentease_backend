@@ -790,7 +790,7 @@ class RentalService {
    */
   async getRental(rentalId, userId, userRole = "user") {
     try {
-      const cacheKey = `rental:${rentalId}`;
+      const cacheKey = `rental:${rentalId}:${userRole}:${userId}`;
 
       // Try cache first
       if (this.redisClient) {
@@ -825,7 +825,6 @@ class RentalService {
           path: "maintenance",
           options: { sort: { createdAt: -1 }, limit: 5 },
         })
-        .populate("reviews")
         .lean();
 
       if (!rental) {
@@ -846,6 +845,14 @@ class RentalService {
       ) {
         throw new AppError("Unauthorized to view this rental", 403);
       }
+
+      // Review stores the rental reference on Review, while Rental.reviews is
+      // a legacy embedded shape. Resolve the inverse relation explicitly so
+      // the frontend receives rental.reviews.user consistently.
+      const userReview = await Review.findOne({ rental: rentalId })
+        .populate('user', 'profile.firstName profile.lastName profile.avatar')
+        .lean();
+      rental.reviews = { user: userReview || null, vendor: null };
 
       // Calculate late fee if overdue
       if (

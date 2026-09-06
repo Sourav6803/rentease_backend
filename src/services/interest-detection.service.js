@@ -66,9 +66,10 @@ class InterestDetectionService {
     try {
       await addJob('notification', 'create', {
         userId,
-        type: 'marketing',
+        type: 'in_app', // valid enum: email | sms | push | in_app | whatsapp
+        category: 'marketing', // valid enum (marketing is a category, not a type)
         title: 'Still interested?',
-        message: 'We noticed you were checking out a product. Here is a special offer for you!',
+        content: 'We noticed you were checking out a product. Here is a special offer for you!',
         data: { productId: interest.product, interestScore: interest.interactionScore },
       });
     } catch (err) {

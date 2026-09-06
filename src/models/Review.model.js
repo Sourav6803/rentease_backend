@@ -77,6 +77,7 @@ const reviewSchema = new mongoose.Schema({
       enum: ['image', 'video']
     },
     url: String,
+    publicId: String,
     caption: String,
     isVerified: { type: Boolean, default: false }
   }],
@@ -179,7 +180,7 @@ reviewSchema.pre('save', async function(next) {
     const count = await mongoose.model('Review').countDocuments();
     this.reviewNumber = `REV${Date.now().toString().slice(-8)}${(count + 1).toString().padStart(4, '0')}`;
   }
-  next();
+  // next();
 });
 
 // Pre-save middleware to ensure only one review per rental
@@ -190,7 +191,7 @@ reviewSchema.pre('save', async function(next) {
       next(new Error('Review already exists for this rental'));
     }
   }
-  next();
+  // next();
 });
 
 // Post-save middleware to update product ratings

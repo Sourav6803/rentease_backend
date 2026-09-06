@@ -125,6 +125,19 @@ const uploadVideo = multer({
   }
 });
 
+const uploadReviewMediaFiles = multer({
+  storage: memoryStorage,
+  limits: { fileSize: 50 * 1024 * 1024, files: 5 },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = [
+      'image/jpeg', 'image/png', 'image/webp',
+      'video/mp4', 'video/webm', 'video/quicktime'
+    ];
+    if (allowedTypes.includes(file.mimetype)) return cb(null, true);
+    cb(new AppError('Reviews support JPG, PNG, WebP, MP4, and WebM files only', 400), false);
+  }
+});
+
 const uploadMultiple = multer({
   storage: memoryStorage,
   limits: { fileSize: 5 * 1024 * 1024 },
@@ -197,7 +210,7 @@ const uploadVideoToCloudinary = async (file, folder = 'rentease/videos') => {
     const result = await uploadToCloudinary(file.buffer, {
       folder,
       resource_type: 'video',
-      allowed_formats: ['mp4', 'mov', 'avi'],
+      allowed_formats: ['mp4', 'mov', 'avi', 'webm'],
       public_id: publicId
     });
 
@@ -573,32 +586,57 @@ const uploadVendorMedia = [
   }
 ];
 
+const uploadReviewMedia = [
+  uploadReviewMediaFiles.array('media', 5),
+  handleUploadError,
+  async (req, res, next) => {
+    if (!req.files || req.files.length === 0) return next();
+
+    try {
+      const uploadedMedia = await Promise.all(req.files.map(async (file) => {
+        const isVideo = file.mimetype.startsWith('video/');
+        const result = isVideo
+          ? await uploadVideoToCloudinary(file, 'rentease/reviews')
+          : await processAndUploadImage(file, 'rentease/reviews');
+
+        return {
+          type: isVideo ? 'video' : 'image',
+          url: result.secure_url,
+          publicId: result.public_id,
+          format: result.format,
+          width: result.width,
+          height: result.height,
+          duration: result.duration
+        };
+      }));
+
+      req.body.media = uploadedMedia;
+      next();
+    } catch (error) {
+      next(new AppError('Unable to upload review media: ' + error.message, 500));
+    }
+  }
+];
+
 module.exports = {
-  // Original multer instances
   uploadImage,
   uploadDocument,
   uploadVideo,
   uploadMultiple,
   uploadMemory,
-
-  upload,           // Generic upload with fields support
-  uploadDelivery,   // Dedicated delivery upload instance
-  
-  // Combined middleware
+  upload,
+  uploadDelivery,
   uploadProfilePicture,
   uploadProductImages,
   uploadKycDocuments,
   uploadVendorDocuments,
   uploadVendorMedia,
-
-  // Helper functions
+  uploadReviewMedia,
   processAndUploadImage,
   deleteFile,
   getFileInfo,
   getSignedUrl,
   handleUploadError,
-  
-  // Additional exports for flexibility
   uploadSingleImage,
   uploadSingleDocument,
   uploadSingleVideo,

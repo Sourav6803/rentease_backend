@@ -19,7 +19,11 @@ class ReviewController {
    */
   getReview = catchAsync(async (req, res) => {
     const { id } = req.params;
-    const review = await ReviewService.getReview(id, req.user?._id, req.user?.role);
+    const review = await ReviewService.getReview(
+      id,
+      req.user?._id,
+      req.userRole || req.user?.role || (req.admin ? 'admin' : undefined),
+    );
     
     return ApiResponse.success(res, 200, 'Review retrieved successfully', { review });
   });
@@ -190,7 +194,7 @@ class ReviewController {
   moderateReview = catchAsync(async (req, res) => {
     const { id } = req.params;
     
-    const review = await ReviewService.moderateReview(id, req.admin._id, req.body);
+    const review = await ReviewService.moderateReview(id, req.user._id, req.body);
     
     return ApiResponse.success(res, 200, 'Review moderated successfully', { review });
   });
@@ -227,7 +231,7 @@ class ReviewController {
 
     for (const reviewId of reviewIds) {
       try {
-        await ReviewService.moderateReview(reviewId, req.admin._id, { status, reason });
+        await ReviewService.moderateReview(reviewId, req.user._id, { status, reason });
         results.successful.push(reviewId);
       } catch (error) {
         results.failed.push({ id: reviewId, reason: error.message });

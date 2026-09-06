@@ -1,20 +1,28 @@
 const { Review, User, Product, Rental, Vendor } = require('../models');
-const { AppError } = require('../utils/AppError');
+const AppError  = require('../utils/AppError');
 const { addJob } = require('../jobs');
 const { eventEmitter, EVENTS } = require('../events');
 const { getRedisClient } = require('../config/redis');
 const logger = require('../config/logger');
 const mongoose = require('mongoose');
 const Sentiment = require('sentiment');
-const natural = require('natural');
+// `natural` v8 pulls afinn-165 which is ESM-only — crashes Node < 22 CJS
+// require(). Load it defensively; fall back to a simple tokenizer so review
+// creation is never blocked by an NLP dependency.
+let natural = null;
+try {
+  natural = require('natural');
+} catch (err) {
+  logger.warn(`natural NLP unavailable, using fallback tokenizer: ${err.message}`);
+}
 
 class ReviewService {
   constructor() {
     this.redisClient = getRedisClient();
     this.defaultTTL = 1800; // 30 minutes
     this.sentiment = new Sentiment();
-    this.tokenizer = new natural.WordTokenizer();
-    this.TfIdf = natural.TfIdf;
+    this.tokenizer = natural ? new natural.WordTokenizer() : null;
+    this.TfIdf = natural ? natural.TfIdf : null;
   }
 
   /**
@@ -24,6 +32,32 @@ class ReviewService {
     const timestamp = Date.now().toString().slice(-8);
     const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
     return `REV${timestamp}${random}`;
+  }
+
+  /**
+   * Get product name (basicInfo.name)
+   */
+  async getProductName(productId) {
+    try {
+      const product = await Product.findById(productId).select('basicInfo.name').lean();
+      return product?.basicInfo?.name || null;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Get user display name
+   */
+  async getUserName(userId) {
+    try {
+      const user = await User.findById(userId).select('profile.firstName profile.lastName').lean();
+      const first = user?.profile?.firstName || '';
+      const last = user?.profile?.lastName || '';
+      return [first, last].filter(Boolean).join(' ').trim() || 'A customer';
+    } catch {
+      return 'A customer';
+    }
   }
 
   /**
@@ -57,7 +91,10 @@ class ReviewService {
    * Extract keywords from review
    */
   extractKeywords(content) {
-    const tokens = this.tokenizer.tokenize(content.toLowerCase());
+    // Fallback tokenizer when natural NLP is unavailable (ESM issue on Node < 22)
+    const tokens = this.tokenizer
+      ? this.tokenizer.tokenize(content.toLowerCase())
+      : content.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
     
     // Remove common stop words
     const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 
@@ -80,7 +117,7 @@ class ReviewService {
     session.startTransaction();
 
     try {
-      const { rentalId, ratings, title, content, pros, cons, images } = reviewData;
+      const { rentalId, ratings, title, content, pros, cons, tips, media, images } = reviewData;
 
       // Check if rental exists and belongs to user
       const rental = await Rental.findOne({
@@ -92,9 +129,9 @@ class ReviewService {
         throw new AppError('Rental not found or unauthorized', 404);
       }
 
-      // Check if rental is completed
-      if (rental.status !== 'completed') {
-        throw new AppError('Reviews can only be created for completed rentals', 400);
+      // A customer can review once delivery is confirmed and afterward.
+      if (!['delivered', 'active', 'completed'].includes(rental.status)) {
+        throw new AppError('Reviews can only be created after the rental is delivered', 400);
       }
 
       // Check if review already exists
@@ -123,11 +160,12 @@ class ReviewService {
         content,
         pros: pros || [],
         cons: cons || [],
-        attachments: images ? images.map(img => ({
+        tips: tips || undefined,
+        attachments: media || (images || []).map(img => ({
           type: 'image',
-          url: img,
-          uploadedAt: new Date()
-        })) : [],
+          url: typeof img === 'string' ? img : img.url,
+          publicId: typeof img === 'object' ? img.publicId : undefined
+        })),
         sentiment: {
           score: sentiment.score,
           sentiment: sentiment.sentiment,
@@ -147,11 +185,33 @@ class ReviewService {
 
       await session.commitTransaction();
 
+      // Notify admins — every new review starts as `pending` and must be
+      // approved by an admin before it becomes public (see moderateReview).
+      // Get product + user names for a meaningful notification.
+      const productName = rental.productName || (await this.getProductName(rental.product));
+      const customerName = await this.getUserName(userId);
+
+      await addJob('notification', 'create', {
+        role: ['admin', 'super-admin', 'super_admin'],
+        type: 'in_app',
+        title: '⭐ New Review Pending Approval',
+        content: `${customerName} rated "${productName || 'a product'}" ${ratings.overall}/5 and left a review. Review and approve it.`,
+        data: {
+          reviewId: review[0]._id,
+          reviewNumber: review[0].reviewNumber,
+          productId: rental.product,
+          rating: ratings.overall,
+          moderationUrl: `/admin/reviews/moderation/${review[0]._id}`,
+        },
+      });
+
       // Update product rating
       await this.updateProductRating(rental.product);
 
       // Update vendor rating
       await this.updateVendorRating(rental.vendor);
+
+      await this.invalidateReviewCache(review[0]._id);
 
       // Emit event
       eventEmitter.emit(EVENTS.REVIEW.SUBMITTED, {
@@ -186,12 +246,12 @@ class ReviewService {
       const cacheKey = `review:${reviewId}`;
       
       // Try cache first
-      if (this.redisClient) {
-        const cached = await this.redisClient.get(cacheKey);
-        if (cached) {
-          return JSON.parse(cached);
-        }
-      }
+      // if (this.redisClient) {
+      //   const cached = await this.redisClient.get(cacheKey);
+      //   if (cached) {
+      //     return JSON.parse(cached);
+      //   }
+      // }
 
       const review = await Review.findById(reviewId)
         .populate('user', 'profile.firstName profile.lastName profile.avatar')
@@ -212,17 +272,22 @@ class ReviewService {
         throw new AppError('Review not found', 404);
       }
 
-      // Check authorization for pending reviews
-      if (review.moderation.status === 'pending' && 
-          userRole !== 'admin' && 
-          review.user._id.toString() !== userId.toString()) {
+      // Approved reviews are public. Pending reviews are restricted to their
+      // author or an authenticated admin; public callers have no userId.
+      const isAdmin = ['admin', 'super-admin', 'super_admin'].includes(userRole);
+      const reviewUserId = review.user?._id?.toString();
+      const requestingUserId = userId?.toString();
+      if (review.moderation.status === 'pending' &&
+          !isAdmin &&
+          (!requestingUserId || reviewUserId !== requestingUserId)) {
         throw new AppError('Review is pending moderation', 403);
       }
 
       // Calculate helpful percentage
-      const totalVotes = review.helpful.count + (review.reported?.count || 0);
-      review.helpfulPercentage = totalVotes > 0 ? 
-        (review.helpful.count / totalVotes) * 100 : 0;
+      const helpfulCount = review.helpful?.count || 0;
+      const totalVotes = helpfulCount + (review.reported?.count || 0);
+      review.helpfulPercentage = totalVotes > 0 ?
+        (helpfulCount / totalVotes) * 100 : 0;
 
       // Cache the result
       if (this.redisClient && review.moderation.status === 'approved') {
@@ -284,12 +349,12 @@ class ReviewService {
         Review.countDocuments(query),
         this.getRatingDistribution(productId)
       ]);
-
       // Calculate helpful percentages
       reviews.forEach(review => {
-        const totalVotes = review.helpful.count + (review.reported?.count || 0);
-        review.helpfulPercentage = totalVotes > 0 ? 
-          (review.helpful.count / totalVotes) * 100 : 0;
+        const helpfulCount = review.helpful?.count || 0;
+        const totalVotes = helpfulCount + (review.reported?.count || 0);
+        review.helpfulPercentage = totalVotes > 0 ?
+          (helpfulCount / totalVotes) * 100 : 0;
       });
 
       // Get summary statistics
@@ -426,13 +491,8 @@ class ReviewService {
         throw new AppError('Review not found or unauthorized', 404);
       }
 
-      // Check if review can be updated
-      if (review.moderation.status !== 'pending') {
-        throw new AppError('Cannot update review after moderation', 400);
-      }
-
       // Update fields
-      const { ratings, title, content, pros, cons, images } = updateData;
+      const { ratings, title, content, pros, cons, tips, media, images } = updateData;
 
       if (ratings) review.ratings = ratings;
       if (title) review.title = title;
@@ -448,13 +508,21 @@ class ReviewService {
       }
       if (pros) review.pros = pros;
       if (cons) review.cons = cons;
-      if (images) {
+      if (tips !== undefined) review.tips = tips;
+      if (media?.length) {
+        review.attachments = [...(review.attachments || []), ...media].slice(0, 5);
+      } else if (images) {
         review.attachments = images.map(img => ({
           type: 'image',
           url: img,
-          uploadedAt: new Date()
         }));
       }
+
+      // Any edit to a public review must pass moderation again.
+      review.moderation.status = 'pending';
+      review.moderation.reviewedBy = undefined;
+      review.moderation.reviewedAt = undefined;
+      review.moderation.rejectionReason = undefined;
 
       review.metadata.updatedBy = userId;
       review.metadata.updatedAt = new Date();
@@ -462,6 +530,11 @@ class ReviewService {
       await review.save({ session });
 
       await session.commitTransaction();
+
+      // The edit is pending moderation now, so remove its old public rating
+      // from product/vendor aggregates until it is approved again.
+      await this.updateProductRating(review.product);
+      await this.updateVendorRating(review.vendor);
 
       // Invalidate cache
       await this.invalidateReviewCache(reviewId);
@@ -611,7 +684,7 @@ class ReviewService {
         
         // Notify admins
         await addJob('notification', 'create', {
-          role: 'admin',
+          role: ['admin', 'super-admin'],
           type: 'in_app',
           title: '🚩 Review Flagged',
           content: `Review #${review.reviewNumber} has been flagged by ${review.reported.count} users.`,
@@ -795,10 +868,11 @@ class ReviewService {
    */
   async getRatingDistribution(productId) {
     try {
+      const productObjectId = new mongoose.Types.ObjectId(productId);
       const distribution = await Review.aggregate([
         { 
           $match: { 
-            product: productId, 
+            product: productObjectId, 
             'moderation.status': 'approved',
             status: 'active'
           } 
@@ -829,10 +903,11 @@ class ReviewService {
    */
   async getReviewSummary(productId) {
     try {
+      const productObjectId = new mongoose.Types.ObjectId(productId);
       const summary = await Review.aggregate([
         { 
           $match: { 
-            product: productId, 
+            product: productObjectId, 
             'moderation.status': 'approved',
             status: 'active'
           } 
@@ -866,7 +941,7 @@ class ReviewService {
       const sentimentBreakdown = await Review.aggregate([
         { 
           $match: { 
-            product: productId, 
+            product: productObjectId, 
             'moderation.status': 'approved',
             status: 'active'
           } 
@@ -918,7 +993,7 @@ class ReviewService {
 
       // Notify admins
       await addJob('notification', 'create', {
-        role: 'admin',
+        role: ['admin', 'super-admin'],
         type: 'in_app',
         title: '🚩 Review Flagged for Moderation',
         content: `Review #${review.reviewNumber} has been flagged. Reason: ${reason}`,
@@ -994,6 +1069,27 @@ class ReviewService {
         // Update product and vendor ratings
         await this.updateProductRating(review.product);
         await this.updateVendorRating(review.vendor);
+
+        // Notify the vendor — an approved review is now public on their product.
+        const vendor = await Vendor.findById(review.vendor).select('user').lean();
+        const productName = await this.getProductName(review.product);
+        const customerName = await this.getUserName(review.user);
+
+        if (vendor?.user) {
+          await addJob('notification', 'create', {
+            userId: vendor.user,
+            type: 'in_app',
+            title: '⭐ New Review on Your Product',
+            content: `${customerName} rated "${productName || 'your product'}" ${review.ratings?.overall}/5. The review is now live.`,
+            data: {
+              reviewId: review._id,
+              reviewNumber: review.reviewNumber,
+              productId: review.product,
+              rating: review.ratings?.overall,
+              reviewUrl: `/product/${review.product}`,
+            },
+          });
+        }
       }
 
       // Invalidate cache
@@ -1197,6 +1293,7 @@ class ReviewService {
   async invalidateReviewCache(reviewId) {
     try {
       if (this.redisClient) {
+        const review = await Review.findById(reviewId).select('rental').lean();
         const patterns = [
           `review:${reviewId}`,
           `review:${reviewId}:*`,
@@ -1206,6 +1303,10 @@ class ReviewService {
           'product:*:ratings',
           'vendor:*:ratings'
         ];
+
+        if (review?.rental) {
+          patterns.push(`rental:${review.rental}:*`, `rental:${review.rental}`);
+        }
         
         for (const pattern of patterns) {
           const keys = await this.redisClient.keys(pattern);

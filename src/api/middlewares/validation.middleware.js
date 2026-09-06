@@ -1326,6 +1326,23 @@ const reviewValidations = {
       .isLength({ min: 10, max: 2000 })
       .withMessage("Content must be between 10 and 2000 characters"),
 
+    body("tips").optional().isString().isLength({ max: 500 }),
+
+    body("media")
+      .optional()
+      .isArray({ max: 5 })
+      .withMessage("Maximum 5 media files are allowed"),
+
+    body("media.*.type")
+      .if(body("media").exists())
+      .isIn(["image", "video"])
+      .withMessage("Invalid review media type"),
+
+    body("media.*.url")
+      .if(body("media").exists())
+      .isURL({ protocols: ["https"], require_protocol: true })
+      .withMessage("Review media URL must be a secure URL"),
+
     body("pros").optional().isArray().withMessage("Pros must be an array"),
 
     body("pros.*").if(body("pros").exists()).isString().isLength({ max: 100 }),
@@ -1352,6 +1369,23 @@ const reviewValidations = {
     body("title").optional().isString().isLength({ min: 3, max: 100 }),
 
     body("content").optional().isString().isLength({ min: 10, max: 2000 }),
+
+    body("tips").optional().isString().isLength({ max: 500 }),
+
+    body("media")
+      .optional()
+      .isArray({ max: 5 })
+      .withMessage("Maximum 5 media files are allowed"),
+
+    body("media.*.type")
+      .if(body("media").exists())
+      .isIn(["image", "video"])
+      .withMessage("Invalid review media type"),
+
+    body("media.*.url")
+      .if(body("media").exists())
+      .isURL({ protocols: ["https"], require_protocol: true })
+      .withMessage("Review media URL must be a secure URL"),
 
     body("pros").optional().isArray(),
 

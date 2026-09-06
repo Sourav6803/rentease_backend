@@ -350,6 +350,7 @@ class ProductService {
             category: '$product.category',
             vendor: '$product.vendor',
             ratings: '$product.ratings',
+            rentalTerms: '$product.rentalTerms',
             recommendationScore: '$score'
           }
         }
@@ -398,6 +399,7 @@ class ProductService {
             category: '$product.category',
             vendor: '$product.vendor',
             ratings: '$product.ratings',
+            rentalTerms: '$product.rentalTerms',
             popularityScore: '$rentalCount'
           }
         }
@@ -470,6 +472,7 @@ class ProductService {
             vendor: '$product.vendor',
             ratings: '$product.ratings',
             condition: '$product.condition',
+            rentalTerms: '$product.rentalTerms',
             rentalCount: 1,
             totalRevenue: 1
           }
@@ -515,7 +518,7 @@ class ProductService {
       })
       .populate('vendor', 'business.name')
       .populate('category', 'name slug')
-      .select('basicInfo.name basicInfo.slug basicInfo.brand pricing monthlyRent media.images condition ratings.average vendor category createdAt')
+      .select('basicInfo.name basicInfo.slug basicInfo.brand pricing monthlyRent media.images condition ratings.average vendor category rentalTerms')
       .sort({ createdAt: -1 })
       .limit(limit)
       .lean();
@@ -581,6 +584,7 @@ class ProductService {
             vendor: '$product.vendor',
             ratings: '$product.ratings',
             condition: '$product.condition',
+            rentalTerms: '$product.rentalTerms',
             totalRentals: 1,
             totalRevenue: 1
           }
@@ -742,12 +746,12 @@ class ProductService {
       const cacheKey = `product:${identifier}`;
       
       // Try cache first
-      if (this.redisClient) {
-        const cached = await this.redisClient.get(cacheKey);
-        if (cached) {
-          return JSON.parse(cached);
-        }
-      }
+      // if (this.redisClient) {
+      //   const cached = await this.redisClient.get(cacheKey);
+      //   if (cached) {
+      //     return JSON.parse(cached);
+      //   }
+      // }
 
       // Check if identifier is MongoDB ObjectId or slug
       const isObjectId = mongoose.Types.ObjectId.isValid(identifier);
@@ -1945,7 +1949,7 @@ class ProductService {
       })
       .populate('vendor', 'business.name')
       .populate('category', 'name')
-      .select('basicInfo.name basicInfo.slug pricing monthlyRent media.images ratings.average condition vendor category')
+      .select('basicInfo.name basicInfo.slug pricing monthlyRent media.images ratings.average condition vendor category rentalTerms')
       .sort({ 'ratings.average': -1, createdAt: -1 })
       .limit(limit)
       .lean();
