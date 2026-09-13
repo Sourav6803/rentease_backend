@@ -12,6 +12,26 @@ class AdminVendorService {
   }
 
   /**
+   * Build the lookup for "a vendor", accepting either identifier.
+   *
+   * The admin routes expose the param as `:vendorId`, but the admin UI sends the
+   * Vendor document `_id` (`/admin/vendors/${vendor._id}/reject`), while some
+   * callers pass the human-readable `VEN…` code. Querying only `{ vendorId }`
+   * returned 404 for every UI call; querying only `{ _id }` threw
+   * `CastError: Cast to ObjectId failed` for `VEN…` input. Resolve both.
+   */
+  _vendorQuery(idOrCode) {
+    return mongoose.isValidObjectId(idOrCode)
+      ? { _id: idOrCode }
+      : { vendorId: idOrCode };
+  }
+
+  _findVendor(idOrCode, session) {
+    const query = Vendor.findOne(this._vendorQuery(idOrCode));
+    return session ? query.session(session) : query;
+  }
+
+  /**
    * Get all vendors with filters (admin only)
    */
   // async getAllVendors(page = 1, limit = 20, filters = {}) {
@@ -223,7 +243,7 @@ class AdminVendorService {
    */
   async getVendorForReview(vendorId) {
     try {
-      const vendor = await Vendor.findOne({ vendorId })
+      const vendor = await this._findVendor(vendorId)
         .populate('user', 'email phone profile verification')
         .populate('addresses.registeredOffice')
         .populate('addresses.warehouse')
@@ -233,12 +253,15 @@ class AdminVendorService {
         throw new AppError('Vendor not found', 404);
       }
 
-      // Get additional statistics
+      // Get additional statistics.
+      // Product.vendor / Rental.vendor reference the Vendor document, and
+      // Payment.vendor stores rental.vendor — so all three are keyed by
+      // vendor._id, not by vendor.user (the owning User id).
       const stats = {
-        totalProducts: await mongoose.model('Product').countDocuments({ vendor: vendor.user }),
-        totalRentals: await mongoose.model('Rental').countDocuments({ vendor: vendor.user }),
+        totalProducts: await mongoose.model('Product').countDocuments({ vendor: vendor._id }),
+        totalRentals: await mongoose.model('Rental').countDocuments({ vendor: vendor._id }),
         totalRevenue: await mongoose.model('Payment').aggregate([
-          { $match: { vendor: vendor.user, status: 'success' } },
+          { $match: { vendor: vendor._id, status: 'success' } },
           { $group: { _id: null, total: { $sum: '$amount' } } }
         ]).then(r => r[0]?.total || 0)
       };
@@ -260,10 +283,8 @@ class AdminVendorService {
     try {
       const { commissionRate, notes, sendEmail = true } = approvalData;
 
-      console.log('approveVendor called with:', { vendorId, adminId })
+      const vendor = await this._findVendor(vendorId, session);
 
-      const vendor = await Vendor.findOne({_id: vendorId }).session(session);
-      
       if (!vendor) {
         throw new AppError('Vendor not found', 404);
       }
@@ -345,7 +366,7 @@ class AdminVendorService {
         throw new AppError('Rejection reason is required', 400);
       }
 
-      const vendor = await Vendor.findOne({ vendorId }).session(session);
+      const vendor = await this._findVendor(vendorId, session);
       
       if (!vendor) {
         throw new AppError('Vendor not found', 404);
@@ -422,7 +443,7 @@ class AdminVendorService {
         throw new AppError('Suspension reason is required', 400);
       }
 
-      const vendor = await Vendor.findOne({ vendorId }).session(session);
+      const vendor = await this._findVendor(vendorId, session);
       
       if (!vendor) {
         throw new AppError('Vendor not found', 404);
@@ -439,9 +460,9 @@ class AdminVendorService {
         vendor.metadata.notes = notes;
       }
 
-      // Deactivate all products
+      // Deactivate all products (Product.vendor = Vendor document _id)
       await mongoose.model('Product').updateMany(
-        { vendor: vendor.user },
+        { vendor: vendor._id },
         { $set: { 'status.isActive': false } },
         { session }
       );
@@ -491,7 +512,7 @@ class AdminVendorService {
     try {
       const { notes, sendEmail = true } = reinstatementData;
 
-      const vendor = await Vendor.findOne({ vendorId }).session(session);
+      const vendor = await this._findVendor(vendorId, session);
       
       if (!vendor) {
         throw new AppError('Vendor not found', 404);
@@ -512,9 +533,9 @@ class AdminVendorService {
         vendor.metadata.notes = notes;
       }
 
-      // Reactivate products
+      // Reactivate products (Product.vendor = Vendor document _id)
       await mongoose.model('Product').updateMany(
-        { vendor: vendor.user },
+        { vendor: vendor._id },
         { $set: { 'status.isActive': true } },
         { session }
       );
@@ -560,8 +581,8 @@ class AdminVendorService {
     try {
       const { rate, type, fixedAmount, monthlyCap, specialRates } = commissionData;
 
-      const vendor = await Vendor.findOne({ vendorId });
-      
+      const vendor = await this._findVendor(vendorId);
+
       if (!vendor) {
         throw new AppError('Vendor not found', 404);
       }
@@ -589,7 +610,7 @@ class AdminVendorService {
    */
   async getVendorDocuments(vendorId) {
     try {
-      const vendor = await Vendor.findOne({ vendorId })
+      const vendor = await this._findVendor(vendorId)
         .select('verification.documents business.name vendorId')
         .lean();
 
@@ -614,7 +635,7 @@ class AdminVendorService {
     try {
       const { verified, remarks } = verificationData;
 
-      const vendor = await Vendor.findOne({ vendorId }).session(session);
+      const vendor = await this._findVendor(vendorId, session);
       
       if (!vendor) {
         throw new AppError('Vendor not found', 404);
@@ -624,13 +645,13 @@ class AdminVendorService {
         throw new AppError('Document not found', 404);
       }
 
-      vendor.verification.documents[documentIndex].verifiedAt = new Date();
-      vendor.verification.documents[documentIndex].verifiedBy = adminId;
-      vendor.verification.documents[documentIndex].remarks = remarks;
-
-      if (verified === false) {
-        vendor.verification.documents[documentIndex].status = 'rejected';
-      }
+      const document = vendor.verification.documents[documentIndex];
+      document.verifiedAt = new Date();
+      document.verifiedBy = adminId;
+      document.remarks = remarks;
+      // Must be written in both directions — previously a `true` verdict left
+      // the field untouched, so a document could never move out of 'pending'.
+      document.status = verified === false ? 'rejected' : 'verified';
 
       await vendor.save({ session });
 

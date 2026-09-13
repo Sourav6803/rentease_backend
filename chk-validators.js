@@ -1,0 +1,12 @@
+﻿const v = require("./src/api/middlewares/validation.middleware");
+console.log("exports:", Object.keys(v));
+const vv = v.vendorValidations || {};
+const pv = v.productValidations || {};
+console.log("\nvendorValidations keys:", Object.keys(vv).join(", "));
+console.log("\nproductValidations keys:", Object.keys(pv).join(", "));
+const vendorReq = ["completeProfile","updateProfile","analytics","bankDetails","updateSubscription","payoutSchedule","businessHours","notificationPreferences","replyToReview","verifyDocument","approveVendor","rejectVendor","suspendVendor","reinstateVendor","updateCommission"];
+const productReq = ["createProduct","updateProduct","updateStock","bulkUpdate"];
+const missV = vendorReq.filter(k => !vv[k]);
+const missP = productReq.filter(k => !pv[k]);
+console.log("\nvendor MISSING:", missV.length ? missV.join(", ") : "none");
+console.log("product MISSING:", missP.length ? missP.join(", ") : "none");

@@ -8,6 +8,30 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const axios = require('axios');
 
+/**
+ * `Delivery.schedule.scheduledSlot` is declared as { start, end }, but the
+ * reschedule endpoint is called with a plain "HH:MM-HH:MM" string by some
+ * clients. Accept both shapes and return undefined when there is nothing usable,
+ * so an omitted slot leaves the stored one untouched instead of blanking it.
+ */
+const normalizeSlotRange = (slot) => {
+  if (!slot) return undefined;
+
+  if (typeof slot === 'object') {
+    const start = slot.start;
+    const end = slot.end;
+    if (!start && !end) return undefined;
+    return { start: start || '', end: end || '' };
+  }
+
+  const [start, end] = String(slot)
+    .split('-')
+    .map((part) => part.trim());
+
+  if (!start) return undefined;
+  return { start, end: end || start };
+};
+
 class DeliveryService {
   constructor() {
     this.redisClient = getRedisClient();
@@ -1209,9 +1233,17 @@ class DeliveryService {
     try {
       const { newDate, newSlot, reason } = rescheduleData;
 
+      // `rental` is an ObjectId ref, so a dot-path into it ('rental.vendor')
+      // can never match and every reschedule used to 404. Resolve the vendor's
+      // rental ids first, the same way getVendorDeliveries and
+      // assignDeliveryPerson already do.
+      const vendorRentalIds = await Rental.find({ vendor: vendorId })
+        .distinct('_id')
+        .session(session);
+
       const delivery = await Delivery.findOne({
         _id: deliveryId,
-        'rental.vendor': vendorId,
+        rental: { $in: vendorRentalIds },
         status: { $in: ['scheduled', 'assigned', 'failed'] }
       }).populate('rental').session(session);
 
@@ -1219,15 +1251,17 @@ class DeliveryService {
         throw new AppError('Delivery not found or cannot be rescheduled', 404);
       }
 
-      // Update schedule
-      delivery.schedule = {
-        ...delivery.schedule,
-        previousDate: delivery.schedule.scheduledDate,
-        scheduledDate: new Date(newDate),
-        scheduledSlot: newSlot,
-        rescheduledCount: (delivery.schedule.rescheduledCount || 0) + 1,
-        rescheduleReason: reason
-      };
+      // Update the schedule subdocument in place. Replacing it wholesale dropped
+      // schema fields, and assigning a bare string to `scheduledSlot` (declared
+      // as { start, end }) raised a CastError.
+      const slotRange = normalizeSlotRange(newSlot);
+
+      delivery.schedule.scheduledDate = new Date(newDate);
+      if (slotRange !== undefined) {
+        delivery.schedule.scheduledSlot = slotRange;
+      }
+      delivery.schedule.rescheduledCount = (delivery.schedule.rescheduledCount || 0) + 1;
+      delivery.schedule.rescheduleReason = reason;
 
       delivery.status = 'rescheduled';
       delivery.tracking.timeline.push({

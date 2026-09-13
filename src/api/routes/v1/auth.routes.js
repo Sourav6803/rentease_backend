@@ -4,13 +4,15 @@ const authController = require('../../controllers/auth.controller');
 const { protect } = require('../../middlewares/auth.middleware');
 const { validate, vendorValidations } = require('../../middlewares/validation.middleware');
 const { authValidations } = require('../../middlewares/validation.middleware');
-const { authLimiter } = require('../../middlewares/rateLimiter.middleware');
+const { authLimiter, refreshLimiter } = require('../../middlewares/rateLimiter.middleware');
 const { uploadVendorDocuments } = require('../../middlewares/upload.middleware');
 
 // Public routes (with rate limiting)
 router.post('/register', authLimiter, validate(authValidations.register), authController.register);
 router.post('/login', authLimiter, validate(authValidations.login), authController.login);
-router.post('/refresh-token', authLimiter, validate(authValidations.refreshToken), authController.refreshToken);
+// Uses refreshLimiter, not authLimiter: token refresh is background traffic and
+// must not consume the manual login attempt budget.
+router.post('/refresh-token', refreshLimiter, validate(authValidations.refreshToken), authController.refreshToken);
 router.post('/forgot-password', authLimiter,  authController.forgotPassword);
 router.post('/reset-password', authLimiter, authController.resetPassword);
 router.get('/verify-email/:token', validate(authValidations.verifyEmail), authController.verifyEmail);

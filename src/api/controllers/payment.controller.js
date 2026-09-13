@@ -64,9 +64,17 @@ class PaymentController {
    */
   getVendorPayments = catchAsync(async (req, res) => {
     const { page = 1, limit = 10, ...filters } = req.query;
-    
+
+    // Payment.vendor holds the Vendor document _id (payment.service writes
+    // `vendor: rental.vendor`), not the owning User id — passing req.user._id
+    // matched nothing, so GET /payments/vendor/me always returned an empty list.
+    const vendorId = req.vendor?._id;
+    if (!vendorId) {
+      throw new AppError('Vendor profile not found for this account', 403);
+    }
+
     const payments = await PaymentService.getVendorPayments(
-      req.user._id,
+      vendorId,
       parseInt(page),
       parseInt(limit),
       filters
@@ -186,17 +194,60 @@ class PaymentController {
    * Get all payments (admin only)
    */
   getAllPayments = catchAsync(async (req, res) => {
-    const { page = 1, limit = 10, ...filters } = req.query;
-    
-    // Use vendor payments method but with admin privileges
-    const payments = await PaymentService.getVendorPayments(
-      null,
-      parseInt(page),
-      parseInt(limit),
-      filters
-    );
-    
-    return ApiResponse.success(res, 200, 'All payments retrieved successfully', payments);
+    const { page = 1, limit = 10 } = req.query;
+
+    // Whitelist the accepted filters instead of spreading req.query: the query
+    // object is handed to Mongoose, so pass-through keys are an injection surface.
+    const filters = {
+      status: req.query.status,
+      method: req.query.method,
+      type: req.query.type,
+      gateway: req.query.gateway,
+      vendor: req.query.vendor,
+      user: req.query.user,
+      rental: req.query.rental,
+      search: req.query.search,
+      startDate: req.query.startDate,
+      endDate: req.query.endDate,
+      minAmount: req.query.minAmount,
+      maxAmount: req.query.maxAmount,
+    };
+    if (req.query.refunded !== undefined) {
+      filters.refunded = req.query.refunded === true || req.query.refunded === 'true';
+    }
+
+    const result = await PaymentService.getAllPayments(page, limit, filters);
+
+    return ApiResponse.success(res, 200, 'All payments retrieved successfully', result);
+  });
+
+  /**
+   * Get refunds (admin only)
+   */
+  getRefunds = catchAsync(async (req, res) => {
+    const { page = 1, limit = 10 } = req.query;
+
+    const filters = {
+      vendor: req.query.vendor,
+      search: req.query.search,
+      startDate: req.query.startDate,
+      endDate: req.query.endDate,
+    };
+
+    const result = await PaymentService.getRefunds(page, limit, filters);
+
+    return ApiResponse.success(res, 200, 'Refunds retrieved successfully', result);
+  });
+
+  /**
+   * Get tax / commission summary (admin only)
+   */
+  getTaxSummary = catchAsync(async (req, res) => {
+    const { startDate, endDate } = req.query;
+
+    const result = await PaymentService.getTaxSummary(startDate, endDate);
+
+    return ApiResponse.success(res, 200, 'Tax summary retrieved successfully', result);
   });
 
   /**

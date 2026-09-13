@@ -36,14 +36,26 @@ const razorpaySchema = new mongoose.Schema({
   keyId: { type: String, default: '' },
   keySecret: { type: String, default: '' },
   webhookSecret: { type: String, default: '' },
-  enabled: { type: Boolean, default: false }
+  enabled: { type: Boolean, default: false },
+  /**
+   * The settings screen has always had a Test/Live toggle for this gateway, but
+   * the field did not exist here and saveRazorpaySettings never wrote it, so the
+   * toggle was cosmetic and the badge always showed the frontend default.
+   *
+   * It is a LABEL, not the authority: which environment the gateway actually runs
+   * in is decided by the key prefix (`rzp_test_` / `rzp_live_`). The API reports
+   * that derived value alongside this one so the UI can show the truth.
+   */
+  testMode: { type: Boolean, default: true }
 }, { _id: false });
 
 const stripeSchema = new mongoose.Schema({
   publishableKey: { type: String, default: '' },
   secretKey: { type: String, default: '' },
   webhookSecret: { type: String, default: '' },
-  enabled: { type: Boolean, default: false }
+  enabled: { type: Boolean, default: false },
+  // Same reasoning as razorpaySchema.testMode.
+  testMode: { type: Boolean, default: true }
 }, { _id: false });
 
 const commissionSchema = new mongoose.Schema({
@@ -74,15 +86,33 @@ const payoutSchema = new mongoose.Schema({
   minimumAmount: { type: Number, default: 500 },
   processingFee: { type: Number, default: 0 },
   taxRate: { type: Number, default: 0 },
-  autoPayout: { type: Boolean, default: true },
   payoutDay: { type: Number, default: 1, min: 0, max: 31 },
   holdPeriod: { type: Number, default: 7 },
+  // `autoPayout` used to be declared TWICE in this schema (once default true, once
+  // default false). Mongoose let the second declaration win, so the first was dead
+  // code and `default: true` never applied. One declaration now.
   autoPayout: { type: Boolean, default: false },
   payoutCycle: { type: String, enum: ['weekly', 'biweekly', 'monthly'], default: 'weekly' },
   minPayoutAmount: { type: Number, default: 0 },
   holdDays: { type: Number, default: 7 },
   razorpayPayoutEnabled: { type: Boolean, default: false },
-  razorpayAccount: { type: String, default: '' }
+  razorpayAccount: { type: String, default: '' },
+
+  // ── RazorpayX payout credentials ──────────────────────────────────────────
+  // Drives /v1/contacts, /v1/fund_accounts and /v1/payouts. Encrypted at rest by
+  // payment-settings.controller.js, exactly like the gateway secrets.
+  keyId: { type: String, default: '' },
+  keySecret: { type: String, default: '' },
+  /**
+   * Payouts ALWAYS start in test mode.
+   *
+   * RazorpayX test mode runs on a dummy balance and per their docs "no real money
+   * is used": payouts, contacts and fund accounts created there never reach the
+   * live environment. Defaulting to true means an install that switches gateway
+   * payouts on before anyone has thought it through still cannot move real money.
+   * Going live is a separate, deliberate flip.
+   */
+  testMode: { type: Boolean, default: true }
 }, { _id: false });
 
 const refundSchema = new mongoose.Schema({

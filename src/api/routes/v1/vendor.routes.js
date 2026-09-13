@@ -4,11 +4,12 @@ const vendorController = require('../../controllers/vendor.controller');
 const { protect } = require('../../middlewares/auth.middleware');
 const { validate, productValidations } = require('../../middlewares/validation.middleware');
 const { vendorValidations } = require('../../middlewares/validation.middleware');
-const { cacheVendor, clearCache, invalidateCache } = require('../../middlewares/cache.middleware');
+const { invalidateCache } = require('../../middlewares/cache.middleware');
 const { restrictTo } = require('../../middlewares/permissions.middleware');
 const { uploadVendorDocuments, uploadProductImages, uploadVendorMedia, uploadProfilePicture } = require('../../middlewares/upload.middleware');
 const productController = require('../../controllers/product.controller');
 const userController = require('../../controllers/user.controller');
+const AppError = require('../../../utils/AppError');
 
 // ==================== PUBLIC ROUTES ====================
 
@@ -26,6 +27,17 @@ router.post('/check-availability', vendorController.checkAvailability);
 // All routes below require authentication
 router.use(protect);
 router.use(restrictTo('vendor'));
+
+// `restrictTo('vendor')` only inspects the JWT role. A user whose role is
+// 'vendor' but who has no Vendor profile row passes that check while `protect`
+// leaves `req.vendor` undefined — and every handler below dereferences
+// `req.vendor._id`, producing a 500 (TypeError). Fail fast and cleanly instead.
+router.use((req, res, next) => {
+  if (!req.vendor) {
+    return next(new AppError('Vendor profile not found for this account.', 403));
+  }
+  next();
+});
 
 
 // Upload product images
@@ -77,7 +89,7 @@ router.post('/documents',
 );
 
 // Profile routes
-router.get('/profile/me', cacheVendor(), vendorController.getProfile);
+router.get('/profile/me',  vendorController.getProfile);
 router.put('/profile', validate(vendorValidations.updateProfile), vendorController.updateProfile);
 router.post('/profile/avatar', uploadProfilePicture, userController.uploadAvatar);
 router.delete('/profile/avatar', userController.deleteAvatar);
@@ -125,21 +137,20 @@ router.get('/analytics/sales', vendorController.getSalesReport);
 router.get('/analytics/products', vendorController.getProductPerformance);
 router.get('/analytics/customers', vendorController.getCustomerInsights);
 
+// Customer directory. These are the only `/:param`-free paths the router needs,
+// so no earlier route can shadow them (`/:vendorId` is commented out above).
+// `req.vendor` is populated by the vendor gate, and the service scopes every
+// query by req.vendor._id.
+router.get('/customers', vendorController.getCustomers);
+router.get('/customers/:customerId', vendorController.getCustomerDetail);
+
 // ==================== ADMIN ROUTES ====================
-
-// All admin routes
-router.use(restrictTo('admin', 'super-admin'));
-
-// Vendor verification
-router.get('/admin/pending', vendorController.getPendingVerifications);
-router.post('/admin/:vendorId/approve', validate(vendorValidations.approveVendor), vendorController.approveVendor);
-router.post('/admin/:vendorId/reject', validate(vendorValidations.rejectVendor), vendorController.rejectVendor);
-
-// Vendor management
-router.post('/admin/:vendorId/suspend', validate(vendorValidations.suspendVendor), vendorController.suspendVendor);
-router.post('/admin/:vendorId/reinstate', vendorController.reinstateVendor);
-
-// List all vendors
-router.get('/admin/all', vendorController.getAllVendors);
+// REMOVED: this router is entirely vendor-scoped — `router.use(protect)` +
+// `router.use(restrictTo('vendor'))` run for every path below, so the old
+// `/vendor/admin/*` handlers could never execute:
+//   * a vendor passed the vendor gate but was rejected by restrictTo('admin', 'super-admin')
+//   * an admin was rejected by the vendor gate before ever reaching it
+// The live admin vendor API is mounted at `/api/v1/admin/vendors`
+// (see routes/v1/admin-vendor.routes.js) and that is what the admin UI calls.
 
 module.exports = router;

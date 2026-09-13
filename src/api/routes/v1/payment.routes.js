@@ -70,6 +70,12 @@ router.get('/admin/all', paymentController.getAllPayments);
 // Get payment analytics
 router.get('/admin/analytics', paymentController.getPaymentAnalytics);
 
+// Get refunds (full and partial)
+router.get('/admin/refunds', paymentController.getRefunds);
+
+// Get tax / commission / platform-fee summary
+router.get('/admin/tax-summary', paymentController.getTaxSummary);
+
 // Process refund
 router.post('/admin/:id/refund', 
   validate(paymentValidations.processRefund),

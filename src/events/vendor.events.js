@@ -824,9 +824,11 @@ eventEmitter.on('vendor:profile-updated', async (data) => {
     });
 
     // Notify if bank details were updated
-    if (data.updatedFields.includes('bankDetails')) {
+    if (data.updatedFields?.includes('bankDetails')) {
       await createNotification({
-        userId: data.vendorId,
+        // `userId` is the owning User id; `vendorId` is the VEN… business code
+        // and is not a valid user reference.
+        userId: data.userId,
         type: 'in_app',
         title: 'Bank Details Updated',
         content: 'Your bank details have been updated successfully.',

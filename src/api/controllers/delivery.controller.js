@@ -461,6 +461,29 @@ const {ApiResponse} = require('../../utils/apiResponse');
 const AppError = require('../../utils/AppError');
 const logger = require('../../config/logger');
 
+/**
+ * Resolve the Vendor document id for the current request.
+ *
+ * Every vendor-owned collection keys on the Vendor document _id, NOT on
+ * req.user._id: Product.vendor is written as `vendor._id` (product.service.js)
+ * and Rental.vendor copies Product.vendor, so Rental.vendor is the Vendor
+ * document id too. `req.vendor` / `req.vendorId` are populated for vendor
+ * requests by the auth middleware.
+ *
+ * Fails closed with 403 instead of falling back to req.user._id — an undefined
+ * vendor condition is stripped by Mongoose, which would match another vendor's
+ * rentals.
+ */
+const requireVendorId = (req) => {
+  const vendorId = req.vendor?._id || req.vendorId;
+
+  if (!vendorId) {
+    throw new AppError('Vendor profile not found for this account', 403);
+  }
+
+  return vendorId;
+};
+
 class DeliveryController {
   /**
    * Create delivery
@@ -468,7 +491,7 @@ class DeliveryController {
   createDelivery = catchAsync(async (req, res) => {
     const { rentalId } = req.params;
     
-    const delivery = await DeliveryService.createDelivery(rentalId, req.user._id, req.body);
+    const delivery = await DeliveryService.createDelivery(rentalId, requireVendorId(req), req.body);
     
     return ApiResponse.success(res, 201, 'Delivery created successfully', { delivery });
   });
@@ -518,7 +541,7 @@ class DeliveryController {
     const { page = 1, limit = 10, ...filters } = req.query;
     
     const deliveries = await DeliveryService.getVendorDeliveries(
-      req.user._id,
+      requireVendorId(req),
       parseInt(page),
       parseInt(limit),
       filters
@@ -533,7 +556,7 @@ class DeliveryController {
   assignDeliveryPerson = catchAsync(async (req, res) => {
     const { id } = req.params;
     
-    const delivery = await DeliveryService.assignDeliveryPerson(id, req.user._id, req.body);
+    const delivery = await DeliveryService.assignDeliveryPerson(id, requireVendorId(req), req.body);
     
     return ApiResponse.success(res, 200, 'Delivery person assigned successfully', { delivery });
   });
@@ -623,7 +646,7 @@ class DeliveryController {
   rescheduleDelivery = catchAsync(async (req, res) => {
     const { id } = req.params;
     
-    const delivery = await DeliveryService.rescheduleDelivery(id, req.user._id, req.body);
+    const delivery = await DeliveryService.rescheduleDelivery(id, requireVendorId(req), req.body);
     
     return ApiResponse.success(res, 200, 'Delivery rescheduled successfully', { delivery });
   });
@@ -665,7 +688,7 @@ class DeliveryController {
     }
 
     const analytics = await DeliveryService.getDeliveryAnalytics(
-      req.user._id,
+      requireVendorId(req),
       startDate,
       endDate
     );
@@ -697,7 +720,7 @@ class DeliveryController {
    * Get delivery summary
    */
   getDeliverySummary = catchAsync(async (req, res) => {
-    const summary = await DeliveryService.getDeliverySummary(req.user._id);
+    const summary = await DeliveryService.getDeliverySummary(requireVendorId(req));
     
     return ApiResponse.success(res, 200, 'Delivery summary retrieved successfully', summary);
   });

@@ -1,5 +1,5 @@
 // services/settings.service.js
-const { User } = require('../models');
+const { User, SecurityEvent } = require('../models');
 const AppError = require('../utils/AppError');
 const logger = require('../config/logger');
 const bcrypt = require('bcrypt');
@@ -317,8 +317,19 @@ class SettingsService {
       // Update security login attempts
       user.security.loginAttempts = 0;
       user.security.lockUntil = null;
-      
+      // Tracked so the security centre can show an accurate
+      // "last password change" date and password-age score component.
+      user.security.passwordLastChanged = new Date();
+
       await user.save();
+
+      // Security centre audit trail
+      await SecurityEvent.record({
+        user: userId,
+        type: 'password_change',
+        action: 'Account password changed',
+        severity: 'warning',
+      });
 
       return { message: 'Password changed successfully' };
     } catch (error) {

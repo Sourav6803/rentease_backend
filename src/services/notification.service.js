@@ -30,6 +30,43 @@ function stringifyData(data = {}) {
   return out;
 }
 
+// ── vendor payout presentation helpers ───────────────────────────────────────
+// Payout notifications are the only place where we show a vendor what was
+// deducted from their gross, so the formatting is pinned here rather than
+// scattered across the in-app card and the email template.
+
+/** `₹1,23,456.78` — Indian grouping, 2 decimals. */
+function formatPayoutMoney(value) {
+  const n = Number.isFinite(Number(value)) ? Number(value) : 0;
+  return n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatPayoutDate(value) {
+  if (!value) return new Date().toLocaleDateString('en-IN');
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return new Date().toLocaleDateString('en-IN');
+  return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+/** "01 Aug 2026 – 31 Aug 2026" — falls back to the payout date when unset. */
+function formatPayoutPeriod(start, end) {
+  const from = start ? formatPayoutDate(start) : '';
+  const to = end ? formatPayoutDate(end) : '';
+  if (from && to) return `${from} – ${to}`;
+  return from || to || 'As per settlement cycle';
+}
+
+const PAYOUT_METHOD_LABELS = {
+  razorpay_payout: 'Razorpay Payout',
+  bank_transfer: 'Bank Transfer',
+  upi: 'UPI',
+  manual: 'Manual Bank Transfer',
+};
+
+function formatPayoutMethod(method) {
+  return PAYOUT_METHOD_LABELS[method] || 'Bank Transfer';
+}
+
 const FCM_MAX_TOKENS_PER_MULTICAST = 500;
 
 class NotificationService {
@@ -1292,6 +1329,187 @@ class NotificationService {
   /**
    * Send scheduled notifications (cron job)
    */
+  /**
+   * Build the display payload for a payout notification.
+   *
+   * SINGLE SOURCE OF TRUTH for both channels: the in-app card and the
+   * `vendor-payout` email template read the same numbers, and every variable the
+   * hbs template interpolates is a key returned here. Add a field to the
+   * template without adding it here and the email renders a blank.
+   */
+  buildVendorPayoutPayload(payout, vendor, user) {
+    const deductions = payout?.deductions || {};
+    const bank = payout?.bankAccountSnapshot || {};
+    const num = (value) => (Number.isFinite(Number(value)) ? Number(value) : 0);
+
+    const commission = num(deductions.commission);
+    const platformFee = num(deductions.platformFee);
+    const tax = num(deductions.tax);
+    const processingFee = num(deductions.processingFee);
+    // Summed rather than read from a stored field: a payout written before a
+    // deduction existed would otherwise report a total that excludes it.
+    const totalDeductions = commission + platformFee + tax + processingFee;
+    // `netAmount` is what the payout row was created with; fall back to the
+    // credited amount so an older payout still renders the correct figure.
+    const netAmount = num(deductions.netAmount) || num(payout?.amount);
+
+    return {
+      // recipient
+      name: user?.profile?.firstName || 'Vendor',
+      email: user?.email || '',
+
+      // payout identity
+      payoutId: payout?._id ? String(payout._id) : '',
+      payoutNumber: payout?.payoutNumber || '',
+      receiptNumber: payout?.receiptNumber || '',
+      payoutDate: formatPayoutDate(payout?.processedAt || payout?.updatedAt || new Date()),
+      periodText: formatPayoutPeriod(payout?.periodStart, payout?.periodEnd),
+      entriesCount: Array.isArray(payout?.entryIds) ? payout.entryIds.length : 0,
+      methodLabel: formatPayoutMethod(payout?.method),
+      statusLabel: payout?.status === 'paid' ? 'Paid' : String(payout?.status || ''),
+
+      // money
+      currency: payout?.currency || 'INR',
+      grossAmount: formatPayoutMoney(deductions.grossAmount),
+      commission: formatPayoutMoney(commission),
+      platformFee: formatPayoutMoney(platformFee),
+      tax: formatPayoutMoney(tax),
+      processingFee: formatPayoutMoney(processingFee),
+      totalDeductions: formatPayoutMoney(totalDeductions),
+      netAmount: formatPayoutMoney(netAmount),
+      // Raw numbers kept alongside the formatted strings so the in-app card and
+      // any future PDF/CSV export do not have to re-parse "1,23,456.78".
+      amountNumeric: netAmount,
+      grossAmountNumeric: num(deductions.grossAmount),
+      totalDeductionsNumeric: totalDeductions,
+
+      // where the money went
+      businessName: vendor?.business?.name || 'Your business',
+      accountHolderName: bank.accountHolderName || '',
+      accountNumberMasked: bank.accountNumberMasked || '',
+      ifscCode: bank.ifscCode || '',
+      bankName: bank.bankName || '',
+      upiId: bank.upiId || '',
+      hasBank: Boolean(bank.accountNumberMasked || bank.ifscCode),
+      hasUpi: Boolean(bank.upiId),
+      utr: payout?.gateway?.utr || '',
+
+      // Points at the vendor payout page that actually exists. This used to be
+      // `/vendor/payouts`, which is not a route, so both the in-app action button
+      // and the email button led to a 404.
+      payoutsUrl: `${process.env.CLIENT_URL || ''}/vendor/payments/payout-history`,
+    };
+  }
+
+  /**
+   * Tell a vendor their payout has landed: an in-app card plus an email receipt
+   * carrying the full deduction breakdown.
+   *
+   * Both channels go through createNotification, so the vendor's own
+   * `preferences.notifications` opt-outs are honoured and the audit trail lives
+   * in the notifications collection. A missing `userId` throws so the caller
+   * (settlement.service) can log it — it must never be silently dropped.
+   */
+  async sendVendorPayoutNotification(userId, payout, vendor) {
+    if (!userId) {
+      throw new Error('userId is required to notify a vendor about a payout');
+    }
+    if (!payout) {
+      throw new Error('payout is required to notify a vendor about a payout');
+    }
+
+    const user = await User.findById(userId)
+      .select('email profile.firstName profile.lastName')
+      .lean();
+
+    const payload = this.buildVendorPayoutPayload(payout, vendor, user);
+    const amountText = `${payload.currency} ${payload.netAmount}`;
+
+    const text =
+      `${amountText} has been credited to your account. ` +
+      `Payout ${payload.payoutNumber} settled on ${payload.payoutDate}. ` +
+      `Gross ${payload.currency} ${payload.grossAmount} minus ` +
+      `${payload.currency} ${payload.totalDeductions} deductions ` +
+      `(commission, platform fee, tax, processing fee).`;
+
+    const rows = [
+      ['Gross Earnings', `${payload.currency} ${payload.grossAmount}`],
+      ['Platform Commission', `- ${payload.currency} ${payload.commission}`],
+      ['Platform Fee', `- ${payload.currency} ${payload.platformFee}`],
+      ['Tax Deducted', `- ${payload.currency} ${payload.tax}`],
+      ['Payout Processing Fee', `- ${payload.currency} ${payload.processingFee}`],
+      ['Net Amount Credited', `${payload.currency} ${payload.netAmount}`],
+    ];
+
+    const html = [
+      `<p>Hi ${payload.name},</p>`,
+      `<p><strong>${amountText}</strong> has been settled to your account for payout <strong>${payload.payoutNumber}</strong>.</p>`,
+      '<table>',
+      ...rows.map(
+        ([label, value]) =>
+          `<tr><th>${label}</th><td>${
+            label === 'Net Amount Credited' ? `<strong>${value}</strong>` : value
+          }</td></tr>`,
+      ),
+      '</table>',
+      payload.utr ? `<p><strong>Bank Reference (UTR):</strong> ${payload.utr}</p>` : '',
+      `<p>Period covered: ${payload.periodText} · Settlements included: ${payload.entriesCount}</p>`,
+    ].join('');
+
+    const sharedData = {
+      ...payload,
+      notificationKind: 'vendor_payout',
+      action: 'view_payout',
+      url: payload.payoutsUrl,
+      breakdown: {
+        gross: payload.grossAmountNumeric,
+        commission: payload.commission,
+        platformFee: payload.platformFee,
+        tax: payload.tax,
+        processingFee: payload.processingFee,
+        totalDeductions: payload.totalDeductionsNumeric,
+        net: payload.amountNumeric,
+      },
+    };
+
+    const actions = [{ type: 'link', label: 'View Payout History', url: payload.payoutsUrl }];
+
+    // 1) In-app card.
+    const inApp = await this.createNotification({
+      userId,
+      type: 'in_app',
+      category: 'transactional',
+      title: `Payout Settled — ${amountText}`,
+      content: { text, html },
+      data: sharedData,
+      actions,
+      priority: 'high',
+    });
+
+    // 2) Email receipt. `content` is only the plain-text fallback — the hbs
+    // template renders the body, using `data` as its context.
+    const email = await this.createNotification({
+      userId,
+      type: 'email',
+      category: 'transactional',
+      title: `Payout Settled ${payload.payoutNumber} - RentEase`,
+      content: { text },
+      template: 'vendor-payout',
+      data: payload,
+      priority: 'high',
+    });
+
+    return {
+      notified: true,
+      inAppNotificationId: inApp?._id ? String(inApp._id) : null,
+      inAppSkipped: !inApp,
+      emailNotificationId: email?._id ? String(email._id) : null,
+      emailSkipped: !email,
+      amount: payload.amountNumeric,
+      payoutNumber: payload.payoutNumber,
+    };
+  }
+
   async processScheduledNotifications() {
     try {
       const now = new Date();

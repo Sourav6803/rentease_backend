@@ -47062,3 +47062,1071 @@
 2026-09-06 09:48:30:4830 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
 2026-09-06 09:48:36:4836 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
 2026-09-06 09:48:45:4845 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-06 10:20:30:2030 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 10:20:31:2031 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 10:20:31:2031 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 10:20:31:2031 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 10:20:32:2032 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 10:20:32:2032 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 10:20:33:2033 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 10:20:33:2033 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 10:20:33:2033 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 10:20:34:2034 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 10:20:34:2034 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 10:20:34:2034 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-06 10:20:35:2035 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 10:25:31:2531 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 10:25:33:2533 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 10:30:31:3031 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 10:30:32:3032 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 14:08:23:823 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-06 14:08:48:848 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 14:08:48:848 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 14:08:48:848 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 14:08:49:849 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 14:08:49:849 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 14:08:49:849 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 14:08:49:849 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-06 14:08:52:852 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 14:08:52:852 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 14:08:52:852 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 14:08:52:852 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 14:08:53:853 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 14:08:57:857 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-06 14:08:58:858 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-06 14:09:10:910 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-06 14:55:11:5511 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-06 14:55:18:5518 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-06 15:02:26:226 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-09-06 15:02:26:226 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-09-07 07:38:24:3824 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 07:38:24:3824 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 07:38:24:3824 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 07:38:25:3825 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 07:38:25:3825 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 07:38:25:3825 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 07:38:25:3825 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 07:38:26:3826 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 07:38:27:3827 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 07:38:31:3831 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-07 07:38:31:3831 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 07:38:31:3831 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 07:38:32:3832 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 07:38:37:3837 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 07:41:54:4154 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 07:41:55:4155 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 07:41:58:4158 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 07:41:59:4159 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 07:41:59:4159 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 07:41:59:4159 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 07:42:07:427 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 07:42:07:427 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 07:42:07:427 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 07:44:17:4417 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-07 07:44:25:4425 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND select-stinkbug-138900.upstash.io[39m
+2026-09-07 07:44:29:4429 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND select-stinkbug-138900.upstash.io[39m
+2026-09-07 07:53:35:5335 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 07:53:35:5335 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 08:14:21:1421 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-07 08:19:21:1921 [31merror[39m: [31mError in getVendorProfile: Vendor profile not found[39m
+2026-09-07 08:19:21:1921 [31merror[39m: [31mVendor profile not found[39m
+2026-09-07 08:30:52:3052 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-07 08:47:55:4755 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-07 08:52:32:5232 [31merror[39m: [31mError in getVendorProfile: Vendor profile not found[39m
+2026-09-07 08:52:32:5232 [31merror[39m: [31mVendor profile not found[39m
+2026-09-07 08:52:37:5237 [31merror[39m: [31mError in getVendorProfile: Vendor profile not found[39m
+2026-09-07 08:52:37:5237 [31merror[39m: [31mVendor profile not found[39m
+2026-09-07 08:52:38:5238 [31merror[39m: [31mError in getVendorProfile: Vendor profile not found[39m
+2026-09-07 08:52:38:5238 [31merror[39m: [31mVendor profile not found[39m
+2026-09-07 08:52:39:5239 [31merror[39m: [31mError in getVendorProfile: Vendor profile not found[39m
+2026-09-07 08:52:39:5239 [31merror[39m: [31mVendor profile not found[39m
+2026-09-07 09:16:15:1615 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-07 15:55:51:5551 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 15:55:51:5551 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 17:22:30:2230 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 17:22:30:2230 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 17:24:09:249 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 17:24:09:249 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 17:24:11:2411 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 17:24:11:2411 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 17:24:42:2442 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-07 22:15:54:1554 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-07 22:16:44:1644 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:16:44:1644 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:16:44:1644 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-07 22:16:45:1645 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:16:45:1645 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:16:45:1645 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:17:54:1754 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:17:55:1755 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:17:57:1757 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:17:58:1758 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:17:58:1758 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:17:59:1759 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:18:01:181 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:18:01:181 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:18:01:181 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:18:02:182 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-07 22:18:02:182 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:18:04:184 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:18:04:184 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:18:04:184 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:18:05:185 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:18:26:1826 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 22:19:43:1943 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:19:43:1943 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:19:44:1944 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:19:44:1944 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:20:38:2038 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:20:38:2038 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:20:47:2047 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:20:47:2047 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:36:01:361 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:02:362 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:03:363 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:04:364 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:05:365 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:05:365 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:05:365 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:05:365 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:05:365 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:05:365 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:06:366 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:06:366 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:06:366 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:06:366 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:06:366 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:09:369 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-07 22:36:09:369 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:09:369 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:10:3610 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:11:3611 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:11:3611 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:11:3611 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:12:3612 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:12:3612 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:12:3612 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:12:3612 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:12:3612 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:12:3612 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:12:3612 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:13:3613 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:13:3613 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:14:3614 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:14:3614 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:14:3614 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:16:3616 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:16:3616 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:16:3616 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:16:3616 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:17:3617 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:17:3617 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:17:3617 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:17:3617 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:31:3631 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:35:3635 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:35:3635 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:36:3636 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:36:3636 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:38:3638 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:38:3638 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-07 22:36:45:3645 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:46:3646 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:46:3646 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:46:3646 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:47:3647 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:36:47:3647 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-07 22:36:48:3648 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-07 22:37:08:378 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 22:38:37:3837 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:38:37:3837 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:38:38:3838 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:38:38:3838 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:38:39:3839 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:38:39:3839 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:38:42:3842 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:38:42:3842 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:46:11:4611 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:46:11:4611 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:47:46:4746 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:47:46:4746 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:48:24:4824 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:48:24:4824 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:54:29:5429 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:54:29:5429 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:54:30:5430 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:54:30:5430 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:54:31:5431 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:54:31:5431 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:54:32:5432 [31merror[39m: [31mError in getVendorDashboard: Cannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 22:54:32:5432 [31merror[39m: [31mCannot find module '../models/Maintenance'[39m
+[31mRequire stack:[39m
+[31m- D:\RentEase\backend\src\services\vendor.service.js[39m
+[31m- D:\RentEase\backend\src\api\controllers\vendor.controller.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\vendor.routes.js[39m
+[31m- D:\RentEase\backend\src\api\routes\v1\index.js[39m
+[31m- D:\RentEase\backend\src\api\routes\index.js[39m
+[31m- D:\RentEase\backend\src\app.js[39m
+2026-09-07 23:21:00:210 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 23:21:00:210 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 23:21:00:210 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 23:24:36:2436 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-07 23:26:40:2640 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-07 23:36:45:3645 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 23:36:45:3645 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-07 23:42:41:4241 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-07 23:45:09:459 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-07 23:54:07:547 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-08 00:05:06:56 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-09-08 00:05:07:57 [31merror[39m: [31mYou do not have permission to perform this action.[39m
+2026-09-09 21:43:29:4329 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-09 21:43:36:4336 [31merror[39m: [31m❌ UNHANDLED REJECTION: MongoNetworkError: connection 1 to [64:ff9b::9f29:f2f1]:27017 closed[39m
+[31m    at Connection.onClose (D:\RentEase\backend\node_modules\mongodb\lib\cmap\connection.js:134:22)[39m
+[31m    at TLSSocket.emit (node:events:519:35)[39m
+[31m    at node:net:351:12[39m
+[31m    at TCP.done (node:_tls_wrap:650:7)[39m
+2026-09-09 21:43:45:4345 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-09 21:43:46:4346 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-09 21:43:49:4349 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-09 21:43:50:4350 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-09 21:43:54:4354 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-09 22:00:19:019 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-09 22:06:45:645 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-09 22:27:52:2752 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-09 22:42:31:4231 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-09 22:42:38:4238 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND select-stinkbug-138900.upstash.io[39m
+2026-09-09 23:26:54:2654 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:11:26:1126 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:11:27:1127 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:11:30:1130 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 07:11:30:1130 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 07:11:36:1136 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 07:11:37:1137 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:11:37:1137 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 07:11:37:1137 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:13:21:1321 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 07:13:22:1322 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 07:13:22:1322 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 07:13:22:1322 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 07:13:22:1322 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 07:13:22:1322 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 07:13:27:1327 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 07:13:27:1327 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 07:13:27:1327 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:13:27:1327 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 07:13:27:1327 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 07:13:27:1327 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:13:28:1328 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 07:13:32:1332 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-10 07:13:32:1332 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 07:14:49:1449 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 07:14:49:1449 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 07:14:51:1451 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 07:14:52:1452 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 07:14:53:1453 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 07:14:53:1453 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 07:14:54:1454 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:14:54:1454 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:15:01:151 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:15:01:151 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 07:15:01:151 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 07:15:01:151 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 07:15:02:152 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:25:53:2553 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:30:43:3043 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 07:51:37:5137 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:51:37:5137 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:52:22:5222 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:52:23:5223 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 07:55:22:5522 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:00:24:024 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:08:42:842 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:08:46:846 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:19:33:1933 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:30:46:3046 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:33:31:3331 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-10 08:34:19:3419 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:34:39:3439 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-10 08:39:28:3928 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:48:39:4839 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:54:31:5431 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:54:32:5432 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:54:34:5434 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:54:35:5435 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:54:38:5438 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:54:38:5438 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:54:44:5444 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:54:44:5444 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:55:21:5521 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:55:21:5521 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-10 08:55:21:5521 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:55:23:5523 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 08:55:26:5526 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:09:22:922 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:09:23:923 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:10:19:1019 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:10:22:1022 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:14:52:1452 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:14:53:1453 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-10 09:15:43:1543 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:16:32:1632 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:16:59:1659 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:16:59:1659 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-10 09:18:34:1834 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:19:16:1916 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:20:26:2026 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-10 09:20:37:2037 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-10 09:20:42:2042 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:21:32:2132 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-10 09:23:21:2321 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-10 09:25:10:2510 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-10 09:25:55:2555 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-10 09:26:36:2636 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:26:40:2640 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:26:43:2643 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:28:52:2852 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:36:51:3651 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-10 09:37:04:374 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:37:59:3759 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:44:00:440 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-10 09:48:51:4851 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:48:59:4859 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:48:59:4859 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:49:07:497 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:49:07:497 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:49:11:4911 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:49:11:4911 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:49:17:4917 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:49:17:4917 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:49:23:4923 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:49:52:4952 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-10 09:50:58:5058 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-10 09:52:16:5216 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-10 09:52:16:5216 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:52:19:5219 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:52:21:5221 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:52:23:5223 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:52:25:5225 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:52:30:5230 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:54:17:5417 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:54:17:5417 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:54:27:5427 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 09:55:05:555 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-10 14:24:21:2421 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:24:24:2424 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:24:26:2426 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:24:29:2429 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:34:34:3434 [31merror[39m: [31mSocket authentication error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:39:29:3929 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:39:33:3933 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:39:38:3938 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:39:42:3942 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:39:46:3946 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:39:48:3948 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:39:51:3951 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:39:54:3954 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:39:56:3956 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:40:00:400 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:40:03:403 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:40:07:407 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:40:10:4010 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:40:14:4014 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:40:17:4017 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:40:20:4020 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:40:23:4023 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:40:26:4026 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:40:29:4029 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 14:40:32:4032 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:08:51:851 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:08:52:852 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:08:54:854 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:08:57:857 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:00:90 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:02:92 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:05:95 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:09:99 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:12:912 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:14:914 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:18:918 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:22:922 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:25:925 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:28:928 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:30:930 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:34:934 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:38:938 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:41:941 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:44:944 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:47:947 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:49:949 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:53:953 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:56:956 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:09:59:959 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:10:01:101 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:10:04:104 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:10:07:107 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:20:18:2018 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:20:19:2019 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:20:20:2020 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:20:21:2021 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:27:34:2734 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:27:34:2734 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-10 16:27:35:2735 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:27:37:2737 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:27:38:2738 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:27:41:2741 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:27:43:2743 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 16:52:36:5236 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-10 18:04:56:456 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 18:04:57:457 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 18:04:59:459 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-10 18:05:00:50 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 18:05:03:53 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 18:15:04:154 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 18:15:36:1536 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 18:18:07:187 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 18:37:28:3728 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 18:39:00:390 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 18:39:04:394 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 18:39:09:399 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 21:50:55:5055 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 21:50:55:5055 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 21:50:55:5055 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 21:50:57:5057 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 21:52:32:5232 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 21:54:14:5414 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 21:54:18:5418 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 22:06:21:621 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:22:622 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:24:624 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:24:624 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-10 22:06:24:624 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-10 22:06:24:624 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-10 22:06:24:624 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-10 22:06:24:624 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 22:06:26:626 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 22:06:26:626 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 22:06:26:626 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 22:06:26:626 [31merror[39m: [31mERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 22:06:27:627 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:27:627 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:28:628 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:28:628 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:28:628 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:29:629 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:29:629 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:29:629 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-10 22:06:30:630 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:30:630 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:30:630 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:30:630 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:30:630 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:31:631 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:31:631 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:31:631 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:31:631 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:32:632 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:32:632 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:32:632 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:32:632 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:34:634 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:34:634 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:38:638 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:40:640 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:41:641 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-10 22:06:42:642 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:43:643 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:52:652 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:52:652 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:52:652 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:06:52:652 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 22:06:53:653 [31merror[39m: [31mRedis cache error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 22:08:46:846 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-10 22:08:56:856 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND select-stinkbug-138900.upstash.io[39m
+2026-09-10 22:08:57:857 [31merror[39m: [31mError in getSearchAggregations: getaddrinfo ENOTFOUND ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-10 22:08:57:857 [31merror[39m: [31mError in searchProducts: getaddrinfo ENOTFOUND ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-10 22:08:57:857 [31merror[39m: [31mgetaddrinfo ENOTFOUND ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-10 22:08:59:859 [31merror[39m: [31mError in getActiveBanners: getaddrinfo ENOTFOUND ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-10 22:08:59:859 [31merror[39m: [31mError in getHomeBanners: getaddrinfo ENOTFOUND ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-10 22:08:59:859 [31merror[39m: [31mgetaddrinfo ENOTFOUND ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-10 22:08:59:859 [31merror[39m: [31mError in getNewArrivals: getaddrinfo ENOTFOUND ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-10 22:08:59:859 [31merror[39m: [31mError in getMostPopularProducts: getaddrinfo ENOTFOUND ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-10 22:08:59:859 [31merror[39m: [31mError in getTrendingProducts: getaddrinfo ENOTFOUND ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-09-10 22:09:01:91 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 22:09:04:94 [31merror[39m: [31mCache middleware error: ERR max requests limit exceeded. Limit: 500000, Usage: 500004. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-10 22:12:54:1254 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:12:54:1254 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:15:07:157 [31merror[39m: [31mError in getActiveBanners: Connection to ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net:27017 interrupted due to server monitor timeout[39m
+2026-09-10 22:15:07:157 [31merror[39m: [31mError in getHomeBanners: Connection to ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net:27017 interrupted due to server monitor timeout[39m
+2026-09-10 22:15:07:157 [31merror[39m: [31mConnection to ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net:27017 interrupted due to server monitor timeout[39m
+2026-09-10 22:29:55:2955 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:30:30:3030 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-10 22:43:55:4355 [31merror[39m: [31m❌ UNHANDLED REJECTION: Error: querySrv EREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+[31m    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)[39m
+2026-09-10 22:46:23:4623 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-10 23:25:39:2539 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-11 00:00:53:053 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 00:00:53:053 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 00:01:19:119 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 00:01:19:119 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 07:36:45:3645 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 07:36:46:3646 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 07:37:32:3732 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 07:37:32:3732 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 07:52:49:5249 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 07:52:50:5250 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 07:53:05:535 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 07:53:10:5310 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 07:53:40:5340 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 08:38:10:3810 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-11 08:38:41:3841 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-11 08:42:40:4240 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-11 09:10:51:1051 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 09:10:56:1056 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 09:11:18:1118 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 09:20:07:207 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-11 09:42:23:4223 [31merror[39m: [31m❌ Redis error: write ECONNRESET[39m
+2026-09-11 21:22:14:2214 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 21:22:14:2214 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 21:22:24:2224 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 21:22:24:2224 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 21:32:13:3213 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-11 21:54:20:5420 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:11:25:1125 [31merror[39m: [31m❌ Redis error: write ECONNRESET[39m
+2026-09-11 22:11:51:1151 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-11 22:19:26:1926 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:19:26:1926 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:19:26:1926 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:19:26:1926 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:29:15:2915 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: AppError is not a constructor[39m
+2026-09-11 22:29:15:2915 [31merror[39m: [31mAppError is not a constructor[39m
+2026-09-11 22:29:17:2917 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: AppError is not a constructor[39m
+2026-09-11 22:29:17:2917 [31merror[39m: [31mAppError is not a constructor[39m
+2026-09-11 22:30:13:3013 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: AppError is not a constructor[39m
+2026-09-11 22:30:13:3013 [31merror[39m: [31mAppError is not a constructor[39m
+2026-09-11 22:30:15:3015 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: AppError is not a constructor[39m
+2026-09-11 22:30:15:3015 [31merror[39m: [31mAppError is not a constructor[39m
+2026-09-11 22:33:14:3314 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: Customer not found for this vendor[39m
+2026-09-11 22:33:14:3314 [31merror[39m: [31mCustomer not found for this vendor[39m
+2026-09-11 22:33:16:3316 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: Customer not found for this vendor[39m
+2026-09-11 22:33:16:3316 [31merror[39m: [31mCustomer not found for this vendor[39m
+2026-09-11 22:38:11:3811 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: Customer not found for this vendor[39m
+2026-09-11 22:38:11:3811 [31merror[39m: [31mCustomer not found for this vendor[39m
+2026-09-11 22:38:13:3813 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: Customer not found for this vendor[39m
+2026-09-11 22:38:13:3813 [31merror[39m: [31mCustomer not found for this vendor[39m
+2026-09-11 22:42:57:4257 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 22:42:58:4258 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 22:42:58:4258 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 22:43:00:430 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:43:03:433 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 22:43:04:434 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 22:43:04:434 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 22:43:04:434 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 22:43:05:435 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:43:05:435 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:43:05:435 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:43:05:435 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:43:09:439 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:43:15:4315 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:43:15:4315 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 22:43:22:4322 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 22:43:24:4324 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 22:43:25:4325 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 22:43:28:4328 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:43:28:4328 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:43:37:4337 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 22:45:22:4522 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: Customer not found for this vendor[39m
+2026-09-11 22:45:22:4522 [31merror[39m: [31mCustomer not found for this vendor[39m
+2026-09-11 22:45:24:4524 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: Customer not found for this vendor[39m
+2026-09-11 22:45:24:4524 [31merror[39m: [31mCustomer not found for this vendor[39m
+2026-09-11 22:50:31:5031 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-09-11 22:51:01:511 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-11 22:54:00:540 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: Customer not found for this vendor[39m
+2026-09-11 22:54:00:540 [31merror[39m: [31mError in VendorCustomerService.getCustomerDetail: Invalid customer id[39m
+2026-09-11 23:14:16:1416 [31merror[39m: [31mYour token has expired. Please log in again.[39m
+2026-09-11 23:14:17:1417 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 23:14:43:1443 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 23:14:47:1447 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 23:14:47:1447 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 23:14:51:1451 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:14:54:1454 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 23:14:54:1454 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 23:14:55:1455 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 23:14:56:1456 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 23:14:58:1458 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:14:58:1458 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:15:01:151 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:15:01:151 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:15:03:153 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:15:20:1520 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 23:15:26:1526 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 23:15:27:1527 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-11 23:15:33:1533 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:15:38:1538 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:15:52:1552 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:16:42:1642 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:16:42:1642 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:17:12:1712 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:17:12:1712 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-11 23:32:02:322 [31merror[39m: [31mCan't find /api/v1/vendor/invoices?page=1&limit=10 on this server![39m
+2026-09-11 23:32:03:323 [31merror[39m: [31mCan't find /api/v1/vendor/invoices?page=1&limit=10 on this server![39m
+2026-09-12 08:28:43:2843 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-12 08:28:44:2844 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-12 08:28:46:2846 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 08:28:46:2846 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-12 08:28:46:2846 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-12 08:28:46:2846 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-12 08:28:46:2846 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-12 08:28:47:2847 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-12 08:28:47:2847 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-12 08:28:47:2847 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-12 08:28:47:2847 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-12 08:28:52:2852 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-12 08:28:54:2854 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-12 08:28:54:2854 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 08:28:54:2854 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 08:28:55:2855 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-12 08:29:02:292 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 08:29:04:294 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 08:29:15:2915 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-12 08:29:16:2916 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-12 08:29:17:2917 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-12 08:29:18:2918 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 08:29:27:2927 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 08:37:53:3753 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 08:37:53:3753 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 08:38:34:3834 [31merror[39m: [31mNo matching document found for id "69c2c47f9d1dd1404a838802" version 15 modifiedPaths "stats, stats.lastActive, security.securityAlerts.loginAlerts, security.securityAlerts.deviceTrust, security.trustedDevices, security.loginHistory"[39m
+2026-09-12 08:45:06:456 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 08:57:05:575 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 09:15:23:1523 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 09:24:44:2444 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 18:35:52:3552 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:35:53:3553 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:36:10:3610 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:36:10:3610 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:36:26:3626 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:36:26:3626 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:38:43:3843 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:38:43:3843 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:39:40:3940 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:39:40:3940 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:42:11:4211 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:42:11:4211 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:59:52:5952 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 18:59:56:5956 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 19:00:09:09 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 19:11:16:1116 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 19:19:07:197 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 19:24:40:2440 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 19:29:36:2936 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 19:41:03:413 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-12 19:42:25:4225 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 19:48:25:4825 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-12 19:48:37:4837 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-12 20:27:16:2716 [31merror[39m: [31m❌ Redis error: write ECONNRESET[39m
+2026-09-12 20:27:17:2717 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 20:27:19:2719 [31merror[39m: [31mError in getAllVendors: read ECONNRESET[39m
+2026-09-12 20:27:19:2719 [31merror[39m: [31mread ECONNRESET[39m
+2026-09-12 20:27:34:2734 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-12 20:37:31:3731 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 20:39:26:3926 [31merror[39m: [31mMongoDB connection error: Socket 'secureConnect' timed out after 31179ms (connectTimeoutMS: 30000)[39m
+2026-09-12 20:40:43:4043 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 20:41:25:4125 [31merror[39m: [31mError in getAllPayments: Invalid vendor id[39m
+2026-09-12 20:48:04:484 [31merror[39m: [31mconnection 10 to 159.41.242.241:27017 timed out[39m
+2026-09-12 20:52:51:5251 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 20:52:51:5251 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 20:57:59:5759 [31merror[39m: [31mError in getActiveBanners: connection 20 to [64:ff9b::9f29:f2f1]:27017 timed out[39m
+2026-09-12 20:57:59:5759 [31merror[39m: [31mError in getHomeBanners: connection 20 to [64:ff9b::9f29:f2f1]:27017 timed out[39m
+2026-09-12 20:57:59:5759 [31merror[39m: [31mconnection 20 to [64:ff9b::9f29:f2f1]:27017 timed out[39m
+2026-09-12 21:11:36:1136 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 21:11:43:1143 [31merror[39m: [31mMongoDB connection error: Socket 'secureConnect' timed out after 31707ms (connectTimeoutMS: 30000)[39m
+2026-09-12 21:12:27:1227 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 21:13:27:1327 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 21:15:09:159 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 21:17:00:170 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-12 21:31:04:314 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 21:31:05:315 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 21:31:08:318 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND more-warthog-73636.upstash.io[39m
+2026-09-12 21:31:09:319 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND more-warthog-73636.upstash.io[39m
+2026-09-12 21:31:13:3113 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND more-warthog-73636.upstash.io[39m
+2026-09-12 21:31:13:3113 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND more-warthog-73636.upstash.io[39m
+2026-09-12 21:31:21:3121 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND more-warthog-73636.upstash.io[39m
+2026-09-12 21:31:21:3121 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND more-warthog-73636.upstash.io[39m
+2026-09-12 21:36:15:3615 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 21:36:18:3618 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 21:37:19:3719 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-12 21:41:55:4155 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-12 21:44:39:4439 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-12 21:55:38:5538 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 21:55:40:5540 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-12 22:00:02:02 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:05:56:556 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:10:56:1056 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 22:25:23:2523 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:26:19:2619 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 22:28:25:2825 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:29:08:298 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:29:53:2953 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:29:56:2956 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:32:29:3229 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:34:05:345 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 22:34:29:3429 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 22:36:25:3625 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-12 22:36:30:3630 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-12 22:36:42:3642 [31merror[39m: [31m❌ UNHANDLED REJECTION: MongoNetworkTimeoutError: Socket 'secureConnect' timed out after 30220ms (connectTimeoutMS: 30000)[39m
+[31m    at TLSSocket.<anonymous> (D:\RentEase\backend\node_modules\mongodb\lib\cmap\connect.js:299:20)[39m
+[31m    at Object.onceWrapper (node:events:621:28)[39m
+[31m    at TLSSocket.emit (node:events:507:28)[39m
+[31m    at Socket._onTimeout (node:net:609:8)[39m
+[31m    at listOnTimeout (node:internal/timers:608:17)[39m
+[31m    at process.processTimers (node:internal/timers:543:7)[39m
+2026-09-12 22:37:15:3715 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:43:03:433 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:46:04:464 [31merror[39m: [31m❌ Queue email not found! Available queues:[39m
+2026-09-12 22:46:04:464 [31merror[39m: [31mError sending email notification: Queue email not found[39m
+2026-09-12 22:46:04:464 [31merror[39m: [31mError processing notification: Queue email not found[39m
+2026-09-12 22:46:04:464 [31merror[39m: [31m❌ Queue notification not found! Available queues:[39m
+2026-09-12 22:46:04:464 [31merror[39m: [31mFailed to enqueue notification retry:[39m
+2026-09-12 22:46:04:464 [31merror[39m: [31mError in createNotification: Queue email not found[39m
+2026-09-12 22:46:04:464 [31merror[39m: [31mPayout notification failed (payout is still paid)[39m
+2026-09-12 22:47:13:4713 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:47:40:4740 [31merror[39m: [31m❌ Email service initialization failed: Connection closed[39m
+2026-09-12 22:47:44:4744 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 22:48:55:4855 [31merror[39m: [31mPayout notification failed (payout is still paid)[39m
+2026-09-12 22:51:51:5151 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 23:00:47:047 [31merror[39m: [31mYou are not logged in. Please log in to access this resource admin auth proect admin.[39m
+2026-09-12 23:02:28:228 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 23:04:10:410 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 23:06:41:641 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-12 23:12:31:1231 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 23:16:44:1644 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 23:21:05:215 [31merror[39m: [31mError handling razorpay webhook: Raw request body is unavailable, so the webhook signature cannot be verified[39m
+2026-09-12 23:23:30:2330 [31merror[39m: [31m❌ Queue email not found! Available queues:[39m
+2026-09-12 23:23:30:2330 [31merror[39m: [31mError sending email notification: Queue email not found[39m
+2026-09-12 23:23:30:2330 [31merror[39m: [31mError processing notification: Queue email not found[39m
+2026-09-12 23:23:30:2330 [31merror[39m: [31m❌ Queue notification not found! Available queues:[39m
+2026-09-12 23:23:30:2330 [31merror[39m: [31mFailed to enqueue notification retry:[39m
+2026-09-12 23:23:30:2330 [31merror[39m: [31mError in createNotification: Queue email not found[39m
+2026-09-12 23:23:30:2330 [31merror[39m: [31mPayout notification failed (payout is still paid)[39m
+2026-09-12 23:24:02:242 [31merror[39m: [31mPayout notification failed (payout is still paid)[39m
+2026-09-12 23:24:12:2412 [31merror[39m: [31mError handling razorpay webhook: Raw request body is unavailable, so the webhook signature cannot be verified[39m
+2026-09-12 23:25:17:2517 [31merror[39m: [31m❌ Queue email not found! Available queues:[39m
+2026-09-12 23:25:17:2517 [31merror[39m: [31mError sending email notification: Queue email not found[39m
+2026-09-12 23:25:17:2517 [31merror[39m: [31mError processing notification: Queue email not found[39m
+2026-09-12 23:25:17:2517 [31merror[39m: [31m❌ Queue notification not found! Available queues:[39m
+2026-09-12 23:25:17:2517 [31merror[39m: [31mFailed to enqueue notification retry:[39m
+2026-09-12 23:25:17:2517 [31merror[39m: [31mError in createNotification: Queue email not found[39m
+2026-09-12 23:25:17:2517 [31merror[39m: [31mPayout notification failed (payout is still paid)[39m
+2026-09-12 23:28:37:2837 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-12 23:36:41:3641 [31merror[39m: [31mPayout notification failed (payout is still paid)[39m
+2026-09-12 23:36:50:3650 [31merror[39m: [31mError handling razorpay webhook: Raw request body is unavailable, so the webhook signature cannot be verified[39m
+2026-09-12 23:39:50:3950 [31merror[39m: [31mMongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-09-13 07:30:38:3038 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-13 07:30:38:3038 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-13 08:21:43:2143 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 08:21:43:2143 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 08:33:58:3358 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 08:46:40:4640 [31merror[39m: [31mPayout notification failed (payout is still paid)[39m
+2026-09-13 08:46:49:4649 [31merror[39m: [31mError handling razorpay webhook: Raw request body is unavailable, so the webhook signature cannot be verified[39m
+2026-09-13 09:14:17:1417 [31merror[39m: [31m❌ Redis error: write ECONNRESET[39m
+2026-09-13 09:29:17:2917 [31merror[39m: [31mPayout notification failed (payout is still paid)[39m
+2026-09-13 09:29:26:2926 [31merror[39m: [31mError handling razorpay webhook: Raw request body is unavailable, so the webhook signature cannot be verified[39m
+2026-09-13 09:33:24:3324 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 09:38:34:3834 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-13 09:38:34:3834 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-13 09:56:15:5615 [31merror[39m: [31mSocket authentication error: jwt expired[39m
+2026-09-13 10:08:02:82 [31merror[39m: [31mPayout notification failed (payout is still paid)[39m
+2026-09-13 10:08:10:810 [31merror[39m: [31mError handling razorpay webhook: Raw request body is unavailable, so the webhook signature cannot be verified[39m
+2026-09-13 12:13:27:1327 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:13:30:1330 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:13:43:1343 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:16:00:160 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:17:17:1717 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:17:17:1717 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:17:33:1733 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:17:35:1735 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:18:35:1835 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:18:39:1839 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:18:56:1856 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:18:57:1857 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:19:00:190 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:19:37:1937 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:19:38:1938 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:19:40:1940 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:20:21:2021 [31merror[39m: [31mRefusing a LIVE payout TEST-1789282211887-7366-P1: 1 earning(s) came from non-live payments[39m
+2026-09-13 12:20:41:2041 [31merror[39m: [31mRefusing a LIVE payout TEST-1789282232185-2761-P1: 1 earning(s) came from non-live payments[39m
+2026-09-13 12:21:09:219 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:21:10:2110 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:21:14:2114 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:21:23:2123 [31merror[39m: [31mRefusing a LIVE payout TEST-1789282272246-8087-P1: 1 earning(s) came from non-live payments[39m
+2026-09-13 12:21:24:2124 [31merror[39m: [31mGateway payout TEST-1789282272246-8087-P2 failed: beneficiary bank unavailable. Released 0 ledger entries back to available.[39m
+2026-09-13 12:21:25:2125 [31merror[39m: [31mGateway payout TEST-1789282272246-8087-P2 failed: the gateway reported a failure. Released 0 ledger entries back to available.[39m
+2026-09-13 12:22:12:2212 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:22:13:2213 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:22:15:2215 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 12:22:28:2228 [31merror[39m: [31mRefusing a LIVE payout TEST-1789282332541-2056-P1: 1 earning(s) came from non-live payments[39m
+2026-09-13 12:22:29:2229 [31merror[39m: [31mGateway payout TEST-1789282332541-2056-P2 failed: beneficiary bank unavailable. Released 1 ledger entries back to available.[39m
+2026-09-13 12:22:30:2230 [31merror[39m: [31mGateway payout TEST-1789282332541-2056-P2 failed: the gateway reported a failure. Released 0 ledger entries back to available.[39m
+2026-09-13 12:23:23:2323 [31merror[39m: [31mPayout notification failed (payout is still paid)[39m
+2026-09-13 12:23:30:2330 [31merror[39m: [31mError handling razorpay webhook: Raw request body is unavailable, so the webhook signature cannot be verified[39m
+2026-09-13 12:23:57:2357 [31merror[39m: [31mRefusing a LIVE payout TEST-1789282429066-8063-P1: 1 earning(s) came from non-live payments[39m
+2026-09-13 12:23:58:2358 [31merror[39m: [31mGateway payout TEST-1789282429066-8063-P2 failed: beneficiary bank unavailable. Released 1 ledger entries back to available.[39m
+2026-09-13 12:23:58:2358 [31merror[39m: [31mGateway payout TEST-1789282429066-8063-P2 failed: the gateway reported a failure. Released 0 ledger entries back to available.[39m
+2026-09-13 13:44:42:4442 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 13:44:42:4442 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 13:44:48:4448 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 13:44:49:4449 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 13:44:56:4456 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 13:44:57:4457 [31merror[39m: [31mSocket authentication error: read ECONNRESET[39m
+2026-09-13 13:45:01:451 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 13:45:14:4514 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-13 13:45:22:4522 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 13:50:36:5036 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 13:50:36:5036 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 13:50:44:5044 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 19:10:55:1055 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 19:11:00:110 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 19:11:05:115 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 19:11:13:1113 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 19:56:05:565 [31merror[39m: [31mNo settled earnings are available for payout[39m
+2026-09-13 20:06:50:650 [31merror[39m: [31mYou are not logged in. Please log in to access this resource admin auth proect admin.[39m
+2026-09-13 21:22:40:2240 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 21:22:41:2241 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 21:22:51:2251 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-13 21:23:03:233 [31merror[39m: [31m❌ Redis error: connect ETIMEDOUT[39m
+2026-09-13 21:35:36:3536 [31merror[39m: [31m❌ Redis error: write ECONNRESET[39m
+2026-09-13 21:35:36:3536 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 21:53:20:5320 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-13 21:57:10:5710 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
+2026-09-13 23:27:13:2713 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-09-13 23:29:41:2941 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m

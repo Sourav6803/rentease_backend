@@ -5,6 +5,12 @@ const AppError = require('../../utils/AppError');
 const logger = require('../../config/logger');
 const { addJob } = require('../../jobs');
 const Vendor = require('../../models/Vendor.model');
+// `Review.find(...)` in getProductAnalytics() and `Product.find()` in
+// exportProducts() were referenced without ever being imported, so both
+// endpoints threw ReferenceError (500) on every call.
+const mongoose = require('mongoose');
+const Product = require('../../models/Product.model');
+const Review = require('../../models/Review.model');
 
 // const {addJob} = require('../middlewares/cache.middleware')
 
@@ -254,7 +260,11 @@ class ProductController {
    */
   deleteProduct = catchAsync(async (req, res) => {
     const { id } = req.params;
-    const result = await ProductService.deleteProduct(id, req.user._id);
+    // Product.vendor references the Vendor document, so passing req.user._id
+    // made the ownership filter never match and every delete returned
+    // "Product not found or unauthorized" (404). updateProduct above already
+    // passes req.vendor._id — keep the two consistent.
+    const result = await ProductService.deleteProduct(id, req.vendor._id);
 
     return ApiResponse.success(res, 200, result.message);
   });
@@ -266,7 +276,7 @@ class ProductController {
     const { page = 1, limit = 10, ...filters } = req.query;
 
     const products = await ProductService.getVendorProducts(
-      req.user._id,
+      req.vendor._id,
       parseInt(page),
       parseInt(limit),
       filters,
@@ -290,7 +300,7 @@ class ProductController {
       throw new AppError("Updates must be an array", 400);
     }
 
-    const results = await ProductService.bulkUpdate(req.user._id, updates);
+    const results = await ProductService.bulkUpdate(req.vendor._id, updates);
 
     return ApiResponse.success(res, 200, "Bulk update completed", results);
   });
@@ -306,7 +316,7 @@ class ProductController {
       throw new AppError("Quantity and operation are required", 400);
     }
 
-    const product = await ProductService.updateStock(id, quantity, operation);
+    const product = await ProductService.updateStock(id, quantity, operation, req.vendor._id);
 
     return ApiResponse.success(res, 200, "Stock updated successfully", {
       product,
@@ -318,6 +328,13 @@ class ProductController {
    */
   getProductAnalytics = catchAsync(async (req, res) => {
     const { id } = req.params;
+
+    // Ownership guard: Product.vendor references the Vendor document. Without
+    // it any authenticated vendor could read another vendor's product
+    // analytics (rental stats / reviews) by guessing a product id.
+    if (!mongoose.isValidObjectId(id) || !(await Product.exists({ _id: id, vendor: req.vendor._id }))) {
+      throw new AppError('Product not found', 404);
+    }
 
     const [rentalStats, reviews, sentiment] = await Promise.all([
       ProductService.getProductRentalStats(id),

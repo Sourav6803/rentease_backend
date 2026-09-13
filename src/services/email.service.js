@@ -328,6 +328,26 @@ class EmailService {
   /**
    * Send delivery notification
    */
+  /**
+   * Send the vendor payout (settlement) receipt.
+   *
+   * The `vendor-payout` template is also rendered by the `email/send` job that
+   * NotificationService.sendVendorPayoutNotification enqueues, so the payload is
+   * built once by NotificationService.buildVendorPayoutPayload and reused here.
+   * One builder means the template and the data cannot drift apart.
+   */
+  async sendVendorPayoutEmail(user, payout, vendor) {
+    const notificationService = require("./notification.service");
+    const data = notificationService.buildVendorPayoutPayload(payout, vendor, user);
+
+    return this.sendEmail({
+      to: user.email,
+      subject: `Payout Settled ${payout.payoutNumber} - RentEase`,
+      template: "vendor-payout",
+      data,
+    });
+  }
+
   async sendDeliveryNotificationEmail(user, delivery) {
     const data = {
       name: user.profile?.firstName || "User",

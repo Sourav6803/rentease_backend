@@ -2042,19 +2042,23 @@ const vendorValidations = {
   ],
 
   notificationPreferences: [
-    body('email.newRentals')
+    // Flat event prefs matching Vendor.model settings.notificationPreferences
+    body('newRentals')
       .optional()
       .isBoolean(),
-    body('email.cancellations')
+    body('cancellations')
       .optional()
       .isBoolean(),
-    body('email.maintenanceRequests')
+    body('maintenanceRequests')
       .optional()
       .isBoolean(),
-    body('email.payments')
+    body('payments')
       .optional()
       .isBoolean(),
-    body('email.dailyDigest')
+    body('reviews')
+      .optional()
+      .isBoolean(),
+    body('dailyDigest')
       .optional()
       .isBoolean(),
   ],

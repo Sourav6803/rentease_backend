@@ -109,10 +109,24 @@ const userSchema = new mongoose.Schema({
     twoFactorSecret: { type: String, select: false },
     loginAttempts: { type: Number, default: 0 },
     lockUntil: Date,
+    // Timestamp of the most recent failed password attempt. login() uses it to
+    // decay a stale `loginAttempts` counter, which previously only reset on a
+    // fully successful login.
+    lastFailedLoginAt: { type: Date },
     refreshTokens: [{
+      // `sid` claim shared with the matching access token, so the security
+      // centre can identify the caller's own session exactly.
+      sessionId: String,
       token: String,
       deviceInfo: String,
       ipAddress: String,
+      // auth.service#saveRefreshToken has always written `userAgent`, but the
+      // path was missing from the schema so Mongoose (strict mode) dropped it on
+      // every save — which is why active sessions showed no device at all.
+      userAgent: String,
+      device: String,
+      browser: String,
+      os: String,
       expiresAt: Date,
       createdAt: Date
     }],
@@ -123,7 +137,55 @@ const userSchema = new mongoose.Schema({
       password: { type: String, select: false },
       changedAt: Date
     }],
-    passwordLastChanged: { type: Date }
+    passwordLastChanged: { type: Date },
+
+    // ------------------------------------------------------------------
+    // Two-factor authentication (real TOTP, see utils/totp.js)
+    // ------------------------------------------------------------------
+    twoFactorEnabledAt: { type: Date },
+    // Secret generated during setup, promoted to `twoFactorSecret` only after
+    // the user proves possession by submitting a valid code. Keeping it
+    // separate means an abandoned setup can never overwrite a live secret.
+    twoFactorPendingSecret: { type: String, select: false },
+    // Recovery codes are only ever persisted as bcrypt hashes and the whole
+    // array is excluded from queries by default.
+    twoFactorRecoveryCodes: {
+      type: [{
+        hash: String,
+        usedAt: { type: Date, default: null }
+      }],
+      select: false,
+      default: undefined
+    },
+
+    // ------------------------------------------------------------------
+    // Security centre: alert preferences, trusted devices, login timeline
+    // ------------------------------------------------------------------
+    securityAlerts: {
+      loginAlerts: { type: Boolean, default: true },
+      deviceTrust: { type: Boolean, default: false }
+    },
+    trustedDevices: [{
+      deviceId: String,
+      name: String,
+      ipAddress: String,
+      userAgent: String,
+      lastUsedAt: Date,
+      createdAt: { type: Date, default: Date.now }
+    }],
+    // Rolling window of the most recent login attempts. Capped in
+    // vendor-security.service so it can never grow unbounded.
+    loginHistory: [{
+      ip: String,
+      userAgent: String,
+      device: String,
+      browser: String,
+      os: String,
+      status: { type: String, enum: ['success', 'failed'], default: 'success' },
+      reason: String,
+      twoFactorUsed: { type: Boolean, default: false },
+      timestamp: { type: Date, default: Date.now }
+    }]
   },
  
   metadata: {

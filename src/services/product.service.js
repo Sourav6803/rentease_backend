@@ -1677,13 +1677,24 @@ class ProductService {
   /**
    * Update product stock
    */
-  async updateStock(productId, quantity, operation = 'add') {
+  async updateStock(productId, quantity, operation = 'add', vendorId = null) {
     const session = await mongoose.startSession();
     session.startTransaction();
 
     try {
-      const product = await Product.findById(productId).session(session);
-      
+      if (!mongoose.isValidObjectId(productId)) {
+        throw new AppError('Product not found', 404);
+      }
+
+      // Scope to the owning vendor when called from the vendor API
+      // (PATCH /products/:id/stock). The lookup used to be an unscoped
+      // findById, so any authenticated vendor could change another vendor's
+      // product stock by guessing a product id.
+      const product = await Product.findOne({
+        _id: productId,
+        ...(vendorId ? { vendor: vendorId } : {}),
+      }).session(session);
+
       if (!product) {
         throw new AppError('Product not found', 404);
       }

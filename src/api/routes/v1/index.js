@@ -34,10 +34,12 @@ const bannerRoutes = require('./banner.routes');
 const emailSettingsRoutes = require('./email-settings.routes');
 const smsSettingsRoutes = require('./sms-settings.routes');
 const paymentSettingsRoutes = require('./payment-settings.routes');
+const adminPayoutRoutes = require('./admin-payout.routes');
 const backupRoutes = require('./backup.routes');
 const apiKeysRoutes = require('./api-keys.routes');
 const systemLogsRoutes = require('./system-logs.routes');
 const settingRoutes = require("./settings.routes");
+const vendorSecurityRoutes = require('./vendor-security.routes');
 
 // Vendor/admin middleware
 const { restrictTo } = require('../../middlewares/permissions.middleware');
@@ -102,6 +104,11 @@ router.use('/discounts', discountRoutes);
 // Notification routes
 router.use('/notifications', notificationRoutes);
 
+// Vendor Security Centre — mounted BEFORE the generic `/vendor` router so its
+// own auth chain handles these paths directly (the /vendor router would
+// otherwise run protect() a second time and fall through).
+router.use('/vendor/security', vendorSecurityRoutes);
+
 router.use('/vendor', vendorRoutes);
 
 // Admin settings routes
@@ -112,6 +119,10 @@ router.use('/admin/settings', adminSettingsRoutes);
 
 router.use('/admin/api-keys', apiKeysRoutes);
 router.use('/admin/logs', systemLogsRoutes);
+
+// Vendor payouts — mounted BEFORE the generic `/admin` router below, which would
+// otherwise apply its own auth chain to these paths first.
+router.use('/admin/payouts', adminPayoutRoutes);
 
 // Role management routes (super admin only)
 router.use('/admin/roles', roleManagementRoutes);

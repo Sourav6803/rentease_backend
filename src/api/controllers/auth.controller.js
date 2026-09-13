@@ -6,6 +6,7 @@ const { validate } = require('../middlewares/validation.middleware');
 const { authValidations } = require('../middlewares/validation.middleware');
 const { AppError } = require('../../utils/AppError');
 const logger = require('../../config/logger');
+const { getClientIp } = require('../../utils/device');
 
 /** Map multer/Cloudinary `req.vendorDocuments` to `{ type, url }[]` for registerVendor. */
 function mapVendorUploadsToDocuments(vendorDocuments) {
@@ -207,7 +208,9 @@ class AuthController {
     const result = await AuthService.changePassword(
       req.user._id,
       currentPassword,
-      newPassword
+      newPassword,
+      getClientIp(req),
+      req.get('User-Agent') || null,
     );
 
     return ApiResponse.success(res, 200, result.message);

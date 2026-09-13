@@ -19,9 +19,12 @@ const maintenanceSchema = new mongoose.Schema({
     required: true,
     index: true
   },
+  // NOTE: stores the Vendor document _id (maintenance.service writes
+  // `rental.vendor._id`). Declared as ref: 'User' before, which broke
+  // `populate('vendor', 'business.name')` in maintenance.service/controller.
   vendor: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Vendor',
     required: true,
     index: true
   },

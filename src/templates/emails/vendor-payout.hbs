@@ -1,0 +1,89 @@
+        <h2>Payout Settled — Money On Its Way 💸</h2>
+
+        <p>Hello {{name}},</p>
+
+        <p>
+            Your earnings have been settled by RentEase and the net amount has been
+            released to your registered bank account. Here is the full breakdown of
+            this payout.
+        </p>
+
+        <div class="info-box">
+            <h3>Payout Summary</h3>
+            <p><strong>Payout Number:</strong> {{payoutNumber}}</p>
+            <p><strong>Receipt Number:</strong> {{receiptNumber}}</p>
+            <p><strong>Business:</strong> {{businessName}}</p>
+            <p><strong>Payout Date:</strong> {{payoutDate}}</p>
+            <p><strong>Period Covered:</strong> {{periodText}}</p>
+            <p><strong>Settlements Included:</strong> {{entriesCount}}</p>
+            <p><strong>Payment Mode:</strong> {{methodLabel}}</p>
+        </div>
+
+        <h3>How your net amount was calculated</h3>
+
+        <table>
+            <tr>
+                <th>Gross Earnings</th>
+                <td>{{currency}} {{grossAmount}}</td>
+            </tr>
+            <tr>
+                <th>Platform Commission</th>
+                <td>- {{currency}} {{commission}}</td>
+            </tr>
+            <tr>
+                <th>Platform Fee</th>
+                <td>- {{currency}} {{platformFee}}</td>
+            </tr>
+            <tr>
+                <th>Tax Deducted</th>
+                <td>- {{currency}} {{tax}}</td>
+            </tr>
+            <tr>
+                <th>Payout Processing Fee</th>
+                <td>- {{currency}} {{processingFee}}</td>
+            </tr>
+            <tr>
+                <th>Total Deductions</th>
+                <td>- {{currency}} {{totalDeductions}}</td>
+            </tr>
+            <tr>
+                <th>Net Amount Credited</th>
+                <td><strong>{{currency}} {{netAmount}}</strong></td>
+            </tr>
+        </table>
+
+        <div class="info-box">
+            <h3>Credited To</h3>
+            {{#if hasBank}}
+            <p><strong>Account Holder:</strong> {{accountHolderName}}</p>
+            <p><strong>Account Number:</strong> {{accountNumberMasked}}</p>
+            <p><strong>IFSC:</strong> {{ifscCode}}</p>
+            <p><strong>Bank:</strong> {{bankName}}</p>
+            {{/if}}
+            {{#if hasUpi}}
+            <p><strong>UPI ID:</strong> {{upiId}}</p>
+            {{/if}}
+            {{#if utr}}
+            <p><strong>Bank Reference (UTR):</strong> {{utr}}</p>
+            {{/if}}
+        </div>
+
+        <center>
+            <a href="{{payoutsUrl}}" class="button">View Payout History</a>
+        </center>
+
+        <p>
+            The commission, platform fee and tax lines above are shown for your
+            records — they were already deducted before the net amount was credited,
+            so there is nothing further to pay.
+        </p>
+
+        <p>
+            Every payment that made up this payout is itemised in your vendor
+            dashboard under Payouts. If any figure looks wrong, contact our vendor
+            support team within 7 days with the payout number above.
+        </p>
+
+        <p>Thanks for being part of RentEase!</p>
+
+        <p>The RentEase Team</p>

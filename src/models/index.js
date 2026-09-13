@@ -35,6 +35,13 @@ const SystemSettings = require('./SystemSettings.model');
 const Backup = require('./Backup.model');
 const ApiKey = require('./ApiKey.model');
 const SystemLog = require('./SystemLog.model');
+// Vendor security centre
+const VendorApiKey = require('./VendorApiKey.model');
+const SecurityEvent = require('./SecurityEvent.model');
+// Payment settlement
+const VendorLedger = require('./VendorLedger.model');
+const Payout = require('./Payout.model');
+const WebhookEvent = require('./WebhookEvent.model');
 
 // Enable virtuals in JSON responses globally
 mongoose.set('toJSON', { virtuals: true });
@@ -72,6 +79,14 @@ module.exports = {
   EmailCampaign,
   MarketingWorkflow,
   SystemSettings,
+  Backup,
+  ApiKey,
+  SystemLog,
+  VendorApiKey,
+  SecurityEvent,
+  VendorLedger,
+  Payout,
+  WebhookEvent,
   // Utility function to setup all indexes
   setupIndexes: async () => {
     console.log('Creating database indexes...');
@@ -83,6 +98,8 @@ module.exports = {
       Wishlist, UserBehaviorEvent, ProductInterest, CustomerSegment,
       EmailTemplate, EmailCampaign, MarketingWorkflow, SystemSettings,
       Backup, ApiKey, SystemLog,
+      VendorApiKey, SecurityEvent,
+      VendorLedger, Payout, WebhookEvent,
     ];
 
     for (const model of models) {
@@ -112,6 +129,8 @@ module.exports = {
       UserBehaviorEvent, ProductInterest, CustomerSegment,
       EmailTemplate, EmailCampaign, MarketingWorkflow,
       Backup, ApiKey, SystemLog,
+      VendorApiKey, SecurityEvent,
+      VendorLedger, Payout, WebhookEvent,
     };
     return models[name];
   },

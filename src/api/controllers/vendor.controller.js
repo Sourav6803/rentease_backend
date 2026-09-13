@@ -2,8 +2,9 @@ const VendorService = require('../../services/vendor.service');
 const catchAsync = require('../../utils/catchAsync');
 const {ApiResponse} = require('../../utils/apiResponse');
 const AppError = require('../../utils/AppError');
-const logger = require('../../config/logger');
+const AuthService = require('../../services/auth.service');
 const vendorAnalyticsService = require('../../services/vendor-analytics.service');
+const vendorCustomerService = require('../../services/vendor-customer.service');
 
 class VendorController {
   /**
@@ -154,7 +155,7 @@ class VendorController {
    * Get vendor profile
    */
   getProfile = catchAsync(async (req, res) => {
-    const profile = await VendorService.getVendorProfile(req.user._id);
+    const profile = await VendorService.getVendorProfile(req.vendor._id);
 
     return ApiResponse.success(
       res,
@@ -198,7 +199,9 @@ class VendorController {
    * Get vendor dashboard
    */
   getDashboard = catchAsync(async (req, res) => {
-    const dashboard = await VendorService.getVendorDashboard(req.user._id);
+    // Pass the Vendor document id: every vendor-owned collection
+    // (Product / Rental / Payment / Review) keys on it, not on req.user._id.
+    const dashboard = await VendorService.getVendorDashboard(req.vendor._id);
 
     return ApiResponse.success(
       res,
@@ -236,7 +239,7 @@ class VendorController {
   getRentals = catchAsync(async (req, res) => {
     const { page = 1, limit = 10, ...filters } = req.query;
     const rentals = await VendorService.getVendorRentals(
-      req.user._id,
+      req.vendor._id,
       parseInt(page),
       parseInt(limit),
       filters,
@@ -261,7 +264,7 @@ class VendorController {
     }
 
     const analytics = await VendorService.getVendorAnalytics(
-      req.user._id,
+      req.vendor._id,
       startDate,
       endDate,
     );
@@ -313,7 +316,7 @@ class VendorController {
    */
   getSubscription = catchAsync(async (req, res) => {
     const subscription = await VendorService.getSubscriptionDetails(
-      req.user._id,
+      req.vendor._id,
     );
 
     return ApiResponse.success(
@@ -353,7 +356,7 @@ class VendorController {
   getPayoutHistory = catchAsync(async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
     const history = await VendorService.getPayoutHistory(
-      req.user._id,
+      req.vendor._id,
       parseInt(page),
       parseInt(limit),
     );
@@ -647,6 +650,38 @@ class VendorController {
     const insights = await vendorAnalyticsService.getCustomerInsights(req.vendor._id, period);
     
     return ApiResponse.success(res, 200, 'Customer insights retrieved', insights);
+  });
+
+  /**
+   * Vendor customer directory — paginated, searchable, segmented.
+   *
+   * Scoped by req.vendor._id (the Vendor document id), the same id every other
+   * vendor-owned collection keys on. Query params are whitelisted inside the
+   * service rather than by a validator, because segment/sort must be clamped
+   * anyway and the customer id needs an ObjectId cast.
+   */
+  getCustomers = catchAsync(async (req, res) => {
+    const { page = 1, limit = 20, search = '', segment = 'all', sort = 'totalSpent' } = req.query;
+
+    const data = await vendorCustomerService.listCustomers(req.vendor._id, {
+      page,
+      limit,
+      search,
+      segment,
+      sort,
+    });
+
+    return ApiResponse.success(res, 200, 'Customers retrieved successfully', data);
+  });
+
+  getCustomerDetail = catchAsync(async (req, res) => {
+    //console.log(`Received request to get customer detail for vendor ${req.vendor._id} and customer ${req.params.customerId}`)
+    const data = await vendorCustomerService.getCustomerDetail(
+      req.vendor._id,
+      req.params.customerId,
+    );
+
+    return ApiResponse.success(res, 200, 'Customer retrieved successfully', data);
   });
 }
 

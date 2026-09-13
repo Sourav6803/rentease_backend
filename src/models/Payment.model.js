@@ -20,9 +20,13 @@ const paymentSchema = new mongoose.Schema({
     required: true,
     index: true
   },
+  // NOTE: stores the Vendor document _id (payment.service writes `rental.vendor`,
+  // and Rental.vendor / Product.vendor are both Vendor refs). It was previously
+  // declared as ref: 'User', which made every `populate('vendor')` resolve against
+  // the users collection and throw on `payment.vendor.business.*` reads.
   vendor: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Vendor',
     index: true
   },
   amount: {
@@ -73,7 +77,20 @@ const paymentSchema = new mongoose.Schema({
     referenceNumber: String,
     razorpayPaymentId: String,
     razorpayOrderId: String,
-    razorpaySignature: String
+    razorpaySignature: String,
+    // Set by the stale-payment sweeper (settlement.expireStalePayments).
+    // `paymentDetails` is a strict subdocument, so without declaring these two the
+    // sweeper's audit trail was silently dropped by Mongoose and there was no
+    // record of WHY an abandoned payment was cancelled.
+    expiredAt: Date,
+    expiryReason: String,
+    /**
+     * 'test' or 'live' — which environment the money actually came from, recorded
+     * when the payment succeeds. Used to stop a LIVE vendor payout from sending real
+     * money against earnings that were only ever test-mode. This subdocument is
+     * strict, so without the field here the value would be silently dropped.
+     */
+    gatewayMode: { type: String, enum: ['test', 'live', null], default: null }
   },
   status: {
     type: String,

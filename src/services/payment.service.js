@@ -1,31 +1,235 @@
-const { Payment, Rental, User, Vendor, Product } = require('../models');
+const {
+  Payment,
+  Rental,
+  User,
+  Vendor,
+  Product,
+  SystemSettings,
+  WebhookEvent,
+  // Needed by the RazorpayX payout webhook handlers.
+  Payout,
+  VendorLedger,
+} = require('../models');
 const  AppError  = require('../utils/AppError');
 const { addJob } = require('../jobs');
 const { eventEmitter, EVENTS } = require('../events');
 const { getRedisClient } = require('../config/redis');
 const logger = require('../config/logger');
 const mongoose = require('mongoose');
+// Single source of truth for money rounding. feeCalculator is dependency-free,
+// so importing it here cannot create a require cycle.
+const { roundMoney, calculatePaymentFees } = require('../utils/feeCalculator');
+// settlement.service does not require this file, so there is no cycle. It owns
+// the ledger and payout rules; this service only tells it what happened.
+const settlement = require('./settlement.service');
 const Razorpay = require('razorpay');
 const Stripe = require('stripe');
 const crypto = require('crypto');
+const encryption = require('../utils/encryption');
+
+/** The shape `encryption.encryptToString` writes into a String field. */
+const ENCRYPTED_ENVELOPE = /^\s*\{\s*"encrypted"\s*:/;
+
+/**
+ * A gateway secret read back from the settings collection.
+ *
+ * The settings screen persists secrets with `encryption.encryptToString`, so the
+ * stored value is normally an envelope. A value written before that change — or by
+ * an install with no ENCRYPTION_KEY, where `encryptToString` returns plaintext — is
+ * still readable, so plaintext passes straight through.
+ */
+function decryptStoredSecret(stored) {
+  if (!stored) return '';
+  const value = String(stored);
+  if (!ENCRYPTED_ENVELOPE.test(value)) return value;
+
+  try {
+    return String(encryption.decryptFromString(value) || '');
+  } catch (error) {
+    logger.warn(`Could not decrypt a stored gateway secret: ${error.message}`);
+    return '';
+  }
+}
 
 class PaymentService {
   constructor() {
     this.redisClient = getRedisClient();
     this.defaultTTL = 1800; // 30 minutes
 
-    // Initialize Razorpay
-    if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
-      this.razorpay = new Razorpay({
-        key_id: process.env.RAZORPAY_KEY_ID,
-        key_secret: process.env.RAZORPAY_KEY_SECRET,
-      });
+    // Gateway clients are built LAZILY from `getGatewayCredentials()` rather than
+    // here from `process.env`. Creating them eagerly from the env alone is exactly
+    // why a key saved in the admin settings had no effect: the client, the payment
+    // signature check and the payout reconciliation all read the env value no
+    // matter what the settings screen said.
+    this._gatewayClients = { razorpay: null, stripe: null, payout: null };
+    this._gatewayClientKeys = { razorpay: null, stripe: null, payout: null };
+  }
+
+  /**
+   * RazorpayX credentials for PAYOUTS.
+   *
+   * A different product from the payment gateway with its own key pair, so it gets
+   * its own resolver rather than being folded into getGatewayCredentials. Same
+   * rules: admin settings first, env second, decrypt on read.
+   */
+  async getPayoutCredentials() {
+    const env = {
+      keyId: process.env.RAZORPAYX_KEY_ID,
+      keySecret: process.env.RAZORPAYX_KEY_SECRET,
+    };
+
+    let stored = {};
+    try {
+      const settings = await SystemSettings.getInstance();
+      const config = settings?.payment?.payout || {};
+      stored = {
+        keyId: decryptStoredSecret(config.keyId),
+        keySecret: decryptStoredSecret(config.keySecret),
+      };
+    } catch (error) {
+      logger.warn(`Could not read payout credentials from settings: ${error.message}`);
     }
 
-    // Initialize Stripe
-    if (process.env.STRIPE_SECRET_KEY) {
-      this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const resolve = (fromSettings, fromEnv) => {
+      const value = typeof fromSettings === 'string' ? fromSettings.trim() : '';
+      return value || (fromEnv ? String(fromEnv).trim() : '') || null;
+    };
+
+    return {
+      keyId: resolve(stored.keyId, env.keyId),
+      keySecret: resolve(stored.keySecret, env.keySecret),
+      source: {
+        keyId: stored.keyId ? 'settings' : 'env',
+        keySecret: stored.keySecret ? 'settings' : 'env',
+      },
+    };
+  }
+
+  /** RazorpayX client for payouts, built from the resolved payout credentials. */
+  async getPayoutClient() {
+    const { keyId, keySecret } = await this.getPayoutCredentials();
+    if (!keyId || !keySecret) return null;
+
+    const fingerprint = `${keyId}:${keySecret}`;
+    if (this._gatewayClients.payout && this._gatewayClientKeys.payout === fingerprint) {
+      return this._gatewayClients.payout;
     }
+
+    this._gatewayClients.payout = new Razorpay({ key_id: keyId, key_secret: keySecret });
+    this._gatewayClientKeys.payout = fingerprint;
+    return this._gatewayClients.payout;
+  }
+
+  /**
+   * The credentials to use for a gateway: admin settings first, environment second.
+   *
+   * Stored values are decrypted on the way out. An empty settings value falls
+   * straight through to the env var, so an install that has only ever used `.env`
+   * behaves exactly as it did before this existed.
+   */
+  async getGatewayCredentials(gateway) {
+    const env =
+      gateway === 'stripe'
+        ? {
+            keyId: process.env.STRIPE_PUBLISHABLE_KEY,
+            keySecret: process.env.STRIPE_SECRET_KEY,
+            webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+          }
+        : {
+            keyId: process.env.RAZORPAY_KEY_ID,
+            keySecret: process.env.RAZORPAY_KEY_SECRET,
+            webhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET,
+          };
+
+    let stored = {};
+    try {
+      const settings = await SystemSettings.getInstance();
+      const config = settings?.payment?.[gateway] || {};
+      stored = {
+        keyId: decryptStoredSecret(config.keyId),
+        // Stripe calls it `secretKey`, Razorpay calls it `keySecret`.
+        keySecret: decryptStoredSecret(
+          gateway === 'stripe' ? config.secretKey : config.keySecret,
+        ),
+        webhookSecret: decryptStoredSecret(config.webhookSecret),
+      };
+    } catch (error) {
+      logger.warn(`Could not read ${gateway} credentials from settings: ${error.message}`);
+    }
+
+    const resolve = (fromSettings, fromEnv) => {
+      const value = typeof fromSettings === 'string' ? fromSettings.trim() : '';
+      return value || (fromEnv ? String(fromEnv).trim() : '') || null;
+    };
+
+    return {
+      keyId: resolve(stored.keyId, env.keyId),
+      keySecret: resolve(stored.keySecret, env.keySecret),
+      webhookSecret: resolve(stored.webhookSecret, env.webhookSecret),
+      // Where each value came from — logged, and asserted by the tests.
+      source: {
+        keyId: stored.keyId ? 'settings' : 'env',
+        keySecret: stored.keySecret ? 'settings' : 'env',
+        webhookSecret: stored.webhookSecret ? 'settings' : 'env',
+      },
+    };
+  }
+
+  /**
+   * Which environment a payment's money came from: 'test', 'live', or null when it
+   * cannot be determined.
+   *
+   * Derived from the key prefix of the credentials in use, because that — not any
+   * stored flag — is what decides the environment at Razorpay. Recorded on the
+   * payment at success time, and used later to stop a LIVE payout from sending real
+   * money against earnings that were only ever test.
+   */
+  async resolvePaymentGatewayMode(payment) {
+    const gateway = payment?.paymentDetails?.gateway;
+    if (!gateway) return null;
+
+    try {
+      const { keyId } = await this.getGatewayCredentials(gateway);
+      if (!keyId) return null;
+      return /_live_/i.test(String(keyId)) ? 'live' : 'test';
+    } catch (error) {
+      logger.warn(`Could not resolve the gateway mode: ${error.message}`);
+      return null;
+    }
+  }
+
+  /** The Razorpay client for the resolved credentials, rebuilt if they change. */
+  async getRazorpayClient() {
+    const { keyId, keySecret } = await this.getGatewayCredentials('razorpay');
+    if (!keyId || !keySecret) return null;
+
+    const fingerprint = `${keyId}:${keySecret}`;
+    if (
+      this._gatewayClients.razorpay &&
+      this._gatewayClientKeys.razorpay === fingerprint
+    ) {
+      return this._gatewayClients.razorpay;
+    }
+
+    // Cached by credential fingerprint so a key edited in the settings screen takes
+    // effect without a restart.
+    this._gatewayClients.razorpay = new Razorpay({ key_id: keyId, key_secret: keySecret });
+    this._gatewayClientKeys.razorpay = fingerprint;
+    return this._gatewayClients.razorpay;
+  }
+
+  /** The Stripe client for the resolved credentials, rebuilt if they change. */
+  async getStripeClient() {
+    const { keySecret } = await this.getGatewayCredentials('stripe');
+    if (!keySecret) return null;
+
+    if (this._gatewayClients.stripe && this._gatewayClientKeys.stripe === keySecret) {
+      return this._gatewayClients.stripe;
+    }
+
+    this._gatewayClients.stripe = new Stripe(keySecret);
+    this._gatewayClientKeys.stripe = keySecret;
+    return this._gatewayClients.stripe;
   }
 
   /**
@@ -42,37 +246,63 @@ class PaymentService {
   /**
    * Calculate payment breakdown
    */
-  calculatePaymentBreakdown(rental, paymentType, amount = null) {
-    const breakdown = {
-      rentalId: rental._id,
-      rentalNumber: rental.rentalNumber,
+  calculatePaymentBreakdown(rental, paymentType, amount = null, options = {}) {
+    const baseAmount = roundMoney(amount ?? rental?.rentalDetails?.totalAmount ?? 0);
+    const paymentSettings = options.paymentSettings || null;
+
+    const result = calculatePaymentFees({
+      baseAmount,
       paymentType,
-      baseAmount: amount || rental.rentalDetails.totalAmount,
-      tax: 0,
-      convenienceFee: 0,
-      discount: 0,
-      total: amount || rental.rentalDetails.totalAmount,
+      tenureMonths: rental?.rentalDetails?.tenureMonths,
+      categoryId: options.categoryId || null,
+      rentalCount: options.vendorRentalCount,
+      vendorCommission: options.vendor?.commission,
+      settingsCommission: paymentSettings?.commission,
+      monthCommissionBefore: options.monthCommissionBefore,
+      yearCommissionBefore: options.yearCommissionBefore,
+      tax: {
+        // The database setting is authoritative. The env flag survives only as a
+        // fallback for a deployment that has no settings document yet — before
+        // this change the env flag was the only control and the admin UI's
+        // taxEnabled/taxRate had no effect at all.
+        enabled: paymentSettings
+          ? paymentSettings.taxEnabled === true
+          : process.env.ENABLE_TAX === "true",
+        rate: paymentSettings?.taxRate ?? 18,
+      },
+      convenienceFee: {
+        enabled: paymentSettings
+          ? paymentSettings.convenienceFeeEnabled === true
+          : process.env.ENABLE_CONVENIENCE_FEE === "true",
+        rate: paymentSettings?.convenienceFeeRate ?? 2,
+        cap: paymentSettings?.convenienceFeeCap ?? 100,
+      },
+      discount: { longTenureMonths: 6, longTenureRate: 5 },
+    });
+
+    // Same field names as before, plus the ones that were missing entirely.
+    // commission / platformFee / taxableAmount / vendorNet are what the vendor
+    // ledger and the payout engine read.
+    return {
+      rentalId: rental?._id,
+      rentalNumber: rental?.rentalNumber,
+      paymentType,
+      baseAmount: result.baseAmount,
+      discount: result.discount,
+      taxableAmount: result.taxableAmount,
+      commission: result.commission,
+      commissionRate: result.commissionRate,
+      commissionType: result.commissionType,
+      commissionSource: result.commissionSource,
+      platformFee: result.platformFee,
+      platformFeeType: result.platformFeeType,
+      tax: result.tax,
+      taxRate: result.taxRate,
+      convenienceFee: result.convenienceFee,
+      total: result.total,
+      vendorNet: result.vendorNet,
+      platformNet: result.platformNet,
     };
-
-    // Calculate tax (if applicable)
-    if (process.env.ENABLE_TAX === "true") {
-      breakdown.tax = breakdown.baseAmount * 0.18; // 18% GST
-      breakdown.total += breakdown.tax;
-    }
-
-    // Calculate convenience fee
-    if (process.env.ENABLE_CONVENIENCE_FEE === "true") {
-      breakdown.convenienceFee = Math.min(breakdown.baseAmount * 0.02, 100); // 2% capped at ₹100
-      breakdown.total += breakdown.convenienceFee;
-    }
-
-    // Apply discount based on payment type
-    if (paymentType === "rent" && rental.rentalDetails.tenureMonths >= 6) {
-      breakdown.discount = breakdown.baseAmount * 0.05; // 5% discount for 6+ months
-      breakdown.total -= breakdown.discount;
-    }
-
-    return breakdown;
   }
 
   /**
@@ -80,7 +310,8 @@ class PaymentService {
    */
   async createRazorpayOrder(amount, currency = "INR", receipt = null) {
     try {
-      if (!this.razorpay) {
+      const razorpay = await this.getRazorpayClient();
+      if (!razorpay) {
         throw new AppError("Razorpay not configured", 500);
       }
 
@@ -91,7 +322,7 @@ class PaymentService {
         payment_capture: 1,
       };
 
-      const order = await this.razorpay.orders.create(options);
+      const order = await razorpay.orders.create(options);
 
       return {
         id: order.id,
@@ -108,15 +339,28 @@ class PaymentService {
   /**
    * Verify Razorpay payment
    */
-  verifyRazorpayPayment(orderId, paymentId, signature) {
+  async verifyRazorpayPayment(orderId, paymentId, signature) {
     try {
+      // The secret has to be resolved (settings first) rather than read straight
+      // from the env, or a key entered in the admin UI would still fail every
+      // customer payment verification.
+      const { keySecret } = await this.getGatewayCredentials("razorpay");
+      if (!keySecret) {
+        logger.warn("Razorpay key secret is not configured; cannot verify a payment");
+        return false;
+      }
+
       const body = orderId + "|" + paymentId;
       const expectedSignature = crypto
-        .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+        .createHmac("sha256", keySecret)
         .update(body.toString())
         .digest("hex");
 
-      return expectedSignature === signature;
+      // Constant-time compare: `===` on a signature leaks its prefix by timing.
+      const expected = Buffer.from(expectedSignature, "utf8");
+      const provided = Buffer.from(String(signature || ""), "utf8");
+      if (expected.length !== provided.length) return false;
+      return crypto.timingSafeEqual(expected, provided);
     } catch (error) {
       logger.error("Error verifying Razorpay payment:", error);
       return false;
@@ -128,11 +372,12 @@ class PaymentService {
    */
   async createStripePaymentIntent(amount, currency = "inr", metadata = {}) {
     try {
-      if (!this.stripe) {
+      const stripe = await this.getStripeClient();
+      if (!stripe) {
         throw new AppError("Stripe not configured", 500);
       }
 
-      const paymentIntent = await this.stripe.paymentIntents.create({
+      const paymentIntent = await stripe.paymentIntents.create({
         amount: Math.round(amount * 100), // Convert to cents/paise
         currency,
         metadata,
@@ -156,19 +401,12 @@ class PaymentService {
   /**
    * Verify Stripe webhook signature
    */
-  verifyStripeWebhook(payload, signature) {
-    try {
-      const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-      const event = this.stripe.webhooks.constructEvent(
-        payload,
-        signature,
-        webhookSecret,
-      );
-      return event;
-    } catch (error) {
-      logger.error("Error verifying Stripe webhook:", error);
-      return null;
-    }
+  async verifyStripeWebhook(payload, signature) {
+    // Kept for callers that want just the event. Reads the secret from the admin
+    // settings (falling back to the env var) and requires the RAW body.
+    const result = await this.verifyWebhookSignature("stripe", this.toRawBody(payload), signature);
+    if (!result.valid) logger.warn(`Stripe webhook verification failed: ${result.reason}`);
+    return result.valid ? result.event : null;
   }
 
   /**
@@ -207,11 +445,26 @@ class PaymentService {
         throw new AppError(validAmounts.message, 400);
       }
 
+      // Load the platform fee policy and this vendor's commission config so the
+      // breakdown reflects configured rates. The rental count feeds the settings
+      // tier rules, so it is counted before the breakdown is built.
+      const [settingsDoc, vendorDoc, vendorRentalCount] = await Promise.all([
+        SystemSettings.getInstance(),
+        Vendor.findById(rental.vendor).select("commission").lean(),
+        Rental.countDocuments({ vendor: rental.vendor }),
+      ]);
+
       // Calculate payment breakdown
       const breakdown = this.calculatePaymentBreakdown(
         rental,
         paymentType,
         amount,
+        {
+          paymentSettings: settingsDoc?.payment || null,
+          vendor: vendorDoc,
+          vendorRentalCount,
+          categoryId: paymentData.categoryId || null,
+        },
       );
 
       // Create payment record
@@ -275,66 +528,146 @@ class PaymentService {
 
 
   async verifyPayment(paymentId, verificationData) {
+    // NOTE: this method used to console.log the whole verificationData payload,
+    // which includes the gateway signature. Anything that can log a signature can
+    // log a replayable credential, so the request body is no longer printed.
+
+    const payment = await Payment.findById(paymentId);
+    if (!payment) {
+      throw new AppError("Payment not found", 404);
+    }
+
+    // Idempotent: a customer whose browser retried the success callback must not
+    // be failed, and must not be charged twice.
+    if (payment.status === "success") {
+      return payment;
+    }
+    if (payment.status !== "pending") {
+      throw new AppError(
+        `Payment cannot be verified from status "${payment.status}"`,
+        400,
+      );
+    }
+
+    const {
+      gateway,
+      orderId,
+      paymentId: gatewayPaymentId,
+      signature,
+      paymentIntentId,
+    } = verificationData;
+
+    // Verify based on gateway
+    let isValid = false;
+    if (gateway === "razorpay") {
+      isValid = await this.verifyRazorpayPayment(orderId, gatewayPaymentId, signature);
+    } else if (gateway === "stripe") {
+      const stripe = paymentIntentId ? await this.getStripeClient() : null;
+      if (!stripe) {
+        isValid = false;
+      } else {
+        const intent = await stripe.paymentIntents.retrieve(paymentIntentId);
+        const expectedId = payment._id.toString();
+        isValid =
+          intent.status === "succeeded" &&
+          intent.metadata?.paymentId === expectedId;
+      }
+    }
+
+    if (!isValid) {
+      payment.status = "failed";
+      payment.timestamps.failed = new Date();
+      await payment.save();
+      logger.warn(`Payment ${payment.paymentNumber} failed signature verification`);
+      // Persisted before throwing so the attempt is durable and a retry is a fresh
+      // attempt rather than a silent no-op.
+      throw new AppError("Payment verification failed", 400);
+    }
+
+    // ATOMIC CLAIM — pending -> processing.
+    //
+    // The previous guard was a read inside the transaction, which two concurrent
+    // verifications could both pass; the rental's paidAmount would then be
+    // incremented twice for a single payment. This conditional update makes
+    // exactly one caller the owner and the loser backs off. It is also what keeps
+    // a client verification and a gateway capture webhook from both applying the
+    // same payment.
+    const claimed = await Payment.findOneAndUpdate(
+      { _id: payment._id, status: "pending" },
+      { $set: { status: "processing", "timestamps.processed": new Date() } },
+      { new: true },
+    );
+
+    if (!claimed) {
+      const current = await Payment.findById(payment._id).lean();
+      if (current?.status === "success") return current;
+      throw new AppError(
+        "This payment is already being processed. Please refresh.",
+        409,
+      );
+    }
+
+    return this.applySuccessfulPayment(claimed, {
+      gatewayPaymentId: gateway === "stripe" ? paymentIntentId : gatewayPaymentId,
+      gatewayOrderId: orderId,
+      via: "client",
+    });
+  }
+
+  /**
+   * Apply a confirmed payment: mark it successful, move the rental's paid and due
+   * amounts, update the vendor counters and write the settlement ledger.
+   *
+   * This is the ONLY implementation of "a payment succeeded". The client
+   * verification path and the gateway capture webhook both finish here, so the two
+   * cannot drift apart — previously the webhook handlers were empty stubs, which
+   * meant a payment captured without a browser return was never applied at all.
+   *
+   * The caller is expected to have claimed the payment (pending -> processing).
+   * The function is itself idempotent, so a replay is a no-op rather than a double
+   * credit.
+   */
+  async applySuccessfulPayment(payment, options = {}) {
+    const { gatewayPaymentId = null, gatewayOrderId = null, via = "unknown" } = options;
+
+    const existing = await Payment.findById(payment._id).select("status").lean();
+    if (!existing) {
+      throw new AppError("Payment not found", 404);
+    }
+    if (existing.status === "success") {
+      logger.info(
+        `Payment ${payment.paymentNumber} was already applied (via ${via}); nothing to do`,
+      );
+      return Payment.findById(payment._id);
+    }
+
+    // Resolved BEFORE the transaction opens. This reads the settings collection, and
+    // a read that is not part of the session has no business running while the
+    // payment and rental documents are locked.
+    const gatewayMode = await this.resolvePaymentGatewayMode(payment);
+
     const session = await mongoose.startSession();
     session.startTransaction();
 
-    console.log("verificationData", verificationData);
-
     try {
-      const payment = await Payment.findById(paymentId).session(session);
-
-      if (!payment) {
-        throw new AppError("Payment not found", 404);
-      }
-
-      if (payment.status !== "pending") {
-        throw new AppError("Payment already processed", 400);
-      }
-
-      const {
-        gateway,
-        orderId,
-        paymentId: gatewayPaymentId,
-        signature,
-        paymentIntentId,
-      } = verificationData;
-
-      // Verify based on gateway
-      let isValid = false;
-      if (gateway === "razorpay") {
-        isValid = this.verifyRazorpayPayment(
-          orderId,
-          gatewayPaymentId,
-          signature,
-        );
-        console.log("isValid", isValid);
-      } else if (gateway === "stripe") {
-        if (!this.stripe || !paymentIntentId) {
-          isValid = false;
-        } else {
-          const intent =
-            await this.stripe.paymentIntents.retrieve(paymentIntentId);
-          const expectedId = payment._id.toString();
-          isValid =
-            intent.status === "succeeded" &&
-            intent.metadata?.paymentId === expectedId;
-        }
-      }
-
-      console.log("isValid", isValid);
-      if (!isValid) {
-        payment.status = "failed";
-        payment.timestamps.failed = new Date();
-        await payment.save({ session });
-        await session.commitTransaction();
-        console.log("Payment verification failed");
-        throw new AppError("Payment verification failed", 400);
-      }
-
       // Update payment status
       payment.status = "success";
-      payment.paymentDetails.transactionId =
-        gateway === "stripe" ? paymentIntentId : gatewayPaymentId;
+      if (gatewayMode) {
+        // Which environment this money actually came from, so a later LIVE payout
+        // can refuse to send real money against earnings that were only ever test.
+        // The ledger cannot tell the difference on its own.
+        payment.paymentDetails.gatewayMode = gatewayMode;
+      }
+      // Whatever identifies the charge at the gateway. Supplied by the caller, so
+      // this works for both the client path (holds the payment id) and the webhook
+      // path (holds the captured entity id).
+      if (gatewayPaymentId) {
+        payment.paymentDetails.transactionId = gatewayPaymentId;
+      }
+      if (gatewayOrderId) {
+        payment.paymentDetails.razorpayOrderId =
+          payment.paymentDetails.razorpayOrderId || gatewayOrderId;
+      }
       payment.timestamps.completed = new Date();
       await payment.save({ session });
 
@@ -419,9 +752,13 @@ class PaymentService {
 
       await rental.save({ session });
 
-      // Update vendor payment info
+      // Update vendor payment info.
+      // `rental.vendor` holds the VENDOR DOCUMENT id (Product.vendor is written as
+      // vendor._id, and Rental.vendor copies it), so this must match on _id. The
+      // previous `{ user: rental.vendor }` compared a Vendor id against the User
+      // field, matched nothing, and silently left these counters at zero forever.
       await Vendor.findOneAndUpdate(
-        { user: rental.vendor },
+        { _id: rental.vendor },
         {
           $inc: {
             "payments.pending": -payment.amount,
@@ -431,34 +768,53 @@ class PaymentService {
         { session },
       );
 
+      // Record what the platform owes this vendor and what was deducted. This is
+      // the only place a payment becomes real, so without it the vendor has no
+      // payable balance and the payout engine has nothing to settle. Skipped when
+      // the payment predates the fee engine and carries no breakdown.
+      const storedBreakdown = payment.paymentDetails?.breakdown;
+      if (storedBreakdown) {
+        await settlement.recordPaymentEntries({
+          payment,
+          rental,
+          breakdown: storedBreakdown,
+          session,
+        });
+      } else {
+        logger.warn(
+          `Payment ${payment.paymentNumber} has no fee breakdown, so no ledger entries were recorded`,
+        );
+      }
+
       await session.commitTransaction();
 
-      console.log("Payment verified successfully:", {
-        paymentId: payment._id,
-        rentalId: rental._id,
+      logger.info("Payment verified successfully", {
+        paymentId: String(payment._id),
+        rentalId: String(rental._id),
         paidAmount: newPaidAmount,
         dueAmount: newDueAmount,
         status: paymentStatus,
       });
 
-      // Emit event (uncomment if you have eventEmitter configured)
-      // eventEmitter.emit(EVENTS.PAYMENT.SUCCESS, {
-      //   paymentId: payment._id,
-      //   paymentNumber: payment.paymentNumber,
-      //   userId: payment.user,
-      //   vendorId: payment.vendor,
-      //   rentalId: rental._id,
-      //   amount: payment.amount,
-      //   type: payment.type
-      // });
-
-      // Queue receipt email (uncomment if you have job queue configured)
-      // addJob('email', 'payment-receipt', {
-      //   paymentId: payment._id,
-      //   userId: payment.user
-      // }).catch((err) => {
-      //   logger.error('Failed to enqueue payment receipt email:', err);
-      // });
+      // Emitted AFTER the commit so a listener can never observe an uncommitted
+      // payment, and wrapped so a failing listener cannot fail the payment itself.
+      try {
+        eventEmitter.emit(EVENTS.PAYMENT.SUCCESS, {
+          // Both keys are deliberate: the socket handler in events/index.js reads
+          // `paymentId`, while the invoice job in the same file reads `_id`.
+          // Emitting only one would silently break the other.
+          _id: payment._id,
+          paymentId: payment._id,
+          paymentNumber: payment.paymentNumber,
+          userId: payment.user,
+          vendorId: payment.vendor,
+          rentalId: rental._id,
+          amount: payment.amount,
+          type: payment.type,
+        });
+      } catch (eventError) {
+        logger.error("Failed to emit PAYMENT.SUCCESS", eventError);
+      }
 
       return payment;
     } catch (error) {
@@ -717,6 +1073,356 @@ class PaymentService {
   }
 
   /**
+   * List every payment in the platform (admin view).
+   *
+   * Replaces the previous approach where the controller called
+   * `getVendorPayments(null, ...)`, which built the query `{ vendor: null }` and
+   * therefore returned only payments with NO vendor instead of all of them.
+   *
+   * @returns {{ payments: Array, totals: object, pagination: object }}
+   */
+  async getAllPayments(page = 1, limit = 10, filters = {}) {
+    try {
+      const pageNum = Math.max(1, parseInt(page, 10) || 1);
+      const limitNum = Math.min(100, Math.max(1, parseInt(limit, 10) || 10));
+      const skip = (pageNum - 1) * limitNum;
+
+      const query = {};
+
+      if (filters.status) query.status = filters.status;
+      if (filters.method) query.method = filters.method;
+      if (filters.type) query.type = filters.type;
+      if (filters.gateway) query['paymentDetails.gateway'] = filters.gateway;
+
+      // ObjectId filters are validated rather than passed straight through: an
+      // invalid id in a `find` silently matches nothing, which would look like
+      // "no results" instead of a bad request.
+      if (filters.vendor) {
+        if (!mongoose.Types.ObjectId.isValid(filters.vendor)) {
+          throw new AppError('Invalid vendor id', 400);
+        }
+        query.vendor = filters.vendor;
+      }
+      if (filters.user) {
+        if (!mongoose.Types.ObjectId.isValid(filters.user)) {
+          throw new AppError('Invalid user id', 400);
+        }
+        query.user = filters.user;
+      }
+      if (filters.rental) {
+        if (!mongoose.Types.ObjectId.isValid(filters.rental)) {
+          throw new AppError('Invalid rental id', 400);
+        }
+        query.rental = filters.rental;
+      }
+
+      if (filters.startDate || filters.endDate) {
+        query.createdAt = {};
+        if (filters.startDate) query.createdAt.$gte = new Date(filters.startDate);
+        if (filters.endDate) query.createdAt.$lte = new Date(filters.endDate);
+      }
+
+      if (filters.minAmount !== undefined || filters.maxAmount !== undefined) {
+        query.amount = {};
+        if (filters.minAmount !== undefined) query.amount.$gte = Number(filters.minAmount);
+        if (filters.maxAmount !== undefined) query.amount.$lte = Number(filters.maxAmount);
+      }
+
+      // "refunded" on the payments screen means "has any refund recorded", which
+      // covers a partial refund that left the payment in `success`.
+      if (filters.refunded === true || filters.refunded === 'true') {
+        query.$or = [
+          { status: 'refunded' },
+          { refundDetails: { $ne: null, $exists: true } },
+          { 'refundDetails.amount': { $gt: 0 } },
+        ];
+      }
+
+      if (filters.search) {
+        // Escape the term so user input cannot inject regex operators.
+        const term = String(filters.search).trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        if (term) {
+          const rx = new RegExp(term, 'i');
+          query.$and = [
+            ...(query.$and || []),
+            {
+              $or: [
+                { paymentNumber: rx },
+                { 'paymentDetails.transactionId': rx },
+                { 'paymentDetails.razorpayPaymentId': rx },
+                { 'paymentDetails.razorpayOrderId': rx },
+                { 'paymentDetails.referenceNumber': rx },
+              ],
+            },
+          ];
+        }
+      }
+
+      const [payments, total] = await Promise.all([
+        Payment.find(query)
+          .populate('user', 'profile.firstName profile.lastName email phone')
+          .populate('rental', 'rentalNumber startDate endDate')
+          .populate('vendor', 'business.name vendorId')
+          .sort({ createdAt: -1 })
+          .skip(skip)
+          .limit(limitNum)
+          .lean(),
+        Payment.countDocuments(query),
+      ]);
+
+      // Status buckets for the KPI row, computed over the SAME filter set so the
+      // cards always agree with the table below them.
+      const statusGroups = await Payment.aggregate([
+        { $match: query },
+        {
+          $group: {
+            _id: '$status',
+            count: { $sum: 1 },
+            amount: { $sum: '$amount' },
+          },
+        },
+      ]);
+
+      const byStatus = statusGroups.reduce((acc, row) => {
+        acc[row._id] = { count: row.count, amount: roundMoney(row.amount) };
+        return acc;
+      }, {});
+
+      const sumFor = (statuses) =>
+        statuses.reduce(
+          (acc, status) => ({
+            count: acc.count + (byStatus[status]?.count || 0),
+            amount: roundMoney(acc.amount + (byStatus[status]?.amount || 0)),
+          }),
+          { count: 0, amount: 0 },
+        );
+
+      const successful = sumFor(['success']);
+      const refundedBucket = sumFor(['refunded', 'cancelled']);
+
+      return {
+        payments,
+        totals: {
+          totalCollected: successful.amount,
+          successfulPayments: successful.count,
+          pending: sumFor(['pending', 'processing']),
+          failed: sumFor(['failed']),
+          refunded: refundedBucket,
+          averageTicket: successful.count > 0 ? roundMoney(successful.amount / successful.count) : 0,
+          grandTotal: roundMoney(statusGroups.reduce((sum, row) => sum + row.amount, 0)),
+          byStatus,
+        },
+        pagination: {
+          page: pageNum,
+          limit: limitNum,
+          total,
+          pages: Math.max(1, Math.ceil(total / limitNum)),
+        },
+      };
+    } catch (error) {
+      logger.error('Error in getAllPayments:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * List payments that carry a refund (full or partial).
+   */
+  async getRefunds(page = 1, limit = 10, filters = {}) {
+    try {
+      const pageNum = Math.max(1, parseInt(page, 10) || 1);
+      const limitNum = Math.min(100, Math.max(1, parseInt(limit, 10) || 10));
+      const skip = (pageNum - 1) * limitNum;
+
+      const query = {
+        $or: [
+          { status: 'refunded' },
+          { 'refundDetails.amount': { $gt: 0 } },
+        ],
+      };
+
+      if (filters.vendor) {
+        if (!mongoose.Types.ObjectId.isValid(filters.vendor)) {
+          throw new AppError('Invalid vendor id', 400);
+        }
+        query.vendor = filters.vendor;
+      }
+
+      if (filters.startDate || filters.endDate) {
+        query.createdAt = {};
+        if (filters.startDate) query.createdAt.$gte = new Date(filters.startDate);
+        if (filters.endDate) query.createdAt.$lte = new Date(filters.endDate);
+      }
+
+      if (filters.search) {
+        const term = String(filters.search).trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        if (term) {
+          const rx = new RegExp(term, 'i');
+          query.$and = [{ $or: [{ paymentNumber: rx }, { 'refundDetails.transactionId': rx }] }];
+        }
+      }
+
+      const [refunds, total] = await Promise.all([
+        Payment.find(query)
+          .populate('user', 'profile.firstName profile.lastName email phone')
+          .populate('rental', 'rentalNumber')
+          .populate('vendor', 'business.name vendorId')
+          .sort({ 'refundDetails.processedAt': -1, updatedAt: -1 })
+          .skip(skip)
+          .limit(limitNum)
+          .lean(),
+        Payment.countDocuments(query),
+      ]);
+
+      // Refund metrics come from the payments themselves, so a partial refund is
+      // counted at its real value instead of assuming the full amount went back.
+      const metrics = await Payment.aggregate([
+        { $match: query },
+        {
+          $group: {
+            _id: null,
+            refundedAmount: {
+              $sum: {
+                $cond: [
+                  { $gt: [{ $ifNull: ['$refundDetails.amount', 0] }, 0] },
+                  '$refundDetails.amount',
+                  { $cond: [{ $eq: ['$status', 'refunded'] }, '$amount', 0] },
+                ],
+              },
+            },
+            originalAmount: { $sum: '$amount' },
+            count: { $sum: 1 },
+          },
+        },
+      ]);
+
+      const totals = metrics[0] || { refundedAmount: 0, originalAmount: 0, count: 0 };
+      const platformRefunded = await Payment.aggregate([
+        { $match: { status: 'success' } },
+        { $group: { _id: null, amount: { $sum: '$amount' }, count: { $sum: 1 } } },
+      ]);
+      const platformTotal = platformRefunded[0] || { amount: 0, count: 0 };
+
+      return {
+        refunds,
+        totals: {
+          refundedAmount: roundMoney(totals.refundedAmount),
+          originalAmount: roundMoney(totals.originalAmount),
+          refundCount: totals.count,
+          // Refund rate is measured against everything ever successfully charged,
+          // which is the number a finance reviewer actually cares about.
+          refundRate:
+            platformTotal.amount > 0
+              ? roundMoney((totals.refundedAmount / platformTotal.amount) * 100)
+              : 0,
+        },
+        pagination: {
+          page: pageNum,
+          limit: limitNum,
+          total,
+          pages: Math.max(1, Math.ceil(total / limitNum)),
+        },
+      };
+    } catch (error) {
+      logger.error('Error in getRefunds:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Tax / commission / platform-fee summary for a period.
+   *
+   * Reads the stored fee breakdown so the reported tax is what was ACTUALLY
+   * charged at the time. Payments created before the fee engine existed have no
+   * breakdown; those are counted separately (`paymentsWithoutBreakdown`) rather
+   * than being silently treated as zero-tax, which would understate the filing.
+   */
+  async getTaxSummary(startDate, endDate) {
+    try {
+      const match = { status: { $in: ['success', 'refunded'] } };
+      if (startDate || endDate) {
+        match.createdAt = {};
+        if (startDate) match.createdAt.$gte = new Date(startDate);
+        if (endDate) match.createdAt.$lte = new Date(endDate);
+      }
+
+      const [summaryRows, monthlyRows] = await Promise.all([
+        Payment.aggregate([
+          { $match: match },
+          {
+            $group: {
+              _id: null,
+              taxableBase: { $sum: { $ifNull: ['$paymentDetails.breakdown.taxableAmount', 0] } },
+              tax: { $sum: { $ifNull: ['$paymentDetails.breakdown.tax', 0] } },
+              commission: { $sum: { $ifNull: ['$paymentDetails.breakdown.commission', 0] } },
+              platformFee: { $sum: { $ifNull: ['$paymentDetails.breakdown.platformFee', 0] } },
+              convenienceFee: { $sum: { $ifNull: ['$paymentDetails.breakdown.convenienceFee', 0] } },
+              discount: { $sum: { $ifNull: ['$paymentDetails.breakdown.discount', 0] } },
+              grossCollected: { $sum: '$amount' },
+              transactions: { $sum: 1 },
+              paymentsWithBreakdown: {
+                $sum: { $cond: [{ $ifNull: ['$paymentDetails.breakdown', false] }, 1, 0] },
+              },
+            },
+          },
+        ]),
+        Payment.aggregate([
+          { $match: match },
+          {
+            $group: {
+              _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } },
+              taxableBase: { $sum: { $ifNull: ['$paymentDetails.breakdown.taxableAmount', 0] } },
+              tax: { $sum: { $ifNull: ['$paymentDetails.breakdown.tax', 0] } },
+              commission: { $sum: { $ifNull: ['$paymentDetails.breakdown.commission', 0] } },
+              platformFee: { $sum: { $ifNull: ['$paymentDetails.breakdown.platformFee', 0] } },
+              grossCollected: { $sum: '$amount' },
+              transactions: { $sum: 1 },
+            },
+          },
+          { $sort: { '_id.year': 1, '_id.month': 1 } },
+        ]),
+      ]);
+
+      const row = summaryRows[0] || {};
+      const transactions = row.transactions || 0;
+      const withBreakdown = row.paymentsWithBreakdown || 0;
+
+      return {
+        summary: {
+          taxableBase: roundMoney(row.taxableBase),
+          tax: roundMoney(row.tax),
+          commission: roundMoney(row.commission),
+          platformFee: roundMoney(row.platformFee),
+          convenienceFee: roundMoney(row.convenienceFee),
+          discount: roundMoney(row.discount),
+          grossCollected: roundMoney(row.grossCollected),
+          transactions,
+          // Honesty flags: the UI must be able to say "this period includes
+          // legacy payments with no recorded tax" instead of implying accuracy.
+          paymentsWithBreakdown: withBreakdown,
+          paymentsWithoutBreakdown: transactions - withBreakdown,
+          effectiveTaxRate:
+            row.taxableBase > 0 ? roundMoney((row.tax / row.taxableBase) * 100) : 0,
+        },
+        monthly: monthlyRows.map((month) => ({
+          year: month._id.year,
+          month: month._id.month,
+          label: `${month._id.year}-${String(month._id.month).padStart(2, '0')}`,
+          taxableBase: roundMoney(month.taxableBase),
+          tax: roundMoney(month.tax),
+          commission: roundMoney(month.commission),
+          platformFee: roundMoney(month.platformFee),
+          grossCollected: roundMoney(month.grossCollected),
+          transactions: month.transactions,
+        })),
+      };
+    } catch (error) {
+      logger.error('Error in getTaxSummary:', error);
+      throw error;
+    }
+  }
+
+  /**
    * Process refund
    */
   async processRefund(paymentId, adminId, refundData) {
@@ -742,10 +1448,16 @@ class PaymentService {
 
       const refundAmount = amount || payment.amount;
 
-      // Process refund based on gateway
-      if (payment.paymentDetails.gateway === "razorpay" && this.razorpay) {
+      // Process refund based on gateway. Clients are resolved rather than read off
+      // `this`, so credentials edited in the settings screen are honoured.
+      const refundGateway = payment.paymentDetails.gateway;
+      const razorpayClient =
+        refundGateway === "razorpay" ? await this.getRazorpayClient() : null;
+      const stripeClient = refundGateway === "stripe" ? await this.getStripeClient() : null;
+
+      if (refundGateway === "razorpay" && razorpayClient) {
         try {
-          const refund = await this.razorpay.payments.refund(
+          const refund = await razorpayClient.payments.refund(
             payment.paymentDetails.transactionId,
             {
               amount: Math.round(refundAmount * 100),
@@ -763,9 +1475,9 @@ class PaymentService {
         } catch (error) {
           throw new AppError("Refund failed at gateway", 500);
         }
-      } else if (payment.paymentDetails.gateway === "stripe" && this.stripe) {
+      } else if (refundGateway === "stripe" && stripeClient) {
         try {
-          const refund = await this.stripe.refunds.create({
+          const refund = await stripeClient.refunds.create({
             payment_intent: payment.paymentDetails.transactionId,
             amount: Math.round(refundAmount * 100),
           });
@@ -1153,57 +1865,270 @@ class PaymentService {
   /**
    * Handle payment webhook
    */
-  async handleWebhook(gateway, payload, signature) {
+  /**
+   * Normalise the request body to the exact bytes the gateway signed.
+   *
+   * Only a Buffer (or a string) is usable — `app.js` captures it via the
+   * `express.json({ verify })` hook. An already-parsed object is deliberately
+   * rejected rather than stringified: `JSON.stringify` does not reproduce the
+   * gateway's byte sequence, so verifying against it would fail every time and
+   * look like a signature problem instead of a plumbing problem.
+   */
+  toRawBody(payload) {
+    if (Buffer.isBuffer(payload)) return payload;
+    if (typeof payload === "string" && payload.length > 0) return Buffer.from(payload, "utf8");
+    return null;
+  }
+
+  /**
+   * The webhook secret configured in the admin settings, falling back to the
+   * environment. The settings screen persists the secret to
+   * `SystemSettings.payment.<gateway>.webhookSecret`, so reading only the env var
+   * meant a secret entered in the UI had no effect.
+   */
+  async getWebhookSecret(gateway) {
+    // Delegates to the single credential resolver so the webhook secret is read,
+    // decrypted and fall back to the env in exactly one place.
+    const { webhookSecret } = await this.getGatewayCredentials(gateway);
+    return webhookSecret;
+  }
+
+  /** Constant-time compare so a signature cannot be brute-forced byte by byte. */
+  safeCompare(expected, received) {
+    if (!expected || !received) return false;
+    const a = Buffer.from(String(expected), "utf8");
+    const b = Buffer.from(String(received), "utf8");
+    if (a.length !== b.length) return false;
     try {
-      let event;
+      return crypto.timingSafeEqual(a, b);
+    } catch {
+      return false;
+    }
+  }
 
-      if (gateway === "stripe") {
-        event = this.verifyStripeWebhook(payload, signature);
-        if (!event) {
-          throw new AppError("Invalid webhook signature", 400);
-        }
+  /**
+   * Verify a webhook signature over the raw bytes.
+   * Returns `{ valid, reason, event }` — never throws, so the caller decides.
+   */
+  async verifyWebhookSignature(gateway, rawBody, signature) {
+    const secret = await this.getWebhookSecret(gateway);
+    if (!secret) {
+      return { valid: false, reason: `no ${gateway} webhook secret is configured` };
+    }
+    if (!signature) {
+      return { valid: false, reason: "the signature header is missing" };
+    }
 
-        // Handle different event types
-        switch (event.type) {
-          case "payment_intent.succeeded":
-            await this.handleStripePaymentSuccess(event.data.object);
-            break;
-          case "payment_intent.payment_failed":
-            await this.handleStripePaymentFailure(event.data.object);
-            break;
-          case "charge.refunded":
-            await this.handleStripeRefund(event.data.object);
-            break;
-        }
-      } else if (gateway === "razorpay") {
-        // Razorpay webhook handling
-        const isValid = this.verifyRazorpayWebhook(payload, signature);
-        if (!isValid) {
-          throw new AppError("Invalid webhook signature", 400);
-        }
+    if (gateway === "stripe") {
+      const stripe = await this.getStripeClient();
+      if (!stripe) {
+        return { valid: false, reason: "the Stripe client is not configured" };
+      }
+      try {
+        const event = stripe.webhooks.constructEvent(rawBody, signature, secret);
+        return { valid: true, event };
+      } catch (error) {
+        return { valid: false, reason: error.message };
+      }
+    }
 
-        const eventData = JSON.parse(payload);
+    const expected = crypto.createHmac("sha256", secret).update(rawBody).digest("hex");
+    const valid = this.safeCompare(expected, signature);
+    return valid ? { valid: true } : { valid: false, reason: "signature mismatch" };
+  }
 
-        switch (eventData.event) {
-          case "payment.captured":
-            await this.handleRazorpayPaymentSuccess(
-              eventData.payload.payment.entity,
-            );
-            break;
-          case "payment.failed":
-            await this.handleRazorpayPaymentFailure(
-              eventData.payload.payment.entity,
-            );
-            break;
-          case "refund.processed":
-            await this.handleRazorpayRefund(eventData.payload.refund.entity);
-            break;
+  /**
+   * A stable id for a delivery, so a gateway retry can be recognised.
+   * Prefers the header the gateway sends; falls back to the entity id, and
+   * finally to the payload hash so an identical retry still dedupes.
+   */
+  extractWebhookEventId(gateway, event, meta = {}) {
+    if (meta.eventId) return String(meta.eventId);
+
+    if (gateway === "stripe") {
+      return event?.id ? String(event.id) : null;
+    }
+
+    const entity =
+      event?.payload?.payment?.entity ||
+      event?.payload?.refund?.entity ||
+      event?.payload?.order?.entity ||
+      null;
+    const entityId = entity?.id || entity?.payment_id || null;
+
+    if (event?.event && entityId) return `${event.event}:${entityId}`;
+    if (entityId) return String(entityId);
+    return null;
+  }
+
+  /**
+   * Claim a delivery. The unique index on { gateway, eventId } is the lock: the
+   * insert either wins (first delivery) or fails (a retry), which is what makes
+   * webhook processing idempotent. Razorpay and Stripe both retry until they get
+   * a 2xx, so without this the same event would be applied repeatedly.
+   */
+  async claimWebhookEvent({ gateway, eventId, eventType, payloadHash }) {
+    try {
+      const doc = await WebhookEvent.create({
+        gateway,
+        eventId,
+        eventType,
+        payloadHash,
+        status: "processing",
+      });
+      return { claimed: true, id: doc._id };
+    } catch (error) {
+      if (error?.code === 11000) {
+        const existing = await WebhookEvent.findOneAndUpdate(
+          { gateway, eventId },
+          { $inc: { attempts: 1 } },
+          { new: true },
+        ).lean();
+
+        // A different payload reusing a claimed id means either a bug at the
+        // gateway or a replayed signature — worth surfacing.
+        if (existing?.payloadHash && payloadHash && existing.payloadHash !== payloadHash) {
+          logger.warn("Webhook event id reused with a different payload", {
+            gateway,
+            eventId,
+            firstSeenStatus: existing.status,
+          });
         }
+        return { claimed: false, existing };
+      }
+      throw error;
+    }
+  }
+
+  /** Close out a claimed delivery. */
+  async markWebhookEvent(id, status, extra = {}) {
+    if (!id) return;
+    try {
+      await WebhookEvent.updateOne(
+        { _id: id },
+        { $set: { status, ...extra, ...(status === "processing" ? {} : { processedAt: new Date() }) } },
+      );
+    } catch (error) {
+      logger.warn(`Could not update webhook event ${id}: ${error.message}`);
+    }
+  }
+
+  /**
+   * Handle payment webhook
+   *
+   * Order matters: the signature is checked BEFORE the delivery is claimed, so an
+   * unauthenticated caller cannot write a WebhookEvent row and thereby suppress
+   * the real delivery of that event id.
+   */
+  async handleWebhook(gateway, payload, signature, meta = {}) {
+    try {
+      const rawBody = this.toRawBody(payload);
+      if (!rawBody) {
+        throw new AppError(
+          "Raw request body is unavailable, so the webhook signature cannot be verified",
+          400,
+        );
       }
 
-      return { received: true };
+      const verification = await this.verifyWebhookSignature(gateway, rawBody, signature);
+      if (!verification.valid) {
+        logger.warn(`Rejected ${gateway} webhook: ${verification.reason}`);
+        throw new AppError("Invalid webhook signature", 400);
+      }
+
+      const event = verification.event || JSON.parse(rawBody.toString("utf8"));
+      const payloadHash = crypto.createHash("sha256").update(rawBody).digest("hex");
+      const eventId =
+        this.extractWebhookEventId(gateway, event, meta) || `payload:${payloadHash}`;
+
+      const claim = await this.claimWebhookEvent({
+        gateway,
+        eventId,
+        eventType: gateway === "stripe" ? event?.type : event?.event,
+        payloadHash,
+      });
+
+      if (!claim.claimed) {
+        // Already handled. Return 2xx so the gateway stops retrying.
+        logger.info(`${gateway} webhook ${eventId} already processed; skipping`);
+        return { received: true, duplicate: true };
+      }
+
+      try {
+        if (gateway === "stripe") {
+          switch (event.type) {
+            case "payment_intent.succeeded":
+              await this.handleStripePaymentSuccess(event.data.object);
+              break;
+            case "payment_intent.payment_failed":
+              await this.handleStripePaymentFailure(event.data.object);
+              break;
+            case "charge.refunded":
+              await this.handleStripeRefund(event.data.object);
+              break;
+            default:
+              await this.markWebhookEvent(claim.id, "ignored", {
+                error: `unhandled Stripe event type: ${event.type}`,
+              });
+              return { received: true, ignored: true };
+          }
+        } else if (gateway === "razorpay") {
+          switch (event.event) {
+            case "payment.captured":
+              await this.handleRazorpayPaymentSuccess(event.payload.payment.entity);
+              break;
+            case "payment.failed":
+              await this.handleRazorpayPaymentFailure(event.payload.payment.entity);
+              break;
+            case "refund.processed":
+              await this.handleRazorpayRefund(event.payload.refund.entity);
+              break;
+
+            // ── RazorpayX payout lifecycle ────────────────────────────────────
+            // A gateway payout is asynchronous: `payouts.create` returns `queued`
+            // and the real outcome arrives here. Without these the payout would sit
+            // in `processing` for ever and its ledger entries would stay reserved.
+            case "payout.processed":
+              await this.handleRazorpayPayoutProcessed(event.payload.payout.entity);
+              break;
+            case "payout.failed":
+            case "payout.rejected":
+              await this.handleRazorpayPayoutFailed(event.payload.payout.entity);
+              break;
+            case "payout.reversed":
+              await this.handleRazorpayPayoutReversed(event.payload.payout.entity);
+              break;
+            case "payout.queued":
+            case "payout.initiated":
+            case "payout.pending":
+              // Not a terminal state. Recorded so the sequence is visible, and the
+              // payout stays `processing` until a terminal event arrives.
+              await this.markWebhookEvent(claim.id, "processed", {
+                error: `payout still in flight: ${event.event}`,
+              });
+              return { received: true, inFlight: true };
+            default:
+              await this.markWebhookEvent(claim.id, "ignored", {
+                error: `unhandled Razorpay event type: ${event.event}`,
+              });
+              return { received: true, ignored: true };
+          }
+        } else {
+          await this.markWebhookEvent(claim.id, "ignored", { error: `unknown gateway: ${gateway}` });
+          throw new AppError(`Unsupported webhook gateway: ${gateway}`, 400);
+        }
+
+        await this.markWebhookEvent(claim.id, "processed");
+        return { received: true };
+      } catch (handlerError) {
+        // Recorded as failed so the delivery can be replayed deliberately. The
+        // gateway will retry, and the retry is deduped — so an operator can flip
+        // this row back to `processing` to force a re-run.
+        await this.markWebhookEvent(claim.id, "failed", { error: handlerError.message });
+        throw handlerError;
+      }
     } catch (error) {
-      logger.error("Error handling webhook:", error);
+      logger.error(`Error handling ${gateway} webhook: ${error.message}`);
       throw error;
     }
   }
@@ -1254,42 +2179,311 @@ class PaymentService {
   }
 
   /**
-   * Handle Razorpay payment success
+   * Handle Razorpay payment success (`payment.captured`).
+   *
+   * This is the safety net for the case the whole webhook exists for: the
+   * customer's money was captured but their browser never came back, so
+   * `verifyPayment` never ran. Without this the payment stayed `pending` forever
+   * and the rental looked unpaid even though the gateway had taken the money.
+   *
+   * The payment is claimed with a conditional update on `status: 'pending'`, which
+   * is what keeps this from racing a concurrent client-side verification: only
+   * one of the two can win the claim, and the loser does nothing.
    */
-  async handleRazorpayPaymentSuccess(payment) {
-    // Find payment by order ID and update
-    // Implementation depends on your order tracking
+  /** Locate the local Payout behind a RazorpayX payout entity. */
+  async findPayoutFromGatewayEntity(entity) {
+    const gatewayPayoutId = entity?.id;
+    const referenceId = entity?.reference_id;
+
+    if (gatewayPayoutId) {
+      const byId = await Payout.findOne({ "gateway.payoutId": gatewayPayoutId });
+      if (byId) return byId;
+    }
+
+    // `reference_id` is the payoutNumber we send, so it still finds the payout when
+    // the create response never made it back into the database.
+    if (referenceId) {
+      return Payout.findOne({ payoutNumber: referenceId });
+    }
+    return null;
+  }
+
+  /** The environment recorded when the payout was sent, for the audit trail. */
+  payoutMode(payout, entity) {
+    const fromEntity = entity?.notes?.environment;
+    if (fromEntity === "test" || fromEntity === "live") return fromEntity;
+    return payout?.gateway?.mode || null;
   }
 
   /**
-   * Handle Razorpay payment failure
+   * RazorpayX finished a payout: mark it paid and settle the ledger.
+   *
+   * Idempotent — a retried `payout.processed` finds the payout already paid and does
+   * nothing, on top of the WebhookEvent dedupe that runs before this.
    */
-  async handleRazorpayPaymentFailure(payment) {
-    // Handle failed payment
+  async handleRazorpayPayoutProcessed(entity) {
+    const payout = await this.findPayoutFromGatewayEntity(entity);
+    if (!payout) {
+      logger.warn(
+        `Razorpay payout.processed for an unknown payout: ${entity?.id} / ${entity?.reference_id}`,
+      );
+      return { applied: false, reason: "unknown payout" };
+    }
+
+    if (payout.status === "paid") {
+      return { applied: false, alreadyApplied: true, payoutNumber: payout.payoutNumber };
+    }
+
+    const settlementService = require("./settlement.service");
+    const updated = await settlementService.finalisePaid(payout._id, {
+      utr: entity?.utr || entity?.id,
+      payoutId: entity?.id,
+      requiresManualTransfer: false,
+      mode: this.payoutMode(payout, entity),
+    });
+
+    logger.info(`Gateway payout ${payout.payoutNumber} confirmed by webhook`);
+    return { applied: true, payoutNumber: updated?.payoutNumber, status: updated?.status };
   }
 
   /**
-   * Handle Razorpay refund
+   * A gateway payout failed or was rejected. No money moved, so the entries it
+   * reserved must go straight back into the payable pool — otherwise the vendor's
+   * money is stuck behind a payout that will never complete.
    */
-  async handleRazorpayRefund(refund) {
-    // Handle refund
+  async handleRazorpayPayoutFailed(entity) {
+    const payout = await this.findPayoutFromGatewayEntity(entity);
+    if (!payout) {
+      logger.warn(
+        `Razorpay payout failure for an unknown payout: ${entity?.id} / ${entity?.reference_id}`,
+      );
+      return { applied: false, reason: "unknown payout" };
+    }
+
+    if (payout.status === "paid") {
+      // A failure notice cannot un-pay a paid payout. Money that must come back does
+      // so as a separate `payout.reversed` event.
+      logger.warn(`Ignoring a failure event for the already-paid payout ${payout.payoutNumber}`);
+      return { applied: false, reason: "payout already paid" };
+    }
+
+    const reason =
+      entity?.failure_reason ||
+      entity?.status_details?.description ||
+      "the gateway reported a failure";
+
+    // Released by the `payout` stamp on the entries — the authoritative record of
+    // what this payout reserved — rather than by the payout's own `entryIds` array.
+    // A missing or stale array would otherwise strand the vendor's money behind a
+    // payout that can never complete. Matching on the stamp is also what cancelPayout
+    // does, and status 'available' keeps a settled entry out of reach.
+    const released = await VendorLedger.updateMany(
+      { payout: payout._id, status: "available" },
+      { $set: { payout: null } },
+    );
+
+    const updated = await Payout.findByIdAndUpdate(
+      payout._id,
+      {
+        $set: {
+          status: "failed",
+          "gateway.failureReason": reason,
+          "gateway.mode": this.payoutMode(payout, entity),
+        },
+      },
+      { new: true },
+    );
+
+    logger.error(
+      `Gateway payout ${payout.payoutNumber} failed: ${reason}. Released ${released.modifiedCount} ledger entries back to available.`,
+    );
+
+    return {
+      applied: true,
+      payoutNumber: updated?.payoutNumber,
+      releasedEntries: released.modifiedCount,
+      reason,
+    };
+  }
+
+  /** A paid payout came back from the bank. Claw the money back in the ledger. */
+  async handleRazorpayPayoutReversed(entity) {
+    const payout = await this.findPayoutFromGatewayEntity(entity);
+    if (!payout) {
+      logger.warn(
+        `Razorpay payout.reversed for an unknown payout: ${entity?.id} / ${entity?.reference_id}`,
+      );
+      return { applied: false, reason: "unknown payout" };
+    }
+
+    const settlementService = require("./settlement.service");
+    const result = await settlementService.reversePayoutInLedger(payout, {
+      reason:
+        entity?.failure_reason ||
+        "the gateway reversed the payout after it was sent",
+    });
+
+    logger.error(
+      `Gateway payout ${payout.payoutNumber} was reversed: ${result.reversed} earnings, amount ${result.amount}`,
+    );
+    return { applied: true, payoutNumber: payout.payoutNumber, ...result };
+  }
+
+  async handleRazorpayPaymentSuccess(entity) {
+    const orderId = entity?.order_id;
+    const gatewayPaymentId = entity?.id;
+
+    const payment =
+      (orderId && (await Payment.findOne({ "paymentDetails.razorpayOrderId": orderId }))) ||
+      (entity?.notes?.paymentId && (await Payment.findById(entity.notes.paymentId))) ||
+      null;
+
+    if (!payment) {
+      logger.warn(
+        `Razorpay capture webhook could not be matched to a payment (order ${orderId || "unknown"})`,
+      );
+      return { applied: false, reason: "no matching payment" };
+    }
+
+    if (payment.status === "success") {
+      return { applied: false, alreadyApplied: true, paymentId: String(payment._id) };
+    }
+
+    const claimed = await Payment.findOneAndUpdate(
+      { _id: payment._id, status: "pending" },
+      { $set: { status: "processing", "timestamps.processed": new Date() } },
+      { new: true },
+    );
+
+    if (!claimed) {
+      // Either a client-side verification is mid-flight, or the payment is in a
+      // terminal state. Either way, another actor owns it — do not touch it.
+      const current = await Payment.findById(payment._id).select("status").lean();
+      logger.info(
+        `Razorpay capture webhook skipped for ${payment.paymentNumber}: status is ${current?.status}`,
+      );
+      return { applied: false, reason: `payment is ${current?.status}`, concurrent: current?.status === "processing" };
+    }
+
+    const applied = await this.applySuccessfulPayment(claimed, {
+      gatewayPaymentId,
+      gatewayOrderId: orderId,
+      via: "webhook",
+    });
+
+    return { applied: true, paymentId: String(payment._id), status: applied.status };
+  }
+
+  /**
+   * Handle Razorpay payment failure (`payment.failed`).
+   * Only moves a payment that has not succeeded — a late failure event must never
+   * undo a captured payment.
+   */
+  async handleRazorpayPaymentFailure(entity) {
+    const orderId = entity?.order_id;
+    const reason = entity?.error_description || entity?.error_reason || "Gateway reported a failure";
+
+    const query = orderId
+      ? { "paymentDetails.razorpayOrderId": orderId, status: "pending" }
+      : entity?.notes?.paymentId
+        ? { _id: entity.notes.paymentId, status: "pending" }
+        : null;
+
+    if (!query) {
+      return { applied: false, reason: "the event carried no order or payment reference" };
+    }
+
+    const updated = await Payment.findOneAndUpdate(
+      query,
+      {
+        $set: {
+          status: "failed",
+          failureReason: reason,
+          "timestamps.failed": new Date(),
+          "paymentDetails.razorpayPaymentId": entity?.id,
+        },
+      },
+      { new: true },
+    );
+
+    if (!updated) {
+      // Already success/failed/cancelled — leave it alone.
+      return { applied: false, reason: "no pending payment matched" };
+    }
+
+    logger.info(`Razorpay failure webhook marked ${updated.paymentNumber} as failed`);
+    return { applied: true, paymentId: String(updated._id) };
+  }
+
+  /**
+   * Handle Razorpay refund (`refund.processed`).
+   *
+   * Records the refund and reverses the ledger so the vendor's share is given
+   * back. Deliberately does NOT flip the payment to fully `refunded` unless the
+   * refunded total covers the amount charged — a partial refund must not make the
+   * payment look fully reversed.
+   */
+  async handleRazorpayRefund(entity) {
+    const gatewayPaymentId = entity?.payment_id;
+    const refundAmount = Number(entity?.amount) / 100; // paise -> rupees
+
+    const payment = gatewayPaymentId
+      ? await Payment.findOne({ "paymentDetails.razorpayPaymentId": gatewayPaymentId })
+      : null;
+
+    if (!payment) {
+      logger.warn(
+        `Razorpay refund webhook could not be matched to a payment (payment ${gatewayPaymentId || "unknown"})`,
+      );
+      return { applied: false, reason: "no matching payment" };
+    }
+
+    const alreadyRefunded = Number(payment.refundDetails?.amount) || 0;
+    const newRefundedTotal = roundMoney(alreadyRefunded + refundAmount);
+    const fullyRefunded = newRefundedTotal >= roundMoney(payment.amount);
+
+    payment.refundDetails = {
+      ...(payment.refundDetails || {}),
+      amount: newRefundedTotal,
+      reason: entity?.notes?.reason || payment.refundDetails?.reason || "Refunded via gateway",
+      transactionId: entity?.id,
+      processedAt: new Date(),
+    };
+    if (fullyRefunded) {
+      payment.status = "refunded";
+      payment.timestamps.refunded = new Date();
+    }
+    await payment.save();
+
+    // Same reversal the admin refund endpoint performs, keyed on the gateway
+    // refund id so a replayed webhook cannot reverse twice.
+    const reversal = await settlement.reverseEntriesForRefund({
+      payment,
+      refundAmount,
+      idempotencyKey: entity?.id ? `razorpay:${entity.id}` : undefined,
+      reason: "Gateway refund",
+    });
+
+    logger.info(`Razorpay refund webhook recorded ${refundAmount} on ${payment.paymentNumber}`);
+    return { applied: true, paymentId: String(payment._id), fullyRefunded, ...reversal };
   }
 
   /**
    * Verify Razorpay webhook
    */
-  verifyRazorpayWebhook(payload, signature) {
-    try {
-      const expectedSignature = crypto
-        .createHmac("sha256", process.env.RAZORPAY_WEBHOOK_SECRET)
-        .update(payload)
-        .digest("hex");
-
-      return expectedSignature === signature;
-    } catch (error) {
-      logger.error("Error verifying Razorpay webhook:", error);
-      return false;
-    }
+  async verifyRazorpayWebhook(payload, signature) {
+    // Delegates to verifyWebhookSignature, which reads the secret from the admin
+    // settings (the env var is only a fallback) and compares in constant time.
+    // The previous implementation used `===`, which leaks timing, and required
+    // `process.env.RAZORPAY_WEBHOOK_SECRET`, so a secret saved through the admin
+    // UI was ignored entirely.
+    const result = await this.verifyWebhookSignature(
+      "razorpay",
+      this.toRawBody(payload),
+      signature,
+    );
+    if (!result.valid) logger.warn(`Razorpay webhook verification failed: ${result.reason}`);
+    return result.valid;
   }
 
   /**

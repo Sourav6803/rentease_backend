@@ -75,7 +75,22 @@ app.use(cors({
 }));
 
 // Body parser middleware
-app.use(express.json({ limit: '10mb' }));
+//
+// The `verify` hook keeps a copy of the RAW request bytes on `req.rawBody`.
+// Gateway webhook signatures (Stripe's `stripe-signature`, Razorpay's
+// `x-razorpay-signature`) are computed by the gateway over the exact bytes it
+// sent, so verifying against a re-serialised object can never match — key order,
+// whitespace and unicode escaping all differ. This parser runs before every
+// route, so the raw bytes have to be captured HERE rather than inside the
+// webhook handlers, where the body stream has already been consumed.
+app.use(
+  express.json({
+    limit: '10mb',
+    verify: (req, res, buf) => {
+      if (buf && buf.length) req.rawBody = Buffer.from(buf);
+    },
+  }),
+);
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 

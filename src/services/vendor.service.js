@@ -1,11 +1,12 @@
-const { Vendor, User, Product, Rental, Review, Payment } = require('../models');
+const { Vendor, User, Product, Rental, Review, Payment, Maintenance } = require('../models');
 const AppError = require('../utils/AppError');
 const { addJob } = require('../jobs');
 const { eventEmitter, EVENTS } = require('../events');
 const { getRedisClient } = require('../config/redis');
-const { invalidateCache } = require('../api/middlewares/cache.middleware');
+const { clearCache } = require('../api/middlewares/cache.middleware');
 const logger = require('../config/logger');
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const PROFILE_CACHE_KEY = 'vendor:undefined:/api/v1/vendor/profile/me';
 
@@ -16,7 +17,7 @@ class VendorService {
 
   _clearProfileCache() {
     try {
-      const result = invalidateCache([PROFILE_CACHE_KEY]);
+      const result = clearCache(`${PROFILE_CACHE_KEY}*`);
       if (result && typeof result.catch === 'function') {
         result.catch(() => {});
       }
@@ -26,11 +27,29 @@ class VendorService {
   }
 
   /**
+   * Resolve the User that owns a vendor so event payloads carry a usable
+   * email/phone/name. The admin actions below emitted `vendor.user?.email`
+   * while `vendor.user` is still an un-populated ObjectId, so every approval /
+   * rejection / suspension notification was dispatched with an undefined
+   * recipient and an owner name of "undefined undefined".
+   */
+  async _vendorOwner(vendor) {
+    const ownerRef = vendor?.user;
+    if (!ownerRef) return null;
+    if (typeof ownerRef === 'object' && ownerRef.email !== undefined) {
+      return ownerRef; // already populated
+    }
+    return User.findById(ownerRef)
+      .select('email phone profile.firstName profile.lastName')
+      .lean();
+  }
+
+  /**
    * Get vendor profile
    */
   async getVendorProfile(userId) {
     try {
-      const vendor = await Vendor.findOne({ user: userId })
+      const vendor = await Vendor.findById(userId)
         .populate('user', 'email phone profile verification.kyc.status')
         .populate('addresses.warehouse')
         .populate('addresses.registeredOffice')
@@ -41,10 +60,35 @@ class VendorService {
       }
 
       // Get additional stats
-      const stats = await this.getVendorStats(userId);
+      const stats = await this.getVendorStats(vendor._id);
+      const performance = {
+        ...vendor.performance,
+        rating: {
+          ...vendor.performance?.rating,
+          average: stats.averageRating,
+          count: stats.reviewCount,
+        },
+        metrics: {
+          ...vendor.performance?.metrics,
+          totalRentals: stats.totalRentals,
+          completedRentals: stats.completedRentals,
+          cancelledRentals: stats.cancelledRentals,
+          totalRevenue: stats.totalRevenue,
+          averageRentalValue: stats.totalRentals
+            ? stats.totalRevenue / stats.totalRentals
+            : 0,
+          customerSatisfaction: stats.averageRating,
+          fulfillmentRate: stats.totalRentals
+            ? (stats.completedRentals / stats.totalRentals) * 100
+            : 0,
+          onTimeDelivery: stats.onTimeDelivery,
+        },
+      };
 
       return {
         ...vendor,
+        products: stats.products,
+        performance,
         stats,
       };
     } catch (error) {
@@ -67,9 +111,9 @@ class VendorService {
         throw new AppError('Vendor not found', 404);
       }
 
-      // Get top products
+      // Get top products (Product.vendor = Vendor document _id, not vendor.user)
       const topProducts = await Product.find({ 
-        vendor: vendor.user,
+        vendor: vendor._id,
         'status.isActive': true 
       })
       .select('basicInfo.name pricing.monthlyRent media.images ratings.average')
@@ -280,7 +324,9 @@ class VendorService {
    */
   async getVendorDashboard(userId) {
     try {
-      const vendor = await Vendor.findOne({ user: userId });
+      // `userId` is the Vendor document id (vendor.controller passes req.vendor._id),
+      // because Product / Rental / Payment / Review all key on it.
+      const vendor = await Vendor.findById(userId);
       if (!vendor) {
         throw new AppError('Vendor profile not found', 404);
       }
@@ -358,7 +404,7 @@ class VendorService {
             vendor: userId, 
             status: 'pending' 
           }),
-          require('../models/Maintenance').countDocuments({ 
+          Maintenance.countDocuments({ 
             vendor: userId, 
             status: 'pending' 
           })
@@ -431,33 +477,88 @@ class VendorService {
    */
   async getVendorStats(userId) {
     try {
-      const [productCount, rentalCount, revenue, averageRating] = await Promise.all([
-        Product.countDocuments({ vendor: userId }),
-        Rental.countDocuments({ vendor: userId }),
+      const vendor = await Vendor.findById(userId).select('user createdAt').lean();
+      if (!vendor) {
+        throw new AppError('Vendor profile not found', 404);
+      }
+
+      const vendorId = vendor._id;
+      const [productStats, rentalStats, revenue, ratingStats, onTimeStats] = await Promise.all([
+        Product.aggregate([
+          { $match: { vendor: vendorId } },
+          { $group: {
+            _id: null,
+            total: { $sum: 1 },
+            active: { $sum: { $cond: ['$status.isActive', 1, 0] } },
+            rented: { $sum: '$inventory.rentedQuantity' },
+            available: { $sum: '$inventory.availableQuantity' },
+          } },
+        ]),
+        Rental.aggregate([
+          { $match: { vendor: vendorId } },
+          { $group: {
+            _id: null,
+            total: { $sum: 1 },
+            completed: { $sum: { $cond: [{ $eq: ['$status', 'completed'] }, 1, 0] } },
+            cancelled: { $sum: { $cond: [{ $eq: ['$status', 'cancelled'] }, 1, 0] } },
+            totalAmount: { $sum: { $ifNull: ['$rentalDetails.totalAmount', 0] } },
+          } },
+        ]),
+        // Payment.vendor stores the Vendor document id (see payment.service:
+        // `vendor: rental.vendor`), not the owning User id.
         Payment.aggregate([
-          { $match: { vendor: userId, status: 'success' } },
+          { $match: { vendor: vendorId, status: 'success' } },
           { $group: { _id: null, total: { $sum: '$amount' } } }
         ]),
         Review.aggregate([
-          { $match: { vendor: userId } },
-          { $group: { _id: null, average: { $avg: '$ratings.overall' } } }
-        ])
+          { $match: { vendor: vendorId, 'moderation.status': 'approved', status: 'active' } },
+          { $group: { _id: null, average: { $avg: '$ratings.overall' }, count: { $sum: 1 } } }
+        ]),
+        Rental.aggregate([
+          { $match: { vendor: vendorId, 'delivery.actualDate': { $ne: null }, 'delivery.scheduledDate': { $ne: null } } },
+          { $group: {
+            _id: null,
+            onTime: { $sum: { $cond: [{ $lte: ['$delivery.actualDate', '$delivery.scheduledDate'] }, 1, 0] } },
+            delivered: { $sum: 1 },
+          } },
+        ]),
       ]);
 
+      const products = productStats[0] || { total: 0, active: 0, rented: 0, available: 0 };
+      const rentals = rentalStats[0] || { total: 0, completed: 0, cancelled: 0, totalAmount: 0 };
+      const onTime = onTimeStats[0];
+
       return {
-        totalProducts: productCount,
-        totalRentals: rentalCount,
+        products: {
+          total: products.total,
+          active: products.active,
+          rented: products.rented,
+          available: products.available,
+          categories: [],
+          topProducts: [],
+        },
+        totalProducts: products.total,
+        totalRentals: rentals.total,
+        completedRentals: rentals.completed,
+        cancelledRentals: rentals.cancelled,
         totalRevenue: revenue[0]?.total || 0,
-        averageRating: averageRating[0]?.average || 0,
-        joinedDate: await this.getVendorJoinDate(userId),
+        averageRating: ratingStats[0]?.average || 0,
+        reviewCount: ratingStats[0]?.count || 0,
+        onTimeDelivery: onTime?.delivered ? (onTime.onTime / onTime.delivered) * 100 : 0,
+        joinedDate: vendor.createdAt,
       };
     } catch (error) {
       logger.error('Error in getVendorStats:', error);
       return {
+        products: { total: 0, active: 0, rented: 0, available: 0, categories: [], topProducts: [] },
         totalProducts: 0,
         totalRentals: 0,
+        completedRentals: 0,
+        cancelledRentals: 0,
         totalRevenue: 0,
         averageRating: 0,
+        reviewCount: 0,
+        onTimeDelivery: 0,
       };
     }
   }
@@ -750,10 +851,16 @@ class VendorService {
 
       await vendor.save();
 
-      // Notify admin for verification
+      // Notify admin for verification.
+      // `updatedFields` is required by the listener in events/vendor.events.js —
+      // it dereferenced `data.updatedFields.includes(...)` without a guard, so
+      // every bank-detail update threw inside the handler and the finance-team
+      // notification never fired.
       eventEmitter.emit('vendor:bank-details-updated', {
         vendorId: vendor.vendorId,
         userId: vendor.user,
+        businessName: vendor.business?.name,
+        updatedFields: ['bankDetails'],
       });
 
       return vendor.bankDetails;
@@ -811,7 +918,7 @@ class VendorService {
    */
   async getSubscriptionDetails(userId) {
     try {
-      const vendor = await Vendor.findOne({ user: userId })
+      const vendor = await Vendor.findById(userId)
         .select('subscription payments payoutSchedule');
 
       if (!vendor) {
@@ -878,8 +985,8 @@ class VendorService {
    */
   async getPayoutHistory(userId, page = 1, limit = 10) {
     try {
-      const vendor = await Vendor.findOne({ user: userId });
-      
+      const vendor = await Vendor.findById(userId);
+
       if (!vendor) {
         throw new AppError('Vendor profile not found', 404);
       }
@@ -946,9 +1053,26 @@ class VendorService {
         throw new AppError('Vendor profile not found', 404);
       }
 
+      // Allowlist — only the flat event keys the model supports. Legacy nested
+      // payloads (email.*/push.*/sms.*) and unknown keys are dropped, never saved.
+      const ALLOWED_KEYS = [
+        'newRentals',
+        'cancellations',
+        'maintenanceRequests',
+        'payments',
+        'reviews',
+        'dailyDigest',
+      ];
+      const cleanPrefs = {};
+      for (const key of ALLOWED_KEYS) {
+        if (preferences && typeof preferences[key] === 'boolean') {
+          cleanPrefs[key] = preferences[key];
+        }
+      }
+
       vendor.settings.notificationPreferences = {
         ...vendor.settings.notificationPreferences,
-        ...preferences,
+        ...cleanPrefs,
       };
       await vendor.save();
 
@@ -1116,12 +1240,14 @@ class VendorService {
       await session.commitTransaction();
 
       // Emit event
+      const owner = await this._vendorOwner(vendor);
       eventEmitter.emit(EVENTS.VENDOR.APPROVED, {
         vendorId: vendor.vendorId,
         userId: vendor.user,
         businessName: vendor.business.name,
-        email: vendor.user?.email,
-        ownerName: vendor.user?.profile?.firstName + ' ' + vendor.user?.profile?.lastName,
+        email: owner?.email || vendor.contact?.primaryEmail,
+        phone: owner?.phone,
+        ownerName: `${owner?.profile?.firstName || ''} ${owner?.profile?.lastName || ''}`.trim(),
         approvedBy: adminId,
       });
 
@@ -1159,12 +1285,14 @@ class VendorService {
       await session.commitTransaction();
 
       // Emit event
+      const owner = await this._vendorOwner(vendor);
       eventEmitter.emit(EVENTS.VENDOR.REJECTED, {
         vendorId: vendor.vendorId,
         userId: vendor.user,
         businessName: vendor.business.name,
-        email: vendor.user?.email,
-        ownerName: vendor.user?.profile?.firstName + ' ' + vendor.user?.profile?.lastName,
+        email: owner?.email || vendor.contact?.primaryEmail,
+        phone: owner?.phone,
+        ownerName: `${owner?.profile?.firstName || ''} ${owner?.profile?.lastName || ''}`.trim(),
         reason,
         rejectedBy: adminId,
       });
@@ -1203,7 +1331,7 @@ class VendorService {
 
       // Deactivate all products
       await Product.updateMany(
-        { vendor: vendor.user },
+        { vendor: vendor._id },
         { $set: { 'status.isActive': false } },
         { session }
       );
@@ -1211,11 +1339,14 @@ class VendorService {
       await session.commitTransaction();
 
       // Emit event
+      const owner = await this._vendorOwner(vendor);
       eventEmitter.emit(EVENTS.VENDOR.SUSPENDED, {
         vendorId: vendor.vendorId,
         userId: vendor.user,
         businessName: vendor.business.name,
-        email: vendor.user?.email,
+        email: owner?.email || vendor.contact?.primaryEmail,
+        phone: owner?.phone,
+        ownerName: `${owner?.profile?.firstName || ''} ${owner?.profile?.lastName || ''}`.trim(),
         reason,
         suspendedBy: adminId,
       });
@@ -1254,7 +1385,7 @@ class VendorService {
 
       // Reactivate products
       await Product.updateMany(
-        { vendor: vendor.user },
+        { vendor: vendor._id },
         { $set: { 'status.isActive': true } },
         { session }
       );
@@ -1262,11 +1393,14 @@ class VendorService {
       await session.commitTransaction();
 
       // Emit event
+      const owner = await this._vendorOwner(vendor);
       eventEmitter.emit('vendor:reinstated', {
         vendorId: vendor.vendorId,
         userId: vendor.user,
         businessName: vendor.business.name,
-        email: vendor.user?.email,
+        email: owner?.email || vendor.contact?.primaryEmail,
+        phone: owner?.phone,
+        ownerName: `${owner?.profile?.firstName || ''} ${owner?.profile?.lastName || ''}`.trim(),
         reinstatedBy: adminId,
       });
 
@@ -1354,10 +1488,23 @@ class VendorService {
   /**
    * Check vendor availability for rental
    */
-  async checkVendorAvailability(vendorId, productId, startDate, endDate) {
+  async checkVendorAvailability(vendorId, productId) {
     try {
-      const vendor = await Vendor.findOne({ vendorId });
-      
+      // SECURITY: this route is mounted BEFORE `router.use(protect)` in
+      // vendor.routes.js, i.e. it is fully public. It used to return the raw
+      // `vendor` and `product` documents, exposing the vendor's contact email/
+      // phone, GSTIN/PAN, commission rate, verification document URLs and
+      // serviceable-area data to anyone who knew a vendorId. Return only the
+      // fields the availability check actually needs.
+      if (!productId || !mongoose.isValidObjectId(productId)) {
+        return { available: false, reason: 'Invalid product id' };
+      }
+
+      // `vendorId` may be the VEN… business code or the Vendor document _id.
+      const vendor = await Vendor.findOne(
+        mongoose.isValidObjectId(vendorId) ? { _id: vendorId } : { vendorId }
+      );
+
       if (!vendor) {
         throw new AppError('Vendor not found', 404);
       }
@@ -1372,28 +1519,40 @@ class VendorService {
         return { available: false, reason: 'Vendor is not verified' };
       }
 
-      // Check if product exists and belongs to vendor
-      const product = await Product.findOne({ 
+      // Check if product exists and belongs to vendor.
+      // Product.vendor references the Vendor document, not the owning User.
+      const product = await Product.findOne({
         _id: productId,
-        vendor: vendor.user
-      });
+        vendor: vendor._id,
+      })
+        .select('basicInfo.name pricing.monthlyRent pricing.securityDeposit inventory.availableQuantity status.isActive')
+        .lean();
 
       if (!product) {
         return { available: false, reason: 'Product not found or does not belong to this vendor' };
       }
 
       // Check product availability
-      if (!product.status.isActive || product.inventory.availableQuantity < 1) {
+      if (!product.status?.isActive || !(product.inventory?.availableQuantity >= 1)) {
         return { available: false, reason: 'Product is not available' };
       }
 
       // Check vendor's serviceable area (would need address pincode)
       // This would require the delivery address pincode
 
-      return { 
+      return {
         available: true,
-        vendor,
-        product
+        vendor: {
+          vendorId: vendor.vendorId,
+          businessName: vendor.business?.name || null,
+        },
+        product: {
+          _id: product._id,
+          name: product.basicInfo?.name || null,
+          monthlyRent: product.pricing?.monthlyRent ?? null,
+          securityDeposit: product.pricing?.securityDeposit ?? null,
+          availableQuantity: product.inventory?.availableQuantity ?? 0,
+        },
       };
     } catch (error) {
       logger.error('Error in checkVendorAvailability:', error);
@@ -1590,7 +1749,7 @@ class VendorService {
     };
   }
 
-  async getRecentActivity(vendorId, dateRange) {
+  async getRecentActivity(vendorId) {
     const recentRentals = await Rental.find({ vendor: vendorId })
       .sort({ createdAt: -1 })
       .limit(10)
@@ -1853,23 +2012,6 @@ class VendorService {
     
     // Get top customers
     const topCustomers = customerData.slice(0, 10);
-    
-    // Get recent customers
-    const recentCustomers = await Rental.aggregate([
-      { $match: { vendor: vendorId } },
-      { $sort: { createdAt: -1 } },
-      { $group: { _id: '$user', lastOrder: { $first: '$createdAt' } } },
-      { $limit: 10 },
-      {
-        $lookup: {
-          from: 'users',
-          localField: '_id',
-          foreignField: '_id',
-          as: 'user'
-        }
-      },
-      { $unwind: '$user' }
-    ]);
     
     return {
       period,

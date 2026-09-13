@@ -824,10 +824,15 @@ class ReviewService {
    */
   async updateVendorRating(vendorId) {
     try {
+      // Reviews store the owner User id, while Vendor updates use the Vendor id.
+      const vendor = await Vendor.findById(vendorId).select('user').lean()
+        || await Vendor.findOne({ user: vendorId }).select('user').lean();
+      if (!vendor) return;
+
       const stats = await Review.aggregate([
         { 
           $match: { 
-            vendor: vendorId, 
+            vendor: vendor.user,
             'moderation.status': 'approved',
             status: 'active'
           } 
@@ -844,20 +849,26 @@ class ReviewService {
         }
       ]);
 
-      if (stats.length > 0) {
-        await Vendor.findByIdAndUpdate(vendorId, {
-          $set: {
-            'performance.rating.average': stats[0].average,
-            'performance.rating.count': stats[0].count,
-            'performance.metrics.customerSatisfaction': stats[0].average,
-            'performance.vendorRatings': {
-              communication: stats[0].avgCommunication,
-              delivery: stats[0].avgDelivery,
-              professionalism: stats[0].avgProfessionalism
-            }
+      const rating = stats[0] || {
+        average: 0,
+        count: 0,
+        avgCommunication: 0,
+        avgDelivery: 0,
+        avgProfessionalism: 0,
+      };
+
+      await Vendor.findByIdAndUpdate(vendor._id, {
+        $set: {
+          'performance.rating.average': rating.average,
+          'performance.rating.count': rating.count,
+          'performance.metrics.customerSatisfaction': rating.average,
+          'performance.vendorRatings': {
+            communication: rating.avgCommunication || 0,
+            delivery: rating.avgDelivery || 0,
+            professionalism: rating.avgProfessionalism || 0
           }
-        });
-      }
+        }
+      });
     } catch (error) {
       logger.error('Error in updateVendorRating:', error);
     }

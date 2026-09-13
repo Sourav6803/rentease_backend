@@ -13,6 +13,10 @@ const { getRedisClient } = require('../config/redis');
 const logger = require('../config/logger');
 const emailService = require('./email.service');
 const mongoose = require('mongoose');
+// Security centre: real TOTP enforcement + login timeline.
+// One-way dependency (vendor-security.service never requires this file).
+const vendorSecurityService = require('./vendor-security.service');
+const { parseUserAgent } = require('../utils/device');
 
 class AuthService {
   constructor() {
@@ -72,7 +76,6 @@ class AuthService {
 
       // Create user
       const user = await User.create(userObj);
-      console.log("🔍 user created with ID:", user._id);
 
       // Create vendor profile if role is vendor
       if (userData.role === "vendor") {
@@ -151,20 +154,35 @@ class AuthService {
    */
   async login(credentials, ipAddress, userAgent) {
     try {
-      const { email, phone, password } = credentials;
+      const { email, phone, password, twoFactorCode } = credentials;
 
       // Find user by email or phone
       const user = await User.findOne({
         $or: [{ email: email?.toLowerCase() }, { phone: phone }],
-      }).select("+password +security.loginAttempts +security.lockUntil");
+      }).select(
+        "+password +security.loginAttempts +security.lockUntil +security.twoFactorSecret +security.twoFactorRecoveryCodes",
+      );
 
       if (!user) {
         throw new AppError("Invalid credentials", 401);
       }
 
-      console.log("user-->", user?.role)
+      // Sliding window: a few failures spread over days must not add up to a
+      // lock. `loginAttempts` used to reset only on a fully successful login, so
+      // a stale counter could accumulate forever and eventually lock an account
+      // whose owner had long forgotten the earlier typos.
+      const LOGIN_ATTEMPT_WINDOW_MS = 15 * 60 * 1000;
+      const lastFailure = user.security?.lastFailedLoginAt
+        ? new Date(user.security.lastFailedLoginAt).getTime()
+        : 0;
 
-      console.log("🔍 User found for login Id:", user._id, "email:", user.email);
+      if (
+        (user.security?.loginAttempts || 0) > 0 &&
+        lastFailure > 0 &&
+        Date.now() - lastFailure > LOGIN_ATTEMPT_WINDOW_MS
+      ) {
+        user.set("security.loginAttempts", 0);
+      }
 
       // Check if account is locked
       if (user.security?.lockUntil && user.security.lockUntil > new Date()) {
@@ -182,11 +200,9 @@ class AuthService {
         password,
         user.password,
       );
-      
-      console.log("isPasswordValid--->", isPasswordValid)
 
       if (!isPasswordValid) {
-        await this.handleFailedLogin(user);
+        await this.handleFailedLogin(user, ipAddress, userAgent);
         throw new AppError("Invalid credentials", 401);
       }
 
@@ -198,17 +214,43 @@ class AuthService {
         );
       }
 
-      // Reset login attempts on successful login
-      user.security = {
-        ...user.security,
-        loginAttempts: 0,
-        lockUntil: null,
-      };
+      // Two-factor authentication. Only enforced once 2FA is *fully
+      // configured* (enabled AND a secret exists) — accounts that merely had
+      // the legacy `twoFactorEnabled` flag flipped keep logging in as before,
+      // so this can never lock an existing user out.
+      let twoFactorUsed = false;
+      try {
+        const secondFactor = await vendorSecurityService.requireSecondFactor(
+          user,
+          twoFactorCode,
+        );
+        twoFactorUsed = secondFactor.used;
+      } catch (twoFactorError) {
+        await vendorSecurityService.recordLoginHistory(user._id, {
+          ip: ipAddress,
+          userAgent,
+          status: "failed",
+          reason:
+            twoFactorError.errors?.code === "TWO_FACTOR_REQUIRED"
+              ? "Two-factor code required"
+              : "Invalid two-factor code",
+        });
+
+        throw twoFactorError;
+      }
+
+      // Reset login attempts on successful login.
+      // NOTE: assigning the whole `security` object here (as this used to)
+      // wipes every `select: false` field that was not loaded onto the
+      // document — including the 2FA secret and recovery-code hashes. Use
+      // targeted sets so sibling security fields survive.
+      user.set("security.loginAttempts", 0);
+      user.set("security.lockUntil", null);
       await user.save();
 
       // Generate tokens
+      // (NOTE: never console.log the token bundle — it contains live JWTs.)
       const tokens = await this.generateAuthTokens(user);
-      console.log("tokens-->", tokens);
 
       // Save refresh token
       await this.saveRefreshToken(
@@ -222,6 +264,26 @@ class AuthService {
       user.stats.lastActive = new Date();
       user.stats.lastLogin = new Date();
       await user.save();
+
+      // Security centre: the authoritative login timeline + audit trail.
+      await vendorSecurityService.recordLoginHistory(user._id, {
+        ip: ipAddress,
+        userAgent,
+        status: "success",
+        twoFactorUsed,
+      });
+
+      await vendorSecurityService.recordEvent(user._id, {
+        type: "login",
+        action: twoFactorUsed
+          ? "Successful login (two-factor)"
+          : "Successful login",
+        severity: "info",
+        ip: ipAddress,
+        userAgent,
+        device: parseUserAgent(userAgent).device,
+        details: { twoFactorUsed },
+      });
 
       // Get user role-specific data
       let roleData = null;
@@ -255,18 +317,23 @@ class AuthService {
   /**
    * Handle failed login attempt
    */
-  async handleFailedLogin(user) {
-    console.log("🔍 from handleFailedLogin -->", user?._id);
+  async handleFailedLogin(user, ipAddress = null, userAgent = null) {
     const attempts = (user.security?.loginAttempts || 0) + 1;
     const maxAttempts = 5;
 
-    user.security = {
-      ...user.security,
-      loginAttempts: attempts,
-    };
+    // Targeted set — see the note in login(): replacing the whole `security`
+    // object would drop every select:false sibling field (notably
+    // twoFactorSecret and the recovery-code hashes).
+    user.set("security.loginAttempts", attempts);
+    // Timestamp of the most recent failure, used by the sliding window in
+    // login() to decay a stale counter.
+    user.set("security.lastFailedLoginAt", new Date());
+
+    let lockUntil = null;
 
     if (attempts >= maxAttempts) {
-      user.security.lockUntil = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes
+      lockUntil = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes
+      user.set("security.lockUntil", lockUntil);
 
       // Notify user about lock
       await addJob("email", "send", {
@@ -274,13 +341,33 @@ class AuthService {
         subject: "Account Locked",
         template: "account-locked",
         data: {
-          name: user.profile.firstName,
-          unlockTime: user.security.lockUntil,
+          name: user.profile?.firstName,
+          unlockTime: lockUntil,
         },
       });
     }
 
     await user.save();
+
+    // Security centre: failed-attempt timeline + audit trail.
+    await vendorSecurityService.recordLoginHistory(user._id, {
+      ip: ipAddress,
+      userAgent,
+      status: "failed",
+      reason: lockUntil
+        ? "Invalid password (account locked)"
+        : "Invalid password",
+    });
+
+    await vendorSecurityService.recordEvent(user._id, {
+      type: "failed_login",
+      action: "Failed login attempt",
+      severity: attempts >= maxAttempts ? "critical" : "warning",
+      ip: ipAddress,
+      userAgent,
+      device: parseUserAgent(userAgent).device,
+      details: { attempts, locked: Boolean(lockUntil) },
+    });
 
     // Emit failed login event
     // eventEmitter.emit(EVENTS.USER.LOGIN_FAILED, {
@@ -294,23 +381,34 @@ class AuthService {
    * Generate auth tokens
    */
   async generateAuthTokens(user) {
+    // A session id embedded in BOTH tokens.
+    //
+    // The security centre needs to know which of the stored sessions is the
+    // caller's own. Comparing token strings does not work: a refresh token is a
+    // JWT, so every one of them starts with the same base64 header
+    // ("eyJhbGciOi…"). A shared `sid` claim makes the match exact.
+    const sessionId = crypto.randomUUID
+      ? crypto.randomUUID()
+      : crypto.randomBytes(16).toString("hex");
+
     const accessToken = jwt.sign(
       {
         id: user._id,
         email: user.email,
         role: user.role,
+        sid: sessionId,
       },
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_ACCESS_EXPIRES_IN || "15m" },
     );
 
     const refreshToken = jwt.sign(
-      { id: user._id },
+      { id: user._id, sid: sessionId },
       process.env.JWT_REFRESH_SECRET,
       { expiresIn: process.env.JWT_REFRESH_EXPIRES_IN || "7d" },
     );
 
-    return { accessToken, refreshToken };
+    return { accessToken, refreshToken, sessionId };
   }
 
   /**
@@ -318,13 +416,22 @@ class AuthService {
    */
   async saveRefreshToken(userId, token, ipAddress, userAgent) {
     const decoded = jwt.decode(token);
+    // The parsed device triple is stored alongside the raw UA so the security
+    // centre can render "Chrome on Windows 10/11" without re-parsing.
+    const parsedDevice = parseUserAgent(userAgent);
 
     await User.findByIdAndUpdate(userId, {
       $push: {
         "security.refreshTokens": {
+          // Derived from the token itself so every existing call site of
+          // saveRefreshToken keeps working unchanged.
+          sessionId: decoded?.sid || null,
           token,
           ipAddress,
           userAgent,
+          device: parsedDevice.device,
+          browser: parsedDevice.browser,
+          os: parsedDevice.os,
           expiresAt: new Date(decoded.exp * 1000),
           createdAt: new Date(),
         },
@@ -342,12 +449,78 @@ class AuthService {
   }
 
   /**
+   * Resolve a refresh token that was rotated away moments ago.
+   *
+   * Refresh tokens are single-use — /refresh-token rotates them on every call.
+   * next-auth can still fire two refreshes with the SAME token (a second tab, or
+   * the SessionProvider poll racing a page load). The loser of that race used to
+   * get a hard 401, and because the next-auth `jwt` callback preserves the old
+   * (by then deleted) token when the refresh fails, a single lost race
+   * permanently killed the session.
+   *
+   * Within a short window after rotation we therefore treat a replay as benign
+   * and hand back the successor token instead of failing.
+   *
+   * @returns {Promise<{accessToken: string, refreshToken: string}|null>}
+   */
+  async resolveRotatedToken(refreshToken, decoded) {
+    if (!this.redisClient) {
+      return null;
+    }
+
+    try {
+      const successor = await this.redisClient.get(
+        `refresh-successor:${refreshToken}`,
+      );
+
+      if (!successor) {
+        return null;
+      }
+
+      // Re-validate ownership before issuing anything off a replayed token.
+      const user = await User.findById(decoded?.id).select("+status.isActive");
+
+      if (!user || !user.status?.isActive || user.status?.isBlocked) {
+        return null;
+      }
+
+      // Confirm the successor really belongs to this user.
+      const ownsSuccessor = await User.exists({
+        _id: user._id,
+        "security.refreshTokens.token": successor,
+      });
+
+      if (!ownsSuccessor) {
+        return null;
+      }
+
+      const accessToken = jwt.sign(
+        { id: user._id, email: user.email, role: user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_ACCESS_EXPIRES_IN || "15m" },
+      );
+
+      return { accessToken, refreshToken: successor };
+    } catch (error) {
+      // Never let the grace path break a normal refresh.
+      logger.warn(`Rotated-token grace lookup failed: ${error.message}`);
+      return null;
+    }
+  }
+
+  /**
    * Refresh access token
    */
   async refreshToken(refreshToken, ipAddress, userAgent) {
     try {
       // Verify refresh token
       const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+
+      // Benign replay of a just-rotated token (see resolveRotatedToken).
+      const replayed = await this.resolveRotatedToken(refreshToken, decoded);
+      if (replayed) {
+        return replayed;
+      }
 
       // Check if token exists in Redis
       if (this.redisClient) {
@@ -391,8 +564,16 @@ class AuthService {
         userAgent,
       );
 
-      // Remove old token from Redis
+      // Remove old token from Redis, but leave a short-lived successor pointer
+      // behind. A concurrent request still holding the token we just rotated
+      // away hits resolveRotatedToken() and gets the new token instead of a 401,
+      // which is what used to kill the session permanently.
       if (this.redisClient) {
+        await this.redisClient.setex(
+          `refresh-successor:${refreshToken}`,
+          120, // seconds — long enough to cover a slow concurrent request
+          tokens.refreshToken,
+        );
         await this.redisClient.del(`refresh:${refreshToken}`);
       }
 
@@ -524,7 +705,6 @@ class AuthService {
   async sendVerificationEmail(email, token, name) {
     try {
       const verificationUrl = `${process.env.CLIENT_URL}/verify-email?token=${token}`;
-      console.log("🔍sending verification email ", email, token, name);
       // await addJob('email', 'send', {
       //   to: email,
       //   subject: 'Verify Your Email - RentEase',
@@ -728,8 +908,6 @@ class AuthService {
       // Generate reset token
       const resetToken = this.generateToken();
       const resetTokenHash = this.encryption.hash(resetToken);
-      console.log("resetToken-->", resetToken);
-      console.log("resetTokenHash-->", resetTokenHash);
 
       user.security.passwordResetToken = resetTokenHash;
       user.security.passwordResetExpires = new Date(
@@ -742,7 +920,6 @@ class AuthService {
       // Send reset email
       const resetUrl = `${process.env.CLIENT_URL}/reset-password?token=${resetToken}`;
 
-      console.log("resetUrl11-->", resetUrl);
 
       await addJob("email", "send", {
         to: user.email,
@@ -757,7 +934,6 @@ class AuthService {
         },
       });
 
-      console.log("resetUrl22-->", resetUrl);
 
       return { message: "If email exists, password reset link will be sent" };
     } catch (error) {
@@ -771,8 +947,6 @@ class AuthService {
    */
   async resetPassword(token, newPassword) {
     try {
-      console.log("Received token:", token);
-      console.log("Received token length:", token?.length);
       const tokenHash = this.encryption.hash(token);
 
       const user = await User.findOne({
@@ -817,7 +991,6 @@ class AuthService {
       // Hash new password
       const hashedPassword = await this.encryption.hashPassword(newPassword);
 
-      console.log("hashedPassword-->", hashedPassword)
       // Store old password in history
       const passwordHistory = user.security?.passwordHistory || [];
       passwordHistory.push({
@@ -825,7 +998,6 @@ class AuthService {
         changedAt: new Date(),
       });
 
-      console.log("passwordHistory-->", passwordHistory)
       // Keep only last 5 passwords
       if (passwordHistory.length > 5) {
         passwordHistory.shift();
@@ -879,7 +1051,13 @@ class AuthService {
   /**
    * Change password
    */
-  async changePassword(userId, currentPassword, newPassword) {
+  async changePassword(
+    userId,
+    currentPassword,
+    newPassword,
+    ipAddress = null,
+    userAgent = null,
+  ) {
     try {
       const user = await User.findById(userId).select(
         "+password +security.passwordHistory",
@@ -960,6 +1138,16 @@ class AuthService {
       eventEmitter.emit(EVENTS.USER.PASSWORD_CHANGED, {
         userId: user._id,
         email: user.email,
+      });
+
+      // Security centre audit trail (powers the "Password Changes" filter).
+      await vendorSecurityService.recordEvent(user._id, {
+        type: "password_change",
+        action: "Account password changed",
+        severity: "warning",
+        ip: ipAddress || null,
+        userAgent: userAgent || null,
+        device: parseUserAgent(userAgent).device,
       });
 
       return { message: "Password changed successfully" };
@@ -1138,6 +1326,10 @@ class AuthService {
     delete userObj.security?.refreshTokens;
     delete userObj.security?.passwordResetToken;
     delete userObj.security?.passwordResetExpires;
+    // Security centre secrets must never leave the server.
+    delete userObj.security?.twoFactorSecret;
+    delete userObj.security?.twoFactorPendingSecret;
+    delete userObj.security?.twoFactorRecoveryCodes;
     delete userObj.verification?.emailVerificationToken;
     delete userObj.verification?.emailVerificationExpires;
     delete userObj.verification?.phoneOTP;
@@ -1334,7 +1526,6 @@ class AuthService {
       // Create user
       const user = await User.create([userObj], { session });
 
-      console.log("user-> register vendor", user)
 
       const [addressDoc] = await Address.create(
         [
@@ -1354,7 +1545,6 @@ class AuthService {
       // Create vendor profile
       const vendorId = this.generateVendorId();
 
-      console.log("vendorId-> register vendor", vendorId)
 
       const vendorObj = {
         user: user[0]._id,

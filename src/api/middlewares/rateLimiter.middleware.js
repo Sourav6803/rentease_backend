@@ -204,6 +204,22 @@ const authLimiter = rateLimit({
 });
 
 
+// Refresh limiter
+// Silent background traffic (SessionProvider polling, extra tabs) must never
+// consume the manual-login budget. /login and /refresh-token used to share one
+// IP bucket, so a stale session's own refresh attempts could rate-limit the
+// user out of logging back in.
+const refreshLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 60,
+  skipSuccessfulRequests: true,
+  message: 'Too many token refresh attempts, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: (req) => ipKeyGenerator(req)
+});
+
+
 // OTP limiter
 const otpLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -369,6 +385,7 @@ const concurrencyLimiter = (maxConcurrent = 5) => {
 module.exports = {
   apiLimiter,
   authLimiter,
+  refreshLimiter,
   otpLimiter,
   paymentLimiter,
   adminLimiter,
