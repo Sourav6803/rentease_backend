@@ -829,22 +829,28 @@ class SettlementService {
       // from the destination rather than configured, so it cannot be set wrong.
       const transferMode = vendor?.bankDetails?.upiId ? 'UPI' : 'IMPS';
 
-      const created = await client.payouts.create({
-        account_number: config.accountNumber,
-        fund_account_id: fundAccountId,
-        amount: Math.round(Number(payout.amount) * 100), // paise
-        currency: 'INR',
-        mode: transferMode,
-        purpose: 'payout',
-        // Without this a payout larger than the RazorpayX balance is rejected
-        // outright instead of being held until the account is topped up.
-        queue_if_low_balance: true,
-        reference_id: payout.payoutNumber,
-        narration: 'RentEase vendor payout',
-        notes: {
-          payoutId: String(payout._id),
-          payoutNumber: payout.payoutNumber,
-          environment: mode,
+      // See the note in ensurePayoutContact — the installed SDK (2.9.6) exposes no
+      // `client.payouts` resource, only the raw `client.api` helper. This is the call
+      // that produced "Cannot read properties of undefined (reading 'create')".
+      const created = await client.api.post({
+        url: '/payouts',
+        data: {
+          account_number: config.accountNumber,
+          fund_account_id: fundAccountId,
+          amount: Math.round(Number(payout.amount) * 100), // paise
+          currency: 'INR',
+          mode: transferMode,
+          purpose: 'payout',
+          // Without this a payout larger than the RazorpayX balance is rejected
+          // outright instead of being held until the account is topped up.
+          queue_if_low_balance: true,
+          reference_id: payout.payoutNumber,
+          narration: 'RentEase vendor payout',
+          notes: {
+            payoutId: String(payout._id),
+            payoutNumber: payout.payoutNumber,
+            environment: mode,
+          },
         },
       });
 
@@ -887,13 +893,23 @@ class SettlementService {
     const cached = vendor?.bankDetails?.payoutContactIds?.[mode];
     if (cached) return cached;
 
-    const contact = await client.contacts.create({
-      name: vendor?.business?.name || 'RentEase vendor',
-      email: vendor?.contact?.primaryEmail || undefined,
-      contact: vendor?.contact?.primaryPhone || undefined,
-      type: 'vendor',
-      reference_id: vendor?.vendorId || undefined,
-      notes: { vendorId: vendor?.vendorId || String(vendor?._id || ''), environment: mode },
+    // NOTE: `client.contacts` / `client.fundAccounts` / `client.payouts` do NOT exist
+    // on the installed razorpay SDK (2.9.6) — it ships no RazorpayX payout resources
+    // at all, so those calls threw `Cannot read properties of undefined (reading
+    // 'create')` before any HTTP request was made. The SDK does expose the raw
+    // `client.api` helper, whose signature is `post({ url, data })`, so the payout
+    // API is called through that instead. If a future SDK version adds the typed
+    // resources, prefer them.
+    const contact = await client.api.post({
+      url: '/contacts',
+      data: {
+        name: vendor?.business?.name || 'RentEase vendor',
+        email: vendor?.contact?.primaryEmail || undefined,
+        contact: vendor?.contact?.primaryPhone || undefined,
+        type: 'vendor',
+        reference_id: vendor?.vendorId || undefined,
+        notes: { vendorId: vendor?.vendorId || String(vendor?._id || ''), environment: mode },
+      },
     });
 
     if (contact?.id && vendor?._id) {
@@ -944,7 +960,9 @@ class SettlementService {
       };
     }
 
-    const fundAccount = await client.fundAccounts.create(payload);
+    // See the note in ensurePayoutContact — the SDK has no `fundAccounts` resource,
+    // only the raw `client.api` helper.
+    const fundAccount = await client.api.post({ url: '/fund_accounts', data: payload });
 
     if (fundAccount?.id && vendor?._id) {
       await Vendor.updateOne(

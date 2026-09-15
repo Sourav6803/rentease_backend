@@ -48130,3 +48130,41 @@
 2026-09-13 21:57:10:5710 [31merror[39m: [31mMongoDB connection error: Server selection timed out after 5000 ms[39m
 2026-09-13 23:27:13:2713 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
 2026-09-13 23:29:41:2941 [31merror[39m: [31mMongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.ffmnsa4.mongodb.net[39m
+2026-09-14 21:40:53:4053 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-14 21:40:56:4056 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-14 21:41:00:410 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-09-14 21:46:47:4647 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-14 21:47:02:472 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-14 21:47:02:472 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-14 22:04:49:449 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-14 22:08:54:854 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-14 23:16:59:1659 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-14 23:17:00:170 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-14 23:17:06:176 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-14 23:17:06:176 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-14 23:17:06:176 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-14 23:17:06:176 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-14 23:17:06:176 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-14 23:17:07:177 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-14 23:17:07:177 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-14 23:17:07:177 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-14 23:17:07:177 [31merror[39m: [31mInvalid token. Please log in again.[39m
+2026-09-14 23:17:15:1715 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-14 23:17:15:1715 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-14 23:17:16:1716 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-14 23:17:16:1716 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-14 23:17:16:1716 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-14 23:17:23:1723 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-14 23:17:29:1729 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-14 23:17:32:1732 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-14 23:17:33:1733 [31merror[39m: [31mInvalid refresh token[39m
+2026-09-14 23:17:35:1735 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-14 23:17:36:1736 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-14 23:17:59:1759 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-09-14 23:52:37:5237 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-14 23:52:37:5237 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-14 23:59:34:5934 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-14 23:59:35:5935 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-15 00:21:18:2118 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-15 00:21:18:2118 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-15 00:27:31:2731 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m

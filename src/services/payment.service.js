@@ -68,9 +68,23 @@ class PaymentService {
   /**
    * RazorpayX credentials for PAYOUTS.
    *
-   * A different product from the payment gateway with its own key pair, so it gets
-   * its own resolver rather than being folded into getGatewayCredentials. Same
-   * rules: admin settings first, env second, decrypt on read.
+   * RazorpayX is a separate product, but it is NOT a separate key pair. Razorpay's
+   * own docs are explicit: "If you are an existing Razorpay merchant, you can use
+   * your existing API key with RazorpayX" — the merchant gets ONE key pair and it
+   * authenticates both the payment gateway and the payouts API. (Verified against a
+   * real account: the RazorpayX Developer Controls page and the Payments API-keys
+   * page list the same `key_id`.)
+   *
+   * WHY THE FALLBACK MATTERS: the payout key secret is unrecoverable from the
+   * Razorpay dashboard — the secret is shown only at generation time, and the
+   * dashboard offers no reveal/download control (only "Regenerate Key"). So an
+   * install that has a working payment gateway but no payout-specific key could
+   * only proceed by REGENERATING the merchant key, which invalidates the key the
+   * gateway is already using. Falling back to the gateway credentials — which this
+   * codebase already stores and can decrypt — avoids that trap entirely.
+   *
+   * Resolution order: payout settings, then RAZORPAYX_* env, then the gateway's
+   * Razorpay key pair. `source` records which one each value came from.
    */
   async getPayoutCredentials() {
     const env = {
@@ -95,14 +109,32 @@ class PaymentService {
       return value || (fromEnv ? String(fromEnv).trim() : '') || null;
     };
 
-    return {
-      keyId: resolve(stored.keyId, env.keyId),
-      keySecret: resolve(stored.keySecret, env.keySecret),
-      source: {
-        keyId: stored.keyId ? 'settings' : 'env',
-        keySecret: stored.keySecret ? 'settings' : 'env',
-      },
+    let keyId = resolve(stored.keyId, env.keyId);
+    let keySecret = resolve(stored.keySecret, env.keySecret);
+    const source = {
+      keyId: stored.keyId ? 'settings' : 'env',
+      keySecret: stored.keySecret ? 'settings' : 'env',
     };
+
+    /**
+     * Last resort: the gateway's own Razorpay key pair (see the note above — it is
+     * the same merchant key). Consulted only when the payout-specific sources came
+     * up short, and field by field, so a half-configured payout block still gets
+     * completed instead of being rejected.
+     */
+    if (!keyId || !keySecret) {
+      const gateway = await this.getGatewayCredentials('razorpay');
+      if (!keyId && gateway.keyId) {
+        keyId = gateway.keyId;
+        source.keyId = 'gateway';
+      }
+      if (!keySecret && gateway.keySecret) {
+        keySecret = gateway.keySecret;
+        source.keySecret = 'gateway';
+      }
+    }
+
+    return { keyId, keySecret, source };
   }
 
   /** RazorpayX client for payouts, built from the resolved payout credentials. */
