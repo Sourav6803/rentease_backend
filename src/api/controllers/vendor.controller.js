@@ -5,6 +5,11 @@ const AppError = require('../../utils/AppError');
 const AuthService = require('../../services/auth.service');
 const vendorAnalyticsService = require('../../services/vendor-analytics.service');
 const vendorCustomerService = require('../../services/vendor-customer.service');
+// Used by downloadInvoice — the rental invoice PDF path.
+const PDFService = require('../../services/pdf.service');
+const fs = require('fs');
+const path = require('path');
+const logger = require('../../config/logger');
 
 class VendorController {
   /**
@@ -354,11 +359,14 @@ class VendorController {
    * Get payout history
    */
   getPayoutHistory = catchAsync(async (req, res) => {
-    const { page = 1, limit = 10 } = req.query;
+    const { page = 1, limit = 10, status } = req.query;
     const history = await VendorService.getPayoutHistory(
       req.vendor._id,
       parseInt(page),
       parseInt(limit),
+      // `status` was previously dropped on the floor, so the page's status filter
+      // did nothing. The service validates the value against the schema enum.
+      typeof status === 'string' ? status.trim() : undefined,
     );
 
     return ApiResponse.success(
@@ -682,6 +690,56 @@ class VendorController {
     );
 
     return ApiResponse.success(res, 200, 'Customer retrieved successfully', data);
+  });
+
+  /**
+   * List this vendor's invoices.
+   *
+   * The invoices page has always called GET /api/v1/vendor/invoices, which did not
+   * exist — every request 404'd and the page rendered as "no invoices". Invoices are
+   * generated per rental, so this is backed by the vendor's rentals.
+   */
+  getInvoices = catchAsync(async (req, res) => {
+    const { page = 1, limit = 10, status, search, type } = req.query;
+
+    const data = await VendorService.getInvoices(req.vendor._id, {
+      page: parseInt(page),
+      limit: parseInt(limit),
+      status: typeof status === 'string' ? status.trim() : undefined,
+      search: typeof search === 'string' ? search : undefined,
+      type: typeof type === 'string' ? type.trim() : undefined,
+    });
+
+    return ApiResponse.success(res, 200, 'Invoices retrieved successfully', data);
+  });
+
+  /**
+   * Download one rental's invoice as a PDF, scoped to this vendor.
+   *
+   * Reuses the existing rental PDF pipeline instead of adding a second invoice
+   * renderer. The ownership check lives in VendorService.getVendorInvoice() because
+   * RentalService.generateInvoice() takes an id and does no scoping of its own.
+   */
+  downloadInvoice = catchAsync(async (req, res) => {
+    const invoice = await VendorService.getVendorInvoice(req.vendor._id, req.params.id);
+
+    const tempDir = path.join(__dirname, '../temp');
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
+    }
+
+    const pdfPath = path.join(tempDir, `invoice-${req.params.id}-${Date.now()}.pdf`);
+    await PDFService.generateInvoicePDF(invoice, pdfPath);
+
+    res.download(pdfPath, `invoice-${invoice.rental.number}.pdf`, (err) => {
+      if (err) {
+        logger.error('Error downloading vendor invoice:', err);
+      }
+      // Clean up the temp file after the download completes either way.
+      fs.unlink(pdfPath, (unlinkErr) => {
+        if (unlinkErr) logger.error('Error deleting temp invoice file:', unlinkErr);
+      });
+    });
   });
 }
 

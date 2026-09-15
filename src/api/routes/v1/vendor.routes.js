@@ -123,6 +123,13 @@ router.put('/subscription', validate(vendorValidations.updateSubscription), vend
 router.put('/payout-schedule', validate(vendorValidations.payoutSchedule), vendorController.updatePayoutSchedule);
 router.get('/payouts', vendorController.getPayoutHistory);
 
+// Invoice routes. Invoices are generated per rental
+// (RentalService.generateInvoice), so these are backed by the vendor's rentals.
+// The invoices page has always called exactly these two paths — the routes simply
+// never existed, so every request 404'd. `:id` is a rental id.
+router.get('/invoices', vendorController.getInvoices);
+router.get('/invoices/:id/download', vendorController.downloadInvoice);
+
 // Settings routes
 router.put('/business-hours', validate(vendorValidations.businessHours), vendorController.updateBusinessHours);
 router.put('/notification-preferences', validate(vendorValidations.notificationPreferences), vendorController.updateNotificationPreferences);

@@ -983,40 +983,239 @@ class VendorService {
   /**
    * Get payout history
    */
-  async getPayoutHistory(userId, page = 1, limit = 10) {
+  async getPayoutHistory(vendorId, page = 1, limit = 10, status) {
     try {
-      const vendor = await Vendor.findById(userId);
+      // Only the _id is needed — the previous version loaded the whole document
+      // just to check it exists.
+      const vendor = await Vendor.findById(vendorId).select('_id').lean();
 
       if (!vendor) {
         throw new AppError('Vendor profile not found', 404);
       }
 
-      const Payment = require('../models/Payment.model');
-      const skip = (page - 1) * limit;
+      // Payouts are their own collection. This used to query `Payment` with
+      // `{ type: 'payout' }`, which never matches — `Payment` holds rent/settlement
+      // transactions and has no payout runs at all — so every vendor saw an empty
+      // payout history no matter how many payouts existed.
+      const Payout = require('../models/Payout.model');
 
-      const [payouts, total] = await Promise.all([
-        Payment.find({ 
-          vendor: userId,
-          type: 'payout'
-        })
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(limit)
-        .lean(),
-        Payment.countDocuments({ vendor: userId, type: 'payout' })
+      // The controller passes parseInt() results, which are NaN for garbage input,
+      // and an unbounded limit would let a caller pull the entire collection.
+      const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+      const safeLimit =
+        Number.isFinite(limit) && limit > 0 ? Math.min(Math.floor(limit), 100) : 10;
+
+      const filter = { vendor: vendor._id };
+
+      // Only narrow when the caller asked for a status the schema actually has.
+      // An unrecognised value must not silently come back as an empty list.
+      if (status) {
+        const { PAYOUT_STATUSES } = require('../models/Payout.model');
+        if (PAYOUT_STATUSES.includes(status)) {
+          filter.status = status;
+        }
+      }
+
+      const skip = (safePage - 1) * safeLimit;
+
+      const [payouts, total, totals] = await Promise.all([
+        Payout.find(filter).sort({ createdAt: -1 }).skip(skip).limit(safeLimit).lean(),
+        Payout.countDocuments(filter),
+        Payout.aggregate([
+          { $match: filter },
+          { $group: { _id: null, amount: { $sum: '$amount' } } },
+        ]),
       ]);
 
       return {
         payouts,
         pagination: {
-          page,
-          limit,
+          page: safePage,
+          limit: safeLimit,
           total,
-          pages: Math.ceil(total / limit)
-        }
+          pages: Math.max(1, Math.ceil(total / safeLimit)),
+        },
+        // Read by the vendor payout-history page for its "Total Amount" stat.
+        totalAmount: totals?.[0]?.amount || 0,
       };
     } catch (error) {
       logger.error('Error in getPayoutHistory:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * List this vendor's rentals as invoice summaries.
+   *
+   * There is no Invoice collection and no vendor invoices route. An invoice is
+   * generated on demand from a rental by RentalService.generateInvoice(), which is
+   * what /rentals/:id/invoice and its download already use. The list is therefore
+   * built straight from the vendor's rentals with a single query — calling
+   * generateInvoice per row would add four populates per invoice on every page.
+   */
+  async getInvoices(vendorId, { page = 1, limit = 10, status, search, type } = {}) {
+    try {
+      const vendor = await Vendor.findById(vendorId).select('_id').lean();
+      if (!vendor) {
+        throw new AppError('Vendor profile not found', 404);
+      }
+
+      const Rental = require('../models/Rental.model');
+
+      const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+      const safeLimit =
+        Number.isFinite(limit) && limit > 0 ? Math.min(Math.floor(limit), 100) : 10;
+
+      // Every invoice here is a rental invoice, so a request for any other type
+      // genuinely has no rows. Returning rentals anyway would be a lie.
+      if (type && type !== 'rental') {
+        return {
+          invoices: [],
+          pagination: { page: safePage, limit: safeLimit, total: 0, pages: 1 },
+          totalAmount: 0,
+        };
+      }
+
+      const filter = { vendor: vendor._id };
+
+      // Free-text search over the invoice/rental number and the customer name.
+      if (search && String(search).trim()) {
+        const rx = new RegExp(
+          String(search).trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+          'i',
+        );
+        filter.$or = [{ rentalNumber: rx }, { 'user.profile.firstName': rx }];
+      }
+
+      const skip = (safePage - 1) * safeLimit;
+
+      const [rentals, total] = await Promise.all([
+        Rental.find(filter)
+          .sort({ createdAt: -1 })
+          .skip(skip)
+          .limit(safeLimit)
+          .populate('user', 'profile.firstName profile.lastName email phone')
+          .populate('product', 'basicInfo.name basicInfo.sku')
+          .lean(),
+        Rental.countDocuments(filter),
+      ]);
+
+      const now = new Date();
+
+      const invoices = rentals.map((rental) => {
+        const details = rental.rentalDetails || {};
+        const payment = rental.payment || {};
+        const totalAmount = Number(details.totalAmount) || 0;
+        const paid = Number(payment.paidAmount) || 0;
+        const due = Number(payment.dueAmount) || 0;
+        const endDate = details.endDate ? new Date(details.endDate) : null;
+
+        // The page only understands paid | pending | overdue. `due` is the source of
+        // truth: anything fully paid is paid, otherwise it is overdue once the rental
+        // has ended, else still pending.
+        let invoiceStatus = 'pending';
+        if (due <= 0) {
+          invoiceStatus = 'paid';
+        } else if (endDate && endDate < now) {
+          invoiceStatus = 'overdue';
+        }
+
+        return {
+          _id: rental._id,
+          invoiceNumber: `INV-${rental.rentalNumber}`,
+          rentalNumber: rental.rentalNumber,
+          rentalId: rental._id,
+          type: 'rental',
+          status: invoiceStatus,
+          rentalStatus: rental.status,
+          customer: {
+            name:
+              [rental.user?.profile?.firstName, rental.user?.profile?.lastName]
+                .filter(Boolean)
+                .join(' ')
+                .trim() || 'Customer',
+            email: rental.user?.email || null,
+            phone: rental.user?.phone || null,
+          },
+          product: {
+            name: rental.product?.basicInfo?.name || 'Rental item',
+            sku: rental.product?.basicInfo?.sku || null,
+          },
+          rentalPeriod: {
+            start: details.startDate || null,
+            end: details.endDate || null,
+          },
+          amounts: {
+            subtotal: Number(details.subtotal) || 0,
+            discount: Number(details.discount) || 0,
+            securityDeposit: Number(details.securityDeposit) || 0,
+            deliveryCharges: Number(details.deliveryCharges) || 0,
+            total: totalAmount,
+            paid,
+            due,
+          },
+          // Flattened as well, so the page can show a single figure without
+          // reaching into `amounts`.
+          amount: totalAmount,
+          paidAmount: paid,
+          dueAmount: due,
+          createdAt: rental.createdAt,
+          dueDate: endDate,
+        };
+      });
+
+      // Status filtering happens in memory because it is derived, not stored.
+      let rows = invoices;
+      if (status) {
+        rows = rows.filter((row) => row.status === status);
+      }
+
+      const totalAmount = rows.reduce((sum, row) => sum + (row.amount || 0), 0);
+
+      return {
+        invoices: rows,
+        pagination: {
+          page: safePage,
+          limit: safeLimit,
+          total: status ? rows.length : total,
+          pages: Math.max(
+            1,
+            Math.ceil((status ? rows.length : total) / safeLimit),
+          ),
+        },
+        totalAmount,
+      };
+    } catch (error) {
+      logger.error('Error in getInvoices:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Generate one rental's invoice, but only if it belongs to this vendor.
+   *
+   * RentalService.generateInvoice() looks a rental up by id alone and does no
+   * ownership check, so calling it straight from a vendor route would let any vendor
+   * read any other vendor's (or any customer's) invoice. This wrapper is the gate.
+   */
+  async getVendorInvoice(vendorId, rentalId) {
+    try {
+      const Rental = require('../models/Rental.model');
+
+      const rental = await Rental.findOne({ _id: rentalId, vendor: vendorId })
+        .select('_id')
+        .lean();
+
+      if (!rental) {
+        // Same response whether the rental does not exist or belongs to someone
+        // else — a distinct 403 would leak that the id exists.
+        throw new AppError('Invoice not found', 404);
+      }
+
+      const RentalService = require('./rental.service');
+      return RentalService.generateInvoice(rentalId);
+    } catch (error) {
+      logger.error('Error in getVendorInvoice:', error);
       throw error;
     }
   }

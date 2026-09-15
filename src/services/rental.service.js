@@ -2059,8 +2059,9 @@ class RentalService {
         .populate("payment.paymentHistory")
         .lean();
 
-      console.log("vendor--->", rental.payment);
-
+      // The null check MUST come first. A debug console.log used to sit here reading
+      // `rental.payment` before it, so an unknown id threw a TypeError instead of the
+      // intended 404 — and it logged payment data on every invoice generation.
       if (!rental) {
         throw new AppError("Rental not found", 404);
       }

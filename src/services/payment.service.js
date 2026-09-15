@@ -1577,6 +1577,14 @@ class PaymentService {
           $gte: new Date(new Date().setDate(1)),
           $lte: new Date(),
         };
+      } else if (period === "quarter") {
+        // The caller offers a "Quarter" option but there was no branch for it, so
+        // `dateFilter` stayed empty and "quarter" silently meant "all time".
+        // Three months back is what the label promises.
+        const quarterStart = new Date();
+        quarterStart.setHours(0, 0, 0, 0);
+        quarterStart.setMonth(quarterStart.getMonth() - 3);
+        dateFilter.createdAt = { $gte: quarterStart, $lte: new Date() };
       } else if (period === "year") {
         dateFilter.createdAt = {
           $gte: new Date(new Date().getFullYear(), 0, 1),
@@ -1636,14 +1644,90 @@ class PaymentService {
         },
       ]);
 
-      return (
+      // `period` narrows the aggregation above, but the overview cards ALSO show
+      // this month vs last month and what is still owed in pending payouts. None of
+      // that was ever computed — the client hardcoded `growth: 12.5` and zeros — so
+      // compute it here over its own window rather than reusing the filtered facets.
+      const now = new Date();
+      const startOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+
+      const baseMatch = role === "user" ? { user: userId } : { vendor: userId };
+      baseMatch.status = "success";
+
+      const monthly = await Payment.aggregate([
+        {
+          $match: {
+            ...baseMatch,
+            createdAt: { $gte: startOfLastMonth, $lte: now },
+          },
+        },
+        {
+          $group: {
+            _id: { $cond: [{ $gte: ["$createdAt", startOfThisMonth] }, "this", "last"] },
+            amount: { $sum: "$amount" },
+          },
+        },
+      ]);
+
+      const amountFor = (key) =>
+        Number(monthly.find((row) => row._id === key)?.amount || 0);
+      const thisMonthRevenue = amountFor("this");
+      const lastMonthRevenue = amountFor("last");
+      // null (not 0, and definitely not a made-up number) when there is no previous
+      // month to compare against — the UI renders that as "no comparison yet".
+      const growth =
+        lastMonthRevenue > 0
+          ? Number(
+              (((thisMonthRevenue - lastMonthRevenue) / lastMonthRevenue) * 100).toFixed(1)
+            )
+          : null;
+
+      // Money earned but not yet transferred to this vendor.
+      let pendingPayout = 0;
+      if (role === "vendor") {
+        const Payout = require("../models/Payout.model");
+        const pending = await Payout.aggregate([
+          {
+            $match: {
+              vendor: userId,
+              status: { $in: ["pending", "processing"] },
+            },
+          },
+          { $group: { _id: null, amount: { $sum: "$amount" } } },
+        ]);
+        pendingPayout = Number(pending?.[0]?.amount || 0);
+      }
+
+      // Real success rate. The overview card displayed a hardcoded "98.5%" that had
+      // nothing to do with the account's payments.
+      const statusCounts = await Payment.aggregate([
+        { $match: role === "user" ? { user: userId } : { vendor: userId } },
+        { $group: { _id: "$status", count: { $sum: 1 } } },
+      ]);
+      const allPayments = statusCounts.reduce((sum, row) => sum + row.count, 0);
+      const succeeded = statusCounts.find((row) => row._id === "success")?.count || 0;
+      const successRate =
+        allPayments > 0
+          ? Number(((succeeded / allPayments) * 100).toFixed(1))
+          : null;
+
+      const result =
         stats[0] || {
           overview: [{ totalAmount: 0, totalCount: 0, averageAmount: 0 }],
           byType: [],
           byMethod: [],
           dailyTrend: [],
-        }
-      );
+        };
+
+      return {
+        ...result,
+        thisMonthRevenue,
+        lastMonthRevenue,
+        growth,
+        pendingPayout,
+        successRate,
+      };
     } catch (error) {
       logger.error("Error in getPaymentStats:", error);
       throw error;

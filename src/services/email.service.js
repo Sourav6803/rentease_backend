@@ -25,6 +25,11 @@ class EmailService {
   constructor() {
     this.transporter = null;
     this.initialized = false;
+    /**
+     * Why the last initialize() failed, if it did. Surfaced by sendEmail() so the
+     * reason reaches the notification record instead of being swallowed.
+     */
+    this.lastInitError = null;
     this.defaultFrom = process.env.EMAIL_FROM || "noreply@rentease.com";
     this.defaultFromName = process.env.EMAIL_FROM_NAME || "RentEase";
   }
@@ -38,6 +43,25 @@ class EmailService {
     try {
       // Use real SMTP whenever configured; fall back to ethereal only if not
       if (process.env.NODE_ENV === "production" || process.env.SMTP_HOST) {
+        // Fail loudly and specifically. Previously, a deployment with SMTP_HOST
+        // unset still built a transport against `host: undefined` (which silently
+        // means localhost), verify() failed, and the error was swallowed at the
+        // bottom of this method — so a complete email outage looked exactly like
+        // "no email arrived", with nothing actionable anywhere in the logs.
+        const missing = ["SMTP_HOST", "SMTP_USER", "SMTP_PASS"].filter(
+          (key) => !process.env[key],
+        );
+
+        if (missing.length > 0) {
+          this.lastInitError =
+            `SMTP mode selected (NODE_ENV=${process.env.NODE_ENV || "unset"}) but ` +
+            `${missing.join(", ")} ${missing.length === 1 ? "is" : "are"} not set.`;
+
+          logger.error(`❌ Email service not configured: ${this.lastInitError}`);
+          this.initialized = false;
+          return;
+        }
+
         this.transporter = nodemailer.createTransport({
           host: process.env.SMTP_HOST,
           port: parseInt(process.env.SMTP_PORT) || 587,
@@ -88,10 +112,12 @@ class EmailService {
       // Verify connection
       await this.transporter.verify();
       this.initialized = true;
+      this.lastInitError = null;
       logger.info("✅ Email service initialized successfully");
     } catch (error) {
       console.error("Email service initialization error:", error);
       logger.error("❌ Email service initialization failed:", error);
+      this.lastInitError = error?.message || String(error);
       // Don't throw - service can work without email
       this.initialized = false;
     }
@@ -103,6 +129,15 @@ class EmailService {
   async sendEmail(options) {
     if (!this.initialized) {
       await this.initialize();
+    }
+
+    // Fail fast, and say WHY. Without this the send went ahead on a transporter
+    // that had already failed verification, so the caller saw a generic SMTP error
+    // and the actual cause (missing configuration) was lost.
+    if (!this.transporter) {
+      throw new Error(
+        `Email transport is not available: ${this.lastInitError || "not configured"}`,
+      );
     }
 
     try {

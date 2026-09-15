@@ -88,9 +88,20 @@ class PaymentController {
    */
   getPaymentStats = catchAsync(async (req, res) => {
     const { period = 'month' } = req.query;
-    
-    const stats = await PaymentService.getPaymentStats(req.user._id, req.user.role, period);
-    
+
+    // `Payment.vendor` holds the Vendor document _id, not the owning User id — the
+    // same mismatch `getVendorPayments` already works around (see the note there).
+    // Passing `req.user._id` for a vendor matched nothing, so the aggregation
+    // returned an empty `overview` and the vendor dashboard showed zeros for every
+    // figure while the payments themselves existed.
+    const ownerId = req.user.role === 'vendor' ? req.vendor?._id : req.user._id;
+
+    if (req.user.role === 'vendor' && !ownerId) {
+      throw new AppError('Vendor profile not found for this account', 403);
+    }
+
+    const stats = await PaymentService.getPaymentStats(ownerId, req.user.role, period);
+
     return ApiResponse.success(res, 200, 'Payment statistics retrieved successfully', stats);
   });
 
