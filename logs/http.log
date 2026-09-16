@@ -100128,3 +100128,7 @@
 2026-09-15 08:39:01:391 [33mwarn[39m: [33mCould not read payout credentials from settings: Operation `systemsettings.findOne()` buffering timed out after 10000ms[39m
 2026-09-15 08:39:11:3911 [33mwarn[39m: [33mCould not read razorpay credentials from settings: Operation `systemsettings.findOne()` buffering timed out after 10000ms[39m
 2026-09-15 08:39:21:3921 [33mwarn[39m: [33mCould not read payout credentials from settings: Operation `systemsettings.findOne()` buffering timed out after 10000ms[39m
+2026-09-16 08:19:11:1911 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-16 08:19:31:1931 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-09-16 09:07:05:75 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-16 09:08:39:839 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m

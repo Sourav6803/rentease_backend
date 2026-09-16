@@ -1568,8 +1568,15 @@ class PaymentService {
    */
   async getPaymentStats(userId, role = "user", period = "month") {
     try {
-      const match = role === "user" ? { user: userId } : { vendor: userId };
-      match.status = "success";
+      // Account scope. `status: "success"` is the only filter that always applies;
+      // the period filter below narrows ONLY the trend. The KPI cards read the
+      // all-time totals computed further down — they used to read the period-scoped
+      // `overview` while the page defaults the period to "month", so "Total Revenue"
+      // and "Avg. Transaction" showed 0 for any vendor with no successful payment in
+      // the current calendar month, however much history the account had.
+      const baseMatch = role === "user" ? { user: userId } : { vendor: userId };
+      baseMatch.status = "success";
+      const match = { ...baseMatch };
 
       const dateFilter = {};
       if (period === "month") {
@@ -1640,9 +1647,50 @@ class PaymentService {
               },
               { $sort: { "_id.year": 1, "_id.month": 1, "_id.day": 1 } },
             ],
+            // Monthly buckets inside the selected period, so the Revenue Trend chart
+            // is driven by the Month/Quarter/Year buttons. Those buttons used to sit
+            // on the chart card while the chart itself was derived on the client from
+            // a fixed last-6-months window, so they visibly did nothing.
+            trend: [
+              {
+                $group: {
+                  _id: {
+                    year: { $year: "$createdAt" },
+                    month: { $month: "$createdAt" },
+                  },
+                  count: { $sum: 1 },
+                  amount: { $sum: "$amount" },
+                },
+              },
+              { $sort: { "_id.year": 1, "_id.month": 1 } },
+            ],
           },
         },
       ]);
+
+      // All-time totals for the KPI cards — deliberately WITHOUT `dateFilter`.
+      const allTimeAgg = await Payment.aggregate([
+        { $match: baseMatch },
+        {
+          $group: {
+            _id: null,
+            totalAmount: { $sum: "$amount" },
+            totalCount: { $sum: 1 },
+            averageAmount: { $avg: "$amount" },
+            minAmount: { $min: "$amount" },
+            maxAmount: { $max: "$amount" },
+          },
+        },
+      ]);
+
+      const allTimeRaw = allTimeAgg[0] || {};
+      const allTime = {
+        totalAmount: Number(allTimeRaw.totalAmount || 0),
+        totalCount: Number(allTimeRaw.totalCount || 0),
+        averageAmount: Number(allTimeRaw.averageAmount || 0),
+        minAmount: Number(allTimeRaw.minAmount || 0),
+        maxAmount: Number(allTimeRaw.maxAmount || 0),
+      };
 
       // `period` narrows the aggregation above, but the overview cards ALSO show
       // this month vs last month and what is still owed in pending payouts. None of
@@ -1651,9 +1699,6 @@ class PaymentService {
       const now = new Date();
       const startOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
       const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-
-      const baseMatch = role === "user" ? { user: userId } : { vendor: userId };
-      baseMatch.status = "success";
 
       const monthly = await Payment.aggregate([
         {
@@ -1718,10 +1763,30 @@ class PaymentService {
           byType: [],
           byMethod: [],
           dailyTrend: [],
+          trend: [],
         };
+
+      const MONTH_LABELS = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+      ];
+
+      // `$facet` always returns a populated array for `trend` when documents match
+      // and an empty array when none do, so no undefined row is possible here.
+      const trend = (result.trend || []).map((row) => ({
+        month: `${MONTH_LABELS[row._id.month - 1]} ${row._id.year}`,
+        year: row._id.year,
+        monthNumber: row._id.month,
+        revenue: Number(row.amount || 0),
+        count: Number(row.count || 0),
+      }));
 
       return {
         ...result,
+        // All-time totals — what "Total Revenue" / "Avg. Transaction" mean.
+        allTime,
+        // Period-scoped monthly buckets — what the trend chart means.
+        trend,
         thisMonthRevenue,
         lastMonthRevenue,
         growth,

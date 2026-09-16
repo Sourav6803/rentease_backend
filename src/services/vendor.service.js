@@ -983,7 +983,7 @@ class VendorService {
   /**
    * Get payout history
    */
-  async getPayoutHistory(vendorId, page = 1, limit = 10, status) {
+  async getPayoutHistory(vendorId, page = 1, limit = 10, status, search) {
     try {
       // Only the _id is needed — the previous version loaded the whole document
       // just to check it exists.
@@ -1014,6 +1014,14 @@ class VendorService {
         if (PAYOUT_STATUSES.includes(status)) {
           filter.status = status;
         }
+      }
+
+      // The page has always rendered a "Search by payout ID" box; without this it was
+      // a control that did nothing. Escaped so a query full of regex metacharacters
+      // cannot turn into a pattern that matches everything.
+      if (search && typeof search === 'string' && search.trim()) {
+        const escaped = search.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        filter.payoutNumber = { $regex: escaped, $options: 'i' };
       }
 
       const skip = (safePage - 1) * safeLimit;
@@ -1216,6 +1224,42 @@ class VendorService {
       return RentalService.generateInvoice(rentalId);
     } catch (error) {
       logger.error('Error in getVendorInvoice:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Receipt payload for one of THIS vendor's payouts.
+   *
+   * SettlementService.getPayoutReceipt() resolves a payout by id alone and performs
+   * no ownership check, so calling it straight from a vendor route would let any
+   * vendor read any other vendor's payout, amounts and bank snapshot. This wrapper
+   * is the gate.
+   */
+  async getPayoutReceipt(vendorId, payoutId) {
+    try {
+      const Payout = require('../models/Payout.model');
+
+      // A malformed id must not reach Mongoose, which would raise a CastError (500).
+      // From the vendor's point of view an id that cannot exist is simply not found.
+      if (!payoutId || !mongoose.Types.ObjectId.isValid(String(payoutId))) {
+        throw new AppError('Payout not found', 404);
+      }
+
+      const owned = await Payout.findOne({ _id: payoutId, vendor: vendorId })
+        .select('_id')
+        .lean();
+
+      if (!owned) {
+        // Same response whether the payout does not exist or belongs to someone
+        // else — a distinct 403 would leak that the id exists.
+        throw new AppError('Payout not found', 404);
+      }
+
+      const settlement = require('./settlement.service');
+      return settlement.getPayoutReceipt(payoutId);
+    } catch (error) {
+      logger.error('Error in getPayoutReceipt:', error);
       throw error;
     }
   }

@@ -116,6 +116,14 @@ const rentalSchema = new mongoose.Schema({
     status: { type: String, enum: ['pending', 'approved', 'rejected'] },
     approvedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     approvedAt: Date,
+    /**
+     * Rejection trail. This subdocument is strict, so without these fields a vendor's
+     * decision would be silently dropped and the request would read as "rejected"
+     * with no record of who declined it, or why.
+     */
+    rejectedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    rejectedAt: Date,
+    rejectionReason: String,
     paymentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Payment' }
   }],
   cancellation: {

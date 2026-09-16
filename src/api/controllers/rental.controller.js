@@ -144,6 +144,30 @@ class RentalController {
   });
 
   /**
+   * Reject extension (vendor only)
+   *
+   * Without this the vendor's only option on an extension request was to approve it —
+   * the frontend offered a Reject button that resolved to no route at all.
+   */
+  rejectExtension = catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const { extensionIndex, reason } = req.body;
+
+    if (extensionIndex === undefined) {
+      throw new AppError('Extension index is required', 400);
+    }
+
+    const rental = await RentalService.rejectExtension(
+      id,
+      req.user._id,
+      extensionIndex,
+      typeof reason === 'string' ? reason.trim() : undefined,
+    );
+
+    return ApiResponse.success(res, 200, 'Extension rejected successfully', { rental });
+  });
+
+  /**
    * Mark as delivered (vendor only)
    */
   markAsDelivered = catchAsync(async (req, res) => {

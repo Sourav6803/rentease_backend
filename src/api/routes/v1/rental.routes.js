@@ -222,6 +222,14 @@ router.post('/vendor/:id/extension/approve',
   rentalController.approveExtension
 );
 
+// Reject extension — the counterpart to approve. Money-neutral: the extension
+// amount is only charged on approval, so there is nothing to reverse here.
+router.post('/vendor/:id/extension/reject',
+  validate(rentalValidations.rejectExtension),
+  invalidateCache(['rental:*', 'rentals:vendor:*', 'rentals:user:*']),
+  rentalController.rejectExtension
+);
+
 // Mark as delivered
 router.post('/vendor/:id/deliver', 
   validate(rentalValidations.markDelivered),

@@ -359,7 +359,7 @@ class VendorController {
    * Get payout history
    */
   getPayoutHistory = catchAsync(async (req, res) => {
-    const { page = 1, limit = 10, status } = req.query;
+    const { page = 1, limit = 10, status, search } = req.query;
     const history = await VendorService.getPayoutHistory(
       req.vendor._id,
       parseInt(page),
@@ -367,6 +367,8 @@ class VendorController {
       // `status` was previously dropped on the floor, so the page's status filter
       // did nothing. The service validates the value against the schema enum.
       typeof status === 'string' ? status.trim() : undefined,
+      // Likewise for the page's search box.
+      typeof search === 'string' ? search : undefined,
     );
 
     return ApiResponse.success(
@@ -740,6 +742,25 @@ class VendorController {
         if (unlinkErr) logger.error('Error deleting temp invoice file:', unlinkErr);
       });
     });
+  });
+
+  /**
+   * Receipt for one of this vendor's payouts.
+   *
+   * The payout detail modal had no receipt to offer: the only receipt route on the
+   * backend is `GET /api/v1/admin/payouts/:id/receipt`, which is admin-only, and the
+   * button pointed at a vendor route that did not exist. This is that route's
+   * handler; the ownership check lives in VendorService.getPayoutReceipt().
+   */
+  getPayoutReceipt = catchAsync(async (req, res) => {
+    const receipt = await VendorService.getPayoutReceipt(req.vendor._id, req.params.id);
+
+    return ApiResponse.success(
+      res,
+      200,
+      'Payout receipt retrieved successfully',
+      receipt,
+    );
   });
 }
 

@@ -840,6 +840,20 @@ const rentalValidations = {
       .toInt()
   ],
   
+  rejectExtension: [
+    body('extensionIndex')
+      .notEmpty()
+      .withMessage('Extension index is required')
+      .isInt({ min: 0 })
+      .toInt(),
+    body('reason')
+      .optional()
+      .isString()
+      .withMessage('Reason must be text')
+      .isLength({ max: 500 })
+      .withMessage('Reason must be 500 characters or fewer')
+  ],
+  
   markDelivered: [
     body('proof')
       .optional()

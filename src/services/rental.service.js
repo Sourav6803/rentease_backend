@@ -1451,6 +1451,72 @@ class RentalService {
   }
 
   /**
+   * Reject extension (vendor action)
+   *
+   * Counterpart to approveExtension, and deliberately money-neutral: the extension
+   * amount is only charged when an extension is APPROVED (approveExtension queues the
+   * payment job), so declining has nothing to reverse. Dates and totals are left
+   * exactly as they were, and the rental carries on on its original terms.
+   */
+  async rejectExtension(rentalId, vendorId, extensionIndex, reason) {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+    try {
+      const rental = await Rental.findOne({
+        _id: rentalId,
+        vendor: vendorId,
+        status: "extension_requested",
+      }).session(session);
+
+      if (!rental) {
+        throw new AppError("Rental not found or no pending extension", 404);
+      }
+
+      const extension = rental.extensions[extensionIndex];
+      if (!extension || extension.status !== "pending") {
+        throw new AppError("Extension request not found", 404);
+      }
+
+      extension.status = "rejected";
+      extension.rejectedBy = vendorId;
+      extension.rejectedAt = new Date();
+      if (reason) extension.rejectionReason = reason;
+
+      // Back to active on the untouched original dates.
+      rental.status = "active";
+
+      rental.timeline.push({
+        status: "extension_rejected",
+        timestamp: new Date(),
+        note: reason
+          ? `Extension request declined by vendor. Reason: ${reason}`
+          : "Extension request declined by vendor",
+      });
+
+      await rental.save({ session });
+      await session.commitTransaction();
+
+      eventEmitter.emit(EVENTS.RENTAL.EXTENSION_REJECTED, {
+        rentalId: rental._id,
+        rentalNumber: rental.rentalNumber,
+        userId: rental.user,
+        vendorId,
+        additionalMonths: extension.additionalMonths,
+        reason: reason || null,
+      });
+
+      return rental;
+    } catch (error) {
+      await session.abortTransaction();
+      logger.error("Error in rejectExtension:", error);
+      throw error;
+    } finally {
+      session.endSession();
+    }
+  }
+
+  /**
    * Mark rental as delivered
    */
   async markAsDelivered(rentalId, deliveryData) {

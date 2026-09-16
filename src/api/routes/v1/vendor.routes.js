@@ -122,6 +122,9 @@ router.put('/subscription', validate(vendorValidations.updateSubscription), vend
 // Payout routes
 router.put('/payout-schedule', validate(vendorValidations.payoutSchedule), vendorController.updatePayoutSchedule);
 router.get('/payouts', vendorController.getPayoutHistory);
+// Receipt for one of this vendor's own payouts. `/payouts` is an exact path, so it
+// does not shadow this one. Ownership is enforced in the service.
+router.get('/payouts/:id/receipt', vendorController.getPayoutReceipt);
 
 // Invoice routes. Invoices are generated per rental
 // (RentalService.generateInvoice), so these are backed by the vendor's rentals.
