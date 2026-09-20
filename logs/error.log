@@ -48168,3 +48168,252 @@
 2026-09-15 00:21:18:2118 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
 2026-09-15 00:21:18:2118 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
 2026-09-15 00:27:31:2731 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-09-16 23:31:52:3152 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-16 23:32:00:320 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-16 23:32:08:328 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-16 23:32:15:3215 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-16 23:32:21:3221 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-16 23:32:28:3228 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-17 00:29:42:2942 [31merror[39m: [31mError processing notification: Operation interrupted because client was closed[39m
+2026-09-17 00:39:02:392 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-17 00:39:02:392 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-17 07:43:09:439 [31merror[39m: [31mError in createCategory: AppError is not a constructor[39m
+2026-09-17 07:44:49:4449 [31merror[39m: [31mError in createCategory: Category "Mobile Phones" already exists under this parent (slug: mobile-phones)[39m
+2026-09-17 07:44:49:4449 [31merror[39m: [31mError in createCategory: Category "Mobile Phones" already exists under this parent (slug: mobile-phones)[39m
+2026-09-17 07:44:50:4450 [31merror[39m: [31mError in createCategory: Category "Mobile Phones" already exists under this parent (slug: mobile-phones)[39m
+2026-09-19 23:58:16:5816 [31merror[39m: [31mError in createProduct: Inventory validation failed: condition.status: `like-new` is not a valid enum value for path `condition.status`.[39m
+2026-09-20 00:55:53:5553 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:55:53:5553 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:55:56:5556 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:55:56:5556 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:01:561 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:01:561 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:02:562 [31merror[39m: [31mError processing notification: Client must be connected before running operations[39m
+2026-09-20 00:56:02:562 [31merror[39m: [31mError in createNotification: Client must be connected before running operations[39m
+2026-09-20 00:56:39:5639 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:39:5639 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:43:5643 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:43:5643 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:48:5648 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:48:5648 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:52:5652 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:52:5652 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:55:5655 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:55:5655 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:58:5658 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:58:5658 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:03:573 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:03:573 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:07:577 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:07:577 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:11:5711 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:11:5711 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:15:5715 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:15:5715 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:18:5718 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:18:5718 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:21:5721 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:21:5721 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:26:5726 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:26:5726 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:31:5731 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:31:5731 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:35:5735 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:35:5735 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:38:5738 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:38:5738 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:42:5742 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:42:5742 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:45:5745 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:45:5745 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:48:5748 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:48:5748 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:53:5753 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:53:5753 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:57:5757 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:57:5757 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:02:582 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:02:582 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:06:586 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:06:586 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:10:5810 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:10:5810 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:13:5813 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:13:5813 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:16:5816 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:16:5816 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:21:5821 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:21:5821 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:24:5824 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:24:5824 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:28:5828 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:28:5828 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:34:5834 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:34:5834 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:38:5838 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:38:5838 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:41:5841 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:41:5841 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:44:5844 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:44:5844 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:49:5849 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:49:5849 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:54:5854 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:54:5854 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:58:5858 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:58:5858 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:02:592 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:02:592 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:07:597 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:07:597 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:11:5911 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:11:5911 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:14:5914 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:14:5914 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:37:5937 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:37:5937 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:40:5940 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:40:5940 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:43:5943 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:43:5943 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:48:5948 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:48:5948 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:52:5952 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:52:5952 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:56:5956 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:56:5956 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:00:00 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:00:00 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:04:04 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:04:04 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:08:08 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:08:08 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:11:011 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:11:011 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:15:015 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:15:015 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:18:018 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:18:018 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:22:022 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:22:022 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:26:026 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:26:026 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:30:030 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:30:030 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:37:037 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:37:037 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:42:042 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:42:042 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:45:045 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:45:045 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:48:048 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:48:048 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:52:052 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:52:052 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:58:058 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:58:058 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:02:12 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:02:12 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:06:16 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:06:16 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:12:112 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:12:112 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:15:115 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:15:115 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:21:121 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:21:121 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:25:125 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:25:125 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:28:128 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:28:128 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:32:132 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:32:132 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:37:137 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:37:137 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:41:141 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:41:141 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:44:144 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:44:144 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:48:148 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:48:148 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:51:151 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:51:151 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:55:155 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:55:155 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:58:158 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:58:158 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:02:02:22 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:02:02:22 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:02:06:26 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:02:06:26 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:02:09:29 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:02:09:29 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:02:13:213 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:02:13:213 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:13:4413 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:13:4413 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:16:4416 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:16:4416 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:20:4420 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:20:4420 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:24:4424 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:24:4424 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:27:4427 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:27:4427 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:31:4431 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:31:4431 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:35:4435 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:35:4435 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:39:4439 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:39:4439 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:42:4442 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:42:4442 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:45:4445 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:45:4445 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:49:4449 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:49:4449 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:52:4452 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:52:4452 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:56:4456 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:56:4456 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:00:450 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:00:450 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:00:450 [31merror[39m: [31mError processing notification: Operation interrupted because client was closed[39m
+2026-09-20 07:45:00:450 [31merror[39m: [31mError in createNotification: Client must be connected before running operations[39m
+2026-09-20 07:45:38:4538 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:38:4538 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:42:4542 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:42:4542 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:45:4545 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:45:4545 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:52:4552 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:52:4552 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:57:4557 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:57:4557 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:01:461 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:01:461 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:05:465 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:05:465 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:12:4612 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:12:4612 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:17:4617 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:17:4617 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:23:4623 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:23:4623 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:28:4628 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:28:4628 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:32:4632 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:32:4632 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:45:4645 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:45:4645 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:53:4653 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:53:4653 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:57:4657 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:57:4657 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:55:55:5555 [31merror[39m: [31mError handling product added event: Cannot pass an array to query updates unless the `updatePipeline` option is set.[39m
+2026-09-20 07:56:48:5648 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:56:48:5648 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 08:43:34:4334 [31merror[39m: [31m❌ Queue email not found! Available queues:[39m
+2026-09-20 08:43:35:4335 [31merror[39m: [31mError processing notification: Cannot use a session that has ended[39m
+2026-09-20 08:48:34:4834 [31merror[39m: [31m❌ Queue definitely-not-a-queue not found (available: email, sms, notification, payment, rental, delivery, report, cleanup, audit, vendor, maintenance, product, analytics, whatsapp, admin, backup) — dropped definitely-not-a-queue/x (best-effort)[39m
+2026-09-20 08:48:34:4834 [31merror[39m: [31m❌ Queue definitely-not-a-queue not found (available: email, sms, notification, payment, rental, delivery, report, cleanup, audit, vendor, maintenance, product, analytics, whatsapp, admin, backup) — dropped definitely-not-a-queue/x[39m

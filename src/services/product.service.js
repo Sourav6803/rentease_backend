@@ -65,8 +65,12 @@ class ProductService {
     
     const vendorPrefix = vendor?.vendorId?.slice(-4) || 'XXXX';
     const categoryPrefix = category?.slug?.slice(0, 3).toUpperCase() || 'GEN';
-    
-    const count = await Product.countDocuments({ vendor: vendorId }) + 1;
+
+    // `vendorId` is a User id, but `Product.vendor` holds the Vendor document id.
+    // Counting by the User id always returned 0, so every product a vendor created
+    // was numbered "0001" — two products in one category then produced an identical
+    // `basicInfo.sku` and the second insert died on the unique index.
+    const count = (vendor ? await Product.countDocuments({ vendor: vendor._id }) : 0) + 1;
     const sequential = String(count).padStart(4, '0');
     
     return `${categoryPrefix}${vendorPrefix}${sequential}`;
@@ -630,9 +634,11 @@ class ProductService {
         throw new AppError('Vendor not found', 404);
       }
 
-      // Check vendor's subscription limits
+      // Check vendor's subscription limits.
+      // Same User-id/Vendor-id mix-up as generateSKU: counting by `vendorId` always
+      // returned 0, so `maxProducts` was never actually enforced.
       if (vendor.subscription?.limits?.maxProducts > 0) {
-        const productCount = await Product.countDocuments({ vendor: vendorId });
+        const productCount = await Product.countDocuments({ vendor: vendor._id });
         if (productCount >= vendor.subscription.limits.maxProducts) {
           throw new AppError('Vendor has reached maximum product limit', 400);
         }
@@ -699,6 +705,25 @@ class ProductService {
       }], { session });
 
       // Create inventory items
+      //
+      // Product.condition and Inventory.condition.status are two DIFFERENT vocabularies
+      // and this used to copy the value straight across:
+      //   Product   : ['new', 'like-new', 'good', 'fair', 'refurbished']
+      //   Inventory : ['new', 'excellent', 'good', 'fair', 'poor', 'damaged']
+      // So creating a product with condition 'like-new' — the most natural value on a
+      // rental marketplace, and accepted by the API validator — failed Inventory
+      // validation and aborted the whole transaction with "`like-new` is not a valid
+      // enum value for path `condition.status`". 'refurbished' failed identically.
+      // Translate explicitly instead of copying.
+      const ASSET_CONDITION = {
+        new: 'new',
+        'like-new': 'excellent',
+        good: 'good',
+        fair: 'fair',
+        refurbished: 'excellent',
+      };
+      const assetCondition = ASSET_CONDITION[condition] || 'good';
+
       const inventoryItems = [];
       for (let i = 0; i < inventory.totalQuantity; i++) {
         inventoryItems.push({
@@ -706,7 +731,7 @@ class ProductService {
           sku: `${sku}-${String(i + 1).padStart(3, '0')}`,
           status: 'available',
           condition: {
-            status: condition
+            status: assetCondition
           }
         });
       }
@@ -726,6 +751,19 @@ class ProductService {
         vendorId,
         productName: product[0].basicInfo.name,
         categoryId: category
+      });
+
+      // The vendor-scoped counters on `Vendor.products` (total / active / categories)
+      // are maintained by the VENDOR.PRODUCT_ADDED listener in events/vendor.events.js
+      // — an event that nothing ever emitted. As a result a vendor's own dashboard and
+      // the admin "Total Products" column read 0 no matter how much stock they listed.
+      // `vendorId` is the User id, which is what that listener looks the vendor up by.
+      eventEmitter.emit(EVENTS.VENDOR.PRODUCT_ADDED, {
+        vendorId,
+        productId: product[0]._id,
+        productName: product[0].basicInfo.name,
+        categoryId: category,
+        requiresApproval: product[0].status?.approvalStatus === 'pending'
       });
 
       return product[0];

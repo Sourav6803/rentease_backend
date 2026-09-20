@@ -27,6 +27,12 @@ const notificationSchema = new mongoose.Schema({
   },
   category: {
     type: String,
+    // `product` and `delivery` are what the product/delivery notifiers actually send
+    // (events/product.events.js, events/delivery.events.js). They were missing from
+    // this enum, so every one of those notifications failed validation — silently,
+    // because the notifier catches and logs. The visible effect was that an admin
+    // was never told a product was waiting for approval, and a vendor never heard
+    // that theirs was approved or rejected.
     enum: [
       'transactional',
       'promotional',
@@ -35,7 +41,9 @@ const notificationSchema = new mongoose.Schema({
       'update',
       'security',
       'marketing',
-      'system'
+      'system',
+      'product',
+      'delivery'
     ],
     required: true,
     index: true

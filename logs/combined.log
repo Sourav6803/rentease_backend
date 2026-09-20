@@ -100134,3 +100134,460 @@
 2026-09-16 08:19:31:1931 [32minfo[39m: [32m✅ Email service initialized successfully[39m
 2026-09-16 09:07:05:75 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
 2026-09-16 09:08:39:839 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-16 23:31:20:3120 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-16 23:31:52:3152 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-16 23:32:00:320 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-16 23:32:08:328 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-16 23:32:15:3215 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-16 23:32:21:3221 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-16 23:32:28:3228 [31merror[39m: [31mError in createNotification: Notification validation failed: category: `product` is not a valid enum value for path `category`.[39m
+2026-09-16 23:36:47:3647 [33mwarn[39m: [33m⚠️ Firebase not configured. Set FIREBASE_* env vars or provide a service-account JSON. Push notifications will be disabled.[39m
+2026-09-17 00:28:13:2813 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-17 00:29:42:2942 [31merror[39m: [31mError processing notification: Operation interrupted because client was closed[39m
+2026-09-17 00:31:37:3137 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-17 00:34:01:341 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-17 00:36:06:366 [33mwarn[39m: [33m⚠️ Firebase not configured. Set FIREBASE_* env vars or provide a service-account JSON. Push notifications will be disabled.[39m
+2026-09-17 00:36:08:368 [33mwarn[39m: [33m⚠️ Firebase not configured. Set FIREBASE_* env vars or provide a service-account JSON. Push notifications will be disabled.[39m
+2026-09-17 00:39:00:390 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-17 00:39:01:391 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaae94da043981beec6a4f6[39m
+2026-09-17 00:39:02:392 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-17 00:39:02:392 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-17 07:42:10:4210 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-17 07:42:57:4257 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-17 07:43:08:438 [32minfo[39m: [32mCategory created: Furniture (6aab4cb4014d714bf15c43d4) by user 69cb7dda187bc81b20049336[39m
+2026-09-17 07:43:09:439 [31merror[39m: [31mError in createCategory: AppError is not a constructor[39m
+2026-09-17 07:44:30:4430 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-17 07:44:49:4449 [31merror[39m: [31mError in createCategory: Category "Mobile Phones" already exists under this parent (slug: mobile-phones)[39m
+2026-09-17 07:44:49:4449 [31merror[39m: [31mError in createCategory: Category "Mobile Phones" already exists under this parent (slug: mobile-phones)[39m
+2026-09-17 07:44:50:4450 [31merror[39m: [31mError in createCategory: Category "Mobile Phones" already exists under this parent (slug: mobile-phones)[39m
+2026-09-17 07:44:57:4457 [32minfo[39m: [32mCategory created: Refrigerators (6aab4d1c875a205c38615a23) by user 69cb7dda187bc81b20049336[39m
+2026-09-17 22:58:01:581 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-17 22:58:08:588 [32minfo[39m: [32mCategory created: Baby Cribs & Cots (6aac2328f8535f302100bbc5) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:11:5811 [32minfo[39m: [32mCategory created: Baby Strollers & Prams (6aac232bf8535f302100bc31) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:14:5814 [32minfo[39m: [32mCategory created: Baby Car Seats (6aac232df8535f302100bc49) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:16:5816 [32minfo[39m: [32mCategory created: High Chairs & Booster Seats (6aac2330f8535f302100bc60) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:20:5820 [32minfo[39m: [32mCategory created: Baby Swings & Bouncers (6aac2334f8535f302100bc78) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:24:5824 [32minfo[39m: [32mCategory created: Kids Furniture & Play (6aac2337f8535f302100bc90) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:27:5827 [32minfo[39m: [32mCategory created: Treadmills (6aac233bf8535f302100bca8) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:31:5831 [32minfo[39m: [32mCategory created: Exercise Bikes (6aac233ff8535f302100bcc0) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:34:5834 [32minfo[39m: [32mCategory created: Elliptical & Cross Trainers (6aac2341f8535f302100bcd7) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:36:5836 [32minfo[39m: [32mCategory created: Home Gym & Strength Equipment (6aac2344f8535f302100bcee) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:38:5838 [32minfo[39m: [32mCategory created: Dumbbells & Weight Plates (6aac2346f8535f302100bd05) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:40:5840 [32minfo[39m: [32mCategory created: Yoga & Aerobics Equipment (6aac2348f8535f302100bd1c) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:44:5844 [32minfo[39m: [32mCategory created: Event Tents & Canopies (6aac234cf8535f302100bd33) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:49:5849 [32minfo[39m: [32mCategory created: Event Chairs & Tables (6aac234ff8535f302100bd4b) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:51:5851 [32minfo[39m: [32mCategory created: Party Lighting & Decor (6aac2353f8535f302100bd63) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:54:5854 [32minfo[39m: [32mCategory created: Sound Systems & Speakers (6aac2356f8535f302100bd7a) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:56:5856 [32minfo[39m: [32mCategory created: Catering & Serving Equipment (6aac2358f8535f302100bd91) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:58:59:5859 [32minfo[39m: [32mCategory created: Bounce Houses & Kids Party Equipment (6aac235bf8535f302100bda8) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:01:591 [32minfo[39m: [32mCategory created: Power Tools (6aac235df8535f302100bdc0) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:04:594 [32minfo[39m: [32mCategory created: Cleaning Equipment (6aac235ff8535f302100bdd7) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:08:598 [32minfo[39m: [32mCategory created: Ladders & Scaffolding (6aac2363f8535f302100bdee) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:11:5911 [32minfo[39m: [32mCategory created: Generators & Power Backup (6aac2366f8535f302100be05) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:14:5914 [32minfo[39m: [32mCategory created: Construction Equipment (6aac236af8535f302100be1c) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:17:5917 [32minfo[39m: [32mCategory created: Gardening Tools & Equipment (6aac236df8535f302100be33) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:21:5921 [32minfo[39m: [32mCategory created: Books & Novels (6aac2370f8535f302100be4a) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:31:5931 [32minfo[39m: [32mCategory created: Comics & Graphic Novels (6aac237bf8535f302100be61) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:35:5935 [32minfo[39m: [32mCategory created: Board Games & Puzzles (6aac237ef8535f302100be78) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:47:5947 [32minfo[39m: [32mCategory created: Musical Instruments (6aac2388f8535f302100be8f) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:52:5952 [32minfo[39m: [32mCategory created: Gaming Consoles & Accessories (6aac238ff8535f302100bea6) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:54:5954 [32minfo[39m: [32mCategory created: Tablets (6aac2392f8535f302100bebe) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:57:5957 [32minfo[39m: [32mCategory created: Televisions (6aac2395f8535f302100bed8) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 22:59:59:5959 [32minfo[39m: [32mCategory created: Audio & Speakers (6aac2397f8535f302100bef2) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:01:01 [32minfo[39m: [32mCategory created: Cameras & Photography Equipment (6aac2399f8535f302100bf0c) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:04:04 [32minfo[39m: [32mCategory created: Desktops & Workstations (6aac239cf8535f302100bf22) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:07:07 [32minfo[39m: [32mCategory created: Printers & Scanners (6aac239ef8535f302100bf30) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:09:09 [32minfo[39m: [32mCategory created: Computer Accessories (6aac23a1f8535f302100bf3e) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:12:012 [32minfo[39m: [32mCategory created: Single & Twin Beds (6aac23a4f8535f302100bf50) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:15:015 [32minfo[39m: [32mCategory created: Double Beds (6aac23a6f8535f302100bf6b) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:17:017 [32minfo[39m: [32mCategory created: Queen Beds (6aac23a9f8535f302100bf85) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:20:020 [32minfo[39m: [32mCategory created: King Beds (6aac23abf8535f302100bfa0) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:23:023 [32minfo[39m: [32mCategory created: Bunk & Loft Beds (6aac23aef8535f302100bfbb) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:26:026 [32minfo[39m: [32mCategory created: 2-Seater Sofas (6aac23b2f8535f302100bfd4) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:30:030 [32minfo[39m: [32mCategory created: Chaise Lounges & Ottomans (6aac23b6f8535f302100bfe9) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:34:034 [32minfo[39m: [32mCategory created: Recliner Sofas (6aac23b9f8535f302100bffd) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:37:037 [32minfo[39m: [32mCategory created: Bean Bags & Pouffes (6aac23bdf8535f302100c012) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:40:040 [32minfo[39m: [32mCategory created: Mattress Protectors & Toppers (6aac23c0f8535f302100c029) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:43:043 [32minfo[39m: [32mCategory created: Split AC (6aac23c2f8535f302100c041) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:46:046 [32minfo[39m: [32mCategory created: Cassette AC (6aac23c5f8535f302100c050) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:49:049 [32minfo[39m: [32mCategory created: Tower AC (6aac23c8f8535f302100c05e) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:53:053 [32minfo[39m: [32mCategory created: Side-by-Side Refrigerators (6aac23ccf8535f302100c06c) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:00:58:058 [32minfo[39m: [32mCategory created: French Door Refrigerators (6aac23d1f8535f302100c07b) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:01:01:11 [32minfo[39m: [32mCategory created: Chimneys (6aac23d5f8535f302100c08a) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:01:05:15 [32minfo[39m: [32mCategory created: Induction Cooktops (6aac23d8f8535f302100c098) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:01:08:18 [32minfo[39m: [32mCategory created: Coffee Makers (6aac23dbf8535f302100c0a6) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:01:12:112 [32minfo[39m: [32mCategory created: Vacuum Cleaners (6aac23dff8535f302100c0b4) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:01:17:117 [32minfo[39m: [32mCategory created: Irons & Garment Steamers (6aac23e4f8535f302100c0c2) by user 69c2c47f9d1dd1404a838802[39m
+2026-09-17 23:54:12:5412 [33mwarn[39m: [33mCloudinary not configured — AI banner image will not be uploaded to a CDN[39m
+2026-09-17 23:55:42:5542 [32minfo[39m: [32mAI banner image generated successfully via Pollinations for: Premium Furniture Collection [occasion=none][39m
+2026-09-19 23:57:37:5737 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-19 23:58:16:5816 [31merror[39m: [31mError in createProduct: Inventory validation failed: condition.status: `like-new` is not a valid enum value for path `condition.status`.[39m
+2026-09-20 00:55:40:5540 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-20 00:55:50:5550 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee1be3f1134e7bb4f5fed[39m
+2026-09-20 00:55:53:5553 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:55:53:5553 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:55:56:5556 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee1c43f1134e7bb4f6038[39m
+2026-09-20 00:55:56:5556 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:55:56:5556 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:01:561 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee1c93f1134e7bb4f6086[39m
+2026-09-20 00:56:01:561 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:01:561 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:02:562 [31merror[39m: [31mError processing notification: Client must be connected before running operations[39m
+2026-09-20 00:56:02:562 [31merror[39m: [31mError in createNotification: Client must be connected before running operations[39m
+2026-09-20 00:56:28:5628 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-20 00:56:39:5639 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee1ef8dc51e615d1641e7[39m
+2026-09-20 00:56:39:5639 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:39:5639 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:43:5643 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee1f28dc51e615d164239[39m
+2026-09-20 00:56:43:5643 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:43:5643 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:48:5648 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee1f78dc51e615d16428e[39m
+2026-09-20 00:56:48:5648 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:48:5648 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:52:5652 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee1fb8dc51e615d1642e4[39m
+2026-09-20 00:56:52:5652 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:52:5652 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:55:5655 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee1ff8dc51e615d16433c[39m
+2026-09-20 00:56:55:5655 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:55:5655 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:56:58:5658 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2028dc51e615d164396[39m
+2026-09-20 00:56:58:5658 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:56:58:5658 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:03:573 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2068dc51e615d1643f3[39m
+2026-09-20 00:57:03:573 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:03:573 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:07:577 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee20b8dc51e615d164451[39m
+2026-09-20 00:57:07:577 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:07:577 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:11:5711 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee20f8dc51e615d1644b2[39m
+2026-09-20 00:57:11:5711 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:11:5711 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:15:5715 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2128dc51e615d164514[39m
+2026-09-20 00:57:15:5715 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:15:5715 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:18:5718 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2168dc51e615d164577[39m
+2026-09-20 00:57:18:5718 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:18:5718 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:21:5721 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2198dc51e615d1645dc[39m
+2026-09-20 00:57:21:5721 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:21:5721 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:26:5726 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee21d8dc51e615d164642[39m
+2026-09-20 00:57:26:5726 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:26:5726 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:31:5731 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2228dc51e615d1646ab[39m
+2026-09-20 00:57:31:5731 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:31:5731 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:35:5735 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2268dc51e615d164718[39m
+2026-09-20 00:57:35:5735 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:35:5735 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:37:5737 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2298dc51e615d164788[39m
+2026-09-20 00:57:38:5738 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:38:5738 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:42:5742 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee22d8dc51e615d1647f8[39m
+2026-09-20 00:57:42:5742 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:42:5742 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:45:5745 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2308dc51e615d16486a[39m
+2026-09-20 00:57:45:5745 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:45:5745 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:48:5748 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2348dc51e615d1648dd[39m
+2026-09-20 00:57:48:5748 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:48:5748 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:53:5753 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2388dc51e615d164952[39m
+2026-09-20 00:57:53:5753 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:53:5753 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:57:56:5756 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee23c8dc51e615d1649cb[39m
+2026-09-20 00:57:57:5757 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:57:57:5757 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:02:582 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2418dc51e615d164a45[39m
+2026-09-20 00:58:02:582 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:02:582 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:06:586 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2458dc51e615d164ac1[39m
+2026-09-20 00:58:06:586 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:06:586 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:10:5810 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2498dc51e615d164b40[39m
+2026-09-20 00:58:10:5810 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:10:5810 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:13:5813 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee24c8dc51e615d164bc0[39m
+2026-09-20 00:58:13:5813 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:13:5813 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:16:5816 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2508dc51e615d164c41[39m
+2026-09-20 00:58:16:5816 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:16:5816 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:20:5820 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2538dc51e615d164cc4[39m
+2026-09-20 00:58:21:5821 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:21:5821 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:24:5824 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2578dc51e615d164d4a[39m
+2026-09-20 00:58:24:5824 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:24:5824 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:28:5828 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee25b8dc51e615d164dd5[39m
+2026-09-20 00:58:28:5828 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:28:5828 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:34:5834 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2608dc51e615d164e61[39m
+2026-09-20 00:58:34:5834 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:34:5834 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:38:5838 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2658dc51e615d164eef[39m
+2026-09-20 00:58:38:5838 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:38:5838 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:41:5841 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2698dc51e615d164f7c[39m
+2026-09-20 00:58:41:5841 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:41:5841 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:44:5844 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee26c8dc51e615d16500c[39m
+2026-09-20 00:58:44:5844 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:44:5844 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:49:5849 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2708dc51e615d16509d[39m
+2026-09-20 00:58:49:5849 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:49:5849 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:54:5854 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2748dc51e615d16512f[39m
+2026-09-20 00:58:54:5854 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:54:5854 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:58:58:5858 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee27a8dc51e615d1651c5[39m
+2026-09-20 00:58:58:5858 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:58:58:5858 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:02:592 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee27d8dc51e615d16525e[39m
+2026-09-20 00:59:02:592 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:02:592 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:07:597 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2828dc51e615d1652f8[39m
+2026-09-20 00:59:07:597 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:07:597 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:11:5911 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2868dc51e615d165393[39m
+2026-09-20 00:59:11:5911 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:11:5911 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:14:5914 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2898dc51e615d165432[39m
+2026-09-20 00:59:14:5914 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:14:5914 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:28:5928 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-20 00:59:36:5936 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2a0e71dc2e7133f9e34[39m
+2026-09-20 00:59:37:5937 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:37:5937 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:40:5940 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2a3e71dc2e7133f9edb[39m
+2026-09-20 00:59:40:5940 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:40:5940 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:43:5943 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2a7e71dc2e7133f9f80[39m
+2026-09-20 00:59:43:5943 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:43:5943 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:48:5948 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2ace71dc2e7133fa027[39m
+2026-09-20 00:59:48:5948 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:48:5948 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:52:5952 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2afe71dc2e7133fa0cf[39m
+2026-09-20 00:59:52:5952 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:52:5952 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 00:59:56:5956 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2b3e71dc2e7133fa179[39m
+2026-09-20 00:59:56:5956 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 00:59:56:5956 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:00:00 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2b8e71dc2e7133fa224[39m
+2026-09-20 01:00:00:00 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:00:00 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:04:04 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2bbe71dc2e7133fa2d1[39m
+2026-09-20 01:00:04:04 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:04:04 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:08:08 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2bfe71dc2e7133fa381[39m
+2026-09-20 01:00:08:08 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:08:08 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:11:011 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2c3e71dc2e7133fa432[39m
+2026-09-20 01:00:11:011 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:11:011 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:15:015 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2c6e71dc2e7133fa4e6[39m
+2026-09-20 01:00:15:015 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:15:015 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:18:018 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2cae71dc2e7133fa59b[39m
+2026-09-20 01:00:18:018 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:18:018 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:22:022 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2cde71dc2e7133fa652[39m
+2026-09-20 01:00:22:022 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:22:022 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:26:026 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2d1e71dc2e7133fa70a[39m
+2026-09-20 01:00:26:026 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:26:026 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:30:030 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2d5e71dc2e7133fa7c5[39m
+2026-09-20 01:00:30:030 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:30:030 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:37:037 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2dce71dc2e7133fa882[39m
+2026-09-20 01:00:37:037 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:37:037 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:41:041 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2e1e71dc2e7133fa942[39m
+2026-09-20 01:00:42:042 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:42:042 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:45:045 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2e4e71dc2e7133faa03[39m
+2026-09-20 01:00:45:045 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:45:045 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:48:048 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2e8e71dc2e7133faac6[39m
+2026-09-20 01:00:48:048 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:48:048 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:52:052 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2ebe71dc2e7133fab8a[39m
+2026-09-20 01:00:52:052 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:52:052 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:00:58:058 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2f0e71dc2e7133fac52[39m
+2026-09-20 01:00:58:058 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:00:58:058 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:02:12 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2f6e71dc2e7133fad1b[39m
+2026-09-20 01:01:02:12 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:02:12 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:06:16 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2fae71dc2e7133fade6[39m
+2026-09-20 01:01:06:16 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:06:16 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:12:112 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee2fee71dc2e7133faeb4[39m
+2026-09-20 01:01:12:112 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:12:112 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:15:115 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee303e71dc2e7133faf84[39m
+2026-09-20 01:01:15:115 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:15:115 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:21:121 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee308e71dc2e7133fb057[39m
+2026-09-20 01:01:21:121 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:21:121 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:24:124 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee30ce71dc2e7133fb12a[39m
+2026-09-20 01:01:25:125 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:25:125 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:28:128 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee30fe71dc2e7133fb1ff[39m
+2026-09-20 01:01:28:128 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:28:128 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:31:131 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee313e71dc2e7133fb2d6[39m
+2026-09-20 01:01:32:132 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:32:132 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:37:137 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee318e71dc2e7133fb3b0[39m
+2026-09-20 01:01:37:137 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:37:137 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:40:140 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee31ce71dc2e7133fb48d[39m
+2026-09-20 01:01:41:141 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:41:141 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:44:144 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee31fe71dc2e7133fb56a[39m
+2026-09-20 01:01:44:144 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:44:144 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:48:148 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee323e71dc2e7133fb64b[39m
+2026-09-20 01:01:48:148 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:48:148 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:51:151 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee326e71dc2e7133fb72e[39m
+2026-09-20 01:01:51:151 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:51:151 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:55:155 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee32ae71dc2e7133fb813[39m
+2026-09-20 01:01:55:155 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:55:155 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:01:58:158 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee32ee71dc2e7133fb8f8[39m
+2026-09-20 01:01:58:158 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:01:58:158 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:02:02:22 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee332e71dc2e7133fb9df[39m
+2026-09-20 01:02:02:22 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:02:02:22 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:02:06:26 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee335e71dc2e7133fbaca[39m
+2026-09-20 01:02:06:26 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:02:06:26 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:02:09:29 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee339e71dc2e7133fbbb5[39m
+2026-09-20 01:02:09:29 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:02:09:29 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:02:13:213 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaee33de71dc2e7133fbca2[39m
+2026-09-20 01:02:13:213 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 01:02:13:213 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 01:02:28:228 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-20 07:44:03:443 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-20 07:44:13:4413 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf4174ddac9efb20453c67[39m
+2026-09-20 07:44:13:4413 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:13:4413 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:16:4416 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf4178ddac9efb20453d59[39m
+2026-09-20 07:44:16:4416 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:16:4416 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:20:4420 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf417cddac9efb20453e4d[39m
+2026-09-20 07:44:20:4420 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:20:4420 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:24:4424 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf417fddac9efb20453f44[39m
+2026-09-20 07:44:24:4424 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:24:4424 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:27:4427 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf4183ddac9efb2045403d[39m
+2026-09-20 07:44:27:4427 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:27:4427 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:31:4431 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf4186ddac9efb20454136[39m
+2026-09-20 07:44:31:4431 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:31:4431 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:35:4435 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf418addac9efb20454233[39m
+2026-09-20 07:44:35:4435 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:35:4435 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:39:4439 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf418eddac9efb20454332[39m
+2026-09-20 07:44:39:4439 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:39:4439 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:42:4442 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf4192ddac9efb20454433[39m
+2026-09-20 07:44:42:4442 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:42:4442 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:45:4445 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf4195ddac9efb20454536[39m
+2026-09-20 07:44:45:4445 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:45:4445 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:49:4449 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf4198ddac9efb20454639[39m
+2026-09-20 07:44:49:4449 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:49:4449 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:52:4452 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf419cddac9efb2045473d[39m
+2026-09-20 07:44:52:4452 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:52:4452 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:44:56:4456 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf419fddac9efb20454845[39m
+2026-09-20 07:44:56:4456 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:44:56:4456 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:00:450 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41a3ddac9efb2045494e[39m
+2026-09-20 07:45:00:450 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:00:450 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:00:450 [31merror[39m: [31mError processing notification: Operation interrupted because client was closed[39m
+2026-09-20 07:45:00:450 [31merror[39m: [31mError in createNotification: Client must be connected before running operations[39m
+2026-09-20 07:45:29:4529 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-20 07:45:38:4538 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41cace962e1a9a73e7f2[39m
+2026-09-20 07:45:38:4538 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:38:4538 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:41:4541 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41cdce962e1a9a73e900[39m
+2026-09-20 07:45:42:4542 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:42:4542 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:45:4545 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41d0ce962e1a9a73ea10[39m
+2026-09-20 07:45:45:4545 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:45:4545 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:52:4552 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41d4ce962e1a9a73eb21[39m
+2026-09-20 07:45:52:4552 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:52:4552 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:45:57:4557 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41ddce962e1a9a73ec36[39m
+2026-09-20 07:45:57:4557 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:45:57:4557 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:01:461 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41e0ce962e1a9a73ed4a[39m
+2026-09-20 07:46:01:461 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:01:461 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:04:464 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41e4ce962e1a9a73ee63[39m
+2026-09-20 07:46:05:465 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:05:465 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:12:4612 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41ebce962e1a9a73ef7d[39m
+2026-09-20 07:46:12:4612 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:12:4612 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:17:4617 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41f0ce962e1a9a73f09a[39m
+2026-09-20 07:46:17:4617 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:17:4617 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:23:4623 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41f6ce962e1a9a73f1b8[39m
+2026-09-20 07:46:23:4623 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:23:4623 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:28:4628 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41fbce962e1a9a73f2d9[39m
+2026-09-20 07:46:28:4628 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:28:4628 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:32:4632 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf41ffce962e1a9a73f3fa[39m
+2026-09-20 07:46:32:4632 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:32:4632 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:43:4643 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf4205ce962e1a9a73f51c[39m
+2026-09-20 07:46:45:4645 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:45:4645 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:53:4653 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf4214ce962e1a9a73f640[39m
+2026-09-20 07:46:53:4653 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:53:4653 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:46:57:4657 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf4218ce962e1a9a73f767[39m
+2026-09-20 07:46:57:4657 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:46:57:4657 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 07:55:50:5550 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-20 07:55:55:5555 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf44337f8b46825d4e09c8[39m
+2026-09-20 07:55:55:5555 [31merror[39m: [31mError handling product added event: Cannot pass an array to query updates unless the `updatePipeline` option is set.[39m
+2026-09-20 07:56:47:5647 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-20 07:56:47:5647 [32minfo[39m: [32mProduct added by vendor: 69c65e7dbe4d9f5600e020ce - Product: 6aaf4467e9c2877bd9bc3d9d[39m
+2026-09-20 07:56:48:5648 [31merror[39m: [31m❌ Queue audit not found! Available queues:[39m
+2026-09-20 07:56:48:5648 [31merror[39m: [31mError handling product added event: Queue audit not found[39m
+2026-09-20 08:41:39:4139 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-20 08:43:12:4312 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-20 08:43:34:4334 [31merror[39m: [31m❌ Queue email not found! Available queues:[39m
+2026-09-20 08:43:35:4335 [31merror[39m: [31mError processing notification: Cannot use a session that has ended[39m
+2026-09-20 08:48:34:4834 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-09-20 08:48:34:4834 [32minfo[39m: [32m🎯 BullMQ queues initialized: 16[39m
+2026-09-20 08:48:34:4834 [31merror[39m: [31m❌ Queue definitely-not-a-queue not found (available: email, sms, notification, payment, rental, delivery, report, cleanup, audit, vendor, maintenance, product, analytics, whatsapp, admin, backup) — dropped definitely-not-a-queue/x (best-effort)[39m
+2026-09-20 08:48:34:4834 [31merror[39m: [31m❌ Queue definitely-not-a-queue not found (available: email, sms, notification, payment, rental, delivery, report, cleanup, audit, vendor, maintenance, product, analytics, whatsapp, admin, backup) — dropped definitely-not-a-queue/x[39m
+2026-09-20 08:48:35:4835 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-09-20 08:48:39:4839 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-09-20 08:48:48:4848 [32minfo[39m: [32m📝 Job options for email/send:[39m
+2026-09-20 08:48:48:4848 [32minfo[39m: [32m✅ Job added successfully: email/send - Job ID: 1[39m
+2026-09-20 08:48:49:4849 [32minfo[39m: [32m🔄 Job 1 (email) started processing[39m
+2026-09-20 08:48:49:4849 [32minfo[39m: [32m📊 Queue email status after add:[39m
+2026-09-20 08:48:49:4849 [32minfo[39m: [32mJob added: email/send - Job ID: 1[39m
+2026-09-20 08:48:49:4849 [32minfo[39m: [32m⚙️ Processing job from email queue:[39m

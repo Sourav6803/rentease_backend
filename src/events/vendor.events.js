@@ -11,6 +11,7 @@ const { createNotification } = require('../services/notification.service');
 const { addJob } = require('../jobs');
 const Vendor = require('../models/Vendor.model');
 const User = require('../models/User.model');
+const mongoose = require('mongoose');
 
 // ====================================
 // VENDOR REGISTRATION EVENTS
@@ -448,18 +449,73 @@ eventEmitter.on(EVENTS.VENDOR.PRODUCT_ADDED, async (data) => {
   try {
     logger.info(`Product added by vendor: ${data.vendorId} - Product: ${data.productId}`);
 
-    // Update vendor product count
+    // Update vendor product count.
+    //
+    // `products.categories` was maintained with a bare `$push`, so every product appended
+    // a NEW row for its category instead of incrementing the existing one. A vendor with
+    // 141 products across 67 categories ended up with 123 rows, mostly `count: 1`
+    // duplicates, which double-listed categories in the dashboard breakdown. It also never
+    // touched `products.available`. Increment the existing row, appending only when the
+    // category is genuinely new.
+    //
+    // Note the type: `data.categoryId` arrives as a plain string from
+    // ProductService.createProduct, while `products.categories.category` is an ObjectId
+    // ref — so the comparison has to cast it first.
+    const categoryId =
+      data.categoryId && mongoose.Types.ObjectId.isValid(String(data.categoryId))
+        ? new mongoose.Types.ObjectId(String(data.categoryId))
+        : null;
+
+    const categoriesExpr = categoryId
+      ? {
+          $let: {
+            vars: { idx: { $indexOfArray: ['$products.categories.category', categoryId] } },
+            in: {
+              $cond: [
+                { $gte: ['$$idx', 0] },
+                {
+                  $map: {
+                    input: '$products.categories',
+                    as: 'c',
+                    in: {
+                      $cond: [
+                        { $eq: ['$$c.category', categoryId] },
+                        {
+                          category: '$$c.category',
+                          count: { $add: [{ $ifNull: ['$$c.count', 0] }, 1] },
+                        },
+                        '$$c',
+                      ],
+                    },
+                  },
+                },
+                {
+                  $concatArrays: [
+                    { $ifNull: ['$products.categories', []] },
+                    [{ category: categoryId, count: 1 }],
+                  ],
+                },
+              ],
+            },
+          },
+        }
+      : '$products.categories';
+
     await Vendor.findOneAndUpdate(
       { user: data.vendorId },
-      {
-        $inc: { 'products.total': 1, 'products.active': 1 },
-        $push: {
-          'products.categories': {
-            category: data.categoryId,
-            count: 1,
+      [
+        {
+          $set: {
+            'products.total': { $add: [{ $ifNull: ['$products.total', 0] }, 1] },
+            'products.active': { $add: [{ $ifNull: ['$products.active', 0] }, 1] },
+            'products.categories': categoriesExpr,
           },
         },
-      }
+      ],
+      // An aggregation-pipeline update needs this opt-in on this Mongoose version;
+      // without it the update is rejected with "Cannot pass an array to query updates
+      // unless the `updatePipeline` option is set" and the handler silently no-ops.
+      { updatePipeline: true }
     );
 
     // Notify admins for approval if needed

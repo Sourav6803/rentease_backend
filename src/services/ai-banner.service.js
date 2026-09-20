@@ -868,6 +868,19 @@ const AppError = require('../utils/AppError');
 const logger = require('../config/logger');
 const { getRedisClient } = require('../config/redis');
 const sharp = require('sharp'); // For image processing + overlay compositing
+const cloudinary = require('cloudinary').v2;
+
+// Configure Cloudinary here instead of relying on another module having done it at
+// import time. config/multer.js and upload.middleware.js both call cloudinary.config()
+// as a module side effect, so this happened to work in the running app — but only
+// because those files got loaded first. Requiring this service on its own (a script,
+// a worker, a test) left cloud_name undefined and every generated banner silently fell
+// back to a base64 data URL. cloudinary.config() is idempotent.
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // Redis client
 const redisClient = getRedisClient();
@@ -1204,8 +1217,15 @@ async function generateBannerImage(title, description, type, theme, customPrompt
             processedBuffer = await overlayFestiveDecoration(processedBuffer, occasion, type);
         }
 
-        // 4. Composite real text — badge/discount + title + CTA — never AI-rendered
-        if (opts.badgeText || opts.ctaText || title) {
+        // 4. Composite text — badge/discount + title + CTA — never AI-rendered.
+        //    OPT-IN, DEFAULT OFF: the storefront renders this banner's title,
+        //    subtitle, description and CTA itself (HeroCarousel / PromoGrid draw them
+        //    over the image, with their own black scrim). Baking the same words into
+        //    the pixels produced two competing sets of text on one banner — dark
+        //    stroked text under a white gradient headline. Only composite when a
+        //    caller explicitly asks for it, e.g. a downloadable export or an
+        //    email / OG image that nothing will caption for us.
+        if (opts.overlayText === true) {
             processedBuffer = await overlayBannerText(processedBuffer, type, {
                 title,
                 badgeText: opts.badgeText,   // e.g. "30% OFF"
@@ -1289,10 +1309,40 @@ async function generateImageWithPollinations(prompt, type) {
     }
 }
 
+/**
+ * Upload a generated banner to Cloudinary and return its public URL.
+ *
+ * This used to be a stub that unconditionally returned null, which meant every
+ * AI-generated banner fell through to the `data:image/jpeg;base64,...` fallback in
+ * generateBannerImage() — a multi-megabyte base64 string written into the Banner
+ * document and rendered inline by the browser via <img src="data:...">. Five of the
+ * six banners in the live collection are in exactly that state, which is why the
+ * homepage hero is so heavy.
+ *
+ * Returns null when Cloudinary is not configured or the upload fails, so the caller
+ * keeps its existing (still wasteful, but non-breaking) fallback behaviour.
+ */
 async function uploadToCDN(imageBuffer, type) {
     try {
-        // Implement your CDN upload logic here (S3, Cloudinary, etc.)
-        return null;
+        if (!cloudinary.config().cloud_name) {
+            logger.warn('Cloudinary not configured — AI banner image will not be uploaded to a CDN');
+            return null;
+        }
+
+        const result = await new Promise((resolve, reject) => {
+            const stream = cloudinary.uploader.upload_stream(
+                {
+                    folder: 'banners',
+                    resource_type: 'image',
+                    format: 'jpg',
+                    public_id: `banner-${type}-${Date.now()}-${Math.round(Math.random() * 1e6)}`,
+                },
+                (err, res) => (err ? reject(err) : resolve(res))
+            );
+            stream.end(imageBuffer);
+        });
+
+        return result.secure_url;
     } catch (error) {
         logger.error('CDN upload error:', error);
         return null;
@@ -1432,15 +1482,21 @@ async function enhanceBannerWithAIImage(banner, customPrompt, opts = {}) {
             url: imageResult.url,
             mobileUrl: imageResult.url,
             alt: title,
-            aiGenerated: true,
-            metadata: {
-                promptUsed: imageResult.promptUsed,
-                occasion: imageResult.occasion,
-                fallback: !!imageResult.fallback,
-                generatedAt: new Date().toISOString(),
-                provider: imageResult.provider || 'placeholder'
-            }
         };
+
+        // Provenance belongs on the ROOT fields declared in Banner.model.js. The
+        // previous version wrote `image.aiGenerated` and `image.metadata`, but
+        // Banner.image is a nested object with only url / mobileUrl / alt, so Mongoose
+        // strict mode silently discarded both keys — root `aiGenerated` stayed false
+        // and the prompt + occasion were lost on every AI banner. Verified against the
+        // live collection: a probe save came back as {"url","alt","mobileUrl"} only.
+        banner.aiGenerated = !imageResult.fallback;
+        banner.aiGenerationMetadata = {
+            promptUsed: imageResult.promptUsed || '',
+            fallback: !!imageResult.fallback,
+            generatedAt: new Date(),
+        };
+        banner.aiGenerationError = imageResult.error || '';
 
         if (imageResult.fallback) {
             logger.warn(`Banner "${title}" is using a placeholder image — AI generation failed: ${imageResult.error}`);

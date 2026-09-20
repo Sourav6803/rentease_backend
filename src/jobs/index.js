@@ -78,18 +78,79 @@ const queueConfigs = {
     name: 'cleanup-queue',
     concurrency: 1,
     options: {
-      attempts: 1,
-      repeat: {
-        pattern: '0 0 * * *',
-      },
+      attempts: 2,
+      backoff: 10000,
     },
   },
-  'default': {
-    name: 'default-queue',
-    concurrency: 5,
+
+  // The queues below are all used by real call sites but had no config here, so every
+  // addJob() for them threw "Queue <name> not found" and the job was silently lost:
+  //   audit (8 call sites) · vendor (4) · maintenance (3) · product (2)
+  //   analytics (1) · whatsapp (1) · admin (1) · backup (1)
+  'audit': {
+    name: 'audit-queue',
+    concurrency: 3,
     options: {
       attempts: 2,
       backoff: 10000,
+      removeOnComplete: { count: 200 },
+      removeOnFail: { count: 200 },
+    },
+  },
+  'vendor': {
+    name: 'vendor-queue',
+    concurrency: 3,
+    options: {
+      attempts: 3,
+      backoff: 15000,
+    },
+  },
+  'maintenance': {
+    name: 'maintenance-queue',
+    concurrency: 2,
+    options: {
+      attempts: 3,
+      backoff: 30000,
+    },
+  },
+  'product': {
+    name: 'product-queue',
+    concurrency: 5,
+    options: {
+      attempts: 3,
+      backoff: 10000,
+    },
+  },
+  'analytics': {
+    name: 'analytics-queue',
+    concurrency: 1,
+    options: {
+      attempts: 2,
+      backoff: 60000,
+    },
+  },
+  'whatsapp': {
+    name: 'whatsapp-queue',
+    concurrency: 3,
+    options: {
+      attempts: 3,
+      backoff: 20000,
+    },
+  },
+  'admin': {
+    name: 'admin-queue',
+    concurrency: 2,
+    options: {
+      attempts: 2,
+      backoff: 15000,
+    },
+  },
+  'backup': {
+    name: 'backup-queue',
+    concurrency: 1,
+    options: {
+      attempts: 1,
+      backoff: 60000,
     },
   },
 };
@@ -101,7 +162,6 @@ const queueConfigs = {
 let isInitialized = false;
 const initializeQueues = () => {
   if (isInitialized) return queues;
-  isInitialized = true;
 
   logger.info('🔧 Initializing BullMQ queues...');
 
@@ -198,7 +258,13 @@ const initializeQueues = () => {
     }
   });
 
-  logger.info('🎯 All BullMQ queues initialized successfully!');
+  // Latch only once the queues actually exist. Setting the flag up front meant that any
+  // failure in here (e.g. createRedisConnection throwing on a bad REDIS_URL) left
+  // `queues` empty for the entire life of the process with no way to retry — which
+  // presents as every addJob() failing with "Queue <name> not found".
+  isInitialized = Object.keys(queues).length > 0;
+
+  logger.info(`🎯 BullMQ queues initialized: ${Object.keys(queues).length}`);
   return queues;
 };
 
@@ -258,10 +324,28 @@ const addJob = async (queueType, jobType, data, options = {}) => {
   //   options,
   // });
 
+  // Best-effort by default.
+  //
+  // Queues are an enhancement, never the business operation itself. This used to
+  // `throw` whenever the queue was missing or Redis was unreachable, which turned
+  // already-committed work into a 500. The clearest example: POST
+  // /products/admin/:id/approve saved the approval, then threw on
+  // addJob('email','send',...) and answered "Something went wrong!". The admin saw an
+  // error for an approval that had in fact succeeded — and the approval email was lost
+  // too. 37 call sites use the email queue and 32 the notification queue, so a single
+  // Redis blip took out a large slice of the API.
+  //
+  // Pass { required: true } when a caller genuinely must not continue without the job
+  // being enqueued.
+  const required = options.required === true;
+
   const queue = queues[queueType];
   
   if (!queue) {
-    logger.error(`❌ Queue ${queueType} not found! Available queues:`, Object.keys(queues));
+    logger.error(
+      `❌ Queue ${queueType} not found (available: ${Object.keys(queues).join(', ') || 'none'}) — dropped ${queueType}/${jobType}${required ? '' : ' (best-effort)'}`,
+    );
+    if (!required) return null;
     throw new Error(`Queue ${queueType} not found`);
   }
 
@@ -273,7 +357,8 @@ const addJob = async (queueType, jobType, data, options = {}) => {
     delay: options.delay,
     priority: options.priority,
     jobId: options.jobId,
-    ...options,
+    // `required` is our own control flag — keep it out of the BullMQ job options
+    ...Object.fromEntries(Object.entries(options).filter(([k]) => k !== 'required')),
   };
 
   logger.info(`📝 Job options for ${queueType}/${jobType}:`, jobOptions);
@@ -295,6 +380,7 @@ const addJob = async (queueType, jobType, data, options = {}) => {
     return job;
   } catch (error) {
     logger.error(`❌ Failed to add job to ${queueType}:`, error);
+    if (!required) return null;
     throw error;
   }
 };

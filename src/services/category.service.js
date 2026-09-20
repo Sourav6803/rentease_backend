@@ -1,5 +1,10 @@
 const { Category, Product } = require('../models');
-const { AppError } = require('../utils/AppError');
+// AppError is a DEFAULT export (module.exports = AppError). Destructuring it as
+// `{ AppError }` yields undefined, so every `new AppError(...)` in this file threw
+// "AppError is not a constructor" and every `error instanceof AppError` threw
+// "Right-hand side of 'instanceof' is not an object" — turning each intended 400/404
+// into an opaque 500. Around 25 files across the codebase still have this import.
+const AppError = require('../utils/AppError');
 const { addJob } = require('../jobs');
 const { eventEmitter } = require('../events');
 const { getRedisClient } = require('../config/redis');
@@ -17,28 +22,33 @@ class CategoryService {
    * Generate unique slug
    */
   async generateSlug(name, parentId = null) {
-    let slug = slugify(name, { lower: true, strict: true });
-    
-    // Check if slug exists
-    const query = { slug };
-    if (parentId) {
-      query.parent = parentId;
+    // `slug` carries a GLOBAL unique index on the categories collection (slug_1,
+    // unique: true), so the existence check has to be global too. Scoping it to the
+    // parent meant that a second category sharing a name under a *different* parent
+    // was handed the slug that already existed, and the insert then died on the
+    // unique index — surfacing on the admin screen as an opaque 500. `parentId` is
+    // kept in the signature for the existing callers, but uniqueness is global.
+    const base = slugify(name, { lower: true, strict: true }) || `category-${Date.now()}`;
+
+    if (!(await Category.exists({ slug: base }))) {
+      return base;
     }
-    
-    const existingCategory = await Category.findOne(query);
-    if (!existingCategory) {
-      return slug;
-    }
-    
-    // If slug exists, append number
+
     let counter = 1;
-    let newSlug = `${slug}-${counter}`;
-    while (await Category.findOne({ slug: newSlug, parent: parentId })) {
+    let candidate = `${base}-${counter}`;
+    while (await Category.exists({ slug: candidate })) {
       counter++;
-      newSlug = `${slug}-${counter}`;
+      candidate = `${base}-${counter}`;
     }
-    
-    return newSlug;
+
+    return candidate;
+  }
+
+  /**
+   * Escape a user-supplied string for safe use inside a RegExp.
+   */
+  escapeRegex(str) {
+    return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
   /**
@@ -543,6 +553,22 @@ async createCategory(categoryData, userId) {
       if (!parentCategory) {
         throw new AppError('Parent category not found', 404);
       }
+    }
+
+    // Reject a duplicate name under the same parent. On a taxonomy an admin has to
+    // navigate, two "Chairs" under one parent is a data-quality bug rather than a
+    // feature, and once created it is painful to undo (products attach to it).
+    // Compared case-insensitively and whitespace-insensitively.
+    const duplicate = await Category.findOne({
+      name: new RegExp(`^\\s*${this.escapeRegex(name.trim())}\\s*$`, 'i'),
+      parent: parentCategory ? parentCategory._id : null,
+    }).select('name slug');
+
+    if (duplicate) {
+      throw new AppError(
+        `Category "${duplicate.name}" already exists under this parent (slug: ${duplicate.slug})`,
+        409,
+      );
     }
 
     // Handle image - supports multiple formats
