@@ -1,0 +1,16 @@
+{
+  "//": "nodemon default ext list is js,mjs,cjs,json — .env is NOT watched, so editing .env alone never restarts the server. That is exactly how a stale GOOGLE_CLIENT_ID placeholder stayed in memory and Google replied 'invalid_client'. Watching .env explicitly makes the restart automatic.",
+  "watch": ["src", ".env"],
+  "ext": "js,mjs,cjs,json,env",
+  "ignore": [
+    "node_modules/**",
+    "logs/**",
+    "coverage/**",
+    "**/*.test.js",
+    "**/*.spec.js",
+    "**/*.png",
+    "**/*.py"
+  ],
+  "delay": 300,
+  "verbose": false
+}

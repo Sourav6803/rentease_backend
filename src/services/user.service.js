@@ -714,9 +714,11 @@ async deleteAddress(userId, addressId) {
 
       // Invalidate all sessions
       if (this.redisClient) {
+        // One batched DEL instead of one command per key. Redis bills per
+        // command, so the old per-key loop turned N sessions into N requests.
         const sessionKeys = await this.redisClient.keys(`sess:*`);
-        for (const key of sessionKeys) {
-          await this.redisClient.del(key);
+        if (sessionKeys.length > 0) {
+          await this.redisClient.del(sessionKeys);
         }
       }
 
@@ -824,6 +826,10 @@ async deleteAddress(userId, addressId) {
 
       // Check for active rentals
       const Rental = require('../models/Rental.model');
+      // These two were used below without ever being required, so account
+      // deletion threw ReferenceError and the account was never removed.
+      const Review = require('../models/Review.model');
+      const Notification = require('../models/Notification.model');
       const activeRentals = await Rental.countDocuments({
         user: userId,
         status: { $in: ['active', 'confirmed', 'delivered'] }
@@ -1054,9 +1060,11 @@ async deleteAddress(userId, addressId) {
 
       // Invalidate sessions if blocked
       if (block && this.redisClient) {
+        // One batched DEL instead of one command per key. Redis bills per
+        // command, so the old per-key loop turned N sessions into N requests.
         const sessionKeys = await this.redisClient.keys(`sess:*`);
-        for (const key of sessionKeys) {
-          await this.redisClient.del(key);
+        if (sessionKeys.length > 0) {
+          await this.redisClient.del(sessionKeys);
         }
       }
 
@@ -1129,6 +1137,12 @@ async deleteAddress(userId, addressId) {
    */
   async exportUserData(userId) {
     try {
+      // Missing requires: this method queries all three models below, so it
+      // threw ReferenceError instead of returning the user's data.
+      const Rental = require('../models/Rental.model');
+      const Payment = require('../models/Payment.model');
+      const Review = require('../models/Review.model');
+
       const [user, addresses, rentals, payments, reviews] = await Promise.all([
         User.findById(userId).lean(),
         Address.find({ user: userId }).lean(),

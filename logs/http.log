@@ -100589,3 +100589,938 @@
 2026-09-20 08:48:49:4849 [32minfo[39m: [32m📊 Queue email status after add:[39m
 2026-09-20 08:48:49:4849 [32minfo[39m: [32mJob added: email/send - Job ID: 1[39m
 2026-09-20 08:48:49:4849 [32minfo[39m: [32m⚙️ Processing job from email queue:[39m
+2026-10-06 07:32:47:3247 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-06 07:34:10:3410 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-06 07:34:12:3412 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-06 07:34:12:3412 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-10-06 07:34:12:3412 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-06 07:34:14:3414 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-06 07:34:14:3414 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-06 07:34:14:3414 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-06 07:34:14:3414 [32minfo[39m: [32m🎯 BullMQ queues initialized: 16[39m
+2026-10-06 07:34:14:3414 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-06 07:34:15:3415 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-06 07:34:15:3415 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-06 07:36:16:3616 [33mwarn[39m: [33m⚠️ Job undefined (email) stalled — will be retried[39m
+2026-10-06 07:36:17:3617 [32minfo[39m: [32m🔄 Job 1 (email) started processing[39m
+2026-10-06 07:36:17:3617 [32minfo[39m: [32m⚙️ Processing job from email queue:[39m
+2026-10-06 07:36:17:3617 [32minfo[39m: [32m📧 Loading email jobs module[39m
+2026-10-06 07:36:17:3617 [32minfo[39m: [32mProcessing email job: send[39m
+2026-10-06 07:36:21:3621 [32minfo[39m: [32m📧 Email sent: <ae69e146-7d47-771c-03ce-d9116a1b7cc4@gmail.com> to: souravbhukta04@gmail.com[39m
+2026-10-06 07:36:21:3621 [32minfo[39m: [32m📧 Preview URL: false[39m
+2026-10-06 07:36:21:3621 [32minfo[39m: [32m✅ Job 1 from email completed[39m
+2026-10-06 07:36:22:3622 [32minfo[39m: [32m✅ Job 1 (email) completed successfully[39m
+2026-10-06 07:36:23:3623 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 07:36:23:3623 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 08:19:48:1948 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 08:19:48:1948 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 08:19:57:1957 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 08:19:57:1957 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 08:49:36:4936 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-06 08:49:36:4936 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-06 08:49:47:4947 [33mwarn[39m: [33mMongoDB disconnected. Attempting to reconnect...[39m
+2026-10-06 08:49:47:4947 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-06 08:49:53:4953 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-06 08:49:55:4955 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-06 09:08:14:814 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-06 09:08:16:816 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-06 09:08:20:820 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-06 09:08:26:826 [33mwarn[39m: [33mMongoDB disconnected. Attempting to reconnect...[39m
+2026-10-06 09:08:26:826 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-06 09:55:22:5522 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-06 09:55:23:5523 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-06 09:55:25:5525 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-06 17:37:31:3731 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-06 17:37:39:3739 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-06 22:24:13:2413 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-06 22:24:45:2445 [33mwarn[39m: [33mMongoDB disconnected. Attempting to reconnect...[39m
+2026-10-06 22:24:45:2445 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-06 22:24:46:2446 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-06 22:25:20:2520 [32minfo[39m: [32mSIGINT signal received[39m
+2026-10-06 22:27:19:2719 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-06 22:28:59:2859 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-06 22:29:03:293 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-10-06 22:29:03:293 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-06 22:29:05:295 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-06 22:29:06:296 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-06 22:29:06:296 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-06 22:29:06:296 [32minfo[39m: [32m🎯 BullMQ queues initialized: 16[39m
+2026-10-06 22:29:06:296 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-06 22:29:06:296 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-06 22:29:06:296 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-06 22:29:06:296 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-06 22:30:23:3023 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 22:30:23:3023 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 22:31:04:314 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 22:31:04:314 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 23:39:12:3912 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 23:39:12:3912 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 01:04:27:427 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 01:04:27:427 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 01:09:09:99 [32minfo[39m: [32mSIGINT signal received[39m
+2026-10-07 21:37:06:376 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-07 21:38:45:3845 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-07 21:38:47:3847 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-07 21:38:48:3848 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-10-07 21:38:48:3848 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-07 21:38:49:3849 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-07 21:38:49:3849 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-07 21:38:49:3849 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-07 21:38:49:3849 [32minfo[39m: [32m🎯 BullMQ queues initialized: 16[39m
+2026-10-07 21:38:49:3849 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-07 21:38:49:3849 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-07 21:38:49:3849 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-07 21:38:56:3856 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 21:38:56:3856 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 21:39:23:3923 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 21:39:23:3923 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 21:40:13:4013 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 21:40:13:4013 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 22:11:48:1148 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-07 22:11:48:1148 [33mwarn[39m: [33mMongoDB disconnected. Attempting to reconnect...[39m
+2026-10-07 22:12:07:127 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-07 22:12:08:128 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-07 22:23:17:2317 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 22:23:17:2317 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 22:30:31:3031 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 22:30:31:3031 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 22:40:08:408 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-07 22:41:11:4111 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-07 22:41:14:4114 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-10-07 22:41:14:4114 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-07 22:41:14:4114 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-07 22:41:15:4115 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-07 22:41:15:4115 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-07 22:41:15:4115 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-07 22:41:15:4115 [32minfo[39m: [32m🎯 BullMQ queues initialized: 16[39m
+2026-10-07 22:41:15:4115 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-07 22:41:15:4115 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-07 22:41:15:4115 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-07 23:20:29:2029 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 23:20:30:2030 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 00:34:04:344 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:34:04:344 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:34:07:347 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:34:07:347 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:34:10:3410 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:34:10:3410 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:34:13:3413 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:45:12:4512 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:46:07:467 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:46:09:469 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-10-08 00:46:09:469 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:46:09:469 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:46:10:4610 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:46:10:4610 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:46:10:4610 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 00:46:10:4610 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:46:10:4610 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:46:10:4610 [32minfo[39m: [32m🎯 BullMQ queues initialized: 16[39m
+2026-10-08 00:46:10:4610 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:46:10:4610 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:46:10:4610 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:46:11:4611 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:46:13:4613 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:54:31:5431 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:54:36:5436 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:54:37:5437 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-10-08 00:54:37:5437 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:54:38:5438 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:54:38:5438 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:54:38:5438 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:54:39:5439 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:54:39:5439 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 17 logical queues)[39m
+2026-10-08 00:54:39:5439 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:54:39:5439 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:54:39:5439 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:54:39:5439 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:54:52:5452 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:54:56:5456 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:54:57:5457 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-10-08 00:54:57:5457 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:54:58:5458 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:54:58:5458 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:54:58:5458 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:54:58:5458 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 00:54:58:5458 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:54:58:5458 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:54:58:5458 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 17 logical queues)[39m
+2026-10-08 00:54:58:5458 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:54:58:5458 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:54:58:5458 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:54:59:5459 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:54:59:5459 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:55:02:552 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:02:552 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:55:02:552 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:55:05:555 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:05:555 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:55:07:557 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:07:557 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:55:10:5510 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:55:16:5516 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:55:20:5520 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:55:21:5521 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-10-08 00:55:21:5521 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:55:22:5522 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:22:5522 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:22:5522 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 00:55:22:5522 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:55:22:5522 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:55:22:5522 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 17 logical queues)[39m
+2026-10-08 00:55:22:5522 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:55:22:5522 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:55:22:5522 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:55:22:5522 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:55:22:5522 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:22:5522 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:55:27:5527 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:55:31:5531 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:55:32:5532 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-10-08 00:55:32:5532 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:55:33:5533 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:55:33:5533 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:55:33:5533 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:55:33:5533 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:55:33:5533 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 17 logical queues)[39m
+2026-10-08 00:55:33:5533 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:55:33:5533 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:55:34:5534 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:55:34:5534 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:55:42:5542 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:55:47:5547 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:55:48:5548 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-10-08 00:55:48:5548 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:55:49:5549 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:49:5549 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:49:5549 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 00:55:49:5549 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:55:49:5549 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:55:49:5549 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 17 logical queues)[39m
+2026-10-08 00:55:49:5549 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:55:49:5549 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:55:49:5549 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:55:49:5549 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:55:49:5549 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:49:5549 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:55:51:5551 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:51:5551 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:55:52:5552 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:55:54:5554 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:56:22:5622 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:56:26:5626 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:56:28:5628 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-10-08 00:56:28:5628 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:56:28:5628 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:28:5628 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:28:5628 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 00:56:28:5628 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:56:28:5628 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:56:28:5628 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 17 logical queues)[39m
+2026-10-08 00:56:28:5628 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:56:28:5628 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:56:28:5628 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:56:29:5629 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:56:29:5629 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:29:5629 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:56:34:5634 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:34:5634 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:56:34:5634 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:34:5634 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:56:37:5637 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:37:5637 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:56:37:5637 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:56:39:5639 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:39:5639 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:56:45:5645 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:56:50:5650 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:56:51:5651 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-10-08 00:56:51:5651 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:56:52:5652 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:56:52:5652 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:56:53:5653 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:56:53:5653 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:56:53:5653 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:56:53:5653 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 17 logical queues)[39m
+2026-10-08 00:56:53:5653 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:56:53:5653 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:56:54:5654 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:57:30:5730 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:57:35:5735 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:57:36:5736 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-10-08 00:57:36:5736 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:57:36:5736 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:57:37:5737 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:37:5737 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:37:5737 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 00:57:37:5737 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:57:37:5737 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:57:37:5737 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 17 logical queues)[39m
+2026-10-08 00:57:37:5737 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:57:37:5737 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:57:37:5737 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:57:37:5737 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:37:5737 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:57:42:5742 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:57:45:5745 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:57:46:5746 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-10-08 00:57:46:5746 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:57:47:5747 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:47:5747 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:47:5747 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 00:57:47:5747 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:57:47:5747 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:57:47:5747 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 17 logical queues)[39m
+2026-10-08 00:57:47:5747 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:57:47:5747 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:57:47:5747 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:57:48:5748 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:48:5748 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:57:48:5748 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:57:50:5750 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:50:5750 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:57:50:5750 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:50:5750 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:57:52:5752 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:52:5752 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:57:53:5753 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:53:5753 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:57:57:5757 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:57:5757 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:57:58:5758 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:58:5758 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:58:02:582 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:58:02:582 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:58:02:582 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:58:02:582 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:58:06:586 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:58:06:586 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:58:06:586 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:58:06:586 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:58:09:589 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:58:09:589 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:58:09:589 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:58:12:5812 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:58:59:5859 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:59:03:593 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:59:04:594 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-10-08 00:59:04:594 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:59:04:594 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:59:04:594 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:04:594 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:04:594 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 00:59:04:594 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:59:04:594 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:59:04:594 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 19 logical queues)[39m
+2026-10-08 00:59:04:594 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:59:04:594 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:59:04:594 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:59:05:595 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:05:595 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:59:07:597 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:07:597 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:59:08:598 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:08:598 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:59:13:5913 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:59:19:5919 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:59:21:5921 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-10-08 00:59:21:5921 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:59:21:5921 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:59:21:5921 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:59:22:5922 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:59:22:5922 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:59:22:5922 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:59:22:5922 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 19 logical queues)[39m
+2026-10-08 00:59:22:5922 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:59:22:5922 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:59:22:5922 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:22:5922 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:59:25:5925 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:25:5925 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 00:59:32:5932 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 00:59:36:5936 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 00:59:38:5938 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+2026-10-08 00:59:38:5938 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 00:59:39:5939 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:59:39:5939 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 00:59:39:5939 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 00:59:39:5939 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 00:59:39:5939 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 00:59:39:5939 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 19 logical queues)[39m
+2026-10-08 00:59:39:5939 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 00:59:39:5939 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-00.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 00:59:40:5940 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:00:41:041 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 01:00:46:046 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 01:00:48:048 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-10-08 01:00:48:048 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 01:00:49:049 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 01:00:49:049 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 01:00:49:049 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 01:00:49:049 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 01:00:49:049 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 19 logical queues)[39m
+2026-10-08 01:00:49:049 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 01:00:49:049 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 01:00:49:049 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 01:00:50:050 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:00:50:050 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:00:55:055 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 01:00:59:059 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 01:01:00:10 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-10-08 01:01:00:10 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 01:01:00:10 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:00:10 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:00:10 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 01:01:00:10 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 01:01:00:10 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 01:01:00:10 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 19 logical queues)[39m
+2026-10-08 01:01:00:10 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 01:01:00:10 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 01:01:00:10 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 01:01:01:11 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 01:01:01:11 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:01:11 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:01:03:13 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:03:13 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 01:01:04:14 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:01:06:16 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 01:01:35:135 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 01:01:39:139 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 01:01:41:141 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-10-08 01:01:41:141 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 01:01:42:142 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 01:01:42:142 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 01:01:42:142 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 01:01:42:142 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 01:01:42:142 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 19 logical queues)[39m
+2026-10-08 01:01:42:142 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 01:01:42:142 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 01:01:43:143 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:43:143 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:01:43:143 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 01:01:46:146 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:46:146 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:01:48:148 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:48:148 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:01:51:151 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:51:151 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:01:54:154 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:54:154 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:01:57:157 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:57:157 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:02:00:20 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:02:00:20 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:02:02:22 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:02:02:22 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:02:05:25 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:02:05:25 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:02:08:28 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:02:08:28 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:02:12:212 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:06:04:64 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 01:06:10:610 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 01:06:11:611 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-10-08 01:06:11:611 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 01:06:12:612 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:06:12:612 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:06:12:612 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 01:06:12:612 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 01:06:12:612 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 01:06:12:612 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 19 logical queues)[39m
+2026-10-08 01:06:12:612 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 01:06:12:612 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 01:06:12:612 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 01:06:13:613 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:06:13:613 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:06:13:613 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 01:06:15:615 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 01:06:15:615 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:06:15:615 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:06:18:618 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 01:10:45:1045 [32minfo[39m: [32mSIGINT signal received[39m
+2026-10-08 11:06:04:64 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 11:06:20:620 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 11:06:21:621 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-10-08 11:06:21:621 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 11:06:22:622 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 11:06:22:622 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:22:622 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:22:622 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 11:06:22:622 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 11:06:22:622 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 11:06:22:622 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 19 logical queues)[39m
+2026-10-08 11:06:22:622 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 11:06:22:622 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 11:06:22:622 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 11:06:22:622 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-08 11:06:23:623 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:23:623 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 11:06:25:625 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 11:06:26:626 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:26:626 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 11:06:28:628 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:28:628 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 11:06:31:631 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:31:631 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 11:06:33:633 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:33:633 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 11:06:37:637 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:37:637 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 11:06:39:639 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:39:639 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 11:06:42:642 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:42:642 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 11:06:44:644 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:44:644 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 11:06:47:647 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:47:647 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 11:06:50:650 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 11:07:37:737 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 11:07:37:737 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 11:08:09:89 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 11:08:09:89 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 11:15:26:1526 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-08 11:15:26:1526 [31merror[39m: [31m❌ Redis(BullMQ) error: read ECONNRESET[39m
+2026-10-08 11:15:26:1526 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-08 11:15:28:1528 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 11:15:28:1528 [31merror[39m: [31m❌ Redis(BullMQ) error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 12:54:21:5421 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 12:54:21:5421 [31merror[39m: [31m❌ Redis(BullMQ) error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 12:54:31:5431 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 12:54:31:5431 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 12:54:31:5431 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 12:54:32:5432 [33mwarn[39m: [33mMongoDB disconnected. Attempting to reconnect...[39m
+2026-10-08 12:54:32:5432 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-08 12:54:33:5433 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 12:54:33:5433 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 12:54:36:5436 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 12:54:36:5436 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 12:54:38:5438 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 13:01:16:116 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 13:02:20:220 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 13:02:21:221 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-10-08 13:02:21:221 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 13:02:22:222 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 13:02:23:223 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 13:02:23:223 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 13:02:23:223 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 13:02:23:223 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 13:02:23:223 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 13:02:23:223 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 19 logical queues)[39m
+2026-10-08 13:02:23:223 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 13:02:23:223 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 13:02:23:223 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 13:02:24:224 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 13:02:24:224 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 13:02:26:226 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 13:02:27:227 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 13:15:40:1540 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 13:15:41:1541 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 13:16:34:1634 [31merror[39m: [31minvalid_client[39m
+2026-10-08 13:16:34:1634 [31merror[39m: [31mCan't find /favicon.ico on this server![39m
+2026-10-08 13:16:49:1649 [31merror[39m: [31minvalid_client[39m
+2026-10-08 13:56:59:5659 [31merror[39m: [31m❌ Redis(BullMQ) error: read ECONNRESET[39m
+2026-10-08 13:57:00:570 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-08 13:57:00:570 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-08 13:57:00:570 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-08 13:57:02:572 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 13:57:03:573 [31merror[39m: [31m❌ Redis(BullMQ) error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 15:41:39:4139 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 15:41:39:4139 [31merror[39m: [31m❌ Redis(BullMQ) error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 15:41:48:4148 [31merror[39m: [31m❌ Redis(BullMQ) error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 15:41:48:4148 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 15:42:01:421 [33mwarn[39m: [33mMongoDB disconnected. Attempting to reconnect...[39m
+2026-10-08 15:42:02:422 [32minfo[39m: [32mMongoDB reconnected[39m
+2026-10-08 15:42:06:426 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:06:426 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 15:42:06:426 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:06:426 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:42:09:429 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:09:429 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:42:09:429 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:09:429 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 15:42:12:4212 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:12:4212 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:42:12:4212 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:12:4212 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 15:42:15:4215 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:15:4215 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:42:15:4215 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:15:4215 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 15:42:18:4218 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:18:4218 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:42:18:4218 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:18:4218 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 15:42:20:4220 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:20:4220 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:42:21:4221 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 15:42:24:4224 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:24:4224 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:42:27:4227 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:27:4227 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:42:29:4229 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:29:4229 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:42:32:4232 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:43:36:4336 [31merror[39m: [31minvalid_client[39m
+2026-10-08 15:45:26:4526 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 15:45:35:4535 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 15:45:37:4537 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+2026-10-08 15:45:37:4537 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 15:45:37:4537 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 15:45:37:4537 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:45:37:4537 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:45:37:4537 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 15:45:37:4537 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 15:45:37:4537 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 15:45:37:4537 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 19 logical queues)[39m
+2026-10-08 15:45:37:4537 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 15:45:37:4537 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-02.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 15:45:37:4537 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:45:38:4538 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 15:45:42:4542 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 15:45:47:4547 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m
+2026-10-08 15:45:48:4548 [32minfo[39m: [32mMongoDB Connected: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+2026-10-08 15:45:48:4548 [32minfo[39m: [32m✅ MongoDB connected successfully[39m
+2026-10-08 15:45:49:4549 [32minfo[39m: [32m✅ Email service initialized successfully[39m
+2026-10-08 15:45:49:4549 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:45:49:4549 [33mwarn[39m: [33m⚠️ Redis not available, continuing without Redis: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:45:49:4549 [33mwarn[39m: [33m⚠️ Redis connection failed - running without Redis[39m
+2026-10-08 15:45:49:4549 [32minfo[39m: [32m✅ Socket.io initialized successfully[39m
+2026-10-08 15:45:49:4549 [32minfo[39m: [32m🔧 Initializing BullMQ queues...[39m
+2026-10-08 15:45:49:4549 [32minfo[39m: [32m🎯 BullMQ initialized: 4 physical queues, 4 workers (from 19 logical queues)[39m
+2026-10-08 15:45:49:4549 [32minfo[39m: [32m✅ BullMQ queues initialized[39m
+2026-10-08 15:45:49:4549 [32minfo[39m: [32m[39m
+[32m      =====================================[39m
+[32m      🚀 RentEase Server Started![39m
+[32m      =====================================[39m
+[32m      Environment: development[39m
+[32m      Port: 5000[39m
+[32m      API URL: http://localhost:5000/api/v1[39m
+[32m      Health Check: http://localhost:5000/health[39m
+[32m      Socket.io: ws://localhost:5000[39m
+[32m      =====================================[39m
+[32m      Database: ac-scpk5oi-shard-00-01.ffmnsa4.mongodb.net[39m
+[32m      Redis: fast-beagle-173029.upstash.io:6379[39m
+[32m      =====================================[39m
+[32m      [39m
+2026-10-08 15:45:49:4549 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:45:49:4549 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:45:49:4549 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 15:45:52:4552 [32minfo[39m: [32m✅ Redis connected successfully[39m
+2026-10-08 15:45:52:4552 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:45:52:4552 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 15:45:55:4555 [32minfo[39m: [32m✅ Redis(BullMQ) connected successfully[39m
+2026-10-08 15:46:44:4644 [32minfo[39m: [32m✅ Firebase initialised successfully (source: env)[39m
+2026-10-08 15:46:49:4649 [32minfo[39m: [32m✅ Swagger docs available at /api-docs[39m

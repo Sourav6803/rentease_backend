@@ -118,7 +118,10 @@ app.use(hpp({
 }));
 
 // Compression middleware
-// app.use(compression());
+// Response bodies here are large JSON payloads (product lists, dashboards,
+// invoices). Leaving this off made every API call move several times more bytes
+// than it needed to.
+app.use(compression());
 
 // ====================================
 // STATIC FILES
@@ -374,13 +377,10 @@ const startServer = async () => {
       logger.warn('⚠️ Redis connection failed - running without Redis');
     }
 
-    // Initialize BullMQ queues AFTER Redis, reusing the shared client
-    try {
-      initializeQueues();
-      logger.info('✅ BullMQ queues initialized');
-    } catch (error) {
-      logger.error('❌ Failed to initialize BullMQ queues:', error);
-    }
+    // NOTE: BullMQ queues/workers are created AFTER the HTTP server is
+    // listening (see below). Building 16 Queues + 16 Workers here fired a burst
+    // of Redis round-trips over TLS to Upstash before the process could accept
+    // a single request — most of why startup felt slow.
 
     // Connect to Elasticsearch
     // const esClient = await initElasticsearch();
@@ -421,6 +421,16 @@ const startServer = async () => {
       `);
     });
 
+    // Initialize BullMQ queues/workers now that the server is already taking
+    // traffic. Fire-and-forget on purpose: a slow or unavailable Redis must
+    // never delay startup, and initializeQueues handles its own failures.
+    try {
+      initializeQueues();
+      logger.info('✅ BullMQ queues initialized');
+    } catch (error) {
+      logger.error('❌ Failed to initialize BullMQ queues:', error);
+    }
+
     // Emit server started event
     eventEmitter.emit(EVENTS.SYSTEM.INFO, {
       type: 'server_started',
@@ -439,7 +449,11 @@ const startServer = async () => {
 // INITIALIZE DATABASE INDEXES (Optional)
 // ====================================
 const createIndexes = async () => {
-  if (config.NODE_ENV === 'production') {
+  // Index creation is a deploy-time task, not a boot task. It used to run on
+  // EVERY production start, adding Mongo load and slowing the first minutes
+  // after each restart. Opt in with RUN_DB_INDEXES=true when the schema changes
+  // (or just run `npm run create-indexes`).
+  if (config.NODE_ENV === 'production' && process.env.RUN_DB_INDEXES === 'true') {
     try {
       logger.info('Creating database indexes...');
       const { setupIndexes } = require('./models');

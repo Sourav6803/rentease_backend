@@ -361,10 +361,14 @@ class AuthController {
     // Implement Google OAuth token exchange
     // This is a placeholder - implement actual OAuth flow
     const { OAuth2Client } = require('google-auth-library');
+    // GOOGLE_REDIRECT_URI was never actually set — .env defines
+    // GOOGLE_CALLBACK_URL. Passing `undefined` makes OAuth2Client omit
+    // redirect_uri from the token exchange, which Google rejects with
+    // redirect_uri_mismatch, so read whichever name is configured.
     const client = new OAuth2Client(
       process.env.GOOGLE_CLIENT_ID,
       process.env.GOOGLE_CLIENT_SECRET,
-      process.env.GOOGLE_REDIRECT_URI
+      process.env.GOOGLE_REDIRECT_URI || process.env.GOOGLE_CALLBACK_URL
     );
 
     const { tokens } = await client.getToken(code);

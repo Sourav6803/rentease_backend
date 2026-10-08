@@ -1,7 +1,7 @@
 
 const { Queue, Worker } = require('bullmq');
 const logger = require('../config/logger');
-const { getRedisClient, createRedisConnection } = require('../config/redis');
+const { createBullConnection } = require('../config/redis');
 
 // Job queues
 const queues = {};
@@ -153,10 +153,107 @@ const queueConfigs = {
       backoff: 60000,
     },
   },
+
+  // Found by scripts/test-jobs.js: these two ARE used by real call sites —
+  // processJob('kyc:review-reminder') in events/user.events.js and
+  // processJob('support:create-ticket') in events/rental.events.js — but had no
+  // config, so addJob() logged "Queue <name> not found" and silently dropped
+  // them. They now enqueue and are handled (or warned about) like the rest.
+  'kyc': {
+    name: 'kyc-queue',
+    concurrency: 2,
+    options: {
+      attempts: 2,
+      backoff: 30000,
+    },
+  },
+  'support': {
+    name: 'support-queue',
+    concurrency: 2,
+    options: {
+      attempts: 2,
+      backoff: 30000,
+    },
+  },
 };
 
-// NOTE: BullMQ does NOT create its own Redis connection anymore.
-// It reuses the single shared client from src/config/redis.js (see initializeQueues).
+// ─────────────────────────────────────────────────────────────────────────────
+// PHYSICAL QUEUES — 4 instead of 16
+//
+// 16 logical queues used to mean 16 BullMQ Workers, and a Worker long-polls
+// Redis whenever its queue is empty. Upstash bills PER COMMAND, so that was
+// ~8M requests/month for an idle app (16 workers x 12 polls/min at the old 5s
+// drainDelay) — which is what exhausted the 500k allowance.
+//
+// All 16 logical names still exist, so every addJob() call site is unchanged;
+// they are now grouped onto 4 physical queues, so we run 4 Workers.
+// ─────────────────────────────────────────────────────────────────────────────
+const physicalQueueConfig = {
+  messaging: { name: 'messaging-queue', concurrency: 10 },
+  commerce: { name: 'commerce-queue', concurrency: 5 },
+  ops: { name: 'ops-queue', concurrency: 3 },
+  system: { name: 'system-queue', concurrency: 2 },
+};
+
+const QUEUE_GROUPS = {
+  // messaging — user-facing comms, individually fast
+  email: 'messaging',
+  sms: 'messaging',
+  whatsapp: 'messaging',
+  notification: 'messaging',
+
+  // commerce — money and stock movements
+  payment: 'commerce',
+  rental: 'commerce',
+  delivery: 'commerce',
+  product: 'commerce',
+
+  // ops — back-office and vendor lifecycle
+  vendor: 'ops',
+  maintenance: 'ops',
+  admin: 'ops',
+  analytics: 'ops',
+  report: 'ops',
+  kyc: 'ops',
+  support: 'ops',
+
+  // system — plumbing
+  audit: 'system',
+  cleanup: 'system',
+  backup: 'system',
+  default: 'system',
+};
+
+// Queue lookups accept BOTH a logical name ('email') and a physical one
+// ('messaging'), so every existing caller keeps working untouched.
+const resolvePhysicalName = (queueType) =>
+  physicalQueueConfig[queueType] ? queueType : QUEUE_GROUPS[queueType];
+
+const resolveQueue = (queueType) => {
+  const physical = resolvePhysicalName(queueType);
+  return physical ? queues[physical] : undefined;
+};
+
+const getQueue = (queueType) => resolveQueue(queueType);
+
+// Web processes set ENABLE_QUEUE_WORKERS=false so the API tier does ZERO queue
+// polling; the standalone worker process (src/worker.js) leaves it enabled.
+// Defaults to enabled so nothing changes for anyone who has not opted in.
+const workersEnabled = process.env.ENABLE_QUEUE_WORKERS !== 'false';
+
+const WORKER_OPTIONS = {
+  // ── Upstash bills PER COMMAND, so idle polling is what blew the limit ──
+  // drainDelay is the single biggest lever: a Worker long-polls the wait list
+  // when its queue is empty, and the default is 5 SECONDS. At 120s an idle
+  // worker polls 24x less often.
+  drainDelay: 120, // seconds (BullMQ default: 5)
+  lockDuration: 60000, // lock heartbeat every 30s instead of 15s
+  stalledInterval: 120000, // stalled checks twice as rare
+  maxStalledCount: 2, // one recovery attempt before failing
+};
+
+// NOTE: BullMQ gets its own connection (see initializeQueues) — it must not
+// share the app client, because Worker commands BLOCK it.
 
 // Initialize all queues (call AFTER Redis is connected — see app.js startServer)
 let isInitialized = false;
@@ -165,54 +262,61 @@ const initializeQueues = () => {
 
   logger.info('🔧 Initializing BullMQ queues...');
 
-  // Reuse the app-wide Redis client — no second connection to Upstash.
-  // Fallback to a fresh connection ONLY when Redis is down (self-heals on retry).
-  const connection = getRedisClient() || createRedisConnection();
+  // BullMQ gets its OWN connection rather than borrowing the app client.
+  //
+  // Two reasons:
+  //   1. A Worker issues BLOCKING commands. Sharing the app client meant every
+  //      cache GET/SET queued behind an in-flight block, which is a large part
+  //      of why some API calls felt slow.
+  //   2. BullMQ requires maxRetriesPerRequest:null (never reject a queued
+  //      command). That setting is actively harmful for app commands, so the
+  //      two use cases get their own clients now (see config/redis.js).
+  const connection = createBullConnection();
 
-  // Create queues
-  Object.entries(queueConfigs).forEach(([key, config]) => {
-    // console.log(`📦 Creating queue: ${key} with name: ${config.name}`);
-    
+  Object.entries(physicalQueueConfig).forEach(([key, config]) => {
     try {
-      // Create queue
-      queues[key] = new Queue(config.name, {
-        connection,
-        defaultJobOptions: config.options,
+      // A Queue is always created (the web tier still needs to ADD jobs).
+      queues[key] = new Queue(config.name, { connection });
+
+      // Keep the event handled — an unhandled 'error' would crash the process.
+      queues[key].on('error', (error) => {
+        logger.debug(`Queue ${key} error: ${error?.message || error?.code || error}`);
       });
-      
-      // Create worker with concurrency
+
+      // A Worker is NOT created when workers are disabled, so this process
+      // never polls Redis. Jobs are still enqueued and picked up by the
+      // dedicated worker process.
+      if (!workersEnabled) return;
+
       workers[key] = new Worker(
         config.name,
         async (job) => {
-          logger.info(`⚙️ Processing job from ${key} queue:`, {
+          // The logical queue is carried in the payload, because 4 physical
+          // queues now fan out to 16 different processors.
+          const logical = job.data?.queueType;
+
+          logger.info(`⚙️ Processing job from ${logical || 'unknown'} queue:`, {
             jobId: job.id,
-            type: job.data.type,
+            type: job.data?.type,
           });
-          
+
           try {
-            const result = await processJobByType(key, job);
-            logger.info(`✅ Job ${job.id} from ${key} completed`);
+            const result = await processJobByType(logical, job);
+            logger.info(`✅ Job ${job.id} from ${logical || 'unknown'} completed`);
             return result;
           } catch (error) {
-            logger.error(`❌ Job ${job.id} from ${key} failed:`, error);
+            logger.error(`❌ Job ${job.id} from ${logical || 'unknown'} failed:`, error);
             throw error;
           }
         },
         {
           connection,
           concurrency: config.concurrency,
-          // Upstash free tier bills per command — keep worker churn low:
-          // - lockDuration 60s    -> lock heartbeat every 30s instead of 15s
-          // - stalledInterval 120s -> stalled checks twice as rare
-          // - maxStalledCount 2   -> one recovery attempt before failing
-          lockDuration: 60000,
-          stalledInterval: 120000,
-          maxStalledCount: 2,
+          ...WORKER_OPTIONS,
         }
       );
 
-      // Worker event handlers
-      workers[key].on('completed', (job, result) => {
+      workers[key].on('completed', (job) => {
         logger.info(`✅ Job ${job.id} (${key}) completed successfully`, {
           durationMs: Date.now() - (job.timestamp || Date.now()),
         });
@@ -226,10 +330,9 @@ const initializeQueues = () => {
         });
       });
 
-      // CRITICAL: the listener must stay attached — an unhandled 'error' event
-      // would crash the process. Logged at debug because the shared client in
-      // config/redis.js already logs the same connection error once (otherwise
-      // 9 workers × 9 queues = 18 duplicate lines per Redis blip).
+      // The listener must stay attached — an unhandled 'error' event would
+      // crash the process. Debug level because the Redis client already logs
+      // the same connection error once.
       workers[key].on('error', (err) => {
         logger.debug(`Worker ${key} error: ${err?.message || err?.code || err}`);
       });
@@ -241,47 +344,42 @@ const initializeQueues = () => {
       workers[key].on('active', (job) => {
         logger.info(`🔄 Job ${job.id} (${key}) started processing`);
       });
-
-      workers[key].on('progress', (job, progress) => {
-        // Progress logging kept minimal to avoid noise
-      });
-
-      // Queue event handlers (debug — the shared client logs the connection
-      // error once; this listener exists only to keep the event handled)
-      queues[key].on('error', (error) => {
-        logger.debug(`Queue ${key} error: ${error?.message || error?.code || error}`);
-      });
-
-      // console.log(`✅ Queue initialized: ${key}`);
     } catch (error) {
       logger.error(`❌ Failed to initialize queue ${key}:`, error);
     }
   });
 
-  // Latch only once the queues actually exist. Setting the flag up front meant that any
-  // failure in here (e.g. createRedisConnection throwing on a bad REDIS_URL) left
-  // `queues` empty for the entire life of the process with no way to retry — which
-  // presents as every addJob() failing with "Queue <name> not found".
+  // Latch only once the queues actually exist. Setting the flag up front meant
+  // that any failure in here left `queues` empty for the life of the process
+  // with no way to retry — which presents as every addJob() failing with
+  // "Queue <name> not found".
   isInitialized = Object.keys(queues).length > 0;
 
-  logger.info(`🎯 BullMQ queues initialized: ${Object.keys(queues).length}`);
+  logger.info(
+    `🎯 BullMQ initialized: ${Object.keys(queues).length} physical queues, ` +
+      `${Object.keys(workers).length} workers (from ${Object.keys(QUEUE_GROUPS).length} logical queues)`,
+  );
   return queues;
 };
 
 // Process job by type
 const processJobByType = async (queueType, job) => {
   const { type, data } = job.data;
+
+  // Jobs enqueued before this change carry no queueType; fall back to the
+  // generic handler rather than guessing from the physical queue.
+  const key = queueType || 'default';
   
   // console.log(`🔄 Processing ${queueType} job: ${type}`, { jobId: job.id, data });
 
   try {
     let result;
-    switch (queueType) {
-      case 'email':
+    switch (key) {
+      case 'email': {
         const emailModule = require('./email.jobs');
-        logger.info('📧 Loading email jobs module');
         result = await emailModule.process(type, data);
         break;
+      }
       case 'sms':
         result = await require('./sms.jobs').process(type, data);
         break;
@@ -311,7 +409,7 @@ const processJobByType = async (queueType, job) => {
     // console.log(`✅ Processed ${queueType} job: ${type}`, { jobId: job.id });
     return result;
   } catch (error) {
-    logger.error(`❌ Error processing job ${queueType}/${type}:`, error);
+    logger.error(`❌ Error processing job ${queueType || 'default'}/${type}:`, error);
     throw error;
   }
 };
@@ -339,11 +437,11 @@ const addJob = async (queueType, jobType, data, options = {}) => {
   // being enqueued.
   const required = options.required === true;
 
-  const queue = queues[queueType];
-  
+  const queue = resolveQueue(queueType);
+
   if (!queue) {
     logger.error(
-      `❌ Queue ${queueType} not found (available: ${Object.keys(queues).join(', ') || 'none'}) — dropped ${queueType}/${jobType}${required ? '' : ' (best-effort)'}`,
+      `❌ Queue ${queueType} not found (logical names: ${Object.keys(QUEUE_GROUPS).join(', ')}) — dropped ${queueType}/${jobType}${required ? '' : ' (best-effort)'}`,
     );
     if (!required) return null;
     throw new Error(`Queue ${queueType} not found`);
@@ -361,22 +459,19 @@ const addJob = async (queueType, jobType, data, options = {}) => {
     ...Object.fromEntries(Object.entries(options).filter(([k]) => k !== 'required')),
   };
 
-  logger.info(`📝 Job options for ${queueType}/${jobType}:`, jobOptions);
+  logger.debug(`📝 Job options for ${queueType}/${jobType}:`, jobOptions);
 
   try {
     const job = await queue.add(jobType, {
       type: jobType,
       data,
       timestamp: new Date(),
+      // Carried in the payload so the shared worker routes to the right
+      // processor — 4 physical queues fan out to 16 logical ones.
+      queueType,
     }, jobOptions);
 
-    logger.info(`✅ Job added successfully: ${queueType}/${jobType} - Job ID: ${job.id}`);
-    
-    // Get queue status
-    const counts = await queue.getJobCounts();
-    logger.info(`📊 Queue ${queueType} status after add:`, counts);
-    
-    logger.info(`Job added: ${queueType}/${jobType} - Job ID: ${job.id}`);
+    logger.info(`✅ Job added: ${queueType}/${jobType} - Job ID: ${job.id}`);
     return job;
   } catch (error) {
     logger.error(`❌ Failed to add job to ${queueType}:`, error);
@@ -387,7 +482,7 @@ const addJob = async (queueType, jobType, data, options = {}) => {
 
 // Add recurring job
 const addRecurringJob = async (queueType, jobType, data, cronPattern) => {
-  const queue = queues[queueType];
+  const queue = resolveQueue(queueType);
   if (!queue) {
     throw new Error(`Queue ${queueType} not found`);
   }
@@ -427,7 +522,7 @@ const processJob = async (jobType, data, options = {}) => {
 
 // Get queue stats
 const getQueueStats = async (queueType) => {
-  const queue = queues[queueType];
+  const queue = resolveQueue(queueType);
   if (!queue) {
     throw new Error(`Queue ${queueType} not found`);
   }
@@ -447,7 +542,7 @@ const getQueueStats = async (queueType) => {
 // Get all queue stats
 const getAllQueueStats = async () => {
   const stats = {};
-  for (const [key, queue] of Object.entries(queues)) {
+  for (const key of Object.keys(queues)) {
     try {
       stats[key] = await getQueueStats(key);
     } catch (error) {
@@ -460,7 +555,7 @@ const getAllQueueStats = async () => {
 
 // Pause queue
 const pauseQueue = async (queueType) => {
-  const queue = queues[queueType];
+  const queue = resolveQueue(queueType);
   if (!queue) {
     throw new Error(`Queue ${queueType} not found`);
   }
@@ -470,7 +565,7 @@ const pauseQueue = async (queueType) => {
 
 // Resume queue
 const resumeQueue = async (queueType) => {
-  const queue = queues[queueType];
+  const queue = resolveQueue(queueType);
   if (!queue) {
     throw new Error(`Queue ${queueType} not found`);
   }
@@ -480,7 +575,7 @@ const resumeQueue = async (queueType) => {
 
 // Clean queue
 const cleanQueue = async (queueType, grace = 24 * 60 * 60 * 1000) => {
-  const queue = queues[queueType];
+  const queue = resolveQueue(queueType);
   if (!queue) {
     throw new Error(`Queue ${queueType} not found`);
   }
@@ -491,7 +586,7 @@ const cleanQueue = async (queueType, grace = 24 * 60 * 60 * 1000) => {
 
 // Get job
 const getJob = async (queueType, jobId) => {
-  const queue = queues[queueType];
+  const queue = resolveQueue(queueType);
   if (!queue) {
     throw new Error(`Queue ${queueType} not found`);
   }
@@ -500,7 +595,7 @@ const getJob = async (queueType, jobId) => {
 
 // Remove job
 const removeJob = async (queueType, jobId) => {
-  const queue = queues[queueType];
+  const queue = resolveQueue(queueType);
   if (!queue) {
     throw new Error(`Queue ${queueType} not found`);
   }
@@ -514,7 +609,7 @@ const removeJob = async (queueType, jobId) => {
 // Close only the workers (used by app.js graceful shutdown)
 const closeWorkers = async () => {
   const results = await Promise.allSettled(
-    Object.entries(workers).map(([key, worker]) => worker.close()),
+    Object.values(workers).map((worker) => worker.close()),
   );
 
   results.forEach((result, index) => {
@@ -554,6 +649,10 @@ const gracefulShutdown = async () => {
 module.exports = {
   queues,
   workers,
+  QUEUE_GROUPS,
+  physicalQueueConfig,
+  workersEnabled,
+  getQueue,
   initializeQueues,
   closeWorkers,
   addJob,

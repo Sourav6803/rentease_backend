@@ -48417,3 +48417,154 @@
 2026-09-20 08:43:35:4335 [31merror[39m: [31mError processing notification: Cannot use a session that has ended[39m
 2026-09-20 08:48:34:4834 [31merror[39m: [31m❌ Queue definitely-not-a-queue not found (available: email, sms, notification, payment, rental, delivery, report, cleanup, audit, vendor, maintenance, product, analytics, whatsapp, admin, backup) — dropped definitely-not-a-queue/x (best-effort)[39m
 2026-09-20 08:48:34:4834 [31merror[39m: [31m❌ Queue definitely-not-a-queue not found (available: email, sms, notification, payment, rental, delivery, report, cleanup, audit, vendor, maintenance, product, analytics, whatsapp, admin, backup) — dropped definitely-not-a-queue/x[39m
+2026-10-06 07:36:23:3623 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 07:36:23:3623 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 08:19:48:1948 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 08:19:48:1948 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 08:19:57:1957 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 08:19:57:1957 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 08:49:53:4953 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-06 09:08:16:816 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-06 09:55:23:5523 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-06 09:55:25:5525 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-06 17:37:31:3731 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-06 17:37:39:3739 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-06 22:24:13:2413 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-06 22:30:23:3023 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 22:30:23:3023 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 22:31:04:314 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 22:31:04:314 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 23:39:12:3912 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-06 23:39:12:3912 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 01:04:27:427 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 01:04:27:427 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 21:38:56:3856 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 21:38:56:3856 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 21:39:23:3923 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 21:39:23:3923 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 21:40:13:4013 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 21:40:13:4013 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 22:11:48:1148 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-07 22:23:17:2317 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 22:23:17:2317 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 22:30:31:3031 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 22:30:31:3031 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 23:20:29:2029 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-07 23:20:30:2030 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 00:34:04:344 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:34:07:347 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:34:10:3410 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:46:10:4610 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:54:58:5458 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:54:59:5459 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:02:552 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:05:555 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:07:557 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:22:5522 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:22:5522 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:49:5549 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:49:5549 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:55:51:5551 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:28:5628 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:29:5629 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:34:5634 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:34:5634 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:37:5637 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:56:39:5639 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:37:5737 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:37:5737 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:47:5747 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:48:5748 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:50:5750 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:50:5750 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:52:5752 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:53:5753 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:57:5757 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:57:58:5758 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:58:02:582 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:58:02:582 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:58:06:586 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:58:06:586 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:58:09:589 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:04:594 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:05:595 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:07:597 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:08:598 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:22:5922 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 00:59:25:5925 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:00:50:050 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:00:10 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:01:11 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:03:13 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:43:143 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:46:146 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:48:148 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:51:151 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:54:154 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:01:57:157 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:02:00:20 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:02:02:22 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:02:05:25 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:02:08:28 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:06:12:612 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:06:13:613 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 01:06:15:615 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:22:622 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:22:622 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-08 11:06:23:623 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:26:626 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:28:628 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:31:631 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:33:633 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:37:637 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:39:639 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:42:642 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:44:644 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:06:47:647 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 11:07:37:737 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 11:07:37:737 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 11:08:09:89 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 11:08:09:89 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 11:15:26:1526 [31merror[39m: [31m❌ Redis(BullMQ) error: read ECONNRESET[39m
+2026-10-08 11:15:26:1526 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-08 11:15:28:1528 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 11:15:28:1528 [31merror[39m: [31m❌ Redis(BullMQ) error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 12:54:21:5421 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 12:54:21:5421 [31merror[39m: [31m❌ Redis(BullMQ) error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 12:54:31:5431 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 12:54:33:5433 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 12:54:36:5436 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 13:02:23:223 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 13:02:24:224 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 13:15:40:1540 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 13:15:41:1541 [31merror[39m: [31mYou are not logged in. Please log in to access this resource.[39m
+2026-10-08 13:16:34:1634 [31merror[39m: [31minvalid_client[39m
+2026-10-08 13:16:34:1634 [31merror[39m: [31mCan't find /favicon.ico on this server![39m
+2026-10-08 13:16:49:1649 [31merror[39m: [31minvalid_client[39m
+2026-10-08 13:56:59:5659 [31merror[39m: [31m❌ Redis(BullMQ) error: read ECONNRESET[39m
+2026-10-08 13:57:00:570 [31merror[39m: [31m❌ Redis error: read ECONNRESET[39m
+2026-10-08 13:57:02:572 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 13:57:03:573 [31merror[39m: [31m❌ Redis(BullMQ) error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 15:41:39:4139 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 15:41:39:4139 [31merror[39m: [31m❌ Redis(BullMQ) error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 15:41:48:4148 [31merror[39m: [31m❌ Redis(BullMQ) error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 15:41:48:4148 [31merror[39m: [31m❌ Redis error: getaddrinfo ENOTFOUND fast-beagle-173029.upstash.io[39m
+2026-10-08 15:42:06:426 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:06:426 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:09:429 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:09:429 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:12:4212 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:12:4212 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:15:4215 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:15:4215 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:18:4218 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:18:4218 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:20:4220 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:24:4224 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:27:4227 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:42:29:4229 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:43:36:4336 [31merror[39m: [31minvalid_client[39m
+2026-10-08 15:45:37:4537 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:45:49:4549 [31merror[39m: [31m❌ Redis error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:45:49:4549 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m
+2026-10-08 15:45:52:4552 [31merror[39m: [31m❌ Redis(BullMQ) error: ERR max requests limit exceeded. Limit: 500000, Usage: 500005. See https://upstash.com/docs/redis/troubleshooting/max_requests_limit for details[39m

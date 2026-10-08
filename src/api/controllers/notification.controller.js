@@ -5,7 +5,7 @@ const AppError = require('../../utils/AppError');
 const logger = require('../../config/logger');
 const Notification = require('../../models/Notification.model');
 const User = require('../../models/User.model');
-const { queues, workers, addJob } = require('../../jobs');
+const { workers, addJob, getQueue } = require('../../jobs');
 
 class NotificationController {
   /**
@@ -467,7 +467,8 @@ class NotificationController {
    * / disconnected" from "delivery reached no one".
    */
   getBroadcastStatus = catchAsync(async (req, res) => {
-    const queue = queues.notification;
+    // Logical name -> physical queue (4 physical queues back 16 logical ones).
+    const queue = getQueue('notification');
 
     let counts = null;
     if (queue) {
@@ -563,7 +564,8 @@ class NotificationController {
 
     // 2) ASYNC probe — real BullMQ 'broadcast' job, then read queue state.
     let asyncResult;
-    const queue = queues.notification;
+    // Logical name -> physical queue (4 physical queues back 16 logical ones).
+    const queue = getQueue('notification');
     try {
       const recipientIds = recipients.map((id) => String(id));
       const job = await addJob(

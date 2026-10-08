@@ -5,14 +5,28 @@ const logger = require('./logger');
 let redisClient = null;
 let connectingPromise = null;
 
-// Build ioredis options once. Shared by the app cache, rate limiter AND BullMQ,
-// so only ONE physical connection is opened to Upstash.
-const buildRedisConfig = () => {
+// Two flavours of connection, because BullMQ and the rest of the app have
+// opposite needs:
+//
+//   • BullMQ   — MUST use `maxRetriesPerRequest: null`. Its blocking commands
+//                (BZPOPMIN / BRPOPLPUSH) legitimately sit idle for minutes and
+//                BullMQ throws if a command is rejected mid-reconnect.
+//
+//   • The app  — must FAIL FAST. The old code handed the SAME null-retry
+//                connection to everything, so whenever Redis was slow or the
+//                Upstash request limit was hit, every cache GET/SET and
+//                blacklist lookup queued in the offline queue forever instead
+//                of erroring. That is what turned a Redis hiccup into requests
+//                that hang for tens of seconds.
+const buildRedisConfig = ({ forBullmq = false } = {}) => {
   const base = {
-    maxRetriesPerRequest: null, // required by BullMQ (never reject a queued command)
-    enableReadyCheck: false,    // recommended for serverless Redis (Upstash)
-    connectTimeout: 10000,
-    keepAlive: 5000,            // keep the socket alive so Upstash doesn't drop it
+    maxRetriesPerRequest: forBullmq ? null : 2,
+    // App commands surface the error immediately instead of queueing behind a
+    // dead connection; BullMQ still needs the queue.
+    enableOfflineQueue: forBullmq,
+    enableReadyCheck: false, // recommended for serverless Redis (Upstash)
+    connectTimeout: forBullmq ? 10000 : 3000,
+    keepAlive: 5000, // keep the socket alive so Upstash doesn't drop it
     retryStrategy: (times) => {
       // Throttled logging: only every 10th attempt. With exponential backoff
       // (capped at 30s) this is ~one line every few minutes per client.
@@ -51,31 +65,38 @@ const buildRedisConfig = () => {
   };
 };
 
-// Factory for the shared client. ALWAYS attach an 'error' listener — without it,
-// a dropped connection emits an unhandled 'error' event and crashes the process.
-const createRedisConnection = () => {
-  const client = new Redis(buildRedisConfig());
-
+// Attach the listeners every client needs. Without an 'error' handler a dropped
+// connection emits an unhandled 'error' event and crashes the process.
+const attachClientLogging = (client, label = 'Redis') => {
   client.on('ready', () => {
-    logger.info('✅ Redis connected successfully');
+    logger.info(`✅ ${label} connected successfully`);
   });
 
   client.on('error', (err) => {
-    logger.error(`❌ Redis error: ${err?.message || err?.code || err}`);
+    logger.error(`❌ ${label} error: ${err?.message || err?.code || err}`);
   });
 
   client.on('reconnecting', (delay) => {
     // Upstash closes idle connections by design, so reconnect is expected.
     // Debug level to avoid spam (retryStrategy logs real failures).
-    logger.debug(`Redis reconnecting in ${delay}ms`);
+    logger.debug(`${label} reconnecting in ${delay}ms`);
   });
 
   client.on('end', () => {
-    logger.error('Redis connection ended');
+    logger.error(`${label} connection ended`);
   });
 
   return client;
 };
+
+// Factory for the shared APP client (fail-fast flavour).
+const createRedisConnection = () => attachClientLogging(new Redis(buildRedisConfig()), 'Redis');
+
+// Dedicated factory for BullMQ queues/workers. Kept separate from the app
+// client on purpose: BullMQ needs a blocking-safe connection, and every Worker
+// duplicates this connection internally for its own blocking reader.
+const createBullConnection = () =>
+  attachClientLogging(new Redis(buildRedisConfig({ forBullmq: true })), 'Redis(BullMQ)');
 
 // Singleton connect for app startup. Returns the shared client or null
 // (server keeps running without Redis instead of hanging/crashing).
@@ -92,11 +113,23 @@ const connectRedis = async () => {
     try {
       const client = createRedisConnection();
 
-      // Ping with a timeout so a dead Redis never hangs server startup
+      // Wait for the socket to be usable BEFORE pinging.
+      //
+      // The app client runs with `enableOfflineQueue: false` (so commands fail
+      // fast instead of hanging when Redis is degraded). That also means an
+      // immediate PING would reject with "Stream isn't writeable" because the
+      // connection has not completed yet — which would make a perfectly healthy
+      // Redis look unavailable on every boot. So gate on 'ready', bounded by a
+      // timeout so a dead Redis never hangs startup.
+      const { once } = require('events');
       await Promise.race([
-        client.ping(),
-        new Promise((_, reject) => setTimeout(() => reject(new Error('Redis ping timeout')), 5000)),
+        once(client, 'ready'),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Redis connect timeout')), 5000)
+        ),
       ]);
+
+      await client.ping();
 
       redisClient = client;
       return redisClient;
@@ -113,4 +146,12 @@ const connectRedis = async () => {
 
 const getRedisClient = () => redisClient;
 
-module.exports = { connectRedis, getRedisClient, createRedisConnection };
+module.exports = {
+  connectRedis,
+  getRedisClient,
+  createRedisConnection,
+  createBullConnection,
+  // exported for `npm run test:jobs` so the two connection flavours can be
+  // asserted directly instead of by reading the source
+  buildRedisConfig,
+};
