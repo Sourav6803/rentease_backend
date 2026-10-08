@@ -90,4 +90,19 @@ class AppError extends Error {
   }
 }
 
+// Dual export, deliberately.
+//
+// `module.exports = AppError` is a default export, and most files correctly do
+// `const AppError = require('../utils/AppError')`.
+//
+// But ~24 other files do `const { AppError } = require('../utils/AppError')` —
+// destructuring `.AppError` off a class, which is `undefined`. Every
+// `new AppError(...)` in those files therefore threw
+// "AppError is not a constructor", and the endpoint answered 500 with an EMPTY
+// body instead of the intended 4xx. Observed in the wild:
+//   GET /api/v1/auth/google   (no ?code)  -> 500 instead of 400
+//
+// Attaching the class to itself satisfies the destructuring form without
+// editing 24 call sites and without breaking the callers that already work.
 module.exports = AppError;
+module.exports.AppError = AppError;
