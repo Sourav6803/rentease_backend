@@ -30,8 +30,7 @@
     "create-indexes": "node scripts/createIndexes.js",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
-    "docker:build": "docker-compose build",
-    "prepare": "husky install"
+    "docker:build": "docker-compose build"
   },
   "keywords": [
     "Ecommerce"
