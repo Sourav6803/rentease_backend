@@ -1213,19 +1213,35 @@ class AuthService {
       });
 
       if (!user) {
+        if (!email) {
+          throw new AppError("Google did not share an email address", 400);
+        }
+
         // Create new user
-        const nameParts = name.split(" ");
+        //
+        // `name` can be a single word, in which case splitting it yields no last
+        // name — Google then sends the parts as given_name / family_name
+        // instead. Prefer those claims, fall back to the split, then to the
+        // email local part, so profile.firstName is always populated.
+        const nameParts = String(name || "")
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+        const firstName = profile.givenName || nameParts[0] || email.split("@")[0];
+        const lastName = profile.familyName || nameParts.slice(1).join(" ");
+
         const hashedPassword = await this.encryption.hashPassword(
           crypto.randomBytes(16).toString("hex"),
         );
 
         user = await User.create({
           email,
-          phone: null, // Will need to be added later
+          // Deliberately no `phone`. Google does not verify one and we must not
+          // invent a number; the schema allows the field to be absent.
           password: hashedPassword,
           profile: {
-            firstName: nameParts[0],
-            lastName: nameParts.slice(1).join(" "),
+            firstName,
+            lastName,
             avatar: photo,
           },
           social: {

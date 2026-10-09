@@ -47,6 +47,30 @@ const WebhookEvent = require('./WebhookEvent.model');
 mongoose.set('toJSON', { virtuals: true });
 mongoose.set('toObject', { virtuals: true });
 
+// `users.phone` used to carry a plain unique index, which permits only ONE
+// document without a phone. Google sign-ups have no phone at all and the
+// delete-account path nulls it, so the index has to ignore documents that have
+// no real phone. Mongoose's createIndexes() will NOT replace an existing index
+// whose options differ — MongoDB raises IndexOptionsConflict and the stale one
+// survives — so it is dropped here first.
+//
+// Idempotent: returns immediately once the index is already partial, and only
+// runs from the opt-in index path (RUN_DB_INDEXES=true / npm run create-indexes).
+const dropStalePhoneIndex = async () => {
+  try {
+    const collection = mongoose.connection.collection('users');
+    const indexes = await collection.indexes();
+    const phoneIndex = indexes.find((index) => index.name === 'phone_1');
+
+    if (!phoneIndex || phoneIndex.partialFilterExpression) return;
+
+    await collection.dropIndex('phone_1');
+    console.log('  ✓ Dropped stale users.phone_1 (plain unique -> partial)');
+  } catch (error) {
+    console.error(`  ✗ Could not drop stale users.phone_1: ${error.message}`);
+  }
+};
+
 // Export all models
 module.exports = {
   User,
@@ -90,6 +114,10 @@ module.exports = {
   // Utility function to setup all indexes
   setupIndexes: async () => {
     console.log('Creating database indexes...');
+
+    // Repair the stale users.phone index before creating/refreshing the rest.
+    await dropStalePhoneIndex();
+
     const models = [
       User, Admin, Vendor, Product, Category, Rental,
       Payment, Inventory, Address, Delivery, Maintenance,

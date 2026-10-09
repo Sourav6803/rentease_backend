@@ -13,9 +13,17 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: true,
-    unique: true,
-    index: true
+    // NOT required, and the unique constraint is PARTIAL.
+    //
+    // Social sign-ups (Google) carry no phone number, and the delete-account
+    // path sets this to null. A plain — or even sparse — unique index still
+    // allows only ONE document without a real phone, so the constraint is
+    // scoped to actual phone strings. `required` used to reject every Google
+    // sign-up with "Path `phone` is required".
+    index: {
+      unique: true,
+      partialFilterExpression: { phone: { $type: 'string' } },
+    },
   },
   password: {
     type: String,
@@ -24,7 +32,10 @@ const userSchema = new mongoose.Schema({
   },
   profile: {
     firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
+    // NOT required: Google can return a single-word display name, leaving no
+    // family name to store. This is what rejected Google sign-ups with
+    // "Path `profile.lastName` is required".
+    lastName: { type: String, default: '' },
     avatar: { type: String },
     dateOfBirth: Date,
     gender: { type: String, enum: ['male', 'female', 'other'] }

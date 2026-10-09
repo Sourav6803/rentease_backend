@@ -385,6 +385,10 @@ class AuthController {
       id: payload.sub,
       email: payload.email,
       name: payload.name,
+      // The explicit claims, because they survive a single-word display name:
+      // splitting `name` on a space then leaves no last name at all.
+      givenName: payload.given_name,
+      familyName: payload.family_name,
       photo: payload.picture,
     };
   }
